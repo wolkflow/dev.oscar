@@ -1,0 +1,92 @@
+// Подключаем переменные
+@import "variables";
+
+.btn,
+a.btn {
+	padding: 6px 16px 3px;
+	text-decoration: none !important;
+	outline: none !important;
+	font: @fontAlternative;
+	font-weight: 500;
+	color: #fff;
+	border: 0;
+	text-align: center;
+	font-size: 26px;
+	background: #000;
+	text-transform: uppercase;
+	display: inline-block;
+	cursor: pointer;
+	.round(18px);
+	.transition();
+
+	&:hover	{
+		background: @blue;
+		color: #fff;
+	}
+	&:active {
+		background: @blue_active;
+		color: #fff;
+	}
+	&-light {
+		background: #f2f2f2;
+		color: #000;
+		
+		&:hover {
+			background: @blue;
+			color: #fff;
+		}
+	}
+	&-blue {
+		color: #fff;
+		background: @blue;
+
+		&:hover {
+			background: #33cfe1;
+		}
+		&:active {
+			background: #14aec5;
+		}
+	}
+	&-more {
+		display: block;
+		width: 96px;
+		margin: 5px auto 0;
+		
+		&_params {
+			font-size: 21px;
+			width: 74px;
+			margin: 13px 0 0;
+			display: block;
+		}
+	}
+	&-find {
+		width: 100%;
+		background: #000 !important;
+		border-color: #000 !important;
+		font-size: 21px !important;
+		height: 34px !important;
+		margin-top: 14px;
+
+		&:hover {
+			background: @blue !important;
+			border-color: @blue !important;
+			color: #fff !important;
+		}
+	}
+	&-sm {
+		font: @baseFont;
+		height: 25px;
+		font-size: 11px;
+		font-weight: 700;
+		line-height: 25px;
+		padding: 0 15px;
+	}
+}
+div[class^="col"] .row {margin: 0 -12px 0 -13px}
+.collapsed {
+	display: none;;
+}
+
+
+
+

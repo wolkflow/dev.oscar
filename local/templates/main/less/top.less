@@ -1,0 +1,55 @@
+// Подключаем переменные
+@import "variables";
+
+.top {
+	background: url('@{images}/top.png') 50% 50%;
+	background-size: cover;
+	padding-top: 70px;
+	height: 183px;
+
+
+	.mainPage & {
+		height: 322px;
+		padding-top: 136px;
+	}
+}
+
+.searchBlock {
+	background: #000;
+	.round(22px);
+
+	.input-group {
+		background: #fff;
+		height: 44px;
+		padding: 7px 40px 0 20px;
+		margin-right: 60px;
+		position: relative;
+		.round(22px);
+
+		&-btn {
+			position: absolute;
+			right: 13px;
+			top: 7px;
+		}
+
+		input[type=text] {
+			border: 0;
+			padding: 0;
+			margin: 0;
+			outline: none !important;
+			font: @fontAlternative;
+			font-size: 27px;
+			color: #000;
+			text-transform: uppercase;
+			width: 100%;
+		}
+	}
+}
+.searchBlockAdd {
+	width: 60px;
+	float: right;
+	padding: 8px 15px 0 0;
+}
+
+
+

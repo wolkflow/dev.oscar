@@ -1,0 +1,4 @@
+<?php
+
+$MESS['GLYF_CORE_GLOBAL_MENU_TEXT']  = 'GlyfCore';
+$MESS['GLYF_CORE_GLOBAL_MENU_TITLE'] = 'GlyfCore';
