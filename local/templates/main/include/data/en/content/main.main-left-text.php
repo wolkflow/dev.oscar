@@ -1,0 +1,1 @@
+Art Agency "Oscar" works with cultural institutions and independent artists. We help our customers to promote the museum objects and museum collections, works of fine and decorative arts by licensing the use of their images on the basis of the museum and copyright law, as well as to detect and deter improper use of images.

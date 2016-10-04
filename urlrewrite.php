@@ -1,16 +1,16 @@
 <?
 $arUrlRewrite = array(
 	array(
-		"CONDITION" => "#^/bitrix/services/ymarket/#",
-		"RULE" => "",
+		"CONDITION" => "#^/blog/(.+?)/(.+?)/#",
+		"RULE" => "SECTION=\$1&ELEMENT=\$2&",
 		"ID" => "",
-		"PATH" => "/bitrix/services/ymarket/index.php",
+		"PATH" => "/blog/detail.php",
 	),
 	array(
-		"CONDITION" => "#^/personal/lists/#",
-		"RULE" => "",
-		"ID" => "bitrix:lists",
-		"PATH" => "/personal/lists/index.php",
+		"CONDITION" => "#^/blog/(.+?)/#",
+		"RULE" => "SECTION=\$1&",
+		"ID" => "",
+		"PATH" => "/blog/index.php",
 	),
 );
 

@@ -1,0 +1,1 @@
+Art can and must generate income

@@ -6,7 +6,7 @@
 	<div class="row">
 		<div class="col-xs-11 col-xs-offset-1 col-sm-12 col-sm-offset-0">
 			<div class="siteFooterMenu">
-				<ul class="nav main-menu">
+				<ul class="nav">
 					<? foreach ($arResult as $arItem) { ?>
 						<li>
 							<a href="<?= $arItem['LINK'] ?>"><?= $arItem['TEXT'] ?></a>

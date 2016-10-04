@@ -20,6 +20,13 @@ define('SITE_EN', 's2');
 
 
 /*
+ * Языки.
+ */
+define('LANG_RU', 'ru');
+define('LANG_EN', 'en');
+
+
+/*
  * Поддомены.
  */
 define('SUBDOMAIN_IMAGES', 'img.oscar.dev.wolkflow.com');
@@ -34,9 +41,12 @@ define('MAIN_TEMPLATE_PATH', '/local/templates/main');
 /*
  * Инфоблоки.
  */
-define('IBLOCK_CONTENT_ID', 2);
-define('IBLOCK_BLOG_ID',    3);
-
+define('IBLOCK_CONTENT_ID',     2);
+define('IBLOCK_BLOG_ID',        3);
+define('IBLOCK_COLLECTIONS_ID', 4);
+define('IBLOCK_TARIFFS_ID',     5);
+define('IBLOCK_PARTNERS_ID',    6);
+define('IBLOCK_DOCUMENTS_ID',   7);
 
 /*
  * HL-блоки.

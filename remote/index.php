@@ -9,6 +9,8 @@ define('DisableEventsCheck', true);
 
 require ($_SERVER['DOCUMENT_ROOT'] . '/bitrix/modules/main/include/prolog_before.php');
 
+// Директория для ajax-скриптов.
+define ('DIR_REMOTE', $_SERVER['DOCUMENT_ROOT'] . '/remote/include/');
 
 /**
  * Ответ в формате JSON.
@@ -27,6 +29,19 @@ function jsonresponse($status, $message = '', $data = null, $console = '', $type
 	exit();
 }
 
+/** 
+ * Получение HTML.
+ */
+function gethtmlremote($file)
+{
+	ob_start();
+	include (DIR_REMOTE . $file);
+	return ob_get_clean();
+}
+
+
+
+
 
 Bitrix\Main\Loader::includeModule('glyf.core');
 // Bitrix\Main\Loader::includeModule('glyf.oscar');
@@ -44,7 +59,11 @@ $action = (string) $request->get('action');
 
 // Обработка действий.
 switch ($action) {
-	case ('load'):
+	
+	// Вывод статей блога.	
+	case ('blog-archive-page'):
+		$html = gethtmlremote('blog.archive.php');
+		jsonresponse(true, '', $html, '', 'html');
 		break;
 		
 	default:

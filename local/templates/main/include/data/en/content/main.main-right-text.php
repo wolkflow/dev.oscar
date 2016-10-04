@@ -1,0 +1,1 @@
+Art Agency "Oscar" - a reliable bridge between Russian museums, galleries, artists and Russian / foreign business, and this is a huge number of publishers, researchers and research laboratories, photo-banks and various companies that use images of art objects for commercial purposes.

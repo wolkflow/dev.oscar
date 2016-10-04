@@ -24,7 +24,7 @@ class Text
 	 * @param bool $titles
 	 * @return string
 	 */
-	public static function decofnum($number, $titles, $include = true)
+	public static function decofnum($number, $titles, $include = false)
 	{
 		$cases  = array(2, 0, 1, 1, 1, 2);
 		$result = $titles[($number % 100 > 4 && $number % 100 < 20) ? 2 : $cases[min($number % 10, 5)]];
@@ -70,6 +70,38 @@ class Text
 			$text .= '...';
 		}
 		return $text;
+	}
+	
+	
+	/**
+	 * Разбивка текста по блокам.
+	 * 
+	 * @param string $text
+	 * @param int $count
+	 * @return string
+	 */
+	public static function split($text, $delimeter = '.', $count)
+	{
+		$text = (string) $text;
+		$delimeter = (string) $delimeter;
+		
+		$length = mb_strlen((string) $text);
+		$index  = 0;
+		
+		$points = array();
+		do {
+			$index = mb_strpos($text, $delimeter, $index + 1, self::DEFAULT_ENCODING);
+			$points []= $index;
+		} while ($index !== false);
+		
+		$points = array_filter($points);
+		
+		$point = $points[count($points) / 2];
+		$text1 = mb_substr($text, 0, $point + 1, self::DEFAULT_ENCODING);
+		$text2 = mb_substr($text, $point + 1, $length, self::DEFAULT_ENCODING);
+		$texts = array($text1, $text2);
+		
+		return $texts;
 	}
 	
 	
@@ -151,7 +183,7 @@ class Text
      */
     public static function translit2rus($string, $direct = true)
     {
-        $letters = [
+        $letters = array(
             'а' => 'a',   'б' => 'b',   'в' => 'v',
             'г' => 'g',   'д' => 'd',   'е' => 'e',
             'ё' => 'yo',  'ж' => 'zh',  'з' => 'z',
@@ -176,7 +208,7 @@ class Text
             'Ь' => "'",   'Ы' => "Y'",  'Ъ' => "''",
             'Э' => "E'",  'Ю' => 'YU',  'Я' => 'YA',
             'ЫЙ' => 'YY',
-        ];
+        );
 		
 		if ($direct) {
 			$result = strtr($string, $letters);

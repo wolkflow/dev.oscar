@@ -2,16 +2,19 @@
  
 namespace Glyf\Core\Events;
 
+use Bitrix\Main\Page\Asset;
+use Glyf\Core\System\Environment;
+
 IncludeModuleLangFile(__FILE__);
 
 
 /**
- * Œ·‡·ÓÚ˜ËÍ ÒÓ·˚ÚËÈ „Î‡‚ÌÓ„Ó ÏÓ‰ÛÎˇ.
+ * –û–±—Ä–∞–±–æ—Ç—á–∏–∫ —Å–æ–±—ã—Ç–∏–π –≥–ª–∞–≤–Ω–æ–≥–æ –º–æ–¥—É–ª—è.
  */
 class Main
 {
     /**
-     * ƒÓ·‡‚ÎÂÌËÂ „Î‡‚ÌÓ„Ó ÏÂÌ˛.
+     * –î–æ–±–∞–≤–ª–µ–Ω–∏–µ –≥–ª–∞–≤–Ω–æ–≥–æ –º–µ–Ω—é.
      */
     public function OnBuildGlobal_AddMainMenu()
     {
@@ -30,7 +33,19 @@ class Main
                 'items' 		=> array()
             )
         );
-        
+      
         return $menu;
     }
+	
+	
+	
+	/**
+     * –ü—Ä–æ–ª–æ–≥ —Å—Ç—Ä–∞–Ω–∏—Ü—ã.
+     */
+    public function OnProlog()
+    {
+        if (Environment::isAdminSection()) {
+            \CJSCore::Init(array('jquery_remote'));
+        }
+	}
 }

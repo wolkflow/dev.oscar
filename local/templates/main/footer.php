@@ -4,19 +4,21 @@
                         <ul class="nav navbar-cart footer-cart visible-xs">
                             <li>
                                 <a href="#">
-                                    <span class="cart-count">5</span>
+                                    <span class="cart-count">0</span>
                                     <i class="icon icon-cart"></i>
                                 </a>
                             </li>
                         </ul>
-                        <ul class="nav footer-login">
-                            <li class="login">
-                                <a href="#">Войти</a>
-                            </li>
-                            <li>
-                                <a href="#">Регистрация</a>
-                            </li>
-                        </ul>
+						
+						<?  // Ссылки авториазции / регистрации.
+							$APPLICATION->IncludeComponent('bitrix:main.include', '', array(
+								'AREA_FILE_SHOW' => 'file',
+								'PATH' => SITE_TEMPLATE_PATH.'/include/area/login.popup.php',
+								'EDIT_TEMPLATE' => 'html',
+								'CSS' => 'footer-login'
+							));
+						?>
+						
                         <div class="col-sm-2 col-footer-logo">
                             <div class="footer-logo">
                                 <a href="/">
@@ -30,7 +32,7 @@
 									'bitrix:menu',
 									'bottom',
 									array(
-										'ROOT_MENU_TYPE' => 'main.' . CURRENT_LANG,
+										'ROOT_MENU_TYPE' => 'bottom.' . CURRENT_LANG,
 										'MENU_CACHE_TYPE' => 'Y',
 										'MENU_CACHE_TIME' => '36000000',
 										'MENU_CACHE_USE_GROUPS' => 'N',
@@ -45,8 +47,20 @@
                             <div class="row">
                                 <div class="col-xs-11 col-xs-offset-1 col-sm-12 col-sm-offset-0">
                                     <div class="siteFooterContacts">
-                                        <p class="footerContactsPhone"><span>Телефон:</span> +7 916 301 34 50</p>
-                                        <p class="footerContactsMail"><span>Email:</span> office@OscarArtAgency.ru</p>
+										<?  // Телефон.
+											$APPLICATION->IncludeComponent('bitrix:main.include', '', array(
+												'AREA_FILE_SHOW' => 'file',
+												'PATH' => SITE_TEMPLATE_PATH.'/include/data/'.CURRENT_LANG.'/phone.php',
+												'EDIT_TEMPLATE' => 'html'
+											));
+										?>
+										<?  // E-mail.
+											$APPLICATION->IncludeComponent('bitrix:main.include', '', array(
+												'AREA_FILE_SHOW' => 'file',
+												'PATH' => SITE_TEMPLATE_PATH.'/include/data/'.CURRENT_LANG.'/email.php',
+												'EDIT_TEMPLATE' => 'html'
+											));
+										?>
                                     </div>
                                 </div>
                             </div>
@@ -55,13 +69,31 @@
                     <div class="row">
                         <div class="col-xs-12 col-sm-6">
                             <div class="copyright">
-                                2015 &copy; Арт агентство «Оскар»
+                                <?  // Копирайт.
+									$APPLICATION->IncludeComponent('bitrix:main.include', '', array(
+										'AREA_FILE_SHOW' => 'file',
+										'PATH' => SITE_TEMPLATE_PATH.'/include/data/'.CURRENT_LANG.'/copy.php',
+										'EDIT_TEMPLATE' => 'html'
+									));
+								?>
                             </div>
                         </div>
                         <div class="col-xs-12 col-sm-6">
                             <div class="madeby">
-                                <span>Дизайн <a href="http://artideas.ru/" target="_blank">ARTIDEAS</a>.</span>
-                                <span>Разработка <a href="http://wolkflow.com/" target="_blank">WOLK</a>. 2016</span>
+								<?  // Дизайн.
+									$APPLICATION->IncludeComponent('bitrix:main.include', '', array(
+										'AREA_FILE_SHOW' => 'file',
+										'PATH' => SITE_TEMPLATE_PATH.'/include/data/'.CURRENT_LANG.'/design.php',
+										'EDIT_TEMPLATE' => 'html'
+									));
+								?>
+								<?  // Разработка.
+									$APPLICATION->IncludeComponent('bitrix:main.include', '', array(
+										'AREA_FILE_SHOW' => 'file',
+										'PATH' => SITE_TEMPLATE_PATH.'/include/data/'.CURRENT_LANG.'/development.php',
+										'EDIT_TEMPLATE' => 'html'
+									));
+								?>
                             </div>
                         </div>
                     </div>
@@ -69,67 +101,27 @@
             </div>
         </div>
         <div class="hide">
-            <div class="modal modal-search" id="modal-search">
-                <div class="modalTitle">
-                    Расширенный поиск
-                    <div class="modalClose arcticmodal-close"></div>
-                </div>
-                <div class="modalContent">
-                    <form action="" class="form">
-                        <ul class="formList">
-                            <li>
-                                <label for="sname">Название</label>
-                                <input type="text" id="sname">
-                            </li>
-                            <li>
-                                <label for="sauthor">Автор</label>
-                                <input type="text" id="sauthor">
-                            </li>
-                            <li>
-                                <label for="scopy">Правообладатель</label>
-                                <input type="text" id="scopy">
-                            </li>
-                            <li class="ci-period-li speriod">
-                                <label class="filtersTitle display-inlineBlock" for="speriod">Период</label>
-                                <label class="label-radio"><input type="radio" name="speriod" id="speriod" class="styler" checked> Год</label>
-                                <label class="label-radio"><input type="radio" name="speriod" class="styler"> Век</label>
-                                <div class="periodSelect">
-                                    <div class="periodSelect_first">
-                                        <input type="text" placeholder="От">
-                                        <select class="styler">
-                                            <option value="ДНЭ">ДО НАШЕЙ ЭРЫ</option>
-                                            <option value="НЭ">НАШЕЙ ЭРЫ</option>
-                                        </select>
-                                    </div>
-                                    <div class="periodSelect_second">
-                                        <input type="text" placeholder="До">
-                                        <select class="styler">
-                                            <option value="ДНЭ">ДО НАШЕЙ ЭРЫ</option>
-                                            <option value="НЭ">НАШЕЙ ЭРЫ</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <label for="stech">Техника</label>
-                                <input type="text" id="stech">
-                            </li>
-                            <li>
-                                <label for="sid">Техника</label>
-                                <input type="text" id="sid">
-                            </li>
-                            <li>
-                                <label for="skeywords">Ключевые слова</label>
-                                <input type="text" id="skeywords">
-                            </li>
-                            <li>
-                                <input type="submit" value="Найти" />
-                            </li>
-                        </ul>
-                    </form>
-                </div>
-            </div>
-
+            <?  // Форма поиска (popup).
+				$APPLICATION->IncludeComponent('bitrix:main.include', '', array(
+					'AREA_FILE_SHOW' => 'file',
+					'PATH' => SITE_TEMPLATE_PATH.'/include/area/search.php',
+					'EDIT_TEMPLATE' => 'html'
+				));
+			?>
+			
+			<?	// Формаа авторизации.
+				$APPLICATION->IncludeComponent(
+					"bitrix:system.auth.form",
+					"popup",
+					array(
+						"REGISTER_URL" => "",
+						"FORGOT_PASSWORD_URL" => "",
+						"PROFILE_URL" => "/profile/",
+						"SHOW_ERRORS" => "Y" 
+					)
+				);
+			?>
+			
             <div class="modal modal-login" id="modal-register">
                 <div class="modalTitle">
                     Регистрация

@@ -1,0 +1,1 @@
+<span>Design <a href="http://artideas.ru/" target="_blank">ARTIDEAS</a>.</span>
