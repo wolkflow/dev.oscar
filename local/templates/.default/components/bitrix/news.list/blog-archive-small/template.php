@@ -8,7 +8,7 @@
 	<div class="col-sm-4 col-md-4 hidden-xs">
 		<div class="sidebarRight">
 			<div class="sidebarRightTitle">
-				<?= getMessage('GL_BLOG_ARCHIVE') ?>
+				<a href="/blog/archive/"><?= getMessage('GL_BLOG_ARCHIVE') ?></a>
 			</div>
 			<div class="archiveList">
 				<? foreach ($arResult['ITEMS'] as $item) { ?>

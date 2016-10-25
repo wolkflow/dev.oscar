@@ -4,14 +4,13 @@
 
 <? $this->setFrameMode(true); ?>
 
-<pre>
-	<? // print_r($arResult) ?>
-</pre>
+<? use Glyf\Oscar\Collection; ?>
 
-<? if (!empty($arResult['SECTIONS'])) { ?>
+<? if (!empty($arResult['ROOT']['CHILDREN'])) { ?>
 	<div class="container">
 		<div class="row">
-			<? foreach ($arResult['SECTIONS'] as $section) { ?>
+			<? foreach ($arResult['ROOT']['CHILDREN'] as $section) { ?>
+                <? $collection = new Collection($section['ID']) ?>
 				<div class="col-sm-4 col-md-2">
 					<div class="collectionsBlock">
 						<div class="collectionsBlockTitle">
@@ -20,13 +19,28 @@
 						<div class="collectionsBlockImage">
 							<img src="/i.php?src=<?= $section['PICTURE']['SRC'] ?>&w=169&h=44" />
 						</div>
-						<ul class="collectionsList">
-							<li><a href="#">Станковая живопись</a></li>
-							<li><a href="#">Монументальная живопись</a></li>
-							<li><a href="#">Иконопись</a></li>
-						</ul>
+                        <? if (!empty($section['CHILDREN'])) { ?>
+                            <ul class="collectionsList">
+                                <? foreach ($section['CHILDREN'] as $subsection) { ?>
+                                    <li>
+                                        <a href="<?= $subsection['DETAIL_PAGE_URL'] ?>">
+                                            <?= $subsection['UF_LANG_TITLE_'.CURRENT_LANG_UP] ?>
+                                        </a>
+                                        <? if (!empty($subsection['CHILDREN'])) { ?>
+                                            <ul>
+                                                <? foreach ($subsection['CHILDREN'] as $subsubsection) { ?>
+                                                     <a href="<?= $subsubsection['DETAIL_PAGE_URL'] ?>">
+                                                        <?= $subsubsection['UF_LANG_TITLE_'.CURRENT_LANG_UP] ?>
+                                                    </a>
+                                                <? } ?>
+                                            </ul>
+                                        <? } ?>
+                                    </li>
+                                <? } ?>
+                            </ul>
+                        <? } ?>
 						<div class="collectionsBlockCount">
-							23 468
+							<?= number_format($collection->getPicturesCount(), 0, '.', ' ') ?>
 						</div>
 					</div>
 				</div>

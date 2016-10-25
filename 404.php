@@ -38,7 +38,7 @@ $APPLICATION->SetTitle("404 Not Found");
 						<a href="#" class="errorPageSearch"></a>
 						<div class="errorPageMessage">
 							попробуйте расширенный<br>
-							поиск по сайту или <a href="#">напишите нам</a>
+							поиск по сайту или напишите нам
 						</div>
 					</div>
 				</div>

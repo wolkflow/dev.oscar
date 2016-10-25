@@ -16,7 +16,7 @@ class IBlockModel extends Model
 	public function load($force = false)
 	{
 		if (empty($this->data) || $force) {
-			$element = \CIBlockElement::GetByID($this->getID())->GetNExtElement();
+			$element = \CIBlockElement::GetByID($this->getID())->GetNextElement();
 			
 			if ($element) {
 				$this->data = $element->getFields();

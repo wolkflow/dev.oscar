@@ -9,6 +9,10 @@ define('TIME_WEEK',  604800);
 define('TIME_MONTH', 2592000);
 define('TIME_YEAR',  31536000);
 
+define ('TIME_YEARS_IN_DECADE',    10);
+define ('TIME_YEARS_IN_CENTURY',   100);
+define ('TIME_YEARS_IN_MILLENIUM', 1000);
+
 
 /*
  * Сайт.
@@ -48,7 +52,66 @@ define('IBLOCK_TARIFFS_ID',     5);
 define('IBLOCK_PARTNERS_ID',    6);
 define('IBLOCK_DOCUMENTS_ID',   7);
 
+
 /*
  * HL-блоки.
  */
-define('HLBLOCK_IMAGES_ID',   1);
+define('HLBLOCK_PICTURES_ID',        4);
+define('HLBLOCK_DICT_AUTHORS_ID',    5);
+define('HLBLOCK_DICT_HOLDERS_ID',    6);
+define('HLBLOCK_DICT_FOLDERS_ID',    8);
+define('HLBLOCK_DICT_KEYWORDS_ID',   9);
+define('HLBLOCK_DICT_TECHNIQUES_ID', 10);
+
+// Месторасположение.
+define('HLBLOCK_DICT_PLACE_COUNTRIES_ID', 11);
+define('HLBLOCK_DICT_PLACE_CITIES_ID',    12);
+
+
+/*
+ * Группы.
+ */
+define('GROUP_PARTNERS_ID', 8);
+ 
+
+/*
+ * JWT ключ
+ */
+define('JWT_KEY', 'OscarArtAgency');
+
+
+/*
+ * Модули.
+ */
+define('MODULE_GLYF_CORE_ID', 'glyf.core');
+define('MODULE_GLYF_OSCAR_ID', 'glyf.oscar');
+
+
+/*
+ * Валюта.
+ */
+define('CURRENCY_DEFAULT', 'RUB');
+ 
+
+/*
+ * Тип плательщика.
+ */
+define('PERSON_TYPE_DEFAULT', 1);
+
+
+/*
+ * Платежная система.
+ */
+define('PAYSYSTEM_DEFAULT', 9);
+
+
+/*
+ * Служба доставки.
+ */
+define('DELYVERY_SYSTEM_DEFAULT', 2);
+
+/*
+ * Тип цен.
+ */
+define('PRICE_TYPE_DEFAULT', 1);
+

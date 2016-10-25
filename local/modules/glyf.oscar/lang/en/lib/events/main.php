@@ -1,4 +1,3 @@
 <?php
 
-$MESS['WOLK_CORE_GLOBAL_MENU_TEXT']  = 'WolkCore';
-$MESS['WOLK_CORE_GLOBAL_MENU_TITLE'] = 'WolkCore';
+$MESS['GL_REGISTER_ERROR_OFFER_CONTRACT'] = 'It is necessary to confirm the terms of the agreement with the contract offer';

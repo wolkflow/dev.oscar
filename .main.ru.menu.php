@@ -22,8 +22,8 @@ $aMenuLinks = Array(
 		"" 
 	),
 	Array(
-		"Тарифы и подписки", 
-		"/subscribes/", 
+		"Тарифы", 
+		"/tariffs/", 
 		Array(), 
 		Array(), 
 		"" 

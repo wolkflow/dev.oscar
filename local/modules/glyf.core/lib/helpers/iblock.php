@@ -53,4 +53,37 @@ class IBlock
 		
 		return strval($iblock['CODE']);
 	}
+    
+    
+    /**
+	 * Получение свойств.
+	 */
+	public static function getProps($iblockID, $key = 'ID') 
+	{
+		$db = \CIBlockProperty::GetList(array(), array('IBLOCK_ID' => $iblockID));
+		
+		$props = array();
+		while ($prop = $db->Fetch()) {
+			$props[$prop[$key]] = $prop;
+		}
+		return $props;
+	}
+
+	
+	/**
+	 * Получение свойств.
+	 */
+	public static function getEnumProps($code, $key = 'ID', $lower = false, $iblockID = null) 
+	{
+		$db = \CIBlockProperty::GetPropertyEnum($code, array('SORT' => 'ASC'), array('IBLOCK_ID' => $iblockID));
+		
+		$props = array();
+		while ($prop = $db->Fetch()) {
+			if ($lower) {
+				$prop[$key] = mb_strtolower($prop[$key]);
+			}
+			$props[$prop[$key]] = $prop;
+		}
+		return $props;
+	}
 }

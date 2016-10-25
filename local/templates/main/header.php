@@ -18,10 +18,11 @@
 		<![endif]-->
 
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-		
+		<? /* <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> */ ?>
+        
 		<? $APPLICATION->ShowHead() ?>
 	</head>
-	<body <?= (in_array(PAGE, array('MAIN', 'ABOUT', 'CONTACTS', 'RULES', '404'))) ? ('class="mainPage"') : ('') ?>>
+	<body <?= (in_array(PAGE, array('MAIN', 'ABOUT', 'CONTACTS', 'RULES', 'UPLOAD', '404'))) ? ('class="mainPage"') : ('') ?>>
 		<div id="panel">
 			<? $APPLICATION->ShowPanel() ?>
 		</div>
@@ -31,7 +32,7 @@
 				<div class="container">
 					<div class="logo">
 						<a href="/">
-							<? if (in_array(PAGE, array('MAIN', 'ABOUT', 'CONTACTS', 'RULES', '404'))) { ?>
+							<? if (in_array(PAGE, array('MAIN', 'ABOUT', 'CONTACTS', 'RULES', 'UPLOAD', '404'))) { ?>
 								<img src="<?= SITE_TEMPLATE_PATH ?>/images/logo.png" alt="OSCAR art agency" />
 							<? } else { ?>
 								<img src="<?= SITE_TEMPLATE_PATH ?>/images/logo-small.png" alt="OSCAR art agency" />
@@ -70,7 +71,7 @@
 						<ul class="nav navbar-cart hidden-xs">
 							<li>
 								<a href="/cart/">
-									<span class="cart-count">0</span>
+									<span id="js-cart-count-id" class="cart-count">0</span>
 									<i class="icon icon-cart"></i>
 								</a>
 							</li>

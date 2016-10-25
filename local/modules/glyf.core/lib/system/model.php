@@ -4,7 +4,7 @@ namespace Glyf\Core\System;
 
 abstract class Model
 {
-	/**
+    /**
      * ID объекта.
      */
     protected $id;
@@ -18,29 +18,30 @@ abstract class Model
      * Сущность объекта.
      */
     protected $entity;
-	
-		
-	/**
+    
+        
+    /**
      * Создание объекта.
      * 
      * @param int $id
      * @param array $data
      */
-    public function __construct($id = null, $data = [])
+    public function __construct($id = null, $data = array())
     {
         $this->id   = (int) $id;
         $this->data = (array) $data;
     }
-	
-	
-	/**
+    
+    
+    /**
      * Получение ID.
      */
     public function getID()
     {
         return $this->id;
     }
-
+    
+    
     /**
      * Получение данных в виде массива.
      */
@@ -50,7 +51,8 @@ abstract class Model
 
         return $this->data;
     }
-
+    
+    
     /**
      * Существование данных.
      */
@@ -60,7 +62,8 @@ abstract class Model
 
         return (!empty($this->data));
     }
-
+    
+    
     /**
      * Получение свойства.
      *
@@ -73,9 +76,9 @@ abstract class Model
 
         return $this->data[strval($code)];
     }
-	
-	
-	/**
+    
+    
+    /**
      * Проверка на заполненность парметра.
      *
      * @param string $code
@@ -88,7 +91,7 @@ abstract class Model
         return (empty($this->data[strval($code)]));
     }
 
-	
+    
     /**
      * Загрузка данных из базы.
      */
@@ -98,33 +101,33 @@ abstract class Model
             return false;
         }
         $this->reset();
-		
+        
         return $this->data;
     }
 
-	
+    
     /**
      *  Удаление данных объекта.
      */
     protected function unload()
     {
-		unset($this->data);
+        unset($this->data);
     }
-	
-	
-	 /**
+    
+    
+    /**
      *  Обновление данных объекта.
      */
     protected function reload()
     {
-		$this->unload();
-		$this->load();
+        $this->unload();
+        $this->load();
     }
-	
-	
-	/**
-	 * Сохранение элемнета.
-	 *
+    
+    
+    /**
+     * Сохранение элемнета.
+     *
      * @param bool|array $data
      * @return AddResult|UpdateResult
      */
@@ -135,29 +138,29 @@ abstract class Model
         }
         return $this->add($data);
     }
-	
-	
-	/**
-	 * Получение имени класса.
-	 *
+    
+    
+    /**
+     * Получение имени класса.
+     *
      * @return string
      */
     public static function getClassName()
     {
         return get_called_class();
     }
-	
-	abstract public function add($data);
-	
-	
-	abstract public function update($data);
-	
-		
-	abstract public function delete();
-	
-	
-	abstract public function existDB();
-	
-	
-	abstract public static function getList($params, $object = true, $key = 'ID');
+    
+    abstract public function add($data);
+    
+    
+    abstract public function update($data);
+    
+        
+    abstract public function delete();
+    
+    
+    abstract public function existDB();
+    
+    
+    abstract public static function getList($params, $object = true, $key = 'ID');
 }

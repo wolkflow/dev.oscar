@@ -6,8 +6,9 @@ namespace Glyf\Core\System;
 
 class HLBlockModel extends Model
 {
-	static protected $hlblockID;
+	protected static $hlblockID;
 	
+    
 	/**
      * Возвращает имя класса.
      *
@@ -15,7 +16,7 @@ class HLBlockModel extends Model
      */
     public static function getEntityClassName()
     {
-    	$hldata    = \Bitrix\Highloadblock\HighloadBlockTable::getById(self::$hlblockID)->Fetch();
+    	$hldata    = \Bitrix\Highloadblock\HighloadBlockTable::getById(static::$hlblockID)->Fetch();
     	$hlentity  = \Bitrix\Highloadblock\HighloadBlockTable::compileEntity($hldata);
     	$classname = $hlentity->getDataClass();
     	
@@ -32,7 +33,7 @@ class HLBlockModel extends Model
 	public function load($force = false)
 	{
 		if (empty($this->data) || $force) {
-			$entity = self::getEntityClassName();
+			$entity  = self::getEntityClassName();
 			$element = $entity::GetByID($this->getID());
 			
 			if ($element) {
@@ -51,8 +52,8 @@ class HLBlockModel extends Model
 	 */
 	public function add($data)
 	{
-		$element = new self::getEntityClassName();
-		$result = $element->add($data);
+		$element = self::getEntityClassName();
+		$result  = $element->add($data);
 		
 		if ($result->isSuccess()) {
 			$this->id = $result->getID();
@@ -71,7 +72,7 @@ class HLBlockModel extends Model
 	 */
 	public function update($data)
 	{
-		$element = new self::getEntityClassName($this->getID());
+		$element = self::getEntityClassName($this->getID());
 		$result = $element->update($data);
 		
 		if ($result->isSuccess()) {
@@ -89,7 +90,7 @@ class HLBlockModel extends Model
 	 */
 	public function delete()
 	{
-		$element = new self::getEntityClassName();
+		$element = self::getEntityClassName();
 		$element->elete($this->getID());
 	}
 	
@@ -104,9 +105,9 @@ class HLBlockModel extends Model
 		$entity = self::getEntityClassName();
 		$result = $entity::GetByID($this->getID())->fetch();
 		
-		return ($result);
+		return $result;
 	}
-	
+    
 	
 	/**
 	 * Получение списка элементов.
@@ -120,11 +121,11 @@ class HLBlockModel extends Model
 	{
 		$entity = self::getEntityClassName();
 		$result = $entity::getList($params);
-
+        
         if (!$object) {
             return $result;
         }
-        $items = [];
+        $items = array();
         while ($item = $result->fetch()) {
             $items[$item[$key]] = new static($item['ID']);
         }

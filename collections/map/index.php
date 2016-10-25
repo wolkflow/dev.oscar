@@ -1,6 +1,8 @@
 <? require ($_SERVER['DOCUMENT_ROOT'].'/bitrix/header.php'); ?>
 <? $APPLICATION->SetTitle("Карта коллекций"); ?>
 
+<? IncludeFileLangFile(__FILE__) ?>
+
 <?  // Строка поиска.
 	$APPLICATION->IncludeComponent('bitrix:main.include', '', array(
 		'AREA_FILE_SHOW' => 'file',
@@ -11,8 +13,8 @@
 
 <main class="siteMain">
 	<div class="collections-triggers">
-		<a href="#">Карта коллекций</a>
-		<a href="#" class="active">Все коллекци</a>
+		<a href="/collections/map/" class="active"><?= getMessage('GL_COLLECTIONS_MAP') ?></a>
+		<a href="/collections/"><?= getMessage('GL_COLLECTIONS_ALL') ?></a>
 	</div>
 	
 	<?	// Коллекции.
@@ -28,10 +30,10 @@
 				"SECTION_CODE" => "",
 				"SECTION_URL" => "",
 				"COUNT_ELEMENTS" => "Y",
-				"TOP_DEPTH" => "2",
+				"TOP_DEPTH" => "4",
 				"SECTION_FIELDS" => "",
 				"SECTION_USER_FIELDS" => array("UF_LANG_TITLE_RU", "UF_LANG_TITLE_EN"),
-				"ADD_SECTIONS_CHAIN" => "Y",
+				"ADD_SECTIONS_CHAIN" => "N",
 				"CACHE_TYPE" => "A",
 				"CACHE_TIME" => "36000000",
 				"CACHE_NOTES" => "",

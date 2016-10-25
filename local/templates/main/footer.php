@@ -122,58 +122,41 @@
 				);
 			?>
 			
-            <div class="modal modal-login" id="modal-register">
-                <div class="modalTitle">
-                    Регистрация
-                    <div class="modalClose arcticmodal-close"></div>
-                </div>
-                <div class="modalContent">
-                    <form action="" class="form">
-                        <ul class="formList">
-                            <li>
-                                <label for="regname">Имя</label>
-                                <input type="text" id="regname">
-                            </li>
-                            <li>
-                                <label for="regorg">Организация *</label>
-                                <input type="text" id="regorg">
-                            </li>
-                            <li>
-                                <label for="regpos">Должность *</label>
-                                <input type="text" id="regpos">
-                            </li>
-                            <li>
-                                <label for="regmail">Email</label>
-                                <input type="text" id="regmail">
-                            </li>
-                            <li class="reginfo"><span>*</span> поля заполняются в случае, если пользователь выступает от имени организации</li>
-                            <li>
-                                <label for="regpass">Пароль</label>
-                                <input type="text" id="regpass">
-                            </li>
-                            <li>
-                                <label for="regpassre">Повторить пароль</label>
-                                <input type="text" id="regpassre">
-                            </li>
-                            <li class="reginfo">
-                                <label for="regacept"><input type="checkbox" id="regacept"> Согласен с <a href="#">договором оферты</a></label>
-                            </li>
-                            <li>
-                                <input type="submit" value="ОК" />
-                            </li>
-                        </ul>
-                    </form>
-                </div>
-            </div>
+            <?	// Регистрация.
+                $APPLICATION->IncludeComponent(
+                    "bitrix:main.register",
+                    "popup",
+                    array(
+                        "USER_PROPERTY_NAME" => "",
+                        "SEF_MODE" => "N",
+                        "SHOW_FIELDS" => array(
+                            "NAME",
+                            "EMAIL",
+                            "WORK_COMPANY",
+                            "WORK_POSITION",
+                        ),
+                        "REQUIRED_FIELDS" => array(
+                            "NAME",
+                        ),
+                        "AUTH" => "Y",
+                        "USE_BACKURL" => "N",
+                        "SUCCESS_PAGE" => (!empty($_COOKIE['backurl'])) ? (strval($_COOKIE['backurl'])) :("/"),
+                        "SET_TITLE" => "N",
+                        "USER_PROPERTY" => array(),
+                        "SEF_FOLDER" => "",
+                        "VARIABLE_ALIASES" => array(),
+                    )
+                );
+            ?>
         </div>
         
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
         <script src="<?= SITE_TEMPLATE_PATH ?>/js/jquery.formstyler.min.js"></script>
         <script src="<?= SITE_TEMPLATE_PATH ?>/js/jquery.arcticmodal.min.js"></script>
+        
         <script src="<?= SITE_TEMPLATE_PATH ?>/js/script.js"></script>
         <script>
             $(function() {
-                $('.styler, input[type=checkbox]').styler();
+                $('.styler, input[type="checkbox"], .form input').styler();
             });
         </script>
     </body>

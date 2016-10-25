@@ -1,40 +1,60 @@
-<?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
-$APPLICATION->SetTitle("Поиск");?>
+<? require ($_SERVER['DOCUMENT_ROOT'].'/bitrix/header.php'); ?>
+<? $APPLICATION->SetTitle("Карта коллекций"); ?>
 
-<?$APPLICATION->IncludeComponent("bitrix:search.page", "tags", Array(
-	"RESTART"	=>	"N",
-	"CHECK_DATES"	=>	"Y",
-	"arrWHERE"	=>	array(
-		0	=>	"forum",
-		1	=>	"iblock_news",
-		2	=>	"iblock_articles",
-		3	=>	"iblock_books",
-		4	=>	"blog",
-	),
-	"arrFILTER"	=>	array(
-		0	=>	"no",
-	),
-	"SHOW_WHERE"	=>	"Y",
-	"PAGE_RESULT_COUNT"	=>	"10",
-	"CACHE_TYPE"	=>	"A",
-	"CACHE_TIME"	=>	"3600",
-	"TAGS_SORT"	=>	"NAME",
-	"TAGS_PAGE_ELEMENTS"	=>	"20",
-	"TAGS_PERIOD"	=>	"",
-	"TAGS_URL_SEARCH"	=>	"",
-	"TAGS_INHERIT"	=>	"Y",
-	"SHOW_RATING" => "Y",
-	"FONT_MAX"	=>	"50",
-	"FONT_MIN"	=>	"10",
-	"COLOR_NEW"	=>	"000000",
-	"COLOR_OLD"	=>	"C8C8C8",
-	"PERIOD_NEW_TAGS"	=>	"",
-	"SHOW_CHAIN"	=>	"Y",
-	"COLOR_TYPE"	=>	"Y",
-	"WIDTH"	=>	"100%",
-	"SHOW_RATING" => "Y",
-	"PATH_TO_USER_PROFILE" => "#SITE_DIR#people/user/#USER_ID#/",
-	)
-);?>
+<? IncludeFileLangFile(__FILE__) ?>
 
-<?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");?>
+<?  // Строка поиска.
+	$APPLICATION->IncludeComponent('bitrix:main.include', '', array(
+		'AREA_FILE_SHOW' => 'file',
+		'PATH' => SITE_TEMPLATE_PATH.'/include/area/main.search.php',
+		'EDIT_TEMPLATE' => 'html'
+	));
+?>
+
+<main class="siteMain">
+    <div class="container">
+        <? // TODO: Сделать хлебные крошки при поиске в коллекции // ?>
+        <ol class="breadcrumb">
+            <li><a href="/collections/">Коллекции</a></li>
+            <li>Поиск</li>
+        </ol>
+    
+        <div class="row">
+            <? // Коллекции.
+                $APPLICATION->IncludeComponent(
+                    "glyf:filter.pictures",
+                    "sideleft",
+                    array()
+                );
+            ?>
+            
+            <?	// Коллекции.
+                $APPLICATION->IncludeComponent(
+                    "bitrix:catalog.section.list",
+                    "collections",
+                    array(
+                        "CURRENT" => strval($_REQUEST['SECTION']),
+                        "VIEW_MODE" => "TEXT",
+                        "SHOW_PARENT_NAME" => "N",
+                        "IBLOCK_TYPE" => "products",
+                        "IBLOCK_ID" => "4",
+                        "SECTION_ID" => "",
+                        "SECTION_CODE" => strval($_REQUEST['SECTION']),
+                        "SECTION_URL" => "",
+                        "COUNT_ELEMENTS" => "Y",
+                        "TOP_DEPTH" => "2",
+                        "SECTION_FIELDS" => "",
+                        "SECTION_USER_FIELDS" => array("UF_LANG_TITLE_RU", "UF_LANG_TITLE_EN"),
+                        "ADD_SECTIONS_CHAIN" => "Y",
+                        "CACHE_TYPE" => "A",
+                        "CACHE_TIME" => "36000000",
+                        "CACHE_NOTES" => "",
+                        "CACHE_GROUPS" => "Y"
+                    )		
+                );
+            ?>
+        </div>
+    </div>
+</main>
+
+<? require ($_SERVER['DOCUMENT_ROOT'].'/bitrix/footer.php'); ?>

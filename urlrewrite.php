@@ -12,6 +12,32 @@ $arUrlRewrite = array(
 		"ID" => "",
 		"PATH" => "/blog/index.php",
 	),
+    
+    
+    array(
+		"CONDITION" => "#^/collections/([\d]+)/#",
+		"RULE" => "ELEMENT=\$1&",
+		"ID" => "",
+		"PATH" => "/collections/detail.php",
+	),
+    array(
+		"CONDITION" => "#^/collections/(.+?)/(.+?)/(.+?)/#",
+		"RULE" => "SECTION=\$1&PATH[]=\$1&PATH[]=\$2&PATH[]=\$3&",
+		"ID" => "",
+		"PATH" => "/collections/index.php",
+	),
+    array(
+		"CONDITION" => "#^/collections/(.+?)/(.+?)/#",
+		"RULE" => "SECTION=\$1&PATH[]=\$1&PATH[]=\$2&",
+		"ID" => "",
+		"PATH" => "/collections/index.php",
+	),
+    array(
+		"CONDITION" => "#^/collections/(.+?)/#",
+		"RULE" => "SECTION=\$1&PATH[]=\$1&",
+		"ID" => "",
+		"PATH" => "/collections/index.php",
+	),
 );
 
 ?>

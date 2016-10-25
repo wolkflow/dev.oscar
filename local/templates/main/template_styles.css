@@ -1034,32 +1034,35 @@ div[class^="col"] .row {
 
 
 .jq-file {
-  width: 270px;
-  border-radius: 4px;
-  box-shadow: 0 1px 2px rgba(0,0,0,.1);
+  width: 100%;
+  margin-bottom: 25px;
+  color: #909090;
+  line-height: 32px;
+  background: url(./images/uploadError.png) 6px 50% no-repeat #ffffff;
+  position: relative;
+  padding: 0 0 0 50px;
+  outline: none !important;
 }
 .jq-file input {
   height: auto;
-  line-height: 1em;
   cursor: pointer;
+  outline: none !important;
 }
 .jq-file__name {
   overflow: hidden;
   box-sizing: border-box;
   width: 100%;
   height: 34px;
-  padding: 0 80px 0 10px;
-  border: 1px solid #CCC;
-  border-bottom-color: #B3B3B3;
-  border-radius: 4px;
-  background: #FFF;
-  box-shadow: inset 1px 1px #F1F1F1;
-  font: 14px/32px Arial, sans-serif;
-  color: #333;
+  font: 500 15px/24px 'Circe', Arial, helvetika, sans-serif;
+  font-size: 15px;
+  font-weight: 300;
+  padding: 6px 8px 6px 8px;
   white-space: nowrap;
   text-overflow: ellipsis;
+  outline: none !important;
 }
 .jq-file__browse {
+  display: none !important;
   position: absolute;
   top: 1px;
   right: 1px;
@@ -1082,9 +1085,6 @@ div[class^="col"] .row {
 .jq-file:active .jq-file__browse {
   background: #F5F5F5;
   box-shadow: inset 1px 1px 3px #DDD;
-}
-.jq-file.focused .jq-file__name {
-  border: 1px solid #5794BF;
 }
 .jq-file.disabled,
 .jq-file.disabled .jq-file__name,
@@ -1926,6 +1926,7 @@ div.cabinet-panel--stats-inner {
   display: inline-block;
   vertical-align: top;
   color: #00c3d9;
+	float: right;
 }
 .cabinet-panel__menu-pages > span {
   line-height: 24px;
@@ -3248,7 +3249,7 @@ div.cabinet-panel--stats-inner {
   font-size: 10px;
   text-align: right;
   text-transform: uppercase;
-  padding: 0 0 10px;
+  padding: 0 0 12px;
 }
 @media all and (max-width: 767px) {
   .copyright {
@@ -3260,7 +3261,7 @@ div.cabinet-panel--stats-inner {
   color: #666;
   font-size: 10px;
   text-align: left;
-  padding: 0 0 10px;
+  padding: 0 0 12px;
 }
 .madeby span {
   display: inline-block;
@@ -4319,6 +4320,9 @@ h5 {
 .inftext {
   padding-bottom: 50px;
 }
+.inftext [class^=col] {
+	margin-bottom: 20px;
+}
 .sr-only {
   position: absolute;
   width: 1px;
@@ -4368,9 +4372,11 @@ a:hover {
   font: 400 15px/20px 'Circe', Arial, helvetika, sans-serif;
   font-size: 14px;
   font-weight: 700;
-  text-transform: uppercase;
   line-height: 27px;
   width: 100%;
+}
+.formList input[type=text] {
+  text-transform: uppercase;
 }
 .formList input[type=text].input-size {
   display: inline-block;
@@ -5188,13 +5194,26 @@ a.btn.btn-test2 {
 .white-pagination .cabinet-pagination__button {
   background: #fff;
 }
+.tarrifs {
+	padding-bottom: 70px;
+}
+
+@media all and (max-width: 992px) {
+	.tarrifs {
+		padding-bottom: 20px;
+	}
+}
 .tarrifs h1 {
   padding-top: 50px;
   padding-bottom: 30px;
+	margin-bottom: 0;
 }
 .tariffsPretext {
   margin-bottom: 40px;
   padding-bottom: 0;
+}
+.tariffBlock {
+	margin-bottom: 25px;
 }
 .tariffBlockTop {
   border-radius: 15px;
@@ -5293,6 +5312,9 @@ a.btn.btn-test2 {
 }
 .errorPageContainer {
   position: relative;
+}
+.errorPageContainer img {
+	max-width: 100%;
 }
 .errorPageQuery {
   width: 100%;
@@ -5544,3 +5566,77 @@ input[type=submit].btn.btn-upload:active {
 .text-center {
   text-align: center;
 }
+
+ul.suggest {
+    padding: 2px 8px 2px 8px;
+    border: 1px solid #d9d9d9;
+    margin: 3px 0 0 0;
+    font: 400 15px/20px 'Circe', Arial, helvetika, sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    line-height: 27px;
+}
+ul.suggest li{
+    cursor: pointer;
+}
+ul.suggest li:hover{
+    background-color: #f9f9f9;
+}
+
+
+
+@media (min-width: 1200px) {
+    .ui-menu.ui-autocomplete {
+        width: 1165px;
+    }
+}
+@media (min-width: 992px) {
+    .ui-menu.ui-autocomplete {
+        width: 965px;
+    }
+}
+@media (min-width: 768px) {
+    .ui-menu.ui-autocomplete {
+        width: 745px;
+    }
+}
+
+.ui-menu.ui-autocomplete {
+    background-color: #ffffff;
+    margin-top: 1px;
+    padding: 5px;
+    z-index: 1000;
+}
+.ui-menu.ui-autocomplete li {
+    cursor: pointer;
+    padding: 6px;
+}
+.ui-menu.ui-autocomplete li:hover {
+    background-color: #f9f9f9;
+}
+
+.tags  {
+    margin-top: 5px;
+}
+
+.tags .tag {
+    height: 23px;
+    z-index: 2;
+    padding: 0 7px 0 10px;
+    border-radius: 10px;
+    font: 300 12px/21px 'Circe', Arial, helvetika, sans-serif;
+    color: #fff;
+    background: #000;
+    margin-top: 4px;
+    display: inline-block;
+    text-transform: uppercase;
+}
+
+.tags .tag .close:after {
+    content: "×";
+    cursor: pointer;
+    font-size: 20px;
+    margin: 0 0 0 5px;
+}
+
