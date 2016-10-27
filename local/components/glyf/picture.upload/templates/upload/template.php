@@ -110,8 +110,7 @@
                     var tag = ' ';
                     
                     tag += '<div class="tag">';
-                    tag += '<input type="hidden" name="' + param + '_IDS[]" value="0" />';
-                    tag += '<input type="hidden" name="' + param + '[]" value="' + value + '" />';
+                    tag += '<input type="hidden" name="' + param + '_TITLE[]" value="' + value + '" />';
                     tag += value;
                     tag += '<span class="close"></span>';
                     tag += '</div>';
@@ -161,8 +160,7 @@
                 var tag = ' ';
                 
                 tag += '<div class="tag">';
-                tag += '<input type="hidden" name="' + param + '_IDS[]" value="' + ui.item.id + '" />';
-                tag += '<input type="hidden" name="' + param + '[]" value="' + value + '" />';
+                tag += '<input type="hidden" name="' + param + '[' + ui.item.id + ']" value="' + value + '" />';
                 tag += value;
                 tag += '<span class="close"></span>';
                 tag += '</div>';
@@ -265,17 +263,17 @@
                                             Год
                                         </label> 
                                         <label class="inline-label">
-                                            <input type="radio"  name="ISYEAR" value="CENTURY" <?= ($arResult['DATA']['ISYEAR'] == 'YEAR') ? ('checked') : ('') ?> />
+                                            <input type="radio"  name="ISYEAR" value="CENTURY" <?= ($arResult['DATA']['ISYEAR'] == 'CENTURY') ? ('checked') : ('') ?> />
                                             Век
                                         </label>
                                     </div>
                                     <div class="upload-double">
                                         <input type="text" name="PERIOD" value="<?= $arResult['DATA']['PERIOD'] ?>" placeholder="пример: 1920" />
-                                        <select class="styler" name="PERIOD_AGE">
-                                            <option value="<?= Picture::PROP_TIME_BC ?>" <?= ($arResult['DATA']['PERIOD_AGE'] == Picture::PROP_TIME_BC) ? ('selected') : ('') ?>>
+                                        <select class="styler" name="PERIOD_ERA">
+                                            <option value="<?= Picture::PROP_TIME_AD ?>" <?= ($arResult['DATA']['PERIOD_ERA'] == Picture::PROP_TIME_AD) ? ('selected') : ('') ?>>
                                                 НЭ
                                             </option>
-                                            <option value="<?= Picture::PROP_TIME_AD ?>" <?= ($arResult['DATA']['PERIOD_AGE'] == Picture::PROP_TIME_AD) ? ('selected') : ('') ?>>
+                                            <option value="<?= Picture::PROP_TIME_BC ?>" <?= ($arResult['DATA']['PERIOD_ERA'] == Picture::PROP_TIME_BC) ? ('selected') : ('') ?>>
                                                 ДНЭ
                                             </option>
                                         </select>
@@ -288,11 +286,11 @@
                                     <div class="uploadBlock-title">От</div>
                                     <div class="upload-double">
                                         <input type="text" name="PERIOD_FROM" value="<?= $arResult['DATA']['PERIOD_FROM'] ?>" placeholder="пример: XV" />
-                                        <select class="styler" name="PERIOD_FROM_AGE">
-                                            <option value="<?= Picture::PROP_TIME_BC ?>" <?= ($arResult['DATA']['PERIOD_FROM_AGE'] == Picture::PROP_TIME_BC) ? ('selected') : ('') ?>>
+                                        <select class="styler" name="PERIOD_FROM_ERA">
+                                            <option value="<?= Picture::PROP_TIME_AD ?>" <?= ($arResult['DATA']['PERIOD_FROM_ERA'] == Picture::PROP_TIME_AD) ? ('selected') : ('') ?>>
                                                 НЭ
                                             </option>
-                                            <option value="<?= Picture::PROP_TIME_AD ?>" <?= ($arResult['DATA']['PERIOD_FROM_AGE'] == Picture::PROP_TIME_AD) ? ('selected') : ('') ?>>
+                                            <option value="<?= Picture::PROP_TIME_BC ?>" <?= ($arResult['DATA']['PERIOD_FROM_ERA'] == Picture::PROP_TIME_BC) ? ('selected') : ('') ?>>
                                                 ДНЭ
                                             </option>
                                         </select>
@@ -304,11 +302,11 @@
                                     <div class="uploadBlock-title">До</div>
                                     <div class="upload-double">
                                         <input type="text" name="PERIOD_TO" value="<?= $arResult['DATA']['PERIOD_TO'] ?>" placeholder="пример: XX" />
-                                        <select class="styler" name="PERIOD_TO_AGE">
-                                            <option value="<?= Picture::PROP_TIME_BC ?>" <?= ($arResult['DATA']['PERIOD_TO_AGE'] == Picture::PROP_TIME_BC) ? ('selected') : ('') ?>>
+                                        <select class="styler" name="PERIOD_TO_ERA">
+                                            <option value="<?= Picture::PROP_TIME_AD ?>" <?= ($arResult['DATA']['PERIOD_TO_ERA'] == Picture::PROP_TIME_AD) ? ('selected') : ('') ?>>
                                                 НЭ
                                             </option>
-                                            <option value="<?= Picture::PROP_TIME_AD ?>" <?= ($arResult['DATA']['PERIOD_TO_AGE'] == Picture::PROP_TIME_AD) ? ('selected') : ('') ?>>
+                                            <option value="<?= Picture::PROP_TIME_BC ?>" <?= ($arResult['DATA']['PERIOD_TO_ERA'] == Picture::PROP_TIME_BC) ? ('selected') : ('') ?>>
                                                 ДНЭ
                                             </option>
                                         </select>
@@ -323,9 +321,18 @@
                             <input type="text" class="suggest-tags" data-type="technique" placeholder="пример: Масло, Акварель" />
                             <div class="tags">
                                 <? if (!empty($arResult['DATA']['TECHNIQUE'])) { ?>
-                                    <? foreach ($arResult['DATA']['TECHNIQUE'] as $value) { ?>
+                                    <? foreach ($arResult['DATA']['TECHNIQUE'] as $id => $value) { ?>
                                         <div class="tag">
-                                            <input type="hidden" name="TECHNIQUE[]" value="<?= $value ?>" />
+                                            <input type="hidden" name="TECHNIQUE[<?= $id ?>]" value="<?= $value ?>" />
+                                            <?= $value ?> 
+                                            <span class="close"></span>
+                                        </div>
+                                    <? } ?>
+                                <? } ?>
+                                <? if (!empty($arResult['DATA']['TECHNIQUE_TITLE'])) { ?>
+                                    <? foreach ($arResult['DATA']['TECHNIQUE_TITLE'] as $id => $value) { ?>
+                                        <div class="tag">
+                                            <input type="hidden" name="TECHNIQUE_TITLE[]" value="<?= $value ?>" />
                                             <?= $value ?> 
                                             <span class="close"></span>
                                         </div>
@@ -450,9 +457,34 @@
 
                 <div class="row">
                     <div class="col-xs-12">
-                        <div class="uploadBlock uploadKeywords">
+                        <div class="uploadBlock uploadKeywords js-suggest-tags-wrap" data-param="KEYWORDS">
+                            <div class="uploadBlock-title">Ключевые слова</div>
+                            <input type="text" class="suggest-tags" data-type="keywords" placeholder="пример: Живопись, Пейзаж, ХХ век" />
+                            <div class="tags">
+                                <? if (!empty($arResult['DATA']['KEYWORDS'])) { ?>
+                                    <? foreach ($arResult['DATA']['KEYWORDS'] as $id => $value) { ?>
+                                        <div class="tag">
+                                            <input type="hidden" name="KEYWORDS[<?= $id ?>]" value="<?= $value ?>" />
+                                            <?= $value ?> 
+                                            <span class="close"></span>
+                                        </div>
+                                    <? } ?>
+                                <? } ?>
+                                <? if (!empty($arResult['DATA']['KEYWORDS_TITLE'])) { ?>
+                                    <? foreach ($arResult['DATA']['KEYWORDS_TITLE'] as $id => $value) { ?>
+                                        <div class="tag">
+                                            <input type="hidden" name="KEYWORDS_TITLE[]" value="<?= $value ?>" />
+                                            <?= $value ?> 
+                                            <span class="close"></span>
+                                        </div>
+                                    <? } ?>
+                                <? } ?>
+                            </div>
+                        
+                            <? /*
                             <div class="uploadBlock-title">Ключевые слова</div>
                             <textarea name="KEYWORDS" placeholder="пример: Живопись, Пейзаж, ХХ век"><?= $arResult['DATA']['KEYWORDS'] ?></textarea>
+                            */ ?>
                         </div>
                     </div>
                 </div>

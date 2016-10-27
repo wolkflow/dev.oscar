@@ -8,4 +8,9 @@ class Holder extends HLBlockModel
 {
 	static protected $hlblockID = HLBLOCK_DICT_HOLDERS_ID;
     
+    
+    public function getName()
+    {
+        return $this->get('UF_LANG_NAME_' . CURRENT_LANG_UP);
+    }
 }

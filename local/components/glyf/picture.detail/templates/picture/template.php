@@ -33,7 +33,9 @@
                     </div>
                 </div>
                 <div class="card-description">
-                    <div class="card-description__title">Тип и размер изображения</div>
+                    <div class="card-description__title">
+                        
+                    </div>
                     <div class="card-description__text card-description__text--big">
                         JPEG, 3.04MB, 5118px x 3368px
                     </div>
@@ -98,11 +100,15 @@
                 </h1>
                 <div class="card-meta">
                     <span class="card-meta__key">Автор:</span>
-                    <span class="card-meta__value">Васнецов В.М</span>
+                    <span class="card-meta__value">
+                        <?= $arResult['PICTURE']['AUTHOR'] ?>
+                    </span>
                 </div>
                 <div class="card-meta">
                     <span class="card-meta__key">Место создания:</span>
-                    <span class="card-meta__value">Россия, Москва</span>
+                    <span class="card-meta__value">
+                        <?= implode(', ', $arResult['PICTURE']['PLACE']) ?>
+                    </span>
                 </div>
                 <div class="card-meta">
                     <span class="card-meta__key">Время создания:</span>
@@ -110,19 +116,30 @@
                 </div>
                 <div class="card-meta">
                     <span class="card-meta__key">Техника:</span>
-                    <span class="card-meta__value">Холст, масло</span>
+                    <span class="card-meta__value">
+                        <?= implode(', ', $arResult['PICTURE']['TECHNIQUES'])  ?>
+                    </span>
                 </div>
                 <div class="card-meta">
                     <span class="card-meta__key">Размеры:</span>
-                    <span class="card-meta__value">295,3 х 466 см</span>
+                    <span class="card-meta__value">
+                        <?= $arResult['PICTURE'][Picture::FIELD_WIDTH] ?>
+                        &times;
+                        <?= $arResult['PICTURE'][Picture::FIELD_HEIGHT] ?>
+                        см
+                    </span>
                 </div>
                 <div class="card-meta">
                     <span class="card-meta__key">Правообладатель:</span>
-                    <span class="card-meta__value">Государственная Третьяковская галерея, Москва</span>
+                    <span class="card-meta__value">
+                        <?= $arResult['PICTURE']['HOLDER'] ?>
+                    </span>
                 </div>
                 <div class="card-meta">
                     <span class="card-meta__key">Категория:</span>
-                    <span class="card-meta__value">Живопись</span>
+                    <span class="card-meta__value">
+                        <?= $arResult['PICTURE']['COLLECTION']['TITLE'] ?>
+                    </span>
                 </div>
                 <div class="card-meta">
                     <span class="card-meta__key">ID:</span>
@@ -147,31 +164,53 @@
                     </div>
                 </div>
                 
-                <div class="card-description hidden-xs">
-                    <div class="card-description__title">Упоминания в блоге</div>
-                    <div class="card-description__text">
-                        <div class="archiveList">
-                            <article class="archiveArticle text">
-                                <a href="#">
-                                    <div class="archiveArticleImage">
-                                        <img src="media/archive.png" alt="">
-                                        <div class="catmark">живопись</div>
-                                    </div>
-                                    <p>Tortured Genius: Get up close to Russia's cultural icons</p>
-                                </a>
-                            </article>
-                            <article class="archiveArticle text">
-                                <a href="#">
-                                    <div class="archiveArticleImage">
-                                        <img src="media/archive.png" alt="">
-                                        <div class="catmark">культура</div>
-                                    </div>
-                                    <p>Tortured Genius: Get up close to Russia's cultural icons</p>
-                                </a>
-                            </article>
-                        </div>
-                    </div>
-                </div>
+                <?  // Упоминания в блоге.
+                    $GLOBALS['arBlogTagFilter'] = array(
+                        'PROPERTY_LANG_TAGS_' . CURRENT_LANG_UP => $arResult['PICTURE'][Picture::FIELD_LANG_TITLE_SFX . CURRENT_LANG_UP]
+                    );
+                    
+                    $APPLICATION->IncludeComponent(
+                        "bitrix:news.list",
+                        "blog-mentions",
+                        array(
+                            "IBLOCK_TYPE" => "content",
+                            "IBLOCK_ID" => "3",
+                            "NEWS_COUNT" => "6",
+                            "SORT_BY1" => "SORT",
+                            "SORT_ORDER1" => "ASC",
+                            "SORT_BY2" => "ID",
+                            "SORT_ORDER2" => "DESC",
+                            "FILTER_NAME" => "arBlogTagFilter",
+                            "FIELD_CODE" => array(),
+                            "PROPERTY_CODE" => array("*"),
+                            "PARENT_SECTION_CODE" => "",
+                            "CACHE_TYPE" => "N",
+                            "CACHE_TIME" => "86400",
+                            "CACHE_FILTER" => "Y",
+                            "PREVIEW_TRUNCATE_LEN" => "0",
+                            "ACTIVE_DATE_FORMAT" => "d.m.Y",
+                            "DISPLAY_PANEL" => "N",
+                            "SET_TITLE" => "N",
+                            "INCLUDE_IBLOCK_INTO_CHAIN" => "N",
+                            "ADD_SECTIONS_CHAIN" => "N",
+                            "HIDE_LINK_WHEN_NO_DETAIL" => "N",
+                            "PARENT_SECTION" => "",
+                            "DISPLAY_TOP_PAGER"	=> "N",
+                            "DISPLAY_BOTTOM_PAGER" => "N",
+                            "PAGER_TITLE" => "",
+                            "PAGER_SHOW_ALWAYS" => "N",
+                            "PAGER_TEMPLATE" => "",
+                            "PAGER_DESC_NUMBERING" => "N",
+                            "PAGER_DESC_NUMBERING_CACHE_TIME" => "36000",
+                            "PAGER_SHOW_ALL" => "N",
+                            "DISPLAY_DATE" => "Y",
+                            "DISPLAY_NAME" => "Y",
+                            "DISPLAY_PICTURE" => "N",
+                            "DISPLAY_PREVIEW_TEXT" => "Y"
+                        ),
+                        $component
+                    );
+                ?>
             </div>
         </div>
     </div>

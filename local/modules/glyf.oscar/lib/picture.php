@@ -69,7 +69,6 @@ class Picture extends HLBlockModel
 	const FIELD_HOLDER_CAND     = 'UF_HOLDER_CAND';
     const FIELD_KEYWORDS_CAND   = 'UF_KEYWORDS_CAND';
     const FIELD_TECHNIQUE_CAND  = 'UF_TECHNIQUE_CAND';
-    const FIELD_PLACE_CAND      = 'UF_PLACE_CAND';
     
     // Раздел коллекции.
     const FIELD_COLLECTION      = 'UF_COLLECTION';
@@ -79,7 +78,15 @@ class Picture extends HLBlockModel
     const FIELD_PERIOD_TO       = 'UF_PERIOD_TO';
     const FIELD_IS_YEAR_FROM    = 'UF_IS_YEAR_FROM';
     const FIELD_IS_YEAR_TO      = 'UF_IS_YEAR_TO';
+    //const FIELD_ERA_FROM        = 'UF_ERA_FROM';
+    //const FIELD_ERA_TO          = 'UF_ERA_TO';
 	
+    // Местоположение.
+    const FIELD_PLACE_COUNTRY_ID = 'UF_PLACE_COUNTRY_ID';
+    const FIELD_PLACE_CITY_ID    = 'UF_PLACE_CITY_ID';
+    const FIELD_PLACE_COUNTRY    = 'UF_PLACE_COUNTRY';
+    const FIELD_PLACE_CITY       = 'UF_PLACE_CITY';
+    
     // Свойства.
 	const FIELD_GENRE           = 'UF_GENRE';
 	const FIELD_WIDTH           = 'UF_WIDTH';
@@ -88,8 +95,17 @@ class Picture extends HLBlockModel
 	const FIELD_LEGAL           = 'UF_LEGAL';
     const FIELD_FOLDER          = 'UF_FOLDER';
     
+    
+    // Изображения.
+    const FIELD_FILE                    = 'UF_FILE';
+    const FIELD_FILE_WATERMARK          = 'UF_FILE_WM';
+    const FIELD_PREVIEW_FILE            = 'UF_PREVIEW_FILE';
+    const FIELD_PREVIEW_FILE_WATERMARK  = 'UF_PREVIEW_FILE_WM';
+    const FIELD_SMALL_FILE              = 'UF_SMALL_FILE';
+    const FIELD_SMALL_FILE_WATERMARK    = 'UF_SMALL_FILE_WM';
+    
+    
     // Служебные данные.
-    const FIELD_FILE            = 'UF_FILE';
 	const FIELD_TIME            = 'UF_TIME';
     const FIELD_LANG            = 'UF_LANG';
 	const FIELD_MODERATE        = 'UF_MODERATE';
@@ -106,8 +122,17 @@ class Picture extends HLBlockModel
     
     
     // Размеры дял превью.
-    const IMAGE_PREVIEW_WIDTH  = 1000;
-    const IMAGE_PREVIEW_HEIGHT = 1000;
+    const IMAGE_WATERMARK_PATH   = '/images/img/watermark.png';
+    const IMAGE_WATERMARK_WIDTH  = 66;
+    const IMAGE_WATERMARK_HEIGHT = 45;
+    const IMAGE_PREVIEW_WIDTH    = 1000;
+    const IMAGE_PREVIEW_HEIGHT   = 1000;
+    const IMAGE_SMALL_WIDTH      = 545;
+    const IMAGE_SMALL_HEIGHT     = 360;
+    
+    
+    
+    protected $fileinfo = array();
     
 	
 	/**
@@ -153,6 +178,15 @@ class Picture extends HLBlockModel
         
 		return $this->get(self::FIELD_AUTHOR);
 	}
+    
+    
+    /**
+	 * Получение автора.
+	 */
+	public function getAuthor()
+	{
+        return (new \Glyf\Oscar\Dictionaries\Author($this->getAuthorID()));
+	}
 	
 	
 	/**
@@ -165,6 +199,15 @@ class Picture extends HLBlockModel
 		return $this->get(self::FIELD_HOLDER);
 	}
 	
+    
+    /**
+	 * Получение автора.
+	 */
+	public function getHolder()
+	{
+        return (new \Glyf\Oscar\Dictionaries\Holder($this->getHolderID()));
+	}
+    
 	
 	/**
 	 * Получение ключевых слов.
@@ -178,7 +221,7 @@ class Picture extends HLBlockModel
 	
     
     /**
-	 * Получение ключевых слов.
+	 * Получение ID техник.
 	 */
 	public function getTechniqueID()
 	{
@@ -187,7 +230,84 @@ class Picture extends HLBlockModel
 		return $this->get(self::FIELD_TECHNIQUE);
 	}
     
+    
+    /**
+	 * Получение техник.
+	 */
+	public function getTechniques()
+	{
+        $ids = $this->getTechniqueID();
+        
+        $result = array();
+        
+        foreach ($ids as $id) {
+            $result[$id] = new \Glyf\Oscar\Dictionaries\Technique($id);
+        }
+		return $result;
+	}
+    
+    
+    /**
+     * Получение ID страны.
+     */
+    public function getPlaceCountryID()
+    {
+        $this->load();
+        
+        return $this->get(self::FIELD_PLACE_COUNTRY_ID);
+    }
+    
+    
+    /**
+     * Получение ID города.
+     */
+    public function getPlaceCityID()
+    {
+        $this->load();
+        
+        return $this->get(self::FIELD_PLACE_CITY_ID);
+    }
+    
 	
+    /**
+     * Получение текстового названия страны.
+     */
+    public function getPlaceCountryText()
+    {
+        $this->load();
+        
+        return $this->get(self::FIELD_PLACE_COUNTRY);
+    }
+    
+    
+    /**
+     * Получение текстового названия города.
+     */
+    public function getPlaceCityText()
+    {
+        $this->load();
+        
+        return $this->get(self::FIELD_PLACE_CITY);
+    }
+    
+    
+    /**
+     * Получение страны.
+     */
+    public function getPlaceCountry()
+    {
+        return (new \Glyf\Oscar\Dictionaries\PlaceCountry($this->getPlaceCountryID()));
+    }
+    
+    
+    /**
+     * Получение города.
+     */
+    public function getPlaceCity()
+    {
+        return (new \Glyf\Oscar\Dictionaries\Placecity($this->getPlaceCityID()));
+    }
+    
 	/**
 	 * Получение ключевых слов.
 	 
@@ -215,6 +335,59 @@ class Picture extends HLBlockModel
 	{
 		return (new Collection($this->getCollectionID()));
 	}
+    
+    
+    /**
+     * Получение информации об изображении.
+     */
+    public function getFileInfo()
+    {
+        $filepath = $_SERVER['DOCUMENT_ROOT'] . $this->getFullImageSrc();
+        
+        if (empty($this->fileinfo)) {
+            $sizes = getimagesize($filepath);
+            
+            $this->fileinfo['PATH'] = pathinfo($filepath);
+            $this->fileinfo['SIZE'] = array(
+                'WIDTH'    => $sizes[0],
+                'HEIGHT'   => $sizes[1],
+                'BITS'     => $sizes['bits'],
+                'CHANELLS' => $sizes['channels'],
+                'MIME'     => $sizes['mime'],
+            );
+        }
+        return $this->fileinfo;
+    }
+    
+    
+    /**
+     * Получение расширения файла.
+     */
+    public function getFileExtension()
+    {
+        
+    }
+    
+    
+    
+    
+    
+    /**
+     * Получение ширины изображения.
+     */
+    public function getImageWidth()
+    {
+        
+    }
+    
+    
+    /**
+     * Получение высоты изображения.
+     */
+    public function getImageHeight()
+    {
+        
+    }
     
     
     /**
@@ -266,7 +439,7 @@ class Picture extends HLBlockModel
 	 */
 	public function getFullImageLink()
 	{
-        $link = '/iamges/' . $this->getDownloadToken(\CUser::getID()) . '/';
+        $link = '/images/' . $this->getDownloadToken(\CUser::getID()) . '/';
         
 		return $link;
 	}
@@ -302,6 +475,102 @@ class Picture extends HLBlockModel
         return $token;
 	}
     
+    
+    
+    /**
+     * Создание изображений для предпросмотра.
+     */
+    public static function makePreviewFiles($filepath)
+    {
+        $filepath = (string) $filepath;
+        
+        if (!is_readable($filepath)) {
+            return false;
+        }
+        
+        // Среднее изображение без знака.
+        self::makePreview(
+            $filepath,
+            $_SERVER['DOCUMENT_ROOT'] . '/images/img/preview/example.middle.jpg',
+            self::IMAGE_PREVIEW_WIDTH,
+            self::IMAGE_PREVIEW_HEIGHT,
+            false
+        );
+        
+        // Малое изображение без знака.
+        self::makePreview(
+            $filepath,
+            $_SERVER['DOCUMENT_ROOT'] . '/images/img/preview/example.small.jpg',
+            self::IMAGE_SMALL_WIDTH,
+            self::IMAGE_SMALL_HEIGHT,
+            false
+        );
+        
+        
+        // Среднее изображение со знаком.
+        self::makePreview(
+            $filepath,
+            $_SERVER['DOCUMENT_ROOT'] . '/images/img/preview/example.middle.wm.jpg',
+            self::IMAGE_PREVIEW_WIDTH,
+            self::IMAGE_PREVIEW_HEIGHT,
+            true
+        );
+        
+        // Малое изображение со знаком.
+        self::makePreview(
+            $filepath,
+            $_SERVER['DOCUMENT_ROOT'] . '/images/img/preview/example.small.wm.jpg',
+            self::IMAGE_SMALL_WIDTH,
+            self::IMAGE_SMALL_HEIGHT,
+            true
+        );
+    }
+    
+    
+    /**
+     * Создание изображения для предпросмотра.
+     */
+    protected static function makePreview($filepath, $path, $width, $height, $watermark = false)
+    {
+        $filepath  = (string) $filepath;
+        $watermark = (string) $watermark;
+        
+        if (!is_readable($filepath)) {
+            return false;
+        }
+        
+        // Изображение.
+        $image = new \Imagick($filepath);
+        
+        // Размеры исходного изображения.
+        $iwidth  = $image->getImageWidth();
+        $iheight = $image->getImageHeight();
+        
+        // Максимальный размер поодной стороне.
+        $maxsize = ($iwidth > $iheight) ? ('width') : ('height');
+        
+        
+        // Масштабирование.
+        if ($maxsize == 'width') {
+            $image->scaleImage($width, 0);
+        } else {
+            $image->scaleImage(0, $height);
+        }
+        
+        
+        // Наложение водного знака.
+        if ($watermark) {
+            // Новые размеры исходного изображения.
+            $nwidth  = $image->getImageWidth();
+            $nheight = $image->getImageHeight();
+            
+            $wmimage = new \Imagick($_SERVER['DOCUMENT_ROOT'] . self::IMAGE_WATERMARK_PATH);
+            $image->compositeImage($wmimage, \Imagick::COMPOSITE_DEFAULT, $nwidth / 2 - self::IMAGE_WATERMARK_WIDTH / 2, $nheight / 2 - self::IMAGE_WATERMARK_HEIGHT / 2);
+        }
+        
+        $image->writeImage($path);
+        $image->destroy();
+    }
     
     
     /**

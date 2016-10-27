@@ -25,6 +25,33 @@ class User extends \Glyf\Core\User
     
     
     /**
+     * Получение тарифа пользователя.
+     */
+    public function getTariff()
+    {
+        
+    }
+    
+    
+    /**
+     * Получение количества скачанных картин
+     */
+    public function getCountDownloadPictures(Glyf\Oscar\Tariff $tariff = null, $permonth = false)
+    {
+        $params = array();
+    }
+    
+    
+    /**
+     * Получение привелегий по тарифу.
+     */
+    public function getAccesses()
+    {
+        
+    }
+    
+    
+    /**
      * Получени данных о платежном аккаунте пользователя.
      */
     public function getAccountBudget()
