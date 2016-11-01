@@ -7,6 +7,7 @@ namespace Glyf\Core\System;
 class HLBlockModel extends Model
 {
 	protected static $hlblockID;
+    protected static $gateway;
 	
     
 	/**
@@ -52,14 +53,15 @@ class HLBlockModel extends Model
 	 */
 	public function add($data)
 	{
-		$element = self::getEntityClassName();
-		$result  = $element->add($data);
+        $classname = self::getEntityClassName();
+		$element   = new $classname;
+		$result    = $element->add($data);
 		
 		if ($result->isSuccess()) {
 			$this->id = $result->getID();
 			return $this->getID();
 		} else {
-			throw new \Exception($result->getErrorMessages());
+			throw new \Exception(implode(', ', $result->getErrorMessages()));
 		}
 	}
 	
@@ -78,7 +80,7 @@ class HLBlockModel extends Model
 		if ($result->isSuccess()) {
 			return $this->getID();
 		} else {
-			throw new \Exception($result->getErrorMessages());
+			throw new \Exception(implode(', ', $result->getErrorMessages()));
 		}
 	}
 	
@@ -131,4 +133,14 @@ class HLBlockModel extends Model
         }
         return $items;
 	}
+    
+    
+    protected static function getEntityGateway()
+    {
+        if (!static::$gateway) {
+            $classname = static::getEntityClassName();
+            static::$gateway = new $classname;
+        }
+        return static::$gateway;
+    }
 }

@@ -77,7 +77,6 @@ class NumConvertor
      * Converts a roman number to a decimal representation
      *
      * @param string $roman
-     *
      * @return int
      */
     public function fromRoman($roman)

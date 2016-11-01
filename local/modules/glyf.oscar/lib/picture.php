@@ -19,7 +19,7 @@ use \Firebase\JWT\SignatureInvalidException;
 
 class Picture extends HLBlockModel
 {
-	static protected $hlblockID = 4;
+	static protected $hlblockID = HLBLOCK_PICTURES_ID;
 	
     
 	// Идентификатор.
@@ -348,13 +348,14 @@ class Picture extends HLBlockModel
             $sizes = getimagesize($filepath);
             
             $this->fileinfo['PATH'] = pathinfo($filepath);
-            $this->fileinfo['SIZE'] = array(
+            $this->fileinfo['DIMS'] = array(
                 'WIDTH'    => $sizes[0],
                 'HEIGHT'   => $sizes[1],
                 'BITS'     => $sizes['bits'],
                 'CHANELLS' => $sizes['channels'],
                 'MIME'     => $sizes['mime'],
             );
+            $this->fileinfo['SIZE'] = filesize($filepath);
         }
         return $this->fileinfo;
     }
@@ -365,11 +366,21 @@ class Picture extends HLBlockModel
      */
     public function getFileExtension()
     {
+        $fileinfo = $this->getFileInfo();
         
+        return $fileinfo['PATH']['extension'];
     }
     
     
-    
+    /**
+     * Получение размера файла изображения.
+     */
+    public function getFileSize()
+    {
+        $fileinfo = $this->getFileInfo();
+        
+        return ($fileinfo['SIZE'] / BYTES_IN_MEGABYTE);
+    }
     
     
     /**
@@ -377,7 +388,9 @@ class Picture extends HLBlockModel
      */
     public function getImageWidth()
     {
+        $fileinfo = $this->getFileInfo();
         
+        return $fileinfo['DIMS']['WIDTH'];
     }
     
     
@@ -386,8 +399,11 @@ class Picture extends HLBlockModel
      */
     public function getImageHeight()
     {
+        $fileinfo = $this->getFileInfo();
         
+        return $fileinfo['DIMS']['HEIGHT'];
     }
+    
     
     
     /**
@@ -400,17 +416,54 @@ class Picture extends HLBlockModel
 		return $this->get(self::FIELD_FILE);
     }
     
-	
-	/**
-	 * Получение изображения для предпросмотра.
-	 */
-	public function getPreviewImageSrc($width = 1000, $height = 1000)
-	{
-		// TODO: make preview image;
-	}
-	
-	
-	/**
+    
+    /**
+     * Поучение файла превью.
+     */
+    public function getFilePreview()
+    {
+        $this->load();
+        
+		return $this->get(self::FIELD_PREVIEW_FILE);
+    }
+    
+    
+    
+    /**
+     * Поучение файла превью с водяным знаком.
+     */
+    public function getFilePreviewWM()
+    {
+        $this->load();
+        
+		return $this->get(self::FIELD_PREVIEW_FILE_WATERMARK);
+    }
+    
+    
+    /**
+     * Поучение файла малого превью.
+     */
+    public function getFileSmallPreview()
+    {
+        $this->load();
+        
+		return $this->get(self::FIELD_SMALL_FILE);
+    }
+    
+    
+    
+    /**
+     * Поучение файла малого превью с водяным знаком.
+     */
+    public function getFileSmallPreviewWM()
+    {
+        $this->load();
+        
+		return $this->get(self::FIELD_SMALL_FILE_WATERMARK);
+    }
+    
+    
+    /**
 	 * Получение полного изображения.
 	 */
 	public function getFullImageSrc()
@@ -421,7 +474,59 @@ class Picture extends HLBlockModel
         
         return $source;
 	}
+    
 	
+	/**
+	 * Получение изображения для предпросмотра.
+	 */
+	public function getPreviewImageSrc()
+	{
+		$this->load();
+        
+        $source = \CFile::getPath($this->getFilePreview());
+        
+        return $source;
+	}
+	
+	
+	/**
+	 * Получение изображения для предпросмотра.
+	 */
+	public function getPreviewImageWMSrc()
+	{
+		$this->load();
+        
+        $source = \CFile::getPath($this->getFilePreviewWM());
+        
+        return $source;
+	}
+	
+    
+    /**
+	 * Получение изображения для предпросмотра.
+	 */
+	public function getSmallPreviewImageSrc()
+	{
+		$this->load();
+        
+        $source = \CFile::getPath($this->getFileSmallPreview());
+        
+        return $source;
+	}
+	
+	
+	/**
+	 * Получение изображения для предпросмотра.
+	 */
+	public function getSmallPreviewImageWMSrc()
+	{
+		$this->load();
+        
+        $source = \CFile::getPath($this->getFileSmallPreviewWM());
+        
+        return $source;
+	}
+    
     
     /**
      * Получение ссылки на карточку.
@@ -488,10 +593,17 @@ class Picture extends HLBlockModel
             return false;
         }
         
+        $filenames = array(
+            'PREVIEW' => tempnam('/tmp', 'preview').'.jpg',
+            'PREVIEW_WM' => tempnam('/tmp', 'preview').'.jpg',
+            'SMALL_PREVIEW' => tempnam('/tmp', 'preview').'.jpg',
+            'SMALL_PREVIEW_WM' => tempnam('/tmp', 'preview').'.jpg',
+        );
+        
         // Среднее изображение без знака.
         self::makePreview(
             $filepath,
-            $_SERVER['DOCUMENT_ROOT'] . '/images/img/preview/example.middle.jpg',
+            $filenames['PREVIEW'],
             self::IMAGE_PREVIEW_WIDTH,
             self::IMAGE_PREVIEW_HEIGHT,
             false
@@ -500,7 +612,7 @@ class Picture extends HLBlockModel
         // Малое изображение без знака.
         self::makePreview(
             $filepath,
-            $_SERVER['DOCUMENT_ROOT'] . '/images/img/preview/example.small.jpg',
+            $filenames['SMALL_PREVIEW'],
             self::IMAGE_SMALL_WIDTH,
             self::IMAGE_SMALL_HEIGHT,
             false
@@ -510,7 +622,7 @@ class Picture extends HLBlockModel
         // Среднее изображение со знаком.
         self::makePreview(
             $filepath,
-            $_SERVER['DOCUMENT_ROOT'] . '/images/img/preview/example.middle.wm.jpg',
+            $filenames['PREVIEW_WM'],
             self::IMAGE_PREVIEW_WIDTH,
             self::IMAGE_PREVIEW_HEIGHT,
             true
@@ -519,11 +631,13 @@ class Picture extends HLBlockModel
         // Малое изображение со знаком.
         self::makePreview(
             $filepath,
-            $_SERVER['DOCUMENT_ROOT'] . '/images/img/preview/example.small.wm.jpg',
+            $filenames['SMALL_PREVIEW_WM'],
             self::IMAGE_SMALL_WIDTH,
             self::IMAGE_SMALL_HEIGHT,
             true
         );
+        
+        return $filenames;
     }
     
     

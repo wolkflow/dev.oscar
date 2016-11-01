@@ -21,23 +21,29 @@
             <? } ?>
             <li><?= $lastitem['TITLE'] ?></li>
         </ol>
-        <pre><? // print_r($arResult) ?></pre>
+        
         <div class="row card">
             <div class="col-md-8 col-sm-7">
                 <div class="card-image__container">
-                    <img src="media/card2.png" alt="">
+                    <? $src = (true) ? ($arResult['PICTURE']['IMAGE_PREVIEW_SRC']) : ($arResult['PICTURE']['IMAGE_PREVIEW_WATERMAK_SRC']) ?>
+                    <img src="<?= $src ?>" alt="<?= $arResult['PICTURE'][Picture::FIELD_LANG_TITLE_SFX . CURRENT_LANG_UP] ?>" style="max-height: 545px;" />
                     <div class="card-image__buttons">
-                        <a class="card-image__button card-image__button--copyright" href="#"></a>
+                        <? if ($arResult['PICTURE'][Picture::FIELD_LEGAL] == Picture::PROP_LEGAL_FULL_ID) { ?>
+                            <a class="card-image__button card-image__button--copyright" href="javascript:void(0)"></a>
+                        <? } ?>
                         <a class="card-image__button card-image__button--add" href="#"></a>
                         <a class="card-image__button card-image__button--cart" href="#"></a>
                     </div>
                 </div>
                 <div class="card-description">
                     <div class="card-description__title">
-                        
+                        Тип и размер изображения
                     </div>
                     <div class="card-description__text card-description__text--big">
-                        JPEG, 3.04MB, 5118px x 3368px
+                        <?= strtoupper($arResult['PICTURE']['FILE']['EXT']) ?>, 
+                        <?= round($arResult['PICTURE']['FILE']['SIZE'], 2) ?>MB, 
+                        <?= round($arResult['PICTURE']['FILE']['WIDTH'], 2) ?>px &times; 
+                        <?= round($arResult['PICTURE']['FILE']['HEIGHT'], 2) ?>px
                     </div>
                 </div>
                 <div class="card-description">

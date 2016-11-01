@@ -2,6 +2,9 @@
 
 namespace Glyf\Oscar;
 
+use Glyf\Oscar\Lightbox;
+
+
 class User extends \Glyf\Core\User
 {
     /**
@@ -60,5 +63,14 @@ class User extends \Glyf\Core\User
         $budget  = (float) $account['CURRENT_BUDGET'];
         
         return $budget;
+    }
+    
+    
+    /**
+     * Получение списка справочников.
+     */
+    public function getLightboxes($filters = array())
+    {
+        return Lightbox::getUserLightboxes($this->getID(), $filters);
     }
 }

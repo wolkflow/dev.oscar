@@ -206,7 +206,7 @@
                     <div class="col-md-6">
                         <div class="uploadBlock">
                             <label class="uploadBlock-title">
-                                <input type="radio" name="FOLDER_SET" value="EXIST" <?= (empty($arResult['PARAMS']['FOLDERS'])) ? ('disabled') : ('') ?> />
+                                <input type="radio" name="FOLDER_SET" value="EXIST" <?= (empty($arResult['PARAMS']['FOLDERS'])) ? ('disabled') : ('') ?> <?= ($arResult['DATA']['FOLDER_SET'] == 'EXIST') ? ('checked') : ('') ?> />
                                 поместить в папку:
                             </label>
                             <? if (!empty($arResult['PARAMS']['FOLDERS'])) { ?>
@@ -225,10 +225,10 @@
                     <div class="col-md-6">
                         <div class="uploadBlock">
                             <label class="uploadBlock-title">
-                                <input type="radio"  name="FOLDER_SET" value="CREATE" />
+                                <input type="radio"  name="FOLDER_SET" value="CREATE" <?= ($arResult['DATA']['FOLDER_SET'] == 'CREATE') ? ('checked') : ('') ?> />
                                 создать новую папку
                             </label>
-                            <input type="text" class="FOLDER_TITLE" placeholder="пример: Живопись VII-ХХ век" /> 
+                            <input type="text" name="FOLDER_TITLE" value="<?= $arResult['DATA']['FOLDER_TITLE'] ?>" placeholder="пример: Живопись VII-ХХ век" /> 
                         </div>
                     </div>
                 </div>

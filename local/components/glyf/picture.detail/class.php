@@ -58,6 +58,13 @@ class PicturesDetail extends \CBitrixComponent
         $this->arResult['PICTURE']['TECHNIQUES'] = array();
         $this->arResult['PICTURE']['PLACE'] = array();
         
+        $this->arResult['PICTURE']['FILE'] = array(
+            'SIZE'   => $picture->getFileSize(),
+            'WIDTH'  => $picture->getImageWidth(),
+            'HEIGHT' => $picture->getImageHeight(),
+            'EXT'    => $picture->getFileExtension(),
+        ); 
+        
         foreach ($techniques as $technique) {
             $this->arResult['PICTURE']['TECHNIQUES'][$technique->getID()] = $technique->getName();
         }
@@ -70,6 +77,10 @@ class PicturesDetail extends \CBitrixComponent
             $this->arResult['PICTURE']['PLACE']['CITY'] = $city->getName();
         }
         
+        
+        // Изображения.
+        $this->arResult['PICTURE']['IMAGE_PREVIEW_SRC'] = $picture->getPreviewImageSrc();
+        $this->arResult['PICTURE']['IMAGE_PREVIEW_WATER_MARK_SRC'] = $picture->getPreviewImageWMSrc();
         
         // Доступы.
         $this->arResult['ACCESS'] = array(

@@ -15,7 +15,7 @@
                 <? if (empty($section['CHILDREN'])) { ?>
                     <div class="ddtitle">
                         <label>
-                            <input type="radio" name="SECTION" value="<?= $section['ID'] ?>" <?= ($section['ID'] == $sid) ? ('checked') : ('') ?> />
+                            <input type="radio" name="COLLECTION" value="<?= $section['ID'] ?>" <?= ($section['ID'] == $sid) ? ('checked') : ('') ?> />
                             <?= $section['UF_LANG_TITLE_'.CURRENT_LANG_UP] ?>
                         </label>
                     </div>
@@ -28,7 +28,7 @@
                             <? if (empty($subsection['CHILDREN'])) { ?>
                                 <div class="ddtitle">
                                     <label>
-                                        <input type="radio" name="SECTION" value="<?= $subsection['ID'] ?>" <?= ($subsection['ID'] == $sid) ? ('checked') : ('') ?> />
+                                        <input type="radio" name="COLLECTION" value="<?= $subsection['ID'] ?>" <?= ($subsection['ID'] == $sid) ? ('checked') : ('') ?> />
                                         <?= $subsection['UF_LANG_TITLE_'.CURRENT_LANG_UP] ?>
                                     </label>
                                 </div>
@@ -40,7 +40,7 @@
                                     <? foreach ($subsection['CHILDREN'] as $subsubsection) { ?>
                                         <div class="ddtitle">
                                             <label>
-                                                <input type="radio" name="SECTION" value="<?= $subsubsection['ID'] ?>" <?= ($subsubsection['ID'] == $sid) ? ('checked') : ('') ?> />
+                                                <input type="radio" name="COLLECTION" value="<?= $subsubsection['ID'] ?>" <?= ($subsubsection['ID'] == $sid) ? ('checked') : ('') ?> />
                                                 <?= $subsubsection['UF_LANG_TITLE_'.CURRENT_LANG_UP] ?>
                                             </label>
                                         </div>

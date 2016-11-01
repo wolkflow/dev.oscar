@@ -4,6 +4,7 @@ use Bitrix\Main\Application;
 use Bitrix\Main\Context; 
 use Bitrix\Main\Request;
 use Bitrix\Main\Server;
+use Bitrix\Main\Type\DateTime;
 use Bitrix\Main\Localization\Loc;
 
 use Glyf\Core\Helpers\HLBlock as HLBlockHelper;
@@ -17,7 +18,7 @@ use Glyf\Oscar\User;
 
 class PictureUpload extends \CBitrixComponent
 {
-    const IMAGE_MIN_SIZE = 3000;
+    const IMAGE_MIN_SIZE = 1000;
     
     
     protected static $user;
@@ -49,7 +50,7 @@ class PictureUpload extends \CBitrixComponent
         $this->user = new User();
         
         // Данные.
-		$this->arResult = array();
+		$this->arResult = array('ERRORS' => array());
 		
         // Параметры.
         $this->prepare();
@@ -73,13 +74,14 @@ class PictureUpload extends \CBitrixComponent
             // Данные.
             $this->arResult['DATA'] = $request->getPostList();
             
+            $success = false;
             try {
-                $this->arResult['FIELDS'] = $this->process($this->arResult['DATA']);
+                $success = $this->arResult['FIELDS'] = $this->process($this->arResult['DATA']);
             } catch (Exception $e) {
-                
+                $this->arResult['ERRORS'] []= $e->getMessage();
             }
+            $this->arResult['SUCCESS'] = $success;
         }
-        
         
         
 		// Подключение шаблона компонента.
@@ -158,29 +160,76 @@ class PictureUpload extends \CBitrixComponent
      */
 	public function process($data)
     {
+        $user = new Glyf\Oscar\User();
+        //print_r($data); return;
         $fields = array();
         
         // Сохранение изображения.
         $file = $_FILES['FILE'];
         
         // Ошибка загрузки файла.
-        if (empty($file) || !is_readable($file)) {
-            // throw new Exception('Файл не загружен');
+        if (empty($file) || !is_readable($file['tmp_name'])) {
+            throw new Glyf\Core\System\Exception('Файл не загружен');
         }
         
         $sizes = getimagesize($file['tmp_name']);
         
         if ($sizes[0] < self::IMAGE_MIN_SIZE || $sizes[1] < self::IMAGE_MIN_SIZE) {
-            // throw new Exception('Изображение меньше необходимого размера');
+            throw new Glyf\Core\System\Exception('Изображение меньше необходимого размера');
+        }
+        
+        if ($data['FOLDER_SET'] == 'CREATE' && empty($data['FOLDER_TITLE'])) {
+            throw new Glyf\Core\System\Exception('Не введено название папки для загрузки');
+        }
+        
+        if ($data['FOLDER_SET'] != 'CREATE' && empty($data['FOLDER_ID'])) {
+            throw new Glyf\Core\System\Exception('Не выбрана папка для загрузки');
+        }
+        
+        if (empty($data['TITLE'])) {
+            throw new Glyf\Core\System\Exception('Не введно название');
+        }
+        
+        if (empty($data['COLLECTION'])) {
+            throw new Glyf\Core\System\Exception('Не выбрана коллекция для загрузки');
         }
         
         
         // Создание директории.
         if ($data['FOLDER_SET'] == 'CREATE') {
-            $folder = (string) $data['FOLDER_TITLE'];
+            $folder = new Folder();
+            $result = $folder->add(array(
+                'UF_TITLE' => strval($data['FOLDER_TITLE']),
+                'UF_USER'  => $user->getID(),
+                'UF_TIME'  => new DateTime(),
+            ));
+            
+            if (!$result) {
+                throw new Glyf\Core\System\Exception('Не удалось создать папку');
+            }
+            $fields[Picture::FIELD_FOLDER] = $folder->getID();
         } else {
-            //... сохранение в директорию.
+            $fields[Picture::FIELD_FOLDER] = (int) $data['FOLDER_ID'];
         }
+        
+        
+        // Загружаемый файл.
+        $filename = $file['tmp_name'] . '.jpg';
+        
+        // переименование с расширением.
+        rename($file['tmp_name'], $filename);
+        
+        $fnames = Picture::makePreviewFiles($filename);
+        $unames = array();
+        foreach ($fnames as $code => $fname) {
+            $unames[$code] = CFile::SaveFile(CFile::MakeFileArray($fname), 'preview');
+        }
+        $fields[Picture::FIELD_FILE] = CFile::SaveFile(CFile::MakeFileArray($filename), 'original');
+        $fields[Picture::FIELD_PREVIEW_FILE] = $unames['PREVIEW'];
+        $fields[Picture::FIELD_PREVIEW_FILE_WATERMARK] = $unames['PREVIEW_WM'];
+        $fields[Picture::FIELD_SMALL_FILE] = $unames['SMALL_PREVIEW'];
+        $fields[Picture::FIELD_SMALL_FILE_WATERMARK] = $unames['SMALL_PREVIEW_WM'];
+        
         
         
         // Заголовок.
@@ -322,7 +371,30 @@ class PictureUpload extends \CBitrixComponent
         
         
         
-        return $fields;
+        // Язык заполнения данных.
+        $fields[Picture::FIELD_LANG] = CURRENT_LANG_UP;
+        
+        // Время загрузки.
+        $fields[Picture::FIELD_TIME] = new DateTime();
+        
+        // Модерация.
+        $fields[Picture::FIELD_MODERATE] = false;
+        
+        
+        // Добавление элемента.
+        $picture = new Picture();
+        
+        $result  = $picture->add($fields);
+        $success = false;
+        
+        if (!$result) {
+        	throw new Glyf\Core\System\Exception('Не удалось сохранить данные');
+		} else {
+            // SUCCESS .
+            $success = true;
+        }
+        
+        return $success;
     }
 }
 

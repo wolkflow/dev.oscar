@@ -13,7 +13,14 @@ define ('TIME_YEARS_IN_DECADE',    10);
 define ('TIME_YEARS_IN_CENTURY',   100);
 define ('TIME_YEARS_IN_MILLENIUM', 1000);
 
-
+/*
+ * Размер (байт)
+ */
+define('BYTES_IN_KILOBYTE', 1024);
+define('BYTES_IN_MEGABYTE', 1048576);
+define('BYTES_IN_GIGABYTE', 1073741824);
+ 
+ 
 /*
  * Сайт.
  */
@@ -56,12 +63,14 @@ define('IBLOCK_DOCUMENTS_ID',   7);
 /*
  * HL-блоки.
  */
-define('HLBLOCK_PICTURES_ID',        4);
-define('HLBLOCK_DICT_AUTHORS_ID',    5);
-define('HLBLOCK_DICT_HOLDERS_ID',    6);
-define('HLBLOCK_DICT_FOLDERS_ID',    8);
-define('HLBLOCK_DICT_KEYWORDS_ID',   9);
-define('HLBLOCK_DICT_TECHNIQUES_ID', 10);
+define('HLBLOCK_PICTURES_ID',           4);
+define('HLBLOCK_DICT_AUTHORS_ID',       5);
+define('HLBLOCK_DICT_HOLDERS_ID',       6);
+define('HLBLOCK_DICT_FOLDERS_ID',       8);
+define('HLBLOCK_DICT_KEYWORDS_ID',      9);
+define('HLBLOCK_DICT_TECHNIQUES_ID',    10);
+define('HLBLOCK_LIGHTBOXES_ID',         13);
+define('HLBLOCK_LIGHTBOXE_PICTURES_ID', 14);
 
 // Месторасположение.
 define('HLBLOCK_DICT_PLACE_COUNTRIES_ID', 11);
