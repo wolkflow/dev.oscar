@@ -30,4 +30,22 @@ class Main
             return false;
         }
     }
+    
+    /**
+     * Регистрация пользователя.
+     */
+    public function OnAfterUserRegister($fields)
+    {
+        if ($fields['USER_ID'] > 0) {
+            if (\Bitrix\Main\Loader::includeModule('sale')) {
+                // Создание аккаунта.
+                CSaleUserAccount::Add(
+                    'USER_ID' => $fields['ID'],
+                    'CURRENT_BUDGET' => 0,
+                    'CURRENCY' => CURRENCY_DEFAULT
+                );
+            }
+        }
+    }
+    
 }

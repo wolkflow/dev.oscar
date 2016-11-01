@@ -22,7 +22,7 @@
 			</a>
 		</li>
 		<li>
-			<a href="/profile/">
+			<a href="/personal/">
 				<?= getMessage('GL_PROFILE') ?>
 			</a>
 		</li>

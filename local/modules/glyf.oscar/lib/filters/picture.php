@@ -4,8 +4,8 @@ namespace Glyf\Oscar\Filters;
 
 use Glyf\Core\System\IBlockSectionModel;
 use Glyf\Core\Helpers\NumConvertor;
-use glyf\Oscar\Collection;
-use glyf\Oscar\Picture as PictureElement;
+use Glyf\Oscar\Collection;
+use Glyf\Oscar\Picture as PictureElement;
 
 class Picture extends \Glyf\Core\Filters\HLBlockElement
 {
@@ -147,16 +147,38 @@ class Picture extends \Glyf\Core\Filters\HLBlockElement
      */
     public function setKeywords($values)
     {
-        $this->params['filter'][PictureElement::FIELD_KEYWORDS] = array_filter(array_map('strval', (array) $values));
+        $values = array_filter(array_unique(array_map('trim', array_map('strval', (array) $values))));
+        
+        foreach ($values as &$value) {
+            $value = '%' . $value . '%';
+        }
+        
+        $result = \Glyf\Oscar\Dictionaries\Keyword::getList(
+            array(
+                'select' => array('ID'), 
+                'filter' => array(array(
+                    'LOGIC' => 'OR',
+                    array('UF_LANG_NAME_RU' => $values),
+                    array('UF_LANG_NAME_EN' => $values),
+                ))
+            ),
+            false
+        );
+        
+        $ids = array();
+        while ($item = $result->fetch()) {
+            $ids []= $item['ID'];
+        }
+        $this->params['filter'][PictureElement::FIELD_KEYWORDS] = array_filter(array_map('intval', (array) $ids));
     }
     
     
      /**
      * фильтр по периоду.
      */
-    public function setCollection($values)
+    public function setCollections($values)
     {
-        $values = array_filter(array_map('strval', (array) $values));
+        $values = array_filter(array_map('intval', (array) $values));
         $values = IBlockSectionModel::getFullSubsectionIDs($values);
         $values = array_unique($values);
         
@@ -176,22 +198,44 @@ class Picture extends \Glyf\Core\Filters\HLBlockElement
     /**
      * фильтр по жанру.
      */
-    public function setPlace($values)
+    public function setPlace($country = false, $city = false)
     {
-        // $this->params['filter'][PictureElement::FIELD_PLACE] = array_filter(array_map('intval', (array) $values));
+        if ($country) {
+            $this->params['filter'][PictureElement::FIELD_PLACE_COUNTRY_ID] = intval($country);
+        }
+        
+        if ($city) {
+            $this->params['filter'][PictureElement::FIELD_PLACE_CITY_ID] = intval($city);
+        }
     }
     
     
     /**
      * фильтр по размеру.
      */
-    public function setSize($width = false, $height = false)
+    public function setSize($min = false, $max = false)
     {
-        if ($width) {
-            $this->params['filter'][PictureElement::FIELD_WIDTH] = intval($width);
-        }
-        if ($height) {
-            $this->params['filter'][PictureElement::FIELD_HEIGHT] = intval($height);
+        if ($min > 0 && $max > 0) {
+            $this->params['filter'] []= array(
+                'LOGIC' => 'OR',
+                array('>=' . PictureElement::FIELD_WIDTH => $min,  '<=' . PictureElement::FIELD_WIDTH => $max),
+                array('>=' . PictureElement::FIELD_HEIGHT => $min, '<=' . PictureElement::FIELD_HEIGHT => $max),
+            );
+        } else {
+            if ($min > 0) {
+                $this->params['filter'] []= array(
+                    'LOGIC' => 'OR',
+                    array('>=' . PictureElement::FIELD_WIDTH => $min),
+                    array('>=' . PictureElement::FIELD_HEIGHT => $min),
+                );
+            }
+            if ($max > 0) {
+                $this->params['filter'] []= array(
+                    'LOGIC' => 'OR',
+                    array('<=' . PictureElement::FIELD_WIDTH => $max),
+                    array('<=' . PictureElement::FIELD_HEIGHT => $max),
+                );
+            }
         }
     }
     

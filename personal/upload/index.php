@@ -11,7 +11,7 @@
 ?>
 
 <main class="siteMain bg-gray">
-	<?	// Статья в блоге.					
+	<?	// Загрузка изображения.					
 		$APPLICATION->IncludeComponent(
 			"glyf:picture.upload",
 			"upload",

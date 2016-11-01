@@ -76,7 +76,15 @@ class User
 
         return $this->data[strval($code)];
     }
-
+    
+    
+    public function getData()
+    {
+        $this->load();
+        
+        return $this->data;
+    }
+    
     
     public function update($data)
     {

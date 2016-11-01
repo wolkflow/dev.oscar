@@ -6,4 +6,5 @@ if (\Bitrix\Main\Loader::includeModule('glyf.core')) {
 
 if (\Bitrix\Main\Loader::includeModule('glyf.oscar')) {
 	AddEventHandler('main', 'OnBeforeUserRegister', array('\Glyf\Oscar\Events\Main', 'OnBeforeUserRegister'));
+    AddEventHandler('main', 'OnAfterUserRegister', array('\Glyf\Oscar\Events\Main', 'OnAfterUserRegister'));
 }

@@ -57,9 +57,13 @@ class User extends \Glyf\Core\User
     /**
      * Получени данных о платежном аккаунте пользователя.
      */
-    public function getAccountBudget()
+    public function getBalance()
     {
-        $account = CSaleUserAccount::GetByUserID($this->getID(), CURRENCY_DEFAULT);
+        if (!\Bitrix\Main\Loader::includeModule('sale')) {
+            return false;
+        }
+        
+        $account = \CSaleUserAccount::GetByUserID($this->getID(), CURRENCY_DEFAULT);
         $budget  = (float) $account['CURRENT_BUDGET'];
         
         return $budget;

@@ -6,6 +6,7 @@
 <? IncludeComponentTemplateLangFile(__FILE__, $this->GetFolder()) ?>
 
 <? $this->setFrameMode(true); ?>
+
 <script src="<?= SITE_TEMPLATE_PATH ?>/js/jquery.autocomplete.min.js"></script>
 <script>
     $(document).ready(function() {

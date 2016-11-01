@@ -15,45 +15,29 @@
         <div class="lightboxes">
             <? foreach ($arResult['LIGHTBOXES'] as $item) { ?>
                 <div class="lightboxes__item">
-                    <div class="lightboxes__item-title is-expanded">
+                    <div class="lightboxes__item-title is-expanded" data-collapse-target="lightbox-<?= $item['ID'] ?>">
                         <?= $item['UF_TITLE'] ?>
                     </div>
-                    <div class="lightboxes__item-content">
+                    <div class="lightboxes__item-content" data-collapse-block="lightbox-<?= $item['ID'] ?>">
                         <div class="lightboxes__item-pictures">
-                            <div class="lightboxes__item-pictures-row">
-                                <div class="lightboxes__item-pictures-col">
-                                    <a href="#">
-                                        <img src="images/horse.png" alt="">
-                                    </a>
+                            <? if (!empty($item['PICTURES'])) { ?>
+                                <? $chunks = array_chunk($item['PICTURES'], 3) ?>
+                                <? foreach ($chunks as $chunk) { ?>
+                                    <div class="lightboxes__item-pictures-row">
+                                        <? foreach ($chunk as $picture) { ?>
+                                            <div class="lightboxes__item-pictures-col">
+                                                <a href="/collections/<?= $picture->getID() ?>/">
+                                                    <img src="<?= $picture->getSmallPreviewImageSrc() ?>" title="<?= $picture->getTitle() ?>" alt="<?= $picture->getTitle() ?>" />
+                                                </a>
+                                            </div>
+                                        <? } ?>
+                                    </div>
+                                <? } ?>
+                            <? } else { ?>
+                                <div class="lightboxes__item-empty">
+                                    <span>вы не добавили ещё ни одного изображения</span>
                                 </div>
-                                <div class="lightboxes__item-pictures-col">
-                                    <a href="#">
-                                        <img src="images/horse.png" alt="">
-                                    </a>
-                                </div>
-                                <div class="lightboxes__item-pictures-col">
-                                    <a href="#">
-                                        <img src="images/horse.png" alt="">
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="lightboxes__item-pictures-row">
-                                <div class="lightboxes__item-pictures-col">
-                                    <a href="#">
-                                        <img src="images/horse.png" alt="">
-                                    </a>
-                                </div>
-                                <div class="lightboxes__item-pictures-col">
-                                    <a href="#">
-                                        <img src="images/horse.png" alt="">
-                                    </a>
-                                </div>
-                                <div class="lightboxes__item-pictures-col">
-                                    <a href="#">
-                                        <img src="images/horse.png" alt="">
-                                    </a>
-                                </div>
-                            </div>
+                            <? } ?>
                         </div>
                         <div class="lightboxes__item-bottom">
                             <div class="row">
