@@ -88,10 +88,21 @@ class User extends \Glyf\Core\User
     
     
     /**
+     * Получение количества справочников.
+     */
+    public function getLightboxesCount($filters = array())
+    {
+        $result = Lightbox::getUserLightboxes($this->getID(), $filters,false);
+        
+        return ($result->getSelectedRowsCount());
+    }
+    
+    
+    /**
      * Получение списка справочников.
      */
-    public function getLightboxes($filters = array())
+    public function getLightboxes($params = array())
     {
-        return Lightbox::getUserLightboxes($this->getID(), $filters);
+        return Lightbox::getUserLightboxes($this->getID(), $params);
     }
 }

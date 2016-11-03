@@ -206,7 +206,9 @@
                                 $APPLICATION->IncludeComponent(
                                     "glyf:lightbox.list",
                                     "profile",
-                                    array()
+                                    array(
+                                        "LIMIT" => 9
+                                    )
                                 );
                             ?>
                         

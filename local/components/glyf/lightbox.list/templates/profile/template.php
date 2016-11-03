@@ -17,18 +17,20 @@
             <a class="hidden-sm" href="#">печать</a>
             <a href="#">добавить в корзину</a>
             <a class="is-active" href="#">переименовать</a>
-            <a class="is-active" href="#">удалить</a>
+            <a id="js-personal-lightbox-delete-id" class="is-active" href="javascript:void(0)">
+                удалить
+            </a>
         </div>
     </div>
     <div class="cabinet-lightboxes-list clearfix">
         <? foreach ($arResult['LIGHTBOXES'] as $item) { ?>
-            <div class="cabinet-lightbox">
+            <div class="cabinet-lightbox js-lightbox-wrap">
                 <div class="cabinet-lightbox__title clearfix">
                     <span>
                         <?= $item['UF_TITLE'] ?>
                     </span>
                     <label>
-                        <input type="checkbox" name="LIGHTBOX[]" value="<?= $item['ID']?>" />
+                        <input type="checkbox" name="LIGHTBOX[]" class="js-personal-lightbox" value="<?= $item['ID']?>" />
                     </label>
                 </div>
                 <div class="cabinet-lightbox__content">
@@ -79,6 +81,20 @@
         </div>
     </div>
     
+    <?  // Постраничная навигация.
+        $APPLICATION->IncludeComponent(
+            "glyf:pagenavigation",
+            "dark",
+            array(
+                'JSID'    => 'js-personal-lightboxes-id',
+                'TOTAL'   => $arResult['LIGHTBOXES_COUNT'],
+                'PERPAGE' => $arParams['LIMIT'],
+                'CURRENT' => 1,
+                'SHORT'   => true,
+            )
+        );
+    ?>
+    <? /*
     <div class="cabinet-pagination">
         <div class="cabinet-pagination__count"><span class="current">1</span> из 5</div>
         <div class="cabinet-pagination__buttons">
@@ -86,6 +102,7 @@
             <a href="#" class="cabinet-pagination__button cabinet-pagination__button--next">&rsaquo;</a>
         </div>
     </div>
+    */ ?>
 </div>
 
 <? /*

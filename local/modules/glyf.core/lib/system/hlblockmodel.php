@@ -93,7 +93,10 @@ class HLBlockModel extends Model
 	public function delete()
 	{
 		$element = self::getEntityClassName();
-		$element->elete($this->getID());
+		$element::delete($this->getID());
+        
+        // Событие при удалении.
+        $this->onDelete();
 	}
 	
 	
@@ -109,6 +112,16 @@ class HLBlockModel extends Model
 		
 		return $result;
 	}
+    
+    
+    /**
+     * Событие на удаление.
+     */
+    protected function onDelete()
+    {
+        
+    }
+    
     
 	
 	/**

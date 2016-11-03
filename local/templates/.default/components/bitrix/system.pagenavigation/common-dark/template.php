@@ -22,7 +22,7 @@ $next = ($arResult['NavPageNomer'] < $arResult['nEndPage']) ? ($arResult['NavPag
 
 ?>
 
-<div class="cabinet-pagination cabinet-pagination hidden-xs">
+<div class="cabinet-pagination hidden-xs">
 	<div class="cabinet-pagination__count"><span class="current">
 		<?= $arResult['NavPageNomer'] ?></span> 
 		<?= getMessage('GL_FROM') ?>

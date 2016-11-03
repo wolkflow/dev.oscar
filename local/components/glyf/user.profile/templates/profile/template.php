@@ -73,9 +73,7 @@
                     <div class="cabinet-profile__block">
                         <div class="cabinet-profile__block-field">
                             <div class="cabinet-profile__block-field-key">Email</div>
-                            <div class="cabinet-profile__block-field-value">
-                                <?= $arResult['USER']['EMAIL'] ?>
-                            </div>
+                            <input type="text" class="liveEdit disabled" disabled value="<?= $arResult['USER']['EMAIL'] ?>">
                         </div>
                         <div class="cabinet-profile__block-field">
                             <div class="cabinet-profile__block-field-key">Пароль</div>

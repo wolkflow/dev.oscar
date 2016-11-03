@@ -45,9 +45,6 @@ class Lightbox extends HLBlockModel
     
     public function getPictures($limit = null, $asobjects = true)
     {
-        //$lbpictures = LightboxPicture::getList(array('filter' => array('UF_LIGHTBOX' => $this->getID())));
-        //$pictures   = LightboxPicture::getList(array('filter' => array('ID' => array_keys($lbpictures))));
-        
         $connection = \Bitrix\Main\Application::getConnection();
         
         $sql = "
@@ -111,10 +108,27 @@ class Lightbox extends HLBlockModel
     }
     
     
-    public static function getUserLightboxes($uid, $filters = array(), $objects = true)
+    public static function getUserLightboxes($uid, $params = array(), $objects = true)
     {
-        $filter = array_merge((array) $filters, array(self::FIELD_USER => intval($uid)));
+        $params['filter'] = array_merge((array) $params['filter'], array(self::FIELD_USER => intval($uid)));
         
-        return self::getList(array('filter' => $filter), $objects);
+        return self::getList($params, $objects);
+    }
+    
+    
+    
+    /**
+     * Событие на удаление.
+     */
+    protected function onDelete()
+    {
+        $connection = \Bitrix\Main\Application::getConnection();
+        
+        $sql = "
+            DELETE FROM `g_lightbox_pictures`
+            WHERE `UF_LIGHTBOX` = '" . $this->getID() . "'
+        ";
+        
+        $result = $connection->query($sql);
     }
 }

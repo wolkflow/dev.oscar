@@ -202,16 +202,16 @@ switch ($action) {
         $pid = (int) $request->get('pid');
         
         // Пользователь.
-        $user = new User();
+        $user = new Glyf\Oscar\User();
         
         // Сборник.
         $lightbox = new Glyf\Oscar\Lightbox($lid);
         
-        if (!$lightbox->exist()) {
+        if (!$lightbox->exists()) {
             jsonresponse(false, 'Сборник не существует');
         }
         
-        if (!$lightbox->getUserID() != $user->getID()) {
+        if ($lightbox->getUserID() != $user->getID()) {
             jsonresponse(false, 'Сборник не найден');
         }
         
@@ -222,6 +222,29 @@ switch ($action) {
         jsonresponse(true);
         break;
     
+    
+    // Удаление сборников.
+    case ('lighboxes-delete');
+        $lids = (array) $request->get('lids');
+        
+        // Пользователь.
+        $user = new Glyf\Oscar\User();
+        
+        $rmids = array();
+        foreach ($lids as $lid) {
+            // Сборник.
+            $lightbox = new Glyf\Oscar\Lightbox($lid);
+            
+            if ($lightbox->getUserID() != $user->getID()) {
+                continue;
+            }
+            $lightbox->delete();
+            
+            $rmids []= $lid;
+        }
+        
+        jsonresponse(true, '', $rmids);
+        break;
     
     
 	default:

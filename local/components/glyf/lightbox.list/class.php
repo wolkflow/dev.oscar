@@ -6,11 +6,15 @@ use Glyf\Oscar\LightboxPicture;
 
 class LightboxList extends \CBitrixComponent
 {
+    
 	/** 
 	 * Установка настроек.
 	 */
     public function onPrepareComponentParams($arParams)
     {   
+        // Лимит отображения.
+        $arParams['LIMIT'] = (int) $arParams['LIMIT'];
+    
         return $arParams;
 	}
 	
@@ -36,7 +40,12 @@ class LightboxList extends \CBitrixComponent
         $user = new Glyf\Oscar\User();
         
         // Справочники.
-        $lightboxes = $user->getLightboxes();
+        if ($this->arParams['LIMIT'] > 0) {
+            $lightboxes = $user->getLightboxes(array('limit' => $this->arParams['LIMIT']));
+        } else {
+            $lightboxes = $user->getLightboxes();
+        }
+        
         
         $this->arResult['LIGHTBOXES'] = array();
         foreach ($lightboxes as $lightbox) {
@@ -52,6 +61,8 @@ class LightboxList extends \CBitrixComponent
             
             $this->arResult['LIGHTBOXES'][$lightbox->getID()] = $data;
         }
+        
+        $this->arResult['LIGHTBOXES_COUNT'] = $user->getLightboxesCount();
         
         
 		// Подключение шаблона компонента.
