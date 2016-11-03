@@ -161,7 +161,7 @@ class PictureUpload extends \CBitrixComponent
 	public function process($data)
     {
         $user = new Glyf\Oscar\User();
-        //print_r($data); return;
+        
         $fields = array();
         
         // Сохранение изображения.
@@ -293,7 +293,7 @@ class PictureUpload extends \CBitrixComponent
                 } else {
                     $periodT = (int) $convertor->fromRoman(strtoupper($data['PERIOD_TO'])) * TIME_YEARS_IN_CENTURY;
                 }
-                var_dump($periodF, $periodT);
+                
                 if ($data['PERIOD_FROM_ERA'] == Picture::PROP_TIME_AD) {
                     $periodF -= TIME_YEARS_IN_CENTURY;
                 }
@@ -370,6 +370,9 @@ class PictureUpload extends \CBitrixComponent
         $fields[Picture::FIELD_OTHER_SFX . CURRENT_LANG_UP] = (string) $data['OTHER'];
         
         
+        
+        // Пользователь.
+        $fields[Picture::FIELD_USER_ID] = $user->getID();
         
         // Язык заполнения данных.
         $fields[Picture::FIELD_LANG] = CURRENT_LANG_UP;

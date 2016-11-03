@@ -25,6 +25,9 @@ class Picture extends HLBlockModel
 	// Идентификатор.
 	const FIELD_ID              = 'ID';
     
+    // Пользователь.
+    const FIELD_USER_ID         = 'UF_USER_ID';
+    
     // Текстовые поля.
 	const FIELD_LANG_TITLE_SFX  = 'UF_LANG_TITLE_';
 	const FIELD_LANG_TITLE_RU   = 'UF_LANG_TITLE_RU';
@@ -219,6 +222,22 @@ class Picture extends HLBlockModel
 		return $this->get(self::FIELD_KEYWORDS);
 	}
 	
+    
+    /**
+	 * Получение техник.
+	 */
+	public function getKeywords()
+	{
+        $ids = $this->getKeywordsID();
+        
+        $result = array();
+        
+        foreach ($ids as $id) {
+            $result[$id] = new \Glyf\Oscar\Dictionaries\Keyword($id);
+        }
+		return $result;
+	}
+    
     
     /**
 	 * Получение ID техник.

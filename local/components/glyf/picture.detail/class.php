@@ -49,6 +49,8 @@ class PicturesDetail extends \CBitrixComponent
         // Техники.
         $techniques = $picture->getTechniques();
         
+        // Ключевые слова.
+        $keywords = $picture->getKeywords();
         
         
         // Данные.
@@ -60,6 +62,7 @@ class PicturesDetail extends \CBitrixComponent
         $this->arResult['PICTURE']['HOLDER'] = $picture->getHolder()->getName();
         $this->arResult['PICTURE']['COLLECTION'] = $this->arResult['NAVIGATION'][1];
         $this->arResult['PICTURE']['TECHNIQUES'] = array();
+        $this->arResult['PICTURE']['KEYWORDS'] = array();
         $this->arResult['PICTURE']['PLACE'] = array();
         
         $this->arResult['PICTURE']['FILE'] = array(
@@ -71,6 +74,10 @@ class PicturesDetail extends \CBitrixComponent
         
         foreach ($techniques as $technique) {
             $this->arResult['PICTURE']['TECHNIQUES'][$technique->getID()] = $technique->getName();
+        }
+        
+        foreach ($keywords as $keyword) {
+            $this->arResult['PICTURE']['KEYWORDS'][$keyword->getID()] = $keyword->getName();
         }
         
         if ($picture->getPlaceCountryID() > 0 && ($country = $picture->getPlaceCountry())) {

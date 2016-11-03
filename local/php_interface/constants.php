@@ -9,6 +9,8 @@ define('TIME_WEEK',  604800);
 define('TIME_MONTH', 2592000);
 define('TIME_YEAR',  31536000);
 
+define('TIME_MONTH_IN_QUARTER', 3);
+
 define ('TIME_YEARS_IN_DECADE',    10);
 define ('TIME_YEARS_IN_CENTURY',   100);
 define ('TIME_YEARS_IN_MILLENIUM', 1000);

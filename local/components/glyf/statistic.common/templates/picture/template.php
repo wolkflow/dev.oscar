@@ -123,7 +123,7 @@
                 <div class="card-meta">
                     <span class="card-meta__key">Техника:</span>
                     <span class="card-meta__value">
-                        <?= implode(', ', $arResult['PICTURE']['TECHNIQUES']) ?>
+                        <?= implode(', ', $arResult['PICTURE']['TECHNIQUES'])  ?>
                     </span>
                 </div>
                 <div class="card-meta">
@@ -162,7 +162,7 @@
                     <div class="card-description__text">
                         <?  // Ключевые слова.
                             $keywords = array();
-                            foreach ($arResult['PICTURE']['KEYWORDS'] as $keyword) {
+                            foreach ($arResult['PICTURE'][Picture::FIELD_KEYWORDS] as $keyword) {
                                 $keywords []= '<a href="/collections/?F[TAGS]=' . $keyword . '">' . $keyword . '</a>';
                             }
                         ?>
