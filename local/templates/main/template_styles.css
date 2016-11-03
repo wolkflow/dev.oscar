@@ -3949,6 +3949,12 @@ a.catmark:hover {
   color: #000;
   margin-bottom: 4px;
 }
+.moreParamsList {
+  display: none;
+}
+.moreParamsList li:last-child {
+  margin-bottom: 0;
+}
 .shortParamsSet {
   padding-bottom: 16px;
   border-bottom: 1px solid #ccc;
@@ -4000,7 +4006,7 @@ a.catmark:hover {
   left: 0;
   top: 0;
 }
-.filterSaveInner li a.requestTitle:before {
+.filterSaveInner ul li a:before {
   display: block;
   content: '';
   width: 16px;
@@ -4010,12 +4016,13 @@ a.catmark:hover {
   top: 0;
   background: url('./images/sprite.png') -38px -69px;
 }
+.filterSaveInner ul li a:hover:before {
+  background-position: -38px -101px;
+}
+/*
 .filterSaveInner li a.requestTitle.edit:before {
 
   background: url('./images/sprite.png') -38px -36px;
-}
-.filterSaveInner li a.requestTitle:hover:before {
-  background-position: -38px -101px;
 }
 .filterSaveInner li a.requestEdit-delete,
 .filterSaveInner li a.requestEdit-save {
@@ -4032,7 +4039,7 @@ a.catmark:hover {
 }
 .filterSaveInner li a.requestEdit-save:before  {
   background: url(./images/requestEdit-save.png) 50% 50% no-repeat;
-}
+}*/
 .requestEditBlock {
   position: absolute;
   background: #fff;
@@ -5640,3 +5647,22 @@ ul.suggest li:hover{
     margin: 0 0 0 5px;
 }
 
+
+.ui-menu.ui-autocomplete {
+    max-width: 355px;
+    border: 1px #ccc solid;
+    margin-top: -1px;
+    border-top: none;
+    z-index: 2000;
+}
+.ui-menu.ui-autocomplete li {
+    z-index: 1000;
+}
+.filterSaveInner input[type=text] {
+  padding: 2px 8px 2px 8px;
+  border: 1px solid #d9d9d9;
+  outline: none !important;
+  font: 400 14px/17px 'Circe', Arial, helvetika, sans-serif;
+  width: 100%;
+  margin-bottom: 10px;
+}

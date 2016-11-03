@@ -22,28 +22,28 @@ $APPLICATION->SetTitle("404 Not Found");
 ?>
 
 <main class="siteMain">
-		<div class="container">
-			<div class="row">
-				<div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3">
-					<div class="errorPage">
-						<div class="errorPageTitle-sub">ошибка 404</div>
-						<div class="errorPageTitle">страница не найдена</div>
-						<div class="errorPageContainer">
-							<img src="<?= SITE_TEMPLATE_PATH ?>/images/error.png" />
-							<div class="errorPageQuery">
-								<p><b>«Препятствие пустоты»</b></p>
-								<p>рене магритт</p>
-							</div>
-						</div>
-						<a href="#" class="errorPageSearch"></a>
-						<div class="errorPageMessage">
-							попробуйте расширенный<br>
-							поиск по сайту или напишите нам
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</main>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3">
+                <div class="errorPage">
+                    <div class="errorPageTitle-sub">ошибка 404</div>
+                    <div class="errorPageTitle">страница не найдена</div>
+                    <div class="errorPageContainer">
+                        <img src="<?= SITE_TEMPLATE_PATH ?>/images/error.png" />
+                        <div class="errorPageQuery">
+                            <p><b>«Препятствие пустоты»</b></p>
+                            <p>рене магритт</p>
+                        </div>
+                    </div>
+                    <a href="#" class="errorPageSearch"></a>
+                    <div class="errorPageMessage">
+                        попробуйте расширенный<br>
+                        поиск по сайту или напишите нам
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
 
 <? require ($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php"); ?>

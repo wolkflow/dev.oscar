@@ -21,7 +21,7 @@
         <div class="row">
             <? // Фильтр.
                 $APPLICATION->IncludeComponent(
-                    "glyf:filter.pictures",
+                    "glyf:picture.filter",
                     "sideleft",
                     array()
                 );

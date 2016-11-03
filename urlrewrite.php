@@ -13,6 +13,12 @@ $arUrlRewrite = array(
 		"PATH" => "/blog/index.php",
 	),
     
+    array(
+		"CONDITION" => "#^/personal/card/(.+?)/#",
+		"RULE" => "SECTION=\$1&",
+		"ID" => "",
+		"PATH" => "/personal/card.php",
+	),
     
     array(
 		"CONDITION" => "#^/collections/([\d]+)/#",

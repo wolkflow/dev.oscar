@@ -3,6 +3,8 @@
 namespace Glyf\Oscar;
 
 use Glyf\Oscar\Lightbox;
+use Glyf\Oscar\Tariff;
+use Glyf\Oscar\UserTariff;
 
 
 class User extends \Glyf\Core\User
@@ -30,18 +32,27 @@ class User extends \Glyf\Core\User
     /**
      * Получение тарифа пользователя.
      */
-    public function getTariff()
+    public function getUserTariff()
     {
+        if (!\Bitrix\Main\Loader::includeModule('sale')) {
+            return;
+        }
         
-    }
-    
-    
-    /**
-     * Получение количества скачанных картин
-     */
-    public function getCountDownloadPictures(Glyf\Oscar\Tariff $tariff = null, $permonth = false)
-    {
-        $params = array();
+        $result = \CSaleOrder::getList(
+            array('DATE_PAYED' => 'DESC'),
+            array('USER_ID' => $this->getID(), 'XML_ID' => Tariff::XML_ORDER)
+        );
+        
+        $tariff = null;
+        
+        if ($order = $result->fetch()) {
+            $basket = reset(\Glyf\Core\Helpers\SaleOrder::getBaskets($order['ID']));
+            
+            if (!empty($order['DATE_PAYED'])) {
+                $tariff = new UserTariff($this->getID(), strtotime($order['DATE_PAYED']), (new Tariff($basket['PRODUCT_ID'])));
+            }
+        }
+        return $tariff;
     }
     
     
@@ -50,7 +61,14 @@ class User extends \Glyf\Core\User
      */
     public function getAccesses()
     {
+        $usertariff = $this->getUserTariff();
         
+        $features = array();
+        if (!is_null($usertariff)) {
+            $tariff   = $usertariff->getTariff();
+            $features = $tariff->getFeatures();
+        }
+        return $features;
     }
     
     
@@ -62,7 +80,6 @@ class User extends \Glyf\Core\User
         if (!\Bitrix\Main\Loader::includeModule('sale')) {
             return false;
         }
-        
         $account = \CSaleUserAccount::GetByUserID($this->getID(), CURRENCY_DEFAULT);
         $budget  = (float) $account['CURRENT_BUDGET'];
         

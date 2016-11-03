@@ -20,6 +20,10 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 		<? /* <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> */ ?>
         
+        
+        <script src="<?= SITE_TEMPLATE_PATH ?>/js/jquery.autocomplete.min.js"></script>
+        <script src="<?= SITE_TEMPLATE_PATH ?>/js/gui.js"></script>
+        
 		<? $APPLICATION->ShowHead() ?>
 	</head>
 	<body <?= (in_array(PAGE, array('MAIN', 'ABOUT', 'CONTACTS', 'RULES', 'UPLOAD', '404'))) ? ('class="mainPage"') : ('') ?>>

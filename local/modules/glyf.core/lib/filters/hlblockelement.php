@@ -48,7 +48,7 @@ class HLBlockElement extends Base
 		$this->preset();
 		$this->process();
         
-        $entity = self::getEntityClassName();
+        $entity = static::getEntityClassName();
         
 		$this->result = $entity::GetList($this->params);
 	}

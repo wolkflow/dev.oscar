@@ -95,6 +95,22 @@ class Lightbox extends HLBlockModel
     }
     
     
+    /**
+     * Добавление каритны в сборник.
+     */
+    public function addPicture($pid)
+    {
+        $lightpic = new LightboxPicture();
+        $result   = $lightpic->add(array(
+            'UF_LIGHTBOX' => $this->getID(),
+            'UF_PICTURE'  => $pid,
+            'UF_TIME'     => date('d.m.Y H:i:s')
+        ));
+        
+        return $result->isSuccess();
+    }
+    
+    
     public static function getUserLightboxes($uid, $filters = array(), $objects = true)
     {
         $filter = array_merge((array) $filters, array(self::FIELD_USER => intval($uid)));

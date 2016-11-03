@@ -97,7 +97,7 @@ class IBlockModel extends Model
         if (!$object) {
             return $result;
         }
-        $items = [];
+        $items = array();
         while ($item = $result->Fetch()) {
             $items[$item[$key]] = new static($item['ID']);
         }
@@ -111,7 +111,7 @@ class IBlockModel extends Model
      * @throws \Exception
      * @throws \Bitrix\Main\LoaderException
      */
-    private static function queryByParams($params = [])
+    private static function queryByParams($params = array())
     {
         if (!\Bitrix\Main\Loader::includeModule('iblock')) {
             throw new \Exception('Module IBLOCK is not installed.');

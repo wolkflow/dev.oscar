@@ -10,8 +10,8 @@ class SaleOrder
 			return;
 		}
 		
-		$result = \CSaleOrderPropsValue::GetList(['SORT' => 'ASC'], ['ORDER_ID' => $id]);
-		$items  = [];
+		$result = \CSaleOrderPropsValue::GetList(array('SORT' => 'ASC'), array('ORDER_ID' => $id));
+		$items  = array();
 		while ($item = $result->Fetch()) {
 			$items[$item[$key]] = $item;
 		}
@@ -25,8 +25,8 @@ class SaleOrder
 			return;
 		}
 		
-		$result = \CSaleOrderPropsValue::GetList(['SORT' => 'ASC'], ['ORDER_ID' => $id, 'CODE' => $code]);
-		$items  = [];
+		$result = \CSaleOrderPropsValue::GetList(array('SORT' => 'ASC'), array('ORDER_ID' => $id, 'CODE' => $code));
+		$items  = array();
 		if ($item = $result->Fetch()) {
 			return $item;
 		}
@@ -69,8 +69,8 @@ class SaleOrder
 			return;
 		}
 		
-		$result = \CSaleBasket::GetList(['SORT' => 'ASC'], ['ORDER_ID' => $id]);
-		$items  = [];
+		$result = \CSaleBasket::GetList(array('SORT' => 'ASC'), array('ORDER_ID' => $id));
+		$items  = array();
 		while ($item = $result->Fetch()) {
 			if ($withprops) {
 				$item['PROPS'] = SaleBasket::getProperties($item['ID']);
@@ -89,8 +89,8 @@ class SaleOrder
 			return;
 		}
 		
-		$result = \CSaleStatus::GetList(['SORT' => 'ASC']);
-		$items  = [];
+		$result = \CSaleStatus::GetList(array('SORT' => 'ASC'));
+		$items  = array();
 		while ($item = $result->Fetch()) {
 			$items[$item['ID']] = $item;
 		}

@@ -13,22 +13,63 @@
             <div class="cabinet-profile-sr sidebarRight">
                 <div class="sidebarRightTitle hidden-xs">Профиль</div>
                 <div class="cabinet-profile__container">
-                    <div class="cabinet-profile__block cabinet-profile__block--gray">
-                        <div class="cabinet-profile__block-field">
-                            <div class="cabinet-profile__block-field-value">
-                                <?= $arResult['USER']['NAME'] ?>
+                    
+                    <? if ($arResult['USER']['PARTNER']) { ?>
+                        <div class="cabinet-profile__block cabinet-profile__block--gray">
+                            <div class="cabinet-profile__block-field">
+                                <div class="cabinet-profile__block-field-key">Организация</div>
+                                <div class="cabinet-profile__block-field-value">
+                                    <?= $arResult['USER']['WORK_COMPANY'] ?>
+                                </div>
+                            </div>
+                            <div class="cabinet-profile__block-field">
+                                <div class="cabinet-profile__block-field-key">Телефон</div>
+                                <div class="cabinet-profile__block-field-value">
+                                    <?= $arResult['USER']['WORK_PHONE'] ?>
+                                </div>
+                            </div>
+                            <div class="cabinet-profile__block-buttons">
+                                <a class="btn btn-light btn-filter_edit" href="#">Изменить данные</a>
                             </div>
                         </div>
-                        <div class="cabinet-profile__block-field">
-                            <div class="cabinet-profile__block-field-key">Телефон</div>
-                            <div class="cabinet-profile__block-field-value">
-                                <?= $arResult['USER']['PERSONAL_MOBILE'] ?>
+                        <div class="cabinet-profile__block">
+                            <div class="cabinet-profile__block-field">
+                                <div class="cabinet-profile__block-field-key">Пользователь</div>
+                                <div class="cabinet-profile__block-field-value">
+                                    <?= $arResult['USER']['NAME'] ?>
+                                </div>
+                            </div>
+                            <div class="cabinet-profile__block-field">
+                                <div class="cabinet-profile__block-field-key">Телефон</div>
+                                <div class="cabinet-profile__block-field-value">
+                                    <?= $arResult['USER']['PERSONAL_MOBILE'] ?>
+                                </div>
+                            </div>
+                            <div class="cabinet-profile__block-buttons">
+                                <a class="btn btn-light btn-filter_edit" href="#">Изменить данные</a>
                             </div>
                         </div>
-                        <div class="cabinet-profile__block-buttons">
-                            <a class="btn btn-light btn-filter_edit" href="#">Изменить данные</a>
+                    <? } else { ?>
+                        <div class="cabinet-profile__block">
+                            <div class="cabinet-profile__block-field">
+                                <div class="cabinet-profile__block-field-value">
+                                    <?= $arResult['USER']['NAME'] ?>
+                                </div>
+                            </div>
+                            <div class="cabinet-profile__block-field">
+                                <div class="cabinet-profile__block-field-key">Телефон</div>
+                                <div class="cabinet-profile__block-field-value">
+                                    <?= $arResult['USER']['PERSONAL_MOBILE'] ?>
+                                </div>
+                            </div>
+                            <div class="cabinet-profile__block-buttons">
+                                <a class="btn btn-light btn-filter_edit" href="#">Изменить данные</a>
+                            </div>
                         </div>
-                    </div>
+                    <? } ?>
+                        
+                        
+                    
                     <div class="cabinet-profile__block">
                         <div class="cabinet-profile__block-field">
                             <div class="cabinet-profile__block-field-key">Email</div>
@@ -49,49 +90,59 @@
                     </div>
                 </div>
             </div>
-            <div class="cabinet-profile-sr sidebarRight">
-                <div class="sidebarRightTitle">Тарифный план и баланс</div>
-                <div class="cabinet-profile__container">
-                    <div class="cabinet-profile__block cabinet-profile__block--gray">
-                        <div class="cabinet-profile__block-field">
-                            <div class="cabinet-profile__block-field-value">Advance</div>
-                        </div>
-                        <div class="cabinet-profile__block-field">
-                            <div class="cabinet-profile__block-field-key">Срок действия истекает 04.06.2016</div>
-                        </div>
-                        <div class="cabinet-profile__block-buttons">
-                            <a class="btn btn-light btn-filter_edit" href="#">Продлить</a>
-                            <a class="btn btn-light btn-filter_edit" href="#">Изменить</a>
-                        </div>
-                    </div>
-                    <div class="cabinet-profile__block">
-                        <div class="cabinet-profile__block-field">
-                            <div class="cabinet-profile__block-field-key">Доступно</div>
-                            <div class="cabinet-profile__block-field-value">
-                                <?= $arResult['USER']['BALANCE'] ?> р.
+            
+            <? if (!$arResult['USER']['PARTNER']) { ?>
+                <div class="cabinet-profile-sr sidebarRight">
+                    <div class="sidebarRightTitle">Тарифный план и баланс</div>
+                    <div class="cabinet-profile__container">
+                        <? if (!empty($arResult['TARIFF'])) { ?>
+                            <div class="cabinet-profile__block cabinet-profile__block--gray">
+                                <div class="cabinet-profile__block-field">
+                                    <div class="cabinet-profile__block-field-value">
+                                        <?= $arResult['TARIFF']['NAME'] ?>
+                                    </div>
+                                </div>
+                                <div class="cabinet-profile__block-field">
+                                    <div class="cabinet-profile__block-field-key">
+                                        Срок действия истекает <?= $arResult['TARIFF']['EXPIRE'] ?>
+                                    </div>
+                                </div>
+                                <div class="cabinet-profile__block-buttons">
+                                    <a class="btn btn-light btn-filter_edit" href="#">Продлить</a>
+                                    <a class="btn btn-light btn-filter_edit" href="#">Изменить</a>
+                                </div>
+                            </div>
+                        <? } ?>
+                        <div class="cabinet-profile__block">
+                            <div class="cabinet-profile__block-field">
+                                <div class="cabinet-profile__block-field-key">Доступно</div>
+                                <div class="cabinet-profile__block-field-value">
+                                    <?= $arResult['USER']['BALANCE'] ?> р.
+                                </div>
+                            </div>
+                            <div class="cabinet-profile__block-buttons">
+                                <a class="btn btn-light btn-filter_edit" href="#">Пополнить баланс</a>
                             </div>
                         </div>
-                        <div class="cabinet-profile__block-buttons">
-                            <a class="btn btn-light btn-filter_edit" href="#">Пополнить баланс</a>
+                    </div>
+                </div>
+
+                <div class="cabinet-profile-sr sidebarRight">
+                    <div class="sidebarRightTitle">Подписки</div>
+                    <div class="cabinet-profile__container">
+                        <div class="cabinet-profile__block cabinet-profile__block--gray">
+                            <ul class="cabinet-profile__block-list">
+                                <li>Новые коллекции</li>
+                                <li>Новости блога</li>
+                                <li>Акции</li>
+                            </ul>
+                            <div class="cabinet-profile__block-buttons">
+                                <a class="btn btn-light btn-filter_edit" href="#">Изменить</a>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="cabinet-profile-sr sidebarRight">
-                <div class="sidebarRightTitle">Подписки</div>
-                <div class="cabinet-profile__container">
-                    <div class="cabinet-profile__block cabinet-profile__block--gray">
-                        <ul class="cabinet-profile__block-list">
-                            <li>Новые коллекции</li>
-                            <li>Новости блога</li>
-                            <li>Акции</li>
-                        </ul>
-                        <div class="cabinet-profile__block-buttons">
-                            <a class="btn btn-light btn-filter_edit" href="#">Изменить</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <? } ?>
         </div>
     </div>
 </div>

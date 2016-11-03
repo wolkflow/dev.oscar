@@ -3,6 +3,7 @@
 use Bitrix\Main\Localization\Loc;
 use Glyf\Oscar\Collection;
 use Glyf\Oscar\Picture;
+use Glyf\Oscar\User;
 
 class PicturesDetail extends \CBitrixComponent
 {
@@ -36,6 +37,9 @@ class PicturesDetail extends \CBitrixComponent
             return;
         }
         
+        // Пользователь.
+        $user = new User();
+        
         // Картина.
         $picture = new Picture($this->arParams['PID']);
         
@@ -63,7 +67,7 @@ class PicturesDetail extends \CBitrixComponent
             'WIDTH'  => $picture->getImageWidth(),
             'HEIGHT' => $picture->getImageHeight(),
             'EXT'    => $picture->getFileExtension(),
-        ); 
+        );
         
         foreach ($techniques as $technique) {
             $this->arResult['PICTURE']['TECHNIQUES'][$technique->getID()] = $technique->getName();
@@ -92,6 +96,20 @@ class PicturesDetail extends \CBitrixComponent
             'DOWNLOAD_IP' => false,
         );
         
+        if (!$user->isPartner()) {
+            $tariff = $user->getUserTariff();
+        }
+        
+        
+        // Добавление просмотра в статистику.
+        $view = new Glyf\Oscar\Statistic\View();
+        $view->add(array(
+            Glyf\Oscar\Statistic\View::FIELD_TIME       => date('d.m.Y H:i:s'),
+            Glyf\Oscar\Statistic\View::FIELD_TYPE       => 'PICTURE',
+            Glyf\Oscar\Statistic\View::FIELD_IP         => $_SERVER['REMOTE_ADDR'],
+            Glyf\Oscar\Statistic\View::FIELD_USER_ID    => $user->getID(),
+            Glyf\Oscar\Statistic\View::FIELD_ELEMENT_ID => $picture->getID(),
+        ));
         
         
 		// Подключение шаблона компонента.

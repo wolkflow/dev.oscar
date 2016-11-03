@@ -196,6 +196,34 @@ switch ($action) {
 		break;
     
     
+    // Добавление картины в сборник.
+    case ('add-to-lightbox'):
+        $lid = (int) $request->get('lid');
+        $pid = (int) $request->get('pid');
+        
+        // Пользователь.
+        $user = new User();
+        
+        // Сборник.
+        $lightbox = new Glyf\Oscar\Lightbox($lid);
+        
+        if (!$lightbox->exist()) {
+            jsonresponse(false, 'Сборник не существует');
+        }
+        
+        if (!$lightbox->getUserID() != $user->getID()) {
+            jsonresponse(false, 'Сборник не найден');
+        }
+        
+        if (!$lightbox->addPicture($pid)) {
+            jsonresponse(false, 'Ошибка добавления картины');
+        }
+        
+        jsonresponse(true);
+        break;
+    
+    
+    
 	default:
 		jsonresponse(false, '', array(), 'Internal error');
 		break;

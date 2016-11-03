@@ -6,7 +6,7 @@ use Glyf\Core\Helpers\IBlock as IBlockHelper;
 use Glyf\Oscar\Collection;
 use Glyf\Oscar\Picture;
 
-class FilterPictures extends \CBitrixComponent
+class PictureFilterComponent extends \CBitrixComponent
 {
     protected $filter = array();
     

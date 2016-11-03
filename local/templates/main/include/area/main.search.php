@@ -13,7 +13,7 @@
 					</div>
 					<div class="input-group">
 						<form action="/search/">
-							<input type="text" class="form-control" placeholder="<?= getMessage('GL_MAIN_SEARCH_FORM_PLACEHOLDER') ?>" />
+							<input type="text" class="form-control" name="F[KEYWORDS]" placeholder="<?= getMessage('GL_MAIN_SEARCH_FORM_PLACEHOLDER') ?>" />
 							<span class="input-group-btn">
 								<a href="javascript:void(0)" onclick="javascript: $(this).closest('form').trigger('submit');">
 									<i class="icon icon-find"></i>

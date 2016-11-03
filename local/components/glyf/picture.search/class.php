@@ -58,10 +58,6 @@ class PictureSearchComponent extends \CBitrixComponent
         // Задание параметров навигации.
         // $filter->setNav($this->arParams['NAV']);
         
-        echo '<pre>';
-        print_r($filter->getFilter());
-        echo '</pre>';
-        return;
         
         // Фильтрация.
         $filter->execute();
@@ -69,12 +65,11 @@ class PictureSearchComponent extends \CBitrixComponent
         // Получение результата фильтрации.
         $result = $filter->getResult();
         
-        // Элементы коллекции.
-        $pictures = $collection->getPictures(array('sort' => $sort, 'filter' => $filter));
-		
         $this->arResult['ITEMS'] = array();
         
-        foreach ($pictures as $picture) {
+        while ($element = $result->fetch()) {
+            $picture = new Picture($element['ID']);
+            
             $item = $picture->getData();
             $item['COLLECTION'] = $picture->getCollection()->getData();
             $item['DETAIL_URL'] = $picture->getDetailURL();
@@ -84,10 +79,10 @@ class PictureSearchComponent extends \CBitrixComponent
         
         
         // Постраничная навигация.
-        $this->arResult['NAV_STRING'] = $result->GetPageNavStringEx($nav, 'ЖК', 'estates', false, $this);
+        // $this->arResult['NAV_STRING'] = $result->GetPageNavStringEx($nav, '', 'pictures', false, $this);
         
         // Общее количество.
-        $this->arResult['COUNT'] = $result->SelectedRowsCount();	
+        $this->arResult['COUNT'] = $result->getSelectedRowsCount();	
         
         
 		// Подключение шаблона компонента.

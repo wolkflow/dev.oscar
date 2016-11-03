@@ -10,8 +10,8 @@ class SaleBasket
 			return;
 		}
 		
-		$result = \CSaleBasket::GetPropsList(['SORT' => 'ASC'], ['BASKET_ID' => intval($id)]);
-		$items  = [];
+		$result = \CSaleBasket::GetPropsList(array('SORT' => 'ASC'), array('BASKET_ID' => intval($id)));
+		$items  = array();
 		while ($item = $result->Fetch()) {
 		   $items[$item[$code]] = $item;
 		}

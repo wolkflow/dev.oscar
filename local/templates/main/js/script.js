@@ -102,6 +102,20 @@ $(document).ready(function () {
 		$(modal).arcticmodal();
 		return false;
 	});
+
+	// Больше параметров
+	// Прячем лишнее
+
+	$(document).on('click', '.btn-more_params', function () {
+		if($(this).hasClass('open')) {
+			$(this).removeClass('open').text('Еще');
+			$(this).parent('.filterBlock').find('.moreParamsList').slideUp();
+		} else {
+			$(this).addClass('open').text('Скрыть');
+			$(this).parent('.filterBlock').find('.moreParamsList').slideDown();
+		}
+		return false;
+	});
 });
 
 

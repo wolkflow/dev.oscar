@@ -29,7 +29,6 @@ class UserProfileComponent extends \CBitrixComponent
 			return;
 		}
         
-        
         // Пользователь.
         $user = new Glyf\Oscar\User();
         
@@ -39,8 +38,18 @@ class UserProfileComponent extends \CBitrixComponent
         // Текущий баланс.
         $this->arResult['USER']['BALANCE'] = $user->getBalance();
         
-        // Тариф.
-        
+        // Партнер.
+        $this->arResult['USER']['PARTNER'] = $user->isPartner();
+
+        if (!$user->isPartner()) {
+            // Тариф.
+            $tariff = $user->getUserTariff();
+            
+            if ($tariff) {
+                $this->arResult['TARIFF'] = $tariff->getTariff()->getData();
+                $this->arResult['TARIFF']['EXPIRE'] = date('d.m.Y', $tariff->getExpire());
+            }
+        }
         
         
 		// Подключение шаблона компонента.

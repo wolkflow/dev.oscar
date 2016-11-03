@@ -63,6 +63,9 @@ define('IBLOCK_DOCUMENTS_ID',   7);
 /*
  * HL-блоки.
  */
+define('HLBLOCK_STATISTIC_VIEW_ID',     1);
+define('HLBLOCK_STATISTIC_DOWNLOAD_ID', 2);
+define('HLBLOCK_SUBSCRIBES_ID',         3);
 define('HLBLOCK_PICTURES_ID',           4);
 define('HLBLOCK_DICT_AUTHORS_ID',       5);
 define('HLBLOCK_DICT_HOLDERS_ID',       6);

@@ -6,140 +6,6 @@
 
 <? $this->setFrameMode(true); ?>
 
-<script src="<?= SITE_TEMPLATE_PATH ?>/js/jquery.autocomplete.min.js"></script>
-<script>
-    $(document).ready(function() {
-        $('#js-param-place-country-id').on('keydown', function(event) {
-            $('#js-param-country-id').val('');
-            $('#js-param-city-id').val('');
-            $('#js-param-place-city-id').val('');
-        }).autocomplete({
-            source: function(request, callback) {
-                var $item = $(this.element[0]);
-                
-                $.ajax({
-                    url: '/remote/',
-                    dataType: 'json',
-                    data: {'action': 'dictionary-' + $item.data('type') + '-suggest', 'text': request.term},
-                    success: function(response) {
-                        if (response.status) {
-                            callback(response.data);
-                        }
-                    }
-                });
-            },
-            select: function(event, ui) {
-                $($(this).data('input')).val(ui.item.id);
-            },
-            minLength: 2
-        });
-        
-        
-        $('#js-param-place-city-id').on('keydown', function(event) {
-            $('#js-param-city-id').val('');
-        }).autocomplete({
-            change: function(event, ui) {
-                $('#js-param-city-id').val('');
-            },
-            source: function(request, callback) {
-                var $item = $(this.element[0]);
-                
-                $.ajax({
-                    url: '/remote/',
-                    dataType: 'json',
-                    data: {'action': 'dictionary-' + $item.data('type') + '-suggest', 'text': request.term, 'country': parseInt($('#js-param-country-id').val())},
-                    success: function(response) {
-                        if (response.status) {
-                            callback(response.data);
-                        }
-                    }
-                });
-            },
-            select: function(event, ui) {
-                $($(this).data('input')).val(ui.item.id);
-            },
-            minLength: 2
-        });
-        
-        
-        $('#js-param-place-country-id').on('keydown', function(event) {
-            $('#js-param-country-id').val('');
-            $('#js-param-city-id').val('');
-        }).autocomplete({
-            source: function(request, callback) {
-                var $item = $(this.element[0]);
-                
-                $.ajax({
-                    url: '/remote/',
-                    dataType: 'json',
-                    data: {'action': 'dictionary-' + $item.data('type') + '-suggest', 'text': request.term},
-                    success: function(response) {
-                        if (response.status) {
-                            callback(response.data);
-                        }
-                    }
-                });
-            },
-            select: function(event, ui) {
-                $($(this).data('input')).val(ui.item.id);
-            },
-            minLength: 2
-        });
-        
-        
-        $('#js-param-place-city-id').on('keydown', function(event) {
-            $('#js-param-city-id').val('');
-        }).autocomplete({
-            change: function(event, ui) {
-                $('#js-param-city-id').val('');
-            },
-            source: function(request, callback) {
-                var $item = $(this.element[0]);
-                
-                $.ajax({
-                    url: '/remote/',
-                    dataType: 'json',
-                    data: {'action': 'dictionary-' + $item.data('type') + '-suggest', 'text': request.term, 'country': parseInt($('#js-param-country-id').val())},
-                    success: function(response) {
-                        if (response.status) {
-                            callback(response.data);
-                        }
-                    }
-                });
-            },
-            select: function(event, ui) {
-                $($(this).data('input')).val(ui.item.id);
-            },
-            minLength: 2
-        });
-        
-        
-        $('.suggest').autocomplete({
-            source: function(request, callback) {
-                var $item = $(this.element[0]);
-                
-                $.ajax({
-                    url: '/remote/',
-                    dataType: 'json',
-                    data: {'action': 'dictionary-' + $item.data('type') + '-suggest', 'text': request.term},
-                    success: function(response) {
-                        if (response.status) {
-                            callback(response.data);
-                        }
-                    }
-                });
-            },
-            select: function(event, ui) {
-                $($(this).data('input')).val(ui.item.id);
-            },
-            minLength: 2
-        });
-        
-        
-    });
-</script>
-
-
 <div class="col-sm-3 col-lg-2 sidebarLeft">
     
     <form action="/search/">
@@ -238,42 +104,97 @@
             <?= getMessage('GL_SEARCH_FILTERS') ?>
         </div>
         
-        <div class="form"  data-collapse-block="formFilters">
+        <div class="form" data-collapse-block="formFilters">
             <div class="filterBlock shortParamsSet filterBlock-type">
+
                 <div class="filterBlockTitle">
                     <?= getMessage('GL_SEARCH_PARAM_COLLECTION') ?>
                 </div>
-                <ul>
-                    <? foreach ($arResult['FILTERS']['COLLECTION'] as $value => $title) { ?>
-                        <li>
-                            <label>
-                                <input type="checkbox" name="F[COLLECTION][]" value="<?= $value ?>" <?= (in_array($value, $arResult['DATA']['COLLECTION'])) ? ('checked') : ('') ?> />
-                                <?= $title ?>
-                           </label>
-                        </li>
-                    <? } ?>
-                </ul>
-                <a href="#" class="btn btn-light btn-more_params">
-                    <?= getMessage('GL_SEARCH_BUTTON_MORE') ?>
-                </a>
+
+                <? if (count($arResult['FILTERS']['COLLECTION']) > 5) { ?>
+                    <? $collections = array_slice($arResult['FILTERS']['COLLECTION'], 0, 5); ?>
+                    <ul>
+                        <? foreach ($collections as $value => $title) { ?>
+                            <li>
+                                <label>
+                                    <input type="checkbox" name="F[COLLECTION][]" value="<?= $value ?>" <?= (in_array($value, $arResult['DATA']['COLLECTION'])) ? ('checked') : ('') ?> />
+                                    <?= $title ?>
+                               </label>
+                            </li>
+                        <? } ?>
+                    </ul>
+                    
+                    <? $collections = array_slice($arResult['FILTERS']['COLLECTION'], 5); ?>
+                    <ul class="moreParamsList">
+                        <? foreach ($collections as $value => $title) { ?>
+                            <li>
+                                <label>
+                                    <input type="checkbox" name="F[COLLECTION][]" value="<?= $value ?>" <?= (in_array($value, $arResult['DATA']['COLLECTION'])) ? ('checked') : ('') ?> />
+                                    <?= $title ?>
+                               </label>
+                            </li>
+                        <? } ?>
+                    </ul>
+
+                    <a href="#" class="btn btn-light btn-more_params">
+                        <?= getMessage('GL_SEARCH_BUTTON_MORE') ?>
+                    </a>
+                <? } else { ?>
+                    <ul>
+                        <? foreach ($arResult['FILTERS']['COLLECTION'] as $value => $title) { ?>
+                            <li>
+                                <label>
+                                    <input type="checkbox" name="F[COLLECTION][]" value="<?= $value ?>" <?= (in_array($value, $arResult['DATA']['COLLECTION'])) ? ('checked') : ('') ?> />
+                                    <?= $title ?>
+                               </label>
+                            </li>
+                        <? } ?>
+                    </ul>
+                <? } ?>
             </div>
             <div class="filterBlock shortParamsSet filterBlock-genre">
                 <div class="filterBlockTitle">
                     <?= getMessage('GL_SEARCH_PARAM_GENRE') ?>
                 </div>
+                <? if (count($arResult['FILTERS']['GENRE']) > 5) { ?>
+                    <? $collections = array_slice($arResult['FILTERS']['GENRE'], 0, 5); ?>
+                        <ul>
+                            <? foreach ($collections as $value => $title) { ?>
+                                <li>
+                                    <label>
+                                        <input type="checkbox" name="F[GENRE][]" value="<?= $value ?>" <?= (in_array($value, $arResult['DATA']['GENRE'])) ? ('checked') : ('') ?> />
+                                        <?= $title ?>
+                                   </label>
+                                </li>
+                            <? } ?>
+                        </ul>
+                    <? $collections = array_slice($arResult['FILTERS']['GENRE'], 5); ?>
+                    <ul class="moreParamsList">
+                        <? foreach ($collections as $value => $title) { ?>
+                            <li>
+                                <label>
+                                    <input type="checkbox" name="F[COLLECTION][]" value="<?= $value ?>" <?= (in_array($value, $arResult['DATA']['COLLECTION'])) ? ('checked') : ('') ?> />
+                                    <?= $title ?>
+                                </label>
+                            </li>
+                        <? } ?>
+                    </ul>
+
+                    <a href="#" class="btn btn-light btn-more_params">
+                        <?= getMessage('GL_SEARCH_BUTTON_MORE') ?>
+                    </a>
+                <? } else { ?>
                 <ul>
                     <? foreach ($arResult['FILTERS']['GENRE'] as $value => $title) { ?>
                         <li>
                             <label>
                                 <input type="checkbox" name="F[GENRE][]" value="<?= $value ?>" <?= (in_array($value, $arResult['DATA']['GENRE'])) ? ('checked') : ('') ?> />
                                 <?= $title ?>
-                           </label>
+                            </label>
                         </li>
                     <? } ?>
                 </ul>
-                <a href="#" class="btn btn-light btn-more_params">
-                    <?= getMessage('GL_SEARCH_BUTTON_MORE') ?>
-                </a>
+                <? } ?>
             </div>
             <ul class="filters">
                 <li>
@@ -333,7 +254,11 @@
     <? // Сохраненнный поиск. // ?>
     <div class="filterSave">
         <a href="#" class="btn btn-filter_save" data-collapse-target="searchSave">сохранить поиск</a>
-        <div class="filterSaveInner" data-collapse-block="searchSave">
+        <div class="filterSaveInner hide" data-collapse-block="searchSave">
+            <form action="">
+                <input type="text" placeholder="Введите название">
+                <input type="submit" hidden>
+            </form>
             <ul>
                 <li><a href="#">Поиск №1</a></li>
                 <li><a href="#">Поиск №2</a></li>

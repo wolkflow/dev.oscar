@@ -8,8 +8,9 @@ class User
     const FIELD_LOGIN           = 'LOGIN';
     const FIELD_EMAIL           = 'EMAIL';
     const FIELD_PERSONAL_MOBILE = 'PERSONAL_MOBILE';
-    const FIELD_WORK_POSITION   = 'WORK_POSITION';
     const FIELD_WORK_COMPANY    = 'WORK_COMPANY';
+    const FIELD_WORK_PHONE      = 'WORK_PHONE';
+    const FIELD_WORK_POSITION   = 'WORK_POSITION';
     const FIELD_GROUP_ID        = 'GROUP_ID';
     
     protected $id   = null;
@@ -128,6 +129,12 @@ class User
     public function getWorkCompany()
     {
         return $this->get(self::FIELD_WORK_COMPANY);
+    }
+    
+    
+    public function getWorkPhone()
+    {
+        return $this->get(self::FIELD_WORK_PHONE);
     }
     
     

@@ -13,7 +13,7 @@
 
 <main class="siteMain">
     <div class="container">
-        <div class="collections-triggers">
+        <div class="collections-triggers bg-transparent"> 
             <a href="/collections/map/"><?= getMessage('GL_COLLECTIONS_MAP') ?></a>
             <a href="/collections/" class="active"><?= getMessage('GL_COLLECTIONS_ALL') ?></a>
         </div>
@@ -21,7 +21,7 @@
         <div class="row">
             <? // Коллекции.
                 $APPLICATION->IncludeComponent(
-                    "glyf:filter.pictures",
+                    "glyf:picture.filter",
                     "sideleft",
                     array()
                 );
