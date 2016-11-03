@@ -6,12 +6,13 @@ use Glyf\Core\System\HLBlockModel;
 
 class View extends HLBlockModel
 {
-    const FIELD_ID         = 'ID';
-    const FIELD_TIME       = 'UF_TIME';
-    const FIELD_TYPE       = 'UF_TYPE';
-    const FIELD_IP         = 'UF_IP';
-    const FIELD_USER_ID    = 'UF_USER_ID';
-    const FIELD_ELEMENT_ID = 'UF_ELEMENT_ID';
+    const FIELD_ID          = 'ID';
+    const FIELD_TIME        = 'UF_TIME';
+    const FIELD_TYPE        = 'UF_TYPE';
+    const FIELD_IP          = 'UF_IP';
+    const FIELD_USER_ID     = 'UF_USER_ID';
+    const FIELD_UPLOADER_ID = 'UF_UPLOADER_ID';
+    const FIELD_ELEMENT_ID  = 'UF_ELEMENT_ID';
     
     static protected $hlblockID = HLBLOCK_STATISTIC_VIEW_ID;
     

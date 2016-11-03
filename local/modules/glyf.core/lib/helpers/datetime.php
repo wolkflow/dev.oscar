@@ -28,9 +28,9 @@ class DateTime
         $monthB = $month * TIME_MONTH_IN_QUARTER + 1;
         $monthF = $month * TIME_MONTH_IN_QUARTER + TIME_MONTH_IN_QUARTER + 1;
 
-        $dateB = new DateTime('01.' . $monthS . '.' . date('Y'));
+        $dateB = new \DateTime('01.' . $monthB . '.' . date('Y'));
         $dateF = clone $dateB;
-        $dateF->add(new DateInterval('P'.TIME_MONTH_IN_QUARTER.'M'));
+        $dateF->add(new \DateInterval('P'.TIME_MONTH_IN_QUARTER.'M'));
         
         return array('begin' => $dateB->getTimestamp(), 'finish' => $dateF->getTimestamp());
     }

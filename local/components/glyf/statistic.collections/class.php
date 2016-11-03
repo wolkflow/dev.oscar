@@ -8,7 +8,7 @@ use Glyf\Oscar\Picture;
 use Glyf\Oscar\Partner;
 use Glyf\Oscar\User;
 
-class StatisticCommonComponent extends \CBitrixComponent
+class StatisticCollectionsComponent extends \CBitrixComponent
 {
 	/** 
 	 * Установка настроек.
@@ -33,16 +33,10 @@ class StatisticCommonComponent extends \CBitrixComponent
 			return;
 		}
         
-        
         // Пользователь.
         $partner = new Partner();
         
-        $this->arResult = array(
-            'COUNT'    => $partner->getPicturesCount(),
-            'VIEWS'    => $partner->getQuarterViews(),
-            'SALES'    => $partner->getQuarterSales(),
-            'PAYMENTS' => $partner->getPaymentsMonth(),
-        );
+        
         
         
 		// Подключение шаблона компонента.

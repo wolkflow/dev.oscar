@@ -171,6 +171,17 @@ class Picture extends HLBlockModel
 		return $this->get(self::FIELD_LANG_TITLE_EN);
 	}
 	
+    
+    /**
+	 * Получение ID пользователя.
+	 */
+	public function getUserID()
+	{
+        $this->load();
+        
+		return $this->get(self::FIELD_USER_ID);
+	}
+    
 	
 	/**
 	 * Получение ID автора.

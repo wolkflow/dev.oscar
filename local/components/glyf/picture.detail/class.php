@@ -111,11 +111,12 @@ class PicturesDetail extends \CBitrixComponent
         // Добавление просмотра в статистику.
         $view = new Glyf\Oscar\Statistic\View();
         $view->add(array(
-            Glyf\Oscar\Statistic\View::FIELD_TIME       => date('d.m.Y H:i:s'),
-            Glyf\Oscar\Statistic\View::FIELD_TYPE       => 'PICTURE',
-            Glyf\Oscar\Statistic\View::FIELD_IP         => $_SERVER['REMOTE_ADDR'],
-            Glyf\Oscar\Statistic\View::FIELD_USER_ID    => $user->getID(),
-            Glyf\Oscar\Statistic\View::FIELD_ELEMENT_ID => $picture->getID(),
+            Glyf\Oscar\Statistic\View::FIELD_TIME        => date('d.m.Y H:i:s'),
+            Glyf\Oscar\Statistic\View::FIELD_TYPE        => 'PICTURE',
+            Glyf\Oscar\Statistic\View::FIELD_IP          => $_SERVER['REMOTE_ADDR'],
+            Glyf\Oscar\Statistic\View::FIELD_USER_ID     => $user->getID(),
+            Glyf\Oscar\Statistic\View::FIELD_UPLOADER_ID => $picture->getUserID(),
+            Glyf\Oscar\Statistic\View::FIELD_ELEMENT_ID  => $picture->getID(),
         ));
         
         

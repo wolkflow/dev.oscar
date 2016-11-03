@@ -35,9 +35,9 @@ class Partner extends \Glyf\Core\User
         $result = View::getList(array(
             'select' => array('ID'), 
             'filter' => array(
-                View::FIELD_USER_ID => $this->getID(),
-                '>='.View::FIELD_TIME => date('d.m.Y', $quarter['begin']),
-                '<'.View::FIELD_TIME => date('d.m.Y', $quarter['finish']),
+                View::FIELD_UPLOADER_ID => $this->getID(),
+                '>='.View::FIELD_TIME   => date('d.m.Y 00:00:00', $quarter['begin']),
+                '<'.View::FIELD_TIME    => date('d.m.Y 23:59:59', $quarter['finish']),
             )
         ), false);
         
