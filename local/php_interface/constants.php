@@ -71,6 +71,7 @@ define('HLBLOCK_SUBSCRIBES_ID',         3);
 define('HLBLOCK_PICTURES_ID',           4);
 define('HLBLOCK_DICT_AUTHORS_ID',       5);
 define('HLBLOCK_DICT_HOLDERS_ID',       6);
+define('HLBLOCK_SEARCHES_ID',           7);
 define('HLBLOCK_DICT_FOLDERS_ID',       8);
 define('HLBLOCK_DICT_KEYWORDS_ID',      9);
 define('HLBLOCK_DICT_TECHNIQUES_ID',    10);

@@ -74,8 +74,9 @@ class HLBlockModel extends Model
 	 */
 	public function update($data)
 	{
-		$element = self::getEntityClassName($this->getID());
-		$result = $element->update($data);
+		$classname = self::getEntityClassName();
+        $element   = new $classname;
+		$result    = $element->update($this->getID(), $data);
 		
 		if ($result->isSuccess()) {
 			return $this->getID();

@@ -3,10 +3,10 @@
 namespace Glyf\Oscar;
 
 // JWT.
-require ($_SERVER['DOCUMENT_ROOT'].'/local/vendors/jwt/src/JWT.php');
-require ($_SERVER['DOCUMENT_ROOT'].'/local/vendors/jwt/src/BeforeValidException.php');
-require ($_SERVER['DOCUMENT_ROOT'].'/local/vendors/jwt/src/ExpiredException.php');
-require ($_SERVER['DOCUMENT_ROOT'].'/local/vendors/jwt/src/SignatureInvalidException.php');
+require_once($_SERVER['DOCUMENT_ROOT'].'/local/vendors/jwt/src/JWT.php');
+require_once($_SERVER['DOCUMENT_ROOT'].'/local/vendors/jwt/src/BeforeValidException.php');
+require_once($_SERVER['DOCUMENT_ROOT'].'/local/vendors/jwt/src/ExpiredException.php');
+require_once($_SERVER['DOCUMENT_ROOT'].'/local/vendors/jwt/src/SignatureInvalidException.php');
 
 
 use Glyf\Core\System\HLBlockModel;
@@ -132,6 +132,9 @@ class Picture extends HLBlockModel
     const IMAGE_PREVIEW_HEIGHT   = 1000;
     const IMAGE_SMALL_WIDTH      = 545;
     const IMAGE_SMALL_HEIGHT     = 360;
+    
+    // Время на скачивание файла.
+    const DOWNLOAD_EXPIRE = 1200;//14400;
     
     
     
@@ -572,9 +575,9 @@ class Picture extends HLBlockModel
 	/**
 	 * Получение ссылки на скачаивание полного изображения.
 	 */
-	public function getFullImageLink()
+	public function getDownloadLink()
 	{
-        $link = '/images/' . $this->getDownloadToken(\CUser::getID()) . '/';
+        $link = '/download/' . $this->getDownloadToken(\CUser::getID()) . '/';
         
 		return $link;
 	}
@@ -586,14 +589,17 @@ class Picture extends HLBlockModel
 	public function getDownloadToken($userID, $ttl = 0)
 	{
         $data = array(
-            'image' => $this->getID(),
-            'user'  => $userID,
+            'image'  => $this->getID(),
+            'user'   => $userID,
+            'time'   => time(),
             //'nbf'   => time() - 1000, // время начала использования
            // 'exp'   => time() + 3600 * 1000, // время окончания использования
         );
         
         if ($ttl > 0) {
             $data['exp'] = time() + $ttl;
+        } else {
+            $data['exp'] = time() + self::DOWNLOAD_EXPIRE;
         }
         
         // Генерация токена.

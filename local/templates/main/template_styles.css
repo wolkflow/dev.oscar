@@ -2498,7 +2498,8 @@ div.cabinet-panel--stats-inner {
   font-weight: bold;
   word-wrap: break-word;
 }
-.liveEdit {
+input[type=password].le,
+input[type=text].le {
   padding: 2px 8px 2px 8px;
   border: 1px solid #d9d9d9;
   outline: none !important;
@@ -2506,12 +2507,22 @@ div.cabinet-panel--stats-inner {
   width: 100%;
   word-wrap: break-word;
   background: transparent;
+
+  -webkit-transition: all 200ms ease 0ms;
+  -moz-transition: all 200ms ease 0ms;
+  -ms-transition: all 200ms ease 0ms;
+  -o-transition: all 200ms ease 0ms;
+  transition: all 200ms ease 0ms;
 }
-.liveEdit.disabled {
+input[type=password].le.disabled,
+input[type=text].le.disabled {
   border-color: transparent;
   padding: 2px 8px 2px 0;
 }
-
+.le-end:not(.le-cancel) {
+  background: #00c3d9;
+  color: #fff;
+}
 .cabinet-profile__block-list{
   margin-bottom: 15px;
   font-size: 14px; }
@@ -2531,7 +2542,11 @@ div.cabinet-panel--stats-inner {
     float: none;
     text-align: center; }
 }
-
+.errorCode {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
 .cabinet-lightboxes-list{
   width: 100%;
   margin-top: 35px; }
@@ -4076,6 +4091,21 @@ a.catmark:hover {
   margin-bottom: -25px;
   z-index: 2;
 }
+.cabinet-profile__block-buttons:after {
+  display: table;
+  content: '';
+  clear: both;
+  position: relative;
+}
+div.le.disabled,
+a.le.disabled {
+  display: none;
+}
+.le-actions:after {
+  display: table;
+  content: ' ';
+  clear: both;
+}
 a.btn-filter_edit {
   font: 400 15px/20px 'Circe', Arial, helvetika, sans-serif;
   font-size: 11px;
@@ -4084,6 +4114,13 @@ a.btn-filter_edit {
   min-height: 22px;
   line-height: 12px;
   margin-bottom: 5px;
+}
+a.btn-filter_edit.btn-filter_edit-small {
+  width: 47%;
+  float: left;
+}
+a.btn-filter_edit.btn-filter_edit-small + .btn-filter_edit-small {
+  float: right;
 }
 a.btn-filter_delete {
   font: 400 15px/20px 'Circe', Arial, helvetika, sans-serif;
@@ -4397,9 +4434,6 @@ a:hover {
   font-weight: 700;
   line-height: 27px;
   width: 100%;
-}
-.formList input[type=text] {
-  text-transform: uppercase;
 }
 .formList input[type=text].input-size {
   display: inline-block;
@@ -5681,4 +5715,27 @@ ul.suggest li:hover{
   font: 400 14px/17px 'Circe', Arial, helvetika, sans-serif;
   width: 100%;
   margin-bottom: 10px;
+}
+.form-tip {
+  display: block;
+  margin: 5px;
+  font-size: 11px;
+  background: #f2f2f2;
+  border: 1px solid #d9d9d9;
+  color: #00c3d9;
+  position: relative;
+}
+input.input-error:not(.disabled) {
+  border-color: #f00 !important;
+}
+.form-tip:before {
+  display: block;
+  top: -5px;
+  left: 5px;
+  width: 0;
+  height: 0;
+  content: ' ';
+  border-bottom: 5px solid #d9d9d9;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
 }

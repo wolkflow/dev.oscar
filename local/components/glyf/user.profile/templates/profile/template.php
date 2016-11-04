@@ -13,77 +13,91 @@
             <div class="cabinet-profile-sr sidebarRight">
                 <div class="sidebarRightTitle hidden-xs">Профиль</div>
                 <div class="cabinet-profile__container">
-                    
+
+
+                    <?php
+                    /*
+                     * le - класс для live edit, от него зависит оформление
+                     * le disabled - стиль выключеного инпута для инпута или display:none для дива или ссылки
+                     * data-le - группа которой будет управлять нажатие. Так, data-le ставится кнопке которой запускаем механизм, всем блокам которые должны быть показаны/скрыты в данном механизме, инпутам которым надо открыть/скрыть редактирование. Наглядно понятно в блоке "Баланс"
+                     *
+                     * le-star - триггер запуска
+                     * le-end - триггер окончания
+                     * le-cancel - дополнительно для le-end. Механизм, при разблокировке инпутов сохраняет их текущее значение в плейсхолдер, и если пользователь потупил понаписал, а потом отменил, возвращает предыдущее значение, а не блокирует инпут с тем что там понаписано. Кроме того, юзверь может видеть что было раньше, как пример заполнения.
+                     */
+                    ?>
+
                     <? if ($arResult['USER']['PARTNER']) { ?>
                         <div class="cabinet-profile__block cabinet-profile__block--gray">
                             <div class="cabinet-profile__block-field">
                                 <div class="cabinet-profile__block-field-key">Организация</div>
-                                <div class="cabinet-profile__block-field-value">
-                                    <?= $arResult['USER']['WORK_COMPANY'] ?>
-                                </div>
+                                <input type="text" class="le disabled" disabled data-le="1" value="<?= $arResult['USER']['WORK_COMPANY'] ?>">
                             </div>
                             <div class="cabinet-profile__block-field">
                                 <div class="cabinet-profile__block-field-key">Телефон</div>
-                                <div class="cabinet-profile__block-field-value">
-                                    <?= $arResult['USER']['WORK_PHONE'] ?>
-                                </div>
+                                <input type="text" class="le disabled" disabled data-le="1" value="<?= $arResult['USER']['WORK_PHONE'] ?>">
                             </div>
                             <div class="cabinet-profile__block-buttons">
-                                <a class="btn btn-light btn-filter_edit" href="#">Изменить данные</a>
+                                <a class="btn btn-light btn-filter_edit le le-start" data-le="1" href="#">Изменить данные</a>
+                                <a class="btn btn-light btn-filter_edit btn-filter_edit-small le le-end disabled" data-le="1" href="javascript:void(0)">Сохранить</a>
+                                <a class="btn btn-light btn-filter_edit btn-filter_edit-small le le-end le-cancel disabled" data-le="1" href="javascript:void(0)">Отменить</a>
                             </div>
                         </div>
                         <div class="cabinet-profile__block">
                             <div class="cabinet-profile__block-field">
                                 <div class="cabinet-profile__block-field-key">Пользователь</div>
-                                <div class="cabinet-profile__block-field-value">
-                                    <?= $arResult['USER']['NAME'] ?>
-                                </div>
+                                <input type="text" class="le disabled" disabled data-le="2" value="<?= $arResult['USER']['NAME'] ?>">
                             </div>
                             <div class="cabinet-profile__block-field">
                                 <div class="cabinet-profile__block-field-key">Телефон</div>
-                                <div class="cabinet-profile__block-field-value">
-                                    <?= $arResult['USER']['PERSONAL_MOBILE'] ?>
-                                </div>
+                                <input type="text" class="le disabled" disabled data-le="2" value="<?= $arResult['USER']['PERSONAL_MOBILE'] ?>">
                             </div>
                             <div class="cabinet-profile__block-buttons">
-                                <a class="btn btn-light btn-filter_edit" href="#">Изменить данные</a>
+                                <a class="btn btn-light btn-filter_edit le le-start" data-le="2" href="#">Изменить данные</a>
+                                <a class="btn btn-light btn-filter_edit btn-filter_edit-small le le-end disabled" data-le="2" href="javascript:void(0)">Сохранить</a>
+                                <a class="btn btn-light btn-filter_edit btn-filter_edit-small le le-end le-cancel disabled" data-le="2" href="javascript:void(0)">Отменить</a>
                             </div>
                         </div>
                     <? } else { ?>
                         <div class="cabinet-profile__block">
                             <div class="cabinet-profile__block-field">
-                                <div class="cabinet-profile__block-field-value">
-                                    <?= $arResult['USER']['NAME'] ?>
-                                </div>
+                                <input type="text" class="le disabled" disabled data-le="1" value="<?= $arResult['USER']['NAME'] ?>">
                             </div>
                             <div class="cabinet-profile__block-field">
                                 <div class="cabinet-profile__block-field-key">Телефон</div>
                                 <div class="cabinet-profile__block-field-value">
-                                    <?= $arResult['USER']['PERSONAL_MOBILE'] ?>
+                                    <input type="text" class="le disabled" disabled data-le="1" value="<?= $arResult['USER']['PERSONAL_MOBILE'] ?>">
                                 </div>
                             </div>
                             <div class="cabinet-profile__block-buttons">
-                                <a class="btn btn-light btn-filter_edit" href="#">Изменить данные</a>
+                                <a class="btn btn-light btn-filter_edit le le-start" data-le="1" href="javascript:void(0)">Изменить данные</a>
+                                <a class="btn btn-light btn-filter_edit btn-filter_edit-small le le-end disabled" data-le="1" href="javascript:void(0)">Сохранить</a>
+                                <a class="btn btn-light btn-filter_edit btn-filter_edit-small le le-end le-cancel disabled" data-le="1" href="javascript:void(0)">Отменить</a>
                             </div>
                         </div>
                     <? } ?>
-                        
-                        
+
                     
                     <div class="cabinet-profile__block">
                         <div class="cabinet-profile__block-field">
                             <div class="cabinet-profile__block-field-key">Email</div>
-                            <input type="text" class="liveEdit disabled" disabled value="<?= $arResult['USER']['EMAIL'] ?>">
+                            <input type="text" class="le disabled input-error" disabled data-le="3" value="<?= $arResult['USER']['EMAIL'] ?>">
+                            <span class="form-tip form-tip-error">Это не шпага, сударь, это арматура</span>
                         </div>
-                        <div class="cabinet-profile__block-field">
-                            <div class="cabinet-profile__block-field-key">Пароль</div>
-                            <div class="cabinet-profile__block-field-value">
-                                ************
+                            <div class="cabinet-profile__block-field">
+                                <div class="cabinet-profile__block-field-key">Пароль</div>
+                                <input type="password" disabled value="************" class="le disabled" data-le="4">
                             </div>
-                        </div>
+                                <div class="cabinet-profile__block-field le disabled" data-le="4">
+                                    <div class="cabinet-profile__block-field-key">Подтвердите пароль</div>
+                                    <input type="password" value="" class="le disabled" data-le="4">
+                                </div>
+
                         <div class="cabinet-profile__block-buttons">
-                            <a class="btn btn-light btn-filter_edit" href="#">Изменить логин</a>
-                            <a class="btn btn-light btn-filter_edit" href="#">Изменить пароль</a>
+                            <a class="btn btn-light btn-filter_edit le le-start" href="javascript:void(0)" data-le="3">Изменить логин</a>
+                            <a class="btn btn-light btn-filter_edit le le-start" href="javascript:void(0)" data-le="4">Изменить пароль</a>
+                            <a class="btn btn-light btn-filter_edit btn-filter_edit-small le le-end  disabled" href="javascript:void(0)">Сохранить</a>
+                            <a class="btn btn-light btn-filter_edit btn-filter_edit-small le le-end le-cancel disabled" href="javascript:void(0)">Отменить</a>
                         </div>
                     </div>
                 </div>
@@ -118,8 +132,14 @@
                                     <?= $arResult['USER']['BALANCE'] ?> р.
                                 </div>
                             </div>
+                            <div class="cabinet-profile__block-field le disabled" data-le="pay">
+                                <div class="cabinet-profile__block-field-key">Введите сумму</div>
+                                <input type="text" class="le" data-le="pay" value="1000">
+                            </div>
                             <div class="cabinet-profile__block-buttons">
-                                <a class="btn btn-light btn-filter_edit" href="#">Пополнить баланс</a>
+                                <a class="btn btn-light btn-filter_edit btn-filter_edit-small le le-end disabled" data-le="pay" href="javascript:void(0)">Пополнить</a>
+                                <a class="btn btn-light btn-filter_edit btn-filter_edit-small le le-end le-cancel disabled" data-le="pay" href="javascript:void(0)">Отменить</a>
+                                <a class="btn btn-light btn-filter_edit le le-start" href="#" data-le="pay">Пополнить баланс</a>
                             </div>
                         </div>
                     </div>
@@ -135,7 +155,8 @@
                                 <li>Акции</li>
                             </ul>
                             <div class="cabinet-profile__block-buttons">
-                                <a class="btn btn-light btn-filter_edit" href="#">Изменить</a>
+                                <a class="btn btn-light btn-filter_edit" href="/personal/subscribe/">Изменить</a>
+                                <a class="btn btn-light btn-filter_edit" data-modal="#error">Окно ошибки</a>
                             </div>
                         </div>
                     </div>
@@ -144,3 +165,17 @@
         </div>
     </div>
 </div>
+
+<!-- Окно ошибки -->
+<div class="hide">
+    <div class="modal modal-error" id="error">
+        <div class="modalTitle">
+            Ошибка!		<div class="modalClose arcticmodal-close"></div>
+        </div>
+        <div class="modalContent">
+            <div class="errorCode">Шеф! Усё пропало!</div>
+            <div class="errorText">Что сломалось не знаем, но половину уже починили. Ожидайте на линии как можно дольше.</div>
+        </div>
+    </div>
+</div>
+<!--// .Окно ошибки -->

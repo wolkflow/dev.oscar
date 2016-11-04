@@ -154,8 +154,16 @@
                     </span>
                 </div>
                 <div class="card-right__add-to-cart">
-                    <a class="btn btn-blue" href="#">Скачать</a>
-                    <a class="btn" href="#">Добавить в корзину</a>
+                    <? if ($arResult['ACCESS']['DOWNLOAD']) { ?>
+                        <a id="js-download-id" class="btn btn-blue" href="javascript:void(0)" data-pid="<?= $arResult['PICTURE']['ID'] ?>">
+                            Скачать
+                        </a>
+                    <? } ?>
+                    <? if ($arResult['ACCESS']['BUY']) { ?>
+                        <a class="btn" href="#">
+                            Добавить в корзину
+                        </a>
+                    <? } ?>
                 </div>
                 <div class="card-description hidden-xs">
                     <div class="card-description__title">Ключевые слова</div>

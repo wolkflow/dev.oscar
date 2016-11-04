@@ -14,6 +14,13 @@ $arUrlRewrite = array(
 	),
     
     array(
+		"CONDITION" => "#^/download/(.+?)/#",
+		"RULE" => "TOKEN=\$1&",
+		"ID" => "",
+		"PATH" => "/download/index.php",
+	),
+    
+    array(
 		"CONDITION" => "#^/personal/card/(.+?)/#",
 		"RULE" => "SECTION=\$1&",
 		"ID" => "",

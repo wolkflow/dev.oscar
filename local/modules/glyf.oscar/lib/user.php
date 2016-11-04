@@ -5,6 +5,7 @@ namespace Glyf\Oscar;
 use Glyf\Oscar\Lightbox;
 use Glyf\Oscar\Tariff;
 use Glyf\Oscar\UserTariff;
+use Glyf\Oscar\Subscribe;
 
 
 class User extends \Glyf\Core\User
@@ -104,5 +105,17 @@ class User extends \Glyf\Core\User
     public function getLightboxes($params = array())
     {
         return Lightbox::getUserLightboxes($this->getID(), $params);
+    }
+    
+    
+    /**
+     * Получение подписки.
+     */
+    public function getSubscribe()
+    {
+        $subscribe = Subscribe::getList(array('filter' => array(Subscribe::FIELD_USER_ID => $this->getID())));
+        $subscribe = reset($subscribe);
+        
+        return $subscribe;
     }
 }

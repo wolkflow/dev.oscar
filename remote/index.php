@@ -52,7 +52,7 @@ global $USER;
 $request = Bitrix\Main\Application::getInstance()->getContext()->getRequest();
 
 // Действие.
-$action = (string) $request->get('action');
+$token = (string) $request->get('TOKEN');
 
 
 
@@ -244,6 +244,53 @@ switch ($action) {
         }
         
         jsonresponse(true, '', $rmids);
+        break;
+    
+    
+    // Получение ссылки на скачивание.
+    case ('get-download-link');
+        $pid = (int) $request->get('pid');
+        
+        // Пользователь.
+        $user = new Glyf\Oscar\User();
+        
+        // Ссылка.
+        $link = null;
+        
+        if (!$user->isPartner()) {
+            $tariff = $user->getUserTariff();
+            
+            if ($tariff) {
+                // Ссылка на скачивание.
+                if ($tariff->canDownload()) {
+                    $picture = new Glyf\Oscar\Picture($pid);
+                    
+                    if ($picture->exists()) {
+                        $link = $picture->getDownloadLink();
+                        
+                        
+                        // Добавление скачивания в статистику.
+                        $download = new Glyf\Oscar\Statistic\Download();
+                        $download->add(array(
+                            Glyf\Oscar\Statistic\Download::FIELD_TIME        => date('d.m.Y H:i:s'),
+                            Glyf\Oscar\Statistic\Download::FIELD_USER_ID     => $user->getID(),
+                            Glyf\Oscar\Statistic\Download::FIELD_UPLOADER_ID => $picture->getUserID(),
+                            Glyf\Oscar\Statistic\Download::FIELD_ELEMENT_ID  => $picture->getID(),
+                        ));
+                    } else {
+                        jsonresponse(false, 'Изображение не существует');
+                    }
+                } else {
+                    jsonresponse(false, 'У вас исчерпан лимит скачиваний');
+                }
+            } else {
+                jsonresponse(false, 'У вас нет нужного тарифа');
+            }
+        } else {
+            jsonresponse(false, 'Вы не можете скачать изображение');
+        }
+        
+        jsonresponse(true, '', array('link' => $link));
         break;
     
     

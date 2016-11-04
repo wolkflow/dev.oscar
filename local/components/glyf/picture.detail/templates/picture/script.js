@@ -70,4 +70,23 @@ $(document).ready(function() {
             }
         });
     });
+    
+    // Скачивание.
+    $(document).on('click', '#js-download-id', function() {
+        var pid = $(this).data('pid');
+        
+        $.ajax({
+            url: '/remote/',
+            type: 'post',
+            data: {'action': 'get-download-link', 'pid': pid},
+            dataType: 'json',
+            success: function(response) {
+                if (response.status) {
+                    location.href = response.data['link'];
+                }
+            }
+        });
+    });
+    
+    
 });

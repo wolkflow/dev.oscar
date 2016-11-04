@@ -1,4 +1,4 @@
-<?php`<?php
+<?php
 
 namespace Glyf\Oscar\Features;
 

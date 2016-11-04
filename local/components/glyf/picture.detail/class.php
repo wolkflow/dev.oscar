@@ -105,6 +105,23 @@ class PicturesDetail extends \CBitrixComponent
         
         if (!$user->isPartner()) {
             $tariff = $user->getUserTariff();
+            
+            if ($tariff) {
+                // Доступы.
+                $this->arResult['ACCESS'] = array(
+                    'BUY'         => true,
+                    'INFO'        => $tariff->canInfoView(),
+                    'ZOOM'        => $tariff->canZoom(),
+                    'WATERMARK'   => $tariff->canWatermark(),
+                    'DOWNLOAD'    => $tariff->canDownload(),
+                    'DOWNLOAD_IP' => false,
+                );
+                
+                // Ссылка на скачивание.
+                if ($this->arResult['ACCESS']['DOWNLOAD']) {
+                    $this->arResult['DOWNLOAD_LINK'] = $picture->getDownloadLink();
+                }
+            }
         }
         
         

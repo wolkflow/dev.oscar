@@ -104,8 +104,6 @@ $(document).ready(function () {
 	});
 
 	// Больше параметров
-	// Прячем лишнее
-
 	$(document).on('click', '.btn-more_params', function () {
 		if($(this).hasClass('open')) {
 			$(this).removeClass('open').text('Еще');
@@ -116,6 +114,41 @@ $(document).ready(function () {
 		}
 		return false;
 	});
+
+	// LiveEdit
+
+	$('a.le-start').on('click', function(){
+		var le = $(this).data('le');
+		$('[data-le="'+le+'"]').removeClass('disabled');
+		$('input[data-le="'+le+'"]').each(function () {
+			var leVal = $(this).val();
+			$(this).prop('disabled', false).attr('placeholder', leVal).removeClass('disabled');
+		});
+		$(this).closest('div').find('.le-start').addClass('disabled');
+		$(this).closest('div').find('.le-end').removeClass('disabled').attr('data-le', le);
+
+		return false;
+	});
+	$('a.le-end').on('click', function(){
+		var le = $(this).attr('data-le');
+
+		$('[data-le="'+le+'"]').addClass('disabled');
+		if($(this).hasClass('le-cancel')) {
+			$('input[data-le="'+le+'"]').each(function () {
+				var leVal = $(this).attr('placeholder');
+				$(this).prop('disabled', true).addClass('disabled').val(leVal);
+			});
+		} else {
+			$('input[data-le="'+le+'"]').each(function () {
+				$(this).prop('disabled', true).addClass('disabled');
+			});
+		}
+		$(this).closest('div').find('.le-start').removeClass('disabled');
+		$(this).closest('div').find('.le-end').addClass('disabled');
+
+		return false;
+	});
+
 });
 
 

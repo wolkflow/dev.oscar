@@ -45,6 +45,12 @@ class Main
                     'CURRENCY' => CURRENCY_DEFAULT
                 );
             }
+            
+            $subscribe = new Glyf\Oscar\Subscribe();
+            $subscribe->add(array(
+                Glyf\Oscar\Subscribe::FIELD_USER_ID  => $fields['ID'],
+                Glyf\Oscar\Subscribe::FIELD_ACTIVE => false,
+            ));
         }
     }
     
