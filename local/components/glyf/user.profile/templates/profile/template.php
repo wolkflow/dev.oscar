@@ -31,48 +31,48 @@
                         <div class="cabinet-profile__block cabinet-profile__block--gray">
                             <div class="cabinet-profile__block-field">
                                 <div class="cabinet-profile__block-field-key">Организация</div>
-                                <input type="text" class="le disabled" disabled data-le="1" value="<?= $arResult['USER']['WORK_COMPANY'] ?>">
+                                <input type="text" name="company" class="le disabled" disabled data-le="company" value="<?= $arResult['USER']['WORK_COMPANY'] ?>">
                             </div>
                             <div class="cabinet-profile__block-field">
                                 <div class="cabinet-profile__block-field-key">Телефон</div>
-                                <input type="text" class="le disabled" disabled data-le="1" value="<?= $arResult['USER']['WORK_PHONE'] ?>">
+                                <input type="text" name="workphone" class="le disabled" disabled data-le="company" value="<?= $arResult['USER']['WORK_PHONE'] ?>">
                             </div>
                             <div class="cabinet-profile__block-buttons">
-                                <a class="btn btn-light btn-filter_edit le le-start" data-le="1" href="#">Изменить данные</a>
-                                <a class="btn btn-light btn-filter_edit btn-filter_edit-small le le-end disabled" data-le="1" href="javascript:void(0)">Сохранить</a>
-                                <a class="btn btn-light btn-filter_edit btn-filter_edit-small le le-end le-cancel disabled" data-le="1" href="javascript:void(0)">Отменить</a>
+                                <a class="btn btn-light btn-filter_edit le le-start" data-le="company" href="#">Изменить данные</a>
+                                <a class="btn btn-light btn-filter_edit btn-filter_edit-small le le-end disabled" data-le="company" data-action="update-user-company" href="javascript:void(0)">Сохранить</a>
+                                <a class="btn btn-light btn-filter_edit btn-filter_edit-small le le-end le-cancel disabled" data-le="company" href="javascript:void(0)">Отменить</a>
                             </div>
                         </div>
                         <div class="cabinet-profile__block">
                             <div class="cabinet-profile__block-field">
                                 <div class="cabinet-profile__block-field-key">Пользователь</div>
-                                <input type="text" class="le disabled" disabled data-le="2" value="<?= $arResult['USER']['NAME'] ?>">
+                                <input type="text" name="name" class="le disabled" disabled data-le="profile" value="<?= $arResult['USER']['NAME'] ?>">
                             </div>
                             <div class="cabinet-profile__block-field">
                                 <div class="cabinet-profile__block-field-key">Телефон</div>
-                                <input type="text" class="le disabled" disabled data-le="2" value="<?= $arResult['USER']['PERSONAL_MOBILE'] ?>">
+                                <input type="text" name="phone" class="le disabled" disabled data-le="profile" value="<?= $arResult['USER']['PERSONAL_MOBILE'] ?>">
                             </div>
                             <div class="cabinet-profile__block-buttons">
-                                <a class="btn btn-light btn-filter_edit le le-start" data-le="2" href="#">Изменить данные</a>
-                                <a class="btn btn-light btn-filter_edit btn-filter_edit-small le le-end disabled" data-le="2" href="javascript:void(0)">Сохранить</a>
-                                <a class="btn btn-light btn-filter_edit btn-filter_edit-small le le-end le-cancel disabled" data-le="2" href="javascript:void(0)">Отменить</a>
+                                <a class="btn btn-light btn-filter_edit le le-start" data-le="profile" href="#">Изменить данные</a>
+                                <a class="btn btn-light btn-filter_edit btn-filter_edit-small le le-end disabled" data-le="profile" data-action="update-user-profile" href="javascript:void(0)">Сохранить</a>
+                                <a class="btn btn-light btn-filter_edit btn-filter_edit-small le le-end le-cancel disabled" data-le="profile" href="javascript:void(0)">Отменить</a>
                             </div>
                         </div>
                     <? } else { ?>
                         <div class="cabinet-profile__block">
                             <div class="cabinet-profile__block-field">
-                                <input type="text" class="le disabled" disabled data-le="1" value="<?= $arResult['USER']['NAME'] ?>">
+                                <input type="text" name="name" class="le disabled" disabled data-le="profile" value="<?= $arResult['USER']['NAME'] ?>">
                             </div>
                             <div class="cabinet-profile__block-field">
                                 <div class="cabinet-profile__block-field-key">Телефон</div>
                                 <div class="cabinet-profile__block-field-value">
-                                    <input type="text" class="le disabled" disabled data-le="1" value="<?= $arResult['USER']['PERSONAL_MOBILE'] ?>">
+                                    <input type="text" name="phone" class="le disabled" disabled data-le="profile" value="<?= $arResult['USER']['PERSONAL_MOBILE'] ?>">
                                 </div>
                             </div>
                             <div class="cabinet-profile__block-buttons">
-                                <a class="btn btn-light btn-filter_edit le le-start" data-le="1" href="javascript:void(0)">Изменить данные</a>
-                                <a class="btn btn-light btn-filter_edit btn-filter_edit-small le le-end disabled" data-le="1" href="javascript:void(0)">Сохранить</a>
-                                <a class="btn btn-light btn-filter_edit btn-filter_edit-small le le-end le-cancel disabled" data-le="1" href="javascript:void(0)">Отменить</a>
+                                <a class="btn btn-light btn-filter_edit le le-start" data-le="profile" href="javascript:void(0)">Изменить данные</a>
+                                <a class="btn btn-light btn-filter_edit btn-filter_edit-small le le-end disabled" data-le="profile" data-action="update-user-profile" href="javascript:void(0)">Сохранить</a>
+                                <a class="btn btn-light btn-filter_edit btn-filter_edit-small le le-end le-cancel disabled" data-le="profile" href="javascript:void(0)">Отменить</a>
                             </div>
                         </div>
                     <? } ?>
@@ -81,22 +81,23 @@
                     <div class="cabinet-profile__block">
                         <div class="cabinet-profile__block-field">
                             <div class="cabinet-profile__block-field-key">Email</div>
-                            <input type="text" class="le disabled input-error" disabled data-le="3" value="<?= $arResult['USER']['EMAIL'] ?>">
-                            <span class="form-tip form-tip-error">Это не шпага, сударь, это арматура</span>
+                            <input type="text" name="email" class="le disabled" disabled data-le="email" value="<?= $arResult['USER']['EMAIL'] ?>">
+                            <? /* input-error */ ?>
+                            <? /* <span class="form-tip form-tip-error">Это не шпага, сударь, это арматура</span> */ ?>
                         </div>
-                            <div class="cabinet-profile__block-field">
-                                <div class="cabinet-profile__block-field-key">Пароль</div>
-                                <input type="password" disabled value="************" class="le disabled" data-le="4">
-                            </div>
-                                <div class="cabinet-profile__block-field le disabled" data-le="4">
-                                    <div class="cabinet-profile__block-field-key">Подтвердите пароль</div>
-                                    <input type="password" value="" class="le disabled" data-le="4">
-                                </div>
-
+                        <div class="cabinet-profile__block-field">
+                            <div class="cabinet-profile__block-field-key">Пароль</div>
+                            <input type="password" disabled value="************" class="le disabled" data-le="password" />
+                        </div>
+                        <div class="cabinet-profile__block-field le disabled" data-le="password">
+                            <div class="cabinet-profile__block-field-key">Подтвердите пароль</div>
+                            <input type="password" value="" class="le disabled" data-le="password" />
+                        </div>
+                        
                         <div class="cabinet-profile__block-buttons">
-                            <a class="btn btn-light btn-filter_edit le le-start" href="javascript:void(0)" data-le="3">Изменить логин</a>
-                            <a class="btn btn-light btn-filter_edit le le-start" href="javascript:void(0)" data-le="4">Изменить пароль</a>
-                            <a class="btn btn-light btn-filter_edit btn-filter_edit-small le le-end  disabled" href="javascript:void(0)">Сохранить</a>
+                            <a class="btn btn-light btn-filter_edit le le-start" href="javascript:void(0)" data-le="email">Изменить логин</a>
+                            <a class="btn btn-light btn-filter_edit le le-start" href="javascript:void(0)" data-le="password">Изменить пароль</a>
+                            <a class="btn btn-light btn-filter_edit btn-filter_edit-small le le-end disabled" data-action="update-user-email" href="javascript:void(0)">Сохранить</a>
                             <a class="btn btn-light btn-filter_edit btn-filter_edit-small le le-end le-cancel disabled" href="javascript:void(0)">Отменить</a>
                         </div>
                     </div>

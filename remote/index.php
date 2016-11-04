@@ -294,6 +294,74 @@ switch ($action) {
         break;
     
     
+    // Изменение данных профиля пользователя.
+    case ('update-user-profile');
+        $name  = (string) $request->get('name');
+        $phone = (string) $request->get('phone');
+        
+        $user = new Glyf\Oscar\User();
+        $data = array(
+            Glyf\Oscar\User::FIELD_NAME => $name,
+            Glyf\Oscar\User::FIELD_PERSONAL_MOBILE => $phone,
+        );
+        
+        if (!$user->update($data)) {
+            jsonresponse(false, 'Ошибка сохранения данных');
+        }
+        jsonresponse(true);
+        break;
+    
+    
+    // Изменение данных профиля компании.
+    case ('update-user-company');
+        $company = (string) $request->get('company');
+        $phone   = (string) $request->get('workphone');
+        
+        $user = new Glyf\Oscar\User();
+        $data = array(
+            Glyf\Oscar\User::FIELD_WORK_COMPANY => $company,
+            Glyf\Oscar\User::FIELD_WORK_PHONE => $phone,
+        );
+        
+        if (!$user->update($data)) {
+            jsonresponse(false, 'Ошибка сохранения данных');
+        }
+        jsonresponse(true);
+        break;
+    
+    
+    // Изменение e-mail.
+    case ('update-user-email');
+        $email = (string) $request->get('email');
+        
+        if (empty($email)) {
+            jsonresponse(false, 'Не введен e-mail');
+        }
+        
+        $exist = Glyf\Oscar\User::findByLogin($email);
+        if (!is_null($exist)) {
+            jsonresponse(false, 'Такой e-mail уже существует');
+        }
+        
+        $user = new Glyf\Oscar\User();
+        $data = array(
+            Glyf\Oscar\User::FIELD_LOGIN => $email,
+            Glyf\Oscar\User::FIELD_EMAIL => $email,
+        );
+        
+        if (!$user->update($data)) {
+            jsonresponse(false, 'Ошибка сохранения e-mail');
+        }
+        
+        jsonresponse(true);
+        break;
+    
+    
+    // Изменение пароля.
+    case ('update-user-password');
+        break;
+    
+    
 	default:
 		jsonresponse(false, '', array(), 'Internal error');
 		break;

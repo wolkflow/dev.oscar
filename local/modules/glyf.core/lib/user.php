@@ -144,18 +144,15 @@ class User
     }
     
     
-    
+    /**
+     * Поиск пользователя по логину.
+     */
     public static function findByLogin($login)
     {
         $login = trim((string) $login);
 
         if (strlen($login) > 0) {
-            $result = \CUser::GetList(
-                ($b = 'ID'),
-                ($o = 'ASC'),
-                array('=' . self::FIELD_LOGIN => $login),
-                array('NAV_PARAMS' => array('nTopCount' => 1))
-            );
+            $result = \CUser::GetByLogin($login);
             if ($data = $result->Fetch()) {
                 return new static($data['ID'], $data);
             }

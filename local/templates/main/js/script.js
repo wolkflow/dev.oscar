@@ -114,35 +114,60 @@ $(document).ready(function () {
 		}
 		return false;
 	});
-
-	// LiveEdit
+    
+    
+	// Live Edit
 
 	$('a.le-start').on('click', function(){
 		var le = $(this).data('le');
-		$('[data-le="'+le+'"]').removeClass('disabled');
-		$('input[data-le="'+le+'"]').each(function () {
-			var leVal = $(this).val();
-			$(this).prop('disabled', false).attr('placeholder', leVal).removeClass('disabled');
+		$('[data-le="' + le + '"]').removeClass('disabled');
+		$('input[data-le="' + le + '"]').each(function () {
+			var value = $(this).val();
+            
+			$(this).prop('disabled', false).attr('placeholder', value).removeClass('disabled');
 		});
 		$(this).closest('div').find('.le-start').addClass('disabled');
 		$(this).closest('div').find('.le-end').removeClass('disabled').attr('data-le', le);
 
 		return false;
 	});
-	$('a.le-end').on('click', function(){
-		var le = $(this).attr('data-le');
+    
+	$('a.le-end').on('click', function() {
+        var $that = $(this);
+		var le = $that.attr('data-le');
 
-		$('[data-le="'+le+'"]').addClass('disabled');
-		if($(this).hasClass('le-cancel')) {
-			$('input[data-le="'+le+'"]').each(function () {
-				var leVal = $(this).attr('placeholder');
-				$(this).prop('disabled', true).addClass('disabled').val(leVal);
+		$('[data-le="' + le + '"]').addClass('disabled');
+        
+		if ($that.hasClass('le-cancel')) {
+			$('input[data-le="' + le + '"]').each(function () {
+				var value = $(this).attr('placeholder');
+                
+				$(this).prop('disabled', true).addClass('disabled').val(value);
 			});
 		} else {
-			$('input[data-le="'+le+'"]').each(function () {
+            var data = {'action': $that.data('action')};
+            
+			$('input[data-le="' + le + '"]').each(function () {
+                data[$(this).prop('name')] = $(this).val();
 				$(this).prop('disabled', true).addClass('disabled');
 			});
+            
+            $.ajax({
+                url: '/remote/',
+                type: 'post',
+                data: data,
+                dataType: 'json',
+                success: function(response) {
+                    if (!response.status) {
+                        $('input[data-le="' + le + '"]').each(function () {
+                            $(this).prop('disabled', true).addClass('disabled').val($(this).attr('placeholder'));
+                        });
+                        // show error popup
+                    }
+                }
+            });
 		}
+        
 		$(this).closest('div').find('.le-start').removeClass('disabled');
 		$(this).closest('div').find('.le-end').addClass('disabled');
 
