@@ -182,7 +182,7 @@ class Picture extends HLBlockModel
 	{
         $this->load();
         
-		return $this->get(self::FIELD_USER_ID);
+		return intval($this->get(self::FIELD_USER_ID));
 	}
     
 	
@@ -193,7 +193,7 @@ class Picture extends HLBlockModel
 	{
         $this->load();
         
-		return $this->get(self::FIELD_AUTHOR);
+		return intval($this->get(self::FIELD_AUTHOR));
 	}
     
     
@@ -213,7 +213,7 @@ class Picture extends HLBlockModel
 	{
         $this->load();
         
-		return $this->get(self::FIELD_HOLDER);
+		return intval($this->get(self::FIELD_HOLDER));
 	}
 	
     

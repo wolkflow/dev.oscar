@@ -7,6 +7,9 @@ use Glyf\Oscar\User;
 
 class UserPictureComponent extends \CBitrixComponent
 {
+    const E_USER_PICTURE_NOT_FOUND = 10001;
+    
+    
 	/** 
 	 * Установка настроек.
 	 */
@@ -42,6 +45,12 @@ class UserPictureComponent extends \CBitrixComponent
         
         // Картина.
         $picture = new Picture($this->arParams['PID']);
+        
+        if ($picture->getUserID() != $user->getID()) {
+            $this->arResult['ERROR'] = 'Изображение не найдено';
+            $this->IncludeComponentTemplate('error');
+            return;
+        }
         
         // Коллекция.
         $collection = $picture->getCollection();
