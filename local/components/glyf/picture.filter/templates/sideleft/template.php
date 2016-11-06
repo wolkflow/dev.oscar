@@ -251,24 +251,14 @@
         </div>
     </form>
     
-    <? // Сохраненнный поиск. // ?>
-    <div class="filterSave">
-        <a href="javascript:void(0)" class="btn btn-filter_save" data-collapse-target="searchSave">сохранить поиск</a>
-        <div class="filterSaveInner hide" data-collapse-block="searchSave">
-            
-            <input id="js-search-title-id" type="text" placeholder="Введите название" />
-            <a href="javascript:void(0)" id="js-search-save-id" class="btn btn-light btn-filter_edit">Сохранить</a>
-            <hr/>
-            
-            <ul>
-                <li><a href="#">Поиск №1</a></li>
-                <li><a href="#">Поиск №2</a></li>
-                <li><a href="#">Поиск №356</a></li>
-                <li><a href="#">Поиск №41331</a></li>
-                <li><a href="#">Поиск №5</a></li>
-            </ul>
-            <a href="javascript:void(0)" class="btn btn-light btn-filter_edit">Редактировать</a>
-            <a href="javascript:void(0)" class="btn btn-light btn-filter_delete">Удалить все</a>
-        </div>
-    </div>
+    <? if (CUser::IsAuthorized()) { ?>
+        <?	// Сохраненнный поиск.
+            $APPLICATION->IncludeComponent(
+                "glyf:user.searches",
+                "profile",
+                array(),
+                $component
+            );
+        ?>
+    <? } ?>
 </div>

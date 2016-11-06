@@ -386,6 +386,35 @@ switch ($action) {
         break;
     
     
+    // Сохранение поиска.
+    case ('save-search');
+        $title  = (string) $request->get('title');
+        $filter = (array) $request->get('filter');
+        
+        if (empty($title)) {
+            jsonresponse(false, 'Не введено название поиска');
+        }
+
+        // Пользователь.
+        $user = new Glyf\Oscar\User();
+        
+        // Добавление просмотра в статистику.
+        $search = new Glyf\Oscar\Search();
+        
+        $data = array(
+            Glyf\Oscar\Search::FIELD_TIME   => date('d.m.Y H:i:s'),
+            Glyf\Oscar\Search::FIELD_USER   => $user->getID(),
+            Glyf\Oscar\Search::FIELD_TITLE  => $title,
+            Glyf\Oscar\Search::FIELD_FIELDS => json_encode($filter),
+        );
+        
+        if (!$search->add($data)) {
+            jsonresponse(false, 'Ошибка сохрнениея поиска');
+        }
+        jsonresponse(true);
+        break;
+    
+    
 	default:
 		jsonresponse(false, '', array(), 'Internal error');
 		break;

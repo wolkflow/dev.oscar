@@ -1,14 +1,10 @@
 <?php
 
 use Bitrix\Main\Localization\Loc;
-use Glyf\Oscar\Statistic\Download;
-use Glyf\Oscar\Statistic\View;
-use Glyf\Oscar\Collection;
-use Glyf\Oscar\Picture;
-use Glyf\Oscar\Partner;
-use Glyf\Oscar\User;
+use Bitrix\Main\Context;
+use Glyf\Oscar\Search;
 
-class StatisticCollectionsComponent extends \CBitrixComponent
+class UserSearchesComponent extends \CBitrixComponent
 {
 	/** 
 	 * Установка настроек.
@@ -28,14 +24,24 @@ class StatisticCollectionsComponent extends \CBitrixComponent
 		if (!\Bitrix\Main\Loader::includeModule('glyf.core')) {
 			return;
 		}
-
+        
 		if (!\Bitrix\Main\Loader::includeModule('glyf.oscar')) {
 			return;
 		}
         
-        // Пользователь.
-        $partner = new Partner();
+        // Список сохраненных поисков.
+        $this->arResult = array('ITEMS' => array());
         
+        // Пользователь.
+        $user = new Glyf\Oscar\User();
+        
+        
+        // Сохраненные поиски.
+        $this->arResult['ITEMS'] = array();
+        $items = Search::getList(array('filter' => array(Search::FIELD_USER => $user->getID())));
+        foreach ($items as $item) {
+            $this->arResult['ITEMS'][$item->getID()] = $item->getTitle();
+        }
         
         
         
