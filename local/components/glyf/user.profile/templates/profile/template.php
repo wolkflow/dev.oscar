@@ -157,7 +157,9 @@
                             </ul>
                             <div class="cabinet-profile__block-buttons">
                                 <a class="btn btn-light btn-filter_edit" href="/personal/subscribe/">Изменить</a>
+                                <? /*
                                 <a class="btn btn-light btn-filter_edit" data-modal="#error">Окно ошибки</a>
+                                */ ?>
                             </div>
                         </div>
                     </div>

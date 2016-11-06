@@ -2502,12 +2502,15 @@ input[type=password].le,
 input[type=text].le {
   padding: 2px 8px 2px 8px;
   border: 1px solid #d9d9d9;
+  border-radius: 2px;
   outline: none !important;
   font: 700 14px/17px 'Circe', Arial, helvetika, sans-serif;
   width: 100%;
   word-wrap: break-word;
   background: transparent;
 
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
   -webkit-transition: all 200ms ease 0ms;
   -moz-transition: all 200ms ease 0ms;
   -ms-transition: all 200ms ease 0ms;

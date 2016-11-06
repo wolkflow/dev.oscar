@@ -22,7 +22,7 @@ $arUrlRewrite = array(
     
     array(
 		"CONDITION" => "#^/personal/card/(.+?)/#",
-		"RULE" => "SECTION=\$1&",
+		"RULE" => "ELEMENT=\$1&",
 		"ID" => "",
 		"PATH" => "/personal/card.php",
 	),

@@ -129,9 +129,9 @@
                 <div class="card-meta">
                     <span class="card-meta__key">Размеры:</span>
                     <span class="card-meta__value">
-                        <?= $arResult['PICTURE'][Picture::FIELD_WIDTH] ?>
+                        <?= number_format(($arResult['PICTURE'][Picture::FIELD_WIDTH] / 10), 1, ',', '') ?>
                         &times;
-                        <?= $arResult['PICTURE'][Picture::FIELD_HEIGHT] ?>
+                        <?= number_format(($arResult['PICTURE'][Picture::FIELD_HEIGHT] / 10), 1, ',', '')  ?>
                         см
                     </span>
                 </div>

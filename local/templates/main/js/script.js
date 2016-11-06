@@ -52,6 +52,7 @@ $(document).ready(function () {
 	$('.ddparent').on('click', function () {
 		$(this).toggleClass('active').next('ul').slideToggle();
 	});
+    
 	$(document).on('click', '.uploadError-close', function() {
 		$('.uploadError').hide();
 	});
@@ -60,10 +61,12 @@ $(document).ready(function () {
 		$(this).parent().hide();
 		return false;
 	});
-	$('.btn-filter_edit').on('click', function(){
-		$('.requestTitle').toggleClass('edit');
-		return false;
-	});
+    
+	//$('.btn-filter_edit').on('click', function(){
+		//$('.requestTitle').toggleClass('edit');
+		//return false;
+	//});
+    
 	$(document).on('click', '.requestTitle', function(){
 		if($(this).hasClass('edit')) {
 			var dtext = $(this).text();
