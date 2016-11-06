@@ -95,7 +95,7 @@ class PictureUpload extends \CBitrixComponent
         
         // Конвертация данных.
         if (!empty($this->arParams['PID'])) {
-            $this->arResult['DATA'] = $this->convert($picture->getData());
+            $this->arResult['DATA'] = $this->convert($picture);
         }
         
         
@@ -424,9 +424,50 @@ class PictureUpload extends \CBitrixComponent
     /**
      * Конвертация данных элемента в массив.
      */
-    public function convert($data)
+    public function convert($picture)
     {
+        
+        $items = $picture->getTechniques();
+        $techniques = array();
+        foreach ($items as $item) {
+            $techniques[$item->getID()] = $item->getName();
+        }
+        
+        $items = $picture->getKeywords();
+        $keywords = array();
+        foreach ($items as $item) {
+            $keywords[$item->getID()] = $item->getName();
+        }
+        
+        $country = $picture->getPlaceCountry();
+        $city    = $picture->getPlaceCity();
+        
         $result = array(
+            'FOLDER_SET'    => 'EXIST',
+            'FOLDER'        => $picture->getFolderID(),
+            'TITLE'         => $picture->getTitle(),
+            'AUTHOR_ID'     => $picture->getAuthorID(),
+            'AUTHOR_TITLE'  => $picture->getAuthor()->getName(),
+            'TECHNIQUE'     => $techniques,
+            'DESCRIPTION'   => $picture->getDescription(),
+            'COLLECTION'    => $picture->getCollectionID(),
+            'GENRE'         => $picture->getGenreID(),
+            'COUNTRY_ID'    => $picture->getPlaceCountryID(),
+            'CITY_ID'       => $picture->getPlaceCityID(),
+            'COUNTRY'       => ($picture->getPlaceCountryID() > 0) ? ($country->getName()) : (''),
+            'CITY'          => ($picture->getPlaceCityID() > 0) ? ($city->getName()) : (''),
+            'WIDTH'         => $picture->getWidth(),
+            'HEIGHT'        => $picture->getHeight(),
+            'COLOR'         => $picture->getColorID(),
+            'LEGAL'         => $picture->getLegalID(),
+            'KEYWORDS'      => $keywords,
+            'PROVENANCE'    => $picture->getProvenance(),
+            'MODEL'         => $picture->getModel(),
+            'RESTORATION'   => $picture->getRestoration(),
+            'SKETCHES'      => $picture->getSketches(),
+            'TECHNICAL'     => $picture->getTechnical(),
+            'CUSTOMER'      => $picture->getCustomer(),
+            'OTHER'         => $picture->getOther(),
         );
         
         return $result;

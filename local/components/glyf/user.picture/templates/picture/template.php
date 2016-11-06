@@ -166,7 +166,9 @@
                 </div>
             </div>
             <div class="card-right__edit">
-                <a class="btn btn-light btn-filter_edit btn-inline" href="#">Редактировать</a>
+                <a class="btn btn-light btn-filter_edit btn-inline" href="/personal/reload/<?= $arResult['PICTURE']['ID'] ?>/">
+                    Редактировать
+                </a>
             </div>
         </div>
     </div>

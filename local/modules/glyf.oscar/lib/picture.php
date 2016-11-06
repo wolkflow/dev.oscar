@@ -185,6 +185,29 @@ class Picture extends HLBlockModel
 		return intval($this->get(self::FIELD_USER_ID));
 	}
     
+    
+    /**
+	 * Получение ID папки.
+	 */
+    public function getFolderID()
+    {
+        $this->load();
+        
+        return $this->get(self::FIELD_FOLDER);
+    }
+    
+    
+    /**
+     * Получение описание.
+     */
+    public function getDescription()
+    {
+        $this->load();
+        
+		return $this->get(self::FIELD_LANG_DESC_SFX . CURRENT_LANG_UP);
+    }
+    
+    
 	
 	/**
 	 * Получение ID автора.
@@ -341,14 +364,62 @@ class Picture extends HLBlockModel
         return (new \Glyf\Oscar\Dictionaries\Placecity($this->getPlaceCityID()));
     }
     
-	/**
-	 * Получение ключевых слов.
-	 
-	public function getKeywordsSplit()
-	{
-		return array_map('trim', explode(',', $this->getKeywords()));
-	}
-	*/
+    
+    /**
+     * Получение ширины объекта.
+     */
+    public function getWidth()
+    {
+        $this->load();
+        
+        return $this->get(self::FIELD_WIDTH);
+    }
+    
+    
+    /**
+     * Получение высоты объекта.
+     */
+    public function getHeight()
+    {
+        $this->load();
+        
+        return $this->get(self::FIELD_HEIGHT);
+    }
+    
+    
+    /**
+     * Получение ID цвета.
+     */
+    public function getColorID()
+    {
+        $this->load();
+        
+        return $this->get(self::FIELD_COLOR);
+    }
+    
+    
+    
+    /**
+     * Получение ID правового режима.
+     */
+    public function getLegalID()
+    {
+        $this->load();
+        
+        return $this->get(self::FIELD_LEGAL);
+    }
+    
+    
+    /**
+     * Получение ID жанра.
+     */
+    public function getGenreID()
+    {
+        $this->load();
+        
+		return $this->get(self::FIELD_GENRE);
+    }
+
 	
 	/**
 	 * Получение раздела.
@@ -359,7 +430,7 @@ class Picture extends HLBlockModel
         
 		return $this->get(self::FIELD_COLLECTION);
 	}
-    
+   
     
     /**
 	 * Получение раздела.
@@ -368,6 +439,56 @@ class Picture extends HLBlockModel
 	{
 		return (new Collection($this->getCollectionID()));
 	}
+    
+    
+    public function getProvenance()
+    {
+        $this->load();
+        
+        return $this->get(self::FIELD_PROVENANCE_SFX . CURRENT_LANG_UP);
+    }
+    
+    public function getModel()
+    {
+        $this->load();
+        
+        return $this->get(self::FIELD_MODEL_SFX . CURRENT_LANG_UP);
+    }
+    
+    public function getRestoration()
+    {
+        $this->load();
+        
+        return $this->get(self::FIELD_RESTORATION_SFX . CURRENT_LANG_UP);
+    }
+    
+    public function getSketches()
+    {
+        $this->load();
+        
+        return $this->get(self::FIELD_SKETCHES_SFX . CURRENT_LANG_UP);
+    }
+    
+    public function getTechnical()
+    {
+        $this->load();
+        
+        return $this->get(self::FIELD_TECHNICAL_SFX . CURRENT_LANG_UP);
+    }
+    
+    public function getCustomer()
+    {
+        $this->load();
+        
+        return $this->get(self::FIELD_CUSTOMER_SFX . CURRENT_LANG_UP);
+    }
+    
+    public function getOther()
+    {
+        $this->load();
+        
+        return $this->get(self::FIELD_OTHER_SFX . CURRENT_LANG_UP);
+    }
     
     
     /**

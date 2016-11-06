@@ -11,10 +11,10 @@ class Sale extends HLBlockModel
     const FIELD_USER_ID     = 'UF_USER_ID';
     const FIELD_UPLOADER_ID = 'UF_UPLOADER_ID';
     const FIELD_ELEMENT_ID  = 'UF_ELEMENT_ID';
-    const FIELD_LICENSE_ID  = 'UF_LICENSE_ID';
+    const FIELD_LICENSE     = 'UF_LICENSE';
     const FIELD_PRICE       = 'UF_PRICE';
     
-    static protected $hlblockID = HLBLOCK_STATISTIC_DOWNLOAD_ID;
+    static protected $hlblockID = HLBLOCK_STATISTIC_SALES_ID;
     
     
     
@@ -42,9 +42,9 @@ class Sale extends HLBlockModel
     }
     
     
-    public function getLicenseID()
+    public function getLicense()
     {
-        return $this->get(self::FIELD_LICENSE_ID);
+        return $this->get(self::FIELD_LICENSE);
     }
     
     

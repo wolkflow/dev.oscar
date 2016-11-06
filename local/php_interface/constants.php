@@ -77,6 +77,7 @@ define('HLBLOCK_DICT_KEYWORDS_ID',      9);
 define('HLBLOCK_DICT_TECHNIQUES_ID',    10);
 define('HLBLOCK_LIGHTBOXES_ID',         13);
 define('HLBLOCK_LIGHTBOXE_PICTURES_ID', 14);
+define('HLBLOCK_STATISTIC_SALES_ID',    15);
 
 // Месторасположение.
 define('HLBLOCK_DICT_PLACE_COUNTRIES_ID', 11);
