@@ -8,7 +8,7 @@
 
 <div class="col-sm-3 col-lg-2 sidebarLeft">
     
-    <form action="/search/">
+    <form id="js-filter-sideform-id" action="/search/">
         <div class="sidebarLeftTitle formParamsTitle" data-collapse-target="formParams">
             <?= getMessage('GL_SEARCH_PARAMS') ?>
         </div>
@@ -253,12 +253,13 @@
     
     <? // Сохраненнный поиск. // ?>
     <div class="filterSave">
-        <a href="#" class="btn btn-filter_save" data-collapse-target="searchSave">сохранить поиск</a>
+        <a href="javascript:void(0)" class="btn btn-filter_save" data-collapse-target="searchSave">сохранить поиск</a>
         <div class="filterSaveInner hide" data-collapse-block="searchSave">
-            <form action="">
-                <input type="text" placeholder="Введите название">
-                <input type="submit" hidden>
-            </form>
+            
+            <input id="js-search-title-id" type="text" placeholder="Введите название" />
+            <a href="javascript:void(0)" id="js-search-save-id" class="btn btn-light btn-filter_edit">Сохранить</a>
+            <hr/>
+            
             <ul>
                 <li><a href="#">Поиск №1</a></li>
                 <li><a href="#">Поиск №2</a></li>
@@ -266,8 +267,8 @@
                 <li><a href="#">Поиск №41331</a></li>
                 <li><a href="#">Поиск №5</a></li>
             </ul>
-            <a href="#" class="btn btn-light btn-filter_edit">Редактировать</a>
-            <a href="#" class="btn btn-light btn-filter_delete">Удалить все</a>
+            <a href="javascript:void(0)" class="btn btn-light btn-filter_edit">Редактировать</a>
+            <a href="javascript:void(0)" class="btn btn-light btn-filter_delete">Удалить все</a>
         </div>
     </div>
 </div>

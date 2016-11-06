@@ -359,6 +359,30 @@ switch ($action) {
     
     // Изменение пароля.
     case ('update-user-password');
+        $password = (string) $request->get('password');
+        $confirm  = (string) $request->get('confirm');
+        
+        if (empty($password)) {
+            jsonresponse(false, 'Не введен пароль');
+        }
+        
+        if (empty($confirm)) {
+            jsonresponse(false, 'Не введено подтверждение пароля');
+        }
+        
+        if ($password != $confirm) {
+            jsonresponse(false, 'Пароль и подтверждение не совпадают');
+        }
+        
+        $user = new Glyf\Oscar\User();
+        $data = array(
+            Glyf\Oscar\User::FIELD_PASSWORD => $password
+        );
+        
+        if (!$user->update($data)) {
+            jsonresponse(false, 'Ошибка изменения пароля');
+        }
+        jsonresponse(true);
         break;
     
     

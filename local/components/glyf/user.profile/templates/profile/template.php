@@ -87,11 +87,11 @@
                         </div>
                         <div class="cabinet-profile__block-field">
                             <div class="cabinet-profile__block-field-key">Пароль</div>
-                            <input type="password" disabled value="************" class="le disabled" data-le="password" />
+                            <input type="password" name="password" disabled value="************" class="le disabled" data-le="password" />
                         </div>
                         <div class="cabinet-profile__block-field le disabled" data-le="password">
                             <div class="cabinet-profile__block-field-key">Подтвердите пароль</div>
-                            <input type="password" value="" class="le disabled" data-le="password" />
+                            <input type="password" name="oonfirm" value="" class="le disabled" data-le="password" />
                         </div>
                         
                         <div class="cabinet-profile__block-buttons">
