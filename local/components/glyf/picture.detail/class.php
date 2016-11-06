@@ -89,6 +89,49 @@ class PicturesDetail extends \CBitrixComponent
         }
         
         
+        // Период.
+        $this->arResult['PICTURE']['PERIOD'] = '';
+        $convertor = new Glyf\Core\Helpers\NumConvertor();
+        if ($this->arResult['PICTURE'][Picture::FIELD_PERIOD_FROM] == $this->arResult['PICTURE'][Picture::FIELD_PERIOD_TO]) {
+            $period = $this->arResult['PICTURE'][Picture::FIELD_PERIOD_FROM];
+            $era    = ($period < 0)  ? ('до н.э.') : ('н.э.');
+            $period = abs($period);
+            
+            if (!$this->arResult['PICTURE'][Picture::FIELD_IS_YEAR_FROM]) {
+                $period = $convertor->toRoman($period / TIME_YEARS_IN_CENTURY);
+                $time = ' в. ';
+            } else {
+                $time = ' в. ';
+            }
+            $this->arResult['PICTURE']['PERIOD'] = ($period . $time . $era);
+        } else {
+            $periodF = $this->arResult['PICTURE'][Picture::FIELD_PERIOD_FROM];
+            $periodT = $this->arResult['PICTURE'][Picture::FIELD_PERIOD_TO];
+            $eraF    = ($periodF < 0)  ? ('до н.э.') : ('н.э.');
+            $eraT    = ($periodT < 0)  ? ('до н.э.') : ('н.э.');
+            $periodF = abs($periodF);
+            $periodT = abs($periodT);
+            
+            if (!$this->arResult['PICTURE'][Picture::FIELD_IS_YEAR_FROM]) {
+                $periodF = $convertor->toRoman($periodF / TIME_YEARS_IN_CENTURY);
+                $timeF = ' в. ';
+            } else {
+                $timeF = ' г. ';
+            }
+            
+            if (!$this->arResult['PICTURE'][Picture::FIELD_IS_YEAR_TO]) {
+                $periodT = $convertor->toRoman($periodT / TIME_YEARS_IN_CENTURY);
+                $timeT = ' в. ';
+            } else {
+                $timeT = ' г. ';
+            }
+            $periodF = ($periodF . $timeF . $eraF);
+            $periodT = ($periodT . $timeT . $eraT);
+            
+            $this->arResult['PICTURE']['PERIOD'] = $periodF . ' &ndash; ' . $periodT;
+        }
+        
+        
         // Изображения.
         $this->arResult['PICTURE']['IMAGE_PREVIEW_SRC'] = $picture->getPreviewImageSrc();
         $this->arResult['PICTURE']['IMAGE_PREVIEW_WATER_MARK_SRC'] = $picture->getPreviewImageWMSrc();

@@ -118,7 +118,9 @@
                 </div>
                 <div class="card-meta">
                     <span class="card-meta__key">Время создания:</span>
-                    <span class="card-meta__value">1881 - 1898</span>
+                    <span class="card-meta__value">
+                        <?= $arResult['PICTURE']['PERIOD'] ?>
+                    </span>
                 </div>
                 <div class="card-meta">
                     <span class="card-meta__key">Техника:</span>

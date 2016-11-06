@@ -24,11 +24,11 @@
                 
                 <div class="card-image__stats">
                     <div class="card-image__stats-block card-image__stats-block--views">
-                        <span>580</span>
+                        <span><?= $arResult['STATISTIC']['VIEWS'] ?></span>
                         <span>просмотров</span>
                     </div>
                     <div class="card-image__stats-block card-image__stats-block--sells">
-                        <span>11</span>
+                        <span><?= $arResult['STATISTIC']['SALES'] ?></span>
                         <span>продаж</span>
                     </div>
                 </div>
@@ -52,7 +52,9 @@
             </div>
             <div class="card-meta">
                 <span class="card-meta__key">Время создания:</span>
-                <span class="card-meta__value">1881 - 1898</span>
+                <span class="card-meta__value">
+                    <?= $arResult['PICTURE']['PERIOD'] ?>
+                </span>
             </div>
             <div class="card-meta">
                 <span class="card-meta__key">Техника:</span>

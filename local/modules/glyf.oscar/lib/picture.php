@@ -723,6 +723,36 @@ class Picture extends HLBlockModel
     }
     
     
+    
+    /**
+     * Получение количества прсомотров.
+     */
+    public function getStatisticViewsCount()
+    {
+        $result = \Glyf\Oscar\Statistic\View::getList(array(
+            'select' => array('ID'), 
+            'filter' => array(\Glyf\Oscar\Statistic\View::FIELD_ELEMENT_ID => $this->getID())
+        ), false);
+        
+        return $result->getSelectedRowsCount();
+    }
+    
+    
+    
+    /**
+     * Получение количества продаж.
+     */
+    public function getStatisticSalesCount()
+    {
+        $result = \Glyf\Oscar\Statistic\Sale::getList(array(
+            'select' => array('ID'), 
+            'filter' => array(\Glyf\Oscar\Statistic\Sale::FIELD_ELEMENT_ID => $this->getID())
+        ), false);
+        
+        return $result->getSelectedRowsCount();
+    }
+    
+    
     /**
      * Наложение водного знака на изображение.
      */
@@ -730,4 +760,8 @@ class Picture extends HLBlockModel
     {
         
     }
+    
+    
+    
+    
 }

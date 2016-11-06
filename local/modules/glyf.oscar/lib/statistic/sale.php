@@ -4,7 +4,7 @@ namespace Glyf\Oscar\Statistic;
 
 use Glyf\Core\System\HLBlockModel;
 
-class Payments extends HLBlockModel
+class Sale extends HLBlockModel
 {
     const FIELD_ID          = 'ID';
     const FIELD_TIME        = 'UF_TIME';

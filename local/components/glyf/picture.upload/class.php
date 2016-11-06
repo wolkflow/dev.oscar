@@ -256,9 +256,11 @@ class PictureUpload extends \CBitrixComponent
                 $eraKF = ($data['PERIOD_FROM_ERA'] == Picture::PROP_TIME_AD) ? (1) : (-1);
                 $eraKT = ($data['PERIOD_TO_ERA']   == Picture::PROP_TIME_AD) ? (1) : (-1);
                 
-                $fields[Picture::FIELD_PERIOD_FROM] = (int) $data['PERIOD_FROM'] * $eraKF;
-                $fields[Picture::FIELD_PERIOD_TO]   = (int) $data['PERIOD_TO'] * $eraKT;
+                $fields[Picture::FIELD_PERIOD_FROM]  = (int) $data['PERIOD_FROM'] * $eraKF;
+                $fields[Picture::FIELD_PERIOD_TO]    = (int) $data['PERIOD_TO'] * $eraKT;
             }
+            $fields[Picture::FIELD_IS_YEAR_FROM] = true;
+            $fields[Picture::FIELD_IS_YEAR_TO]   = true;
         } else {
             // Конвертор римских числел.
             $convertor = new NumConvertor();
@@ -304,6 +306,8 @@ class PictureUpload extends \CBitrixComponent
                 $fields[Picture::FIELD_PERIOD_FROM] = $periodF * $eraKF;
                 $fields[Picture::FIELD_PERIOD_TO]   = $periodT * $eraKT;
             }
+            $fields[Picture::FIELD_IS_YEAR_FROM] = false;
+            $fields[Picture::FIELD_IS_YEAR_TO]   = false;
         }
         
         
