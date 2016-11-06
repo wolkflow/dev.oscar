@@ -29,6 +29,9 @@ class PictureUpload extends \CBitrixComponent
 	 */
     public function onPrepareComponentParams($arParams)
     {
+        // Существующее изображение.
+        $arParams['PID'] = (int) $arParams['PID'];
+        
         return $arParams;
 	}
 	
@@ -56,20 +59,26 @@ class PictureUpload extends \CBitrixComponent
         $this->prepare();
         
         
+        // Изображение.
+        $picture = null;
+        if (!empty($this->arParams['PID'])) {
+            $picture = new Picture($this->arParams['PID']);
+            
+            if (!$picture->isBelongsToUser()) {
+                echo 'Изображение не найдено';
+                return;
+            }
+            
+            // Изображения.
+            $this->arResult['PICTURE']['SRC'] = $picture->getPreviewImageSrc();
+        }
+        
         
         // Запрос.
         $request = Context::getCurrent()->getRequest();
         
         // Обработка данных.
         if ($request->isPost()) {
-            $pid = $request->get('ID');
-            if ($pid > 0) {
-                $picture = new Picture($pid);
-                
-                if (!$picture->exists()) {
-                    return;
-                }
-            }
             
             // Данные.
             $this->arResult['DATA'] = $request->getPostList();
@@ -81,6 +90,12 @@ class PictureUpload extends \CBitrixComponent
                 $this->arResult['ERRORS'] []= $e->getMessage();
             }
             $this->arResult['SUCCESS'] = $success;
+        }
+        
+        
+        // Конвертация данных.
+        if (!empty($this->arParams['PID'])) {
+            $this->arResult['DATA'] = $this->convert($picture->getData());
         }
         
         
@@ -402,6 +417,19 @@ class PictureUpload extends \CBitrixComponent
         }
         
         return $success;
+    }
+    
+    
+    
+    /**
+     * Конвертация данных элемента в массив.
+     */
+    public function convert($data)
+    {
+        $result = array(
+        );
+        
+        return $result;
     }
 }
 

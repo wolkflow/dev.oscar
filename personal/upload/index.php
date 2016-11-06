@@ -14,7 +14,7 @@
 	<?	// Загрузка изображения.					
 		$APPLICATION->IncludeComponent(
 			"glyf:picture.upload",
-			"upload",
+			"picture",
 			array()
 		);
 	?>

@@ -754,6 +754,20 @@ class Picture extends HLBlockModel
     
     
     /**
+     * Проверка принадлежности пользователю.
+     */
+    public function isBelongsToUser($uid = null)
+    {
+        if (empty($uid)) {
+            $uid = \CUser::getID();
+        }
+        $uid = (int) $uid;
+        
+        return ($this->getUserID() == $uid);
+    }
+    
+    
+    /**
      * Наложение водного знака на изображение.
      */
     public static function imposeWaterMark()

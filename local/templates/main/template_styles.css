@@ -5746,3 +5746,12 @@ input.input-error:not(.disabled) {
   border-left: 5px solid transparent;
   border-right: 5px solid transparent;
 }
+
+.reload-image {
+    text-align: center;
+}
+
+.reload-image img {
+    max-height: 260px;
+    margin-bottom: 20px;
+}

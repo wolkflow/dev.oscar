@@ -13,6 +13,13 @@ $arUrlRewrite = array(
 		"PATH" => "/blog/index.php",
 	),
     
+    
+    array(
+		"CONDITION" => "#^/personal/reload/([\d]+)/#",
+		"RULE" => "PID=\$1&",
+		"ID" => "",
+		"PATH" => "/personal/reload/index.php",
+	),
     array(
 		"CONDITION" => "#^/download/(.+?)/#",
 		"RULE" => "TOKEN=\$1&",

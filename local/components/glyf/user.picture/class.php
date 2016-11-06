@@ -46,7 +46,8 @@ class UserPictureComponent extends \CBitrixComponent
         // Картина.
         $picture = new Picture($this->arParams['PID']);
         
-        if ($picture->getUserID() != $user->getID()) {
+        // Проверка принаддлежност элемента.
+        if (!$picture->isBelongsToUser()) {
             $this->arResult['ERROR'] = 'Изображение не найдено';
             $this->IncludeComponentTemplate('error');
             return;
