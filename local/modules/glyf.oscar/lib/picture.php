@@ -76,14 +76,6 @@ class Picture extends HLBlockModel
     // Раздел коллекции.
     const FIELD_COLLECTION      = 'UF_COLLECTION';
 	
-    // Дата создания.
-	const FIELD_PERIOD_FROM     = 'UF_PERIOD_FROM';
-    const FIELD_PERIOD_TO       = 'UF_PERIOD_TO';
-    const FIELD_IS_YEAR_FROM    = 'UF_IS_YEAR_FROM';
-    const FIELD_IS_YEAR_TO      = 'UF_IS_YEAR_TO';
-    //const FIELD_ERA_FROM        = 'UF_ERA_FROM';
-    //const FIELD_ERA_TO          = 'UF_ERA_TO';
-	
     // Местоположение.
     const FIELD_PLACE_COUNTRY_ID = 'UF_PLACE_COUNTRY_ID';
     const FIELD_PLACE_CITY_ID    = 'UF_PLACE_CITY_ID';
@@ -115,7 +107,14 @@ class Picture extends HLBlockModel
     const FIELD_MODERATE_TEXT   = 'UF_MODERATE_TEXT';
 	const FIELD_MODERATE_TIME   = 'UF_MODERATE_TIME';
 	
-    
+    // Дата создания.
+	const FIELD_PERIOD_FROM     = 'UF_PERIOD_FROM';
+    const FIELD_PERIOD_TO       = 'UF_PERIOD_TO';
+    const FIELD_IS_YEAR_FROM    = 'UF_IS_YEAR_FROM';
+    const FIELD_IS_YEAR_TO      = 'UF_IS_YEAR_TO';
+    //const FIELD_ERA_FROM        = 'UF_ERA_FROM';
+    //const FIELD_ERA_TO          = 'UF_ERA_TO';
+	
     
     const PROP_LEGAL_FULL_ID = 30;
     const PROP_LEGAL_NOCOMMERCIAL_ID = 31;

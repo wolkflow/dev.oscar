@@ -58,7 +58,6 @@ class PictureSearchComponent extends \CBitrixComponent
         // Задание параметров навигации.
         // $filter->setNav($this->arParams['NAV']);
         
-        
         // Фильтрация.
         $filter->execute();
         

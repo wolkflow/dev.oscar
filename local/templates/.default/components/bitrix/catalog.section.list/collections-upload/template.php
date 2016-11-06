@@ -6,7 +6,7 @@
 
 <? use Glyf\Oscar\Collection; ?>
 
-<? $sid = $arParams['DATA']['SECTION'] ?>
+<? $sid = $arParams['DATA']['COLLECTION'] ?>
 
 <? if (!empty($arResult['ROOT']['CHILDREN'])) { ?>
     <ul class="ddup">

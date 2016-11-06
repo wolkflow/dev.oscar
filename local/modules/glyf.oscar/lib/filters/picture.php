@@ -169,7 +169,12 @@ class Picture extends \Glyf\Core\Filters\HLBlockElement
         while ($item = $result->fetch()) {
             $ids []= $item['ID'];
         }
-        $this->params['filter'][PictureElement::FIELD_KEYWORDS] = array_filter(array_map('intval', (array) $ids));
+        
+        if (empty($ids)) {
+            $this->reset();
+        } else {
+            $this->params['filter'][PictureElement::FIELD_KEYWORDS] = array_filter(array_map('intval', (array) $ids));
+        }
     }
     
     

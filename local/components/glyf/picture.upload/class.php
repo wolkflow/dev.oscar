@@ -73,6 +73,13 @@ class PictureUpload extends \CBitrixComponent
             $this->arResult['PICTURE']['SRC'] = $picture->getPreviewImageSrc();
         }
         
+        // Конвертация данных.
+        if (!empty($this->arParams['PID'])) {
+            $this->arResult['DATA'] = $this->convert($picture);
+        }
+        
+        
+        
         
         // Запрос.
         $request = Context::getCurrent()->getRequest();
@@ -90,13 +97,13 @@ class PictureUpload extends \CBitrixComponent
                 $this->arResult['ERRORS'] []= $e->getMessage();
             }
             $this->arResult['SUCCESS'] = $success;
+            
+            if ($success) {
+                $picture->load(true);
+                $this->arResult['DATA'] = $this->convert($picture);
+            }
         }
         
-        
-        // Конвертация данных.
-        if (!empty($this->arParams['PID'])) {
-            $this->arResult['DATA'] = $this->convert($picture);
-        }
         
         
 		// Подключение шаблона компонента.
@@ -179,18 +186,23 @@ class PictureUpload extends \CBitrixComponent
         
         $fields = array();
         
-        // Сохранение изображения.
-        $file = $_FILES['FILE'];
         
-        // Ошибка загрузки файла.
-        if (empty($file) || !is_readable($file['tmp_name'])) {
-            throw new Glyf\Core\System\Exception('Файл не загружен');
-        }
+        // При загрузке нового изображения.
+        if (empty($this->arParams['PID'])) {
+            
+            // Сохранение изображения.
+            $file = $_FILES['FILE'];
         
-        $sizes = getimagesize($file['tmp_name']);
-        
-        if ($sizes[0] < self::IMAGE_MIN_SIZE || $sizes[1] < self::IMAGE_MIN_SIZE) {
-            throw new Glyf\Core\System\Exception('Изображение меньше необходимого размера');
+            // Ошибка загрузки файла.
+            if (empty($file) || !is_readable($file['tmp_name'])) {
+                throw new Glyf\Core\System\Exception('Файл не загружен');
+            }
+            
+            $sizes = getimagesize($file['tmp_name']);
+            
+            if ($sizes[0] < self::IMAGE_MIN_SIZE || $sizes[1] < self::IMAGE_MIN_SIZE) {
+                throw new Glyf\Core\System\Exception('Изображение меньше необходимого размера');
+            }
         }
         
         if ($data['FOLDER_SET'] == 'CREATE' && empty($data['FOLDER_TITLE'])) {
@@ -228,23 +240,25 @@ class PictureUpload extends \CBitrixComponent
         }
         
         
-        // Загружаемый файл.
-        $filename = $file['tmp_name'] . '.jpg';
-        
-        // переименование с расширением.
-        rename($file['tmp_name'], $filename);
-        
-        $fnames = Picture::makePreviewFiles($filename);
-        $unames = array();
-        foreach ($fnames as $code => $fname) {
-            $unames[$code] = CFile::SaveFile(CFile::MakeFileArray($fname), 'preview');
+        // При загрузке нового изображения.
+        if (empty($this->arParams['PID'])) {
+            // Загружаемый файл.
+            $filename = $file['tmp_name'] . '.jpg';
+            
+            // переименование с расширением.
+            rename($file['tmp_name'], $filename);
+            
+            $fnames = Picture::makePreviewFiles($filename);
+            $unames = array();
+            foreach ($fnames as $code => $fname) {
+                $unames[$code] = CFile::SaveFile(CFile::MakeFileArray($fname), 'preview');
+            }
+            $fields[Picture::FIELD_FILE] = CFile::SaveFile(CFile::MakeFileArray($filename), 'original');
+            $fields[Picture::FIELD_PREVIEW_FILE] = $unames['PREVIEW'];
+            $fields[Picture::FIELD_PREVIEW_FILE_WATERMARK] = $unames['PREVIEW_WM'];
+            $fields[Picture::FIELD_SMALL_FILE] = $unames['SMALL_PREVIEW'];
+            $fields[Picture::FIELD_SMALL_FILE_WATERMARK] = $unames['SMALL_PREVIEW_WM'];
         }
-        $fields[Picture::FIELD_FILE] = CFile::SaveFile(CFile::MakeFileArray($filename), 'original');
-        $fields[Picture::FIELD_PREVIEW_FILE] = $unames['PREVIEW'];
-        $fields[Picture::FIELD_PREVIEW_FILE_WATERMARK] = $unames['PREVIEW_WM'];
-        $fields[Picture::FIELD_SMALL_FILE] = $unames['SMALL_PREVIEW'];
-        $fields[Picture::FIELD_SMALL_FILE_WATERMARK] = $unames['SMALL_PREVIEW_WM'];
-        
         
         
         // Заголовок.
@@ -404,9 +418,14 @@ class PictureUpload extends \CBitrixComponent
         
         
         // Добавление элемента.
-        $picture = new Picture();
+        if (empty($this->arParams['PID'])) {
+            $picture = new Picture();
+            $result  = $picture->add($fields);
+        } else {
+            $picture = new Picture($this->arParams['PID']);
+            $result  = $picture->update($fields);
+        }
         
-        $result  = $picture->add($fields);
         $success = false;
         
         if (!$result) {
@@ -424,8 +443,11 @@ class PictureUpload extends \CBitrixComponent
     /**
      * Конвертация данных элемента в массив.
      */
-    public function convert($picture)
+    public function convert(Picture $picture)
     {
+        // Данные.
+        $data = $picture->getData();
+        
         
         $items = $picture->getTechniques();
         $techniques = array();
@@ -469,6 +491,29 @@ class PictureUpload extends \CBitrixComponent
             'CUSTOMER'      => $picture->getCustomer(),
             'OTHER'         => $picture->getOther(),
         );
+        
+        
+        
+        $result['ISYEAR'] = ($data[Picture::FIELD_IS_YEAR_FROM]) ? ('YEAR') : ('CENTURY');
+        
+        if ($data[Picture::FIELD_PERIOD_FROM] == $data[Picture::FIELD_PERIOD_TO]) {
+            $date = $data[Picture::FIELD_PERIOD_FROM];
+            
+            $result['PERIOD'] = ($result['ISYEAR'] == 'YEAR') ? (abs($date)) : ($numconv->toRoman(abs($date) / TIME_YEARS_IN_CENTURY));
+            $result['PERIOD_ERA'] = ($date > 0) ? (Picture::PROP_TIME_AD) : (Picture::PROP_TIME_BC);
+        } else {
+            $dateF = $data[Picture::FIELD_PERIOD_FROM];
+            $dateT = $data[Picture::FIELD_PERIOD_TO];
+            
+            $numconv = new NumConvertor();
+            
+            $result['PERIOD_FROM'] = ($result['ISYEAR'] == 'YEAR') ? (abs($dateF)) : ($numconv->toRoman(abs($dateF) / TIME_YEARS_IN_CENTURY));
+            $result['PERIOD_TO']   = ($result['ISYEAR'] == 'YEAR') ? (abs($dateT)) : ($numconv->toRoman(abs($dateT) / TIME_YEARS_IN_CENTURY));
+            
+            $result['PERIOD_FROM_ERA'] = ($dateF > 0) ? (Picture::PROP_TIME_AD) : (Picture::PROP_TIME_BC);
+            $result['PERIOD_TO_ERA']   = ($dateT > 0) ? (Picture::PROP_TIME_AD) : (Picture::PROP_TIME_BC);
+        }
+        
         
         return $result;
     }

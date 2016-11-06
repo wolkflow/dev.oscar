@@ -95,7 +95,7 @@
                     <?  // Ключевые слова.
                         $keywords = array();
                         foreach ($arResult['PICTURE']['KEYWORDS'] as $keyword) {
-                            $keywords []= '<a href="/collections/?F[TAGS]=' . $keyword . '">' . $keyword . '</a>';
+                            $keywords []= '<a href="/search/?F[KEYWORDS]=' . $keyword . '">' . $keyword . '</a>';
                         }
                     ?>
                     <?= implode(', ', $keywords) ?>
@@ -148,7 +148,7 @@
                     <div class="card-meta">
                         <span class="card-meta__key">Модель:</span>
                         <span class="card-meta__value">
-                            <?= $arResult['PICTURE'][Picture::FIELD_RESTORATION_SFX . CURRENT_LANG_UP] ?>
+                            <?= $arResult['PICTURE'][Picture::FIELD_MODEL_SFX . CURRENT_LANG_UP] ?>
                         </span>
                     </div>
                     <div class="card-meta">

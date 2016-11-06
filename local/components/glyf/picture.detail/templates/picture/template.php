@@ -173,7 +173,7 @@
                         <?  // Ключевые слова.
                             $keywords = array();
                             foreach ($arResult['PICTURE']['KEYWORDS'] as $keyword) {
-                                $keywords []= '<a href="/collections/?F[TAGS]=' . $keyword . '">' . $keyword . '</a>';
+                                $keywords []= '<a href="/search/?F[KEYWORDS]=' . $keyword . '">' . $keyword . '</a>';
                             }
                         ?>
                         <?= implode(', ', $keywords) ?>
