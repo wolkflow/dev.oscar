@@ -29,9 +29,9 @@
                         "glyf:statistic.folder",
                         "profile",
                         array(
-                            "FID"   => intval($_REQUEST['ELEMENT']),
-                            "PAGE"  => $page,
-                            "COUNT" => $count                            
+                            "FID"     => intval($_REQUEST['ELEMENT']),
+                            "PAGE"    => $page,
+                            "PERPAGE" => $count                            
                         )
                     );
                 ?>

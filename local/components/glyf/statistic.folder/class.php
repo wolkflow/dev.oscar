@@ -25,9 +25,9 @@ class StatisticFolderDetail extends \CBitrixComponent
         // Количество на странице.
         $arParams['PERPAGE'] = (int) $arParams['PERPAGE'];
         
-        if (!in_array($arParams['PERPAGE'], array(30, 60, 90))) {
-            $arParams['PERPAGE'] = self::PERPAGE;
-        }
+        //if (!in_array($arParams['PERPAGE'], array(30, 60, 90))) {
+           // $arParams['PERPAGE'] = self::PERPAGE;
+        //}
         
         // Страница.
         $arParams['PAGE'] = (int) $arParams['PAGE'];
@@ -65,9 +65,29 @@ class StatisticFolderDetail extends \CBitrixComponent
         // Пользователь.
         $user = new User();
         
+        
         // Папка.
         $folder = new Folder($this->arParams['FID']);
         
+        
+        // Общее количество.
+        $result = Picture::getList(array(
+            'filter' => array(Picture::FIELD_FOLDER => $folder->getID())
+        ), false);
+        
+        $this->arResult['TOTAL'] = $result->getSelectedRowsCount();
+        
+        
+        
+        // Количество страниц.
+        $pagescnt = ceil($this->arResult['TOTAL'] / $this->arParams['PERPAGE']);
+        
+        if ($this->arParams['PAGE'] > $pagescnt) {
+            $this->arParams['PAGE'] = $pagescnt;
+        }
+        
+        
+        // Список элементов папки.
         $pictures = Picture::getList(array(
             'order'  => $this->arParams['ORDER'],
             'limit'  => $this->arParams['PERPAGE'],
@@ -78,12 +98,7 @@ class StatisticFolderDetail extends \CBitrixComponent
             )
         ));
         
-        $result = Picture::getList(array(
-            'filter' => array(Picture::FIELD_FOLDER => $folder->getID())
-        ), false);
         
-        // Общее количество.
-        $this->arResult['TITLE'] = $result->getSelectedRowsCount();
         
         // Картины.
         $items = array();

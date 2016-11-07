@@ -63,6 +63,13 @@ class PageNavigationComponent extends \CBitrixComponent
                                   ? ($this->arResult['COUNT']) 
                                   : ($this->arResult['CURRENT'] + 1);
         
+        
+        // Выход за пределы страницы.
+        if ($this->arResult['CURRENT'] > $this->arResult['COUNT']) {
+            $this->arResult['CURRENT'] = $this->arResult['COUNT'];
+        }
+        
+        
         if (!$this->arParams['SHORT']) {
             $this->arResult['PAGES'] = array();
             
