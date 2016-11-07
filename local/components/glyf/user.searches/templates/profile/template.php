@@ -12,7 +12,7 @@
         <a href="javascript:void(0)" id="js-search-save-id" class="btn btn-light btn-filter_edit">Сохранить</a>
         <hr/>
         
-        <ul>
+        <ul id="js-searches-id">
             <? foreach ($arResult['ITEMS'] as $id => $title) { ?>
                 <li>
                     <a href="javascript:void(0)"><?= $title ?></a>

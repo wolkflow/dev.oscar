@@ -10,7 +10,8 @@ $(document).ready(function() {
             dataType: 'json',
             success: function(response) {
                 if (response.status) {
-                    
+                    $('#js-search-title-id').val('');
+                    $('#js-searches-id').append('<li><a href="javascript:void(0)">' + response.data['title'] + '</a></li>');
                 }
             }
         });

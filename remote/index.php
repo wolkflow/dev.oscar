@@ -385,6 +385,8 @@ switch ($action) {
         $title  = (string) $request->get('title');
         $filter = (array) $request->get('filter');
         
+        $title = trim($title);
+        
         if (empty($title)) {
             jsonresponse(false, 'Не введено название поиска');
         }
@@ -405,7 +407,7 @@ switch ($action) {
         if (!$search->add($data)) {
             jsonresponse(false, 'Ошибка сохрнениея поиска');
         }
-        jsonresponse(true);
+        jsonresponse(true, '', array('title' => $title));
         break;
     
     

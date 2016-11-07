@@ -2093,11 +2093,24 @@ div.cabinet-panel--stats-inner {
 .cabinet-panel__stat-blue{
   color: #00c3d9; }
 
+  
+  
+  
+
 .cabinet-table{
   width: 100%;
   max-width: 100%;
-  border-bottom: 1px solid #e6e6e6;}
+  /*border-bottom: 1px solid #e6e6e6;*/
+  }
 
+  
+.cabinet-table tbody {border-bottom: 0}
+.cabinet-table tbody tr.separate {border-top: 1px solid #e6e6e6;}  
+  
+.cabinet-table tbody tr:has(+ .separate) {
+    padding-bottom: 20px;
+}
+  
 .cabinet-table th,
 .cabinet-table td{
   text-align: left;
@@ -2106,6 +2119,7 @@ div.cabinet-panel--stats-inner {
 
 .cabinet-table tbody{
   border-top: 1px solid #e6e6e6;}
+  
 .cabinet-table tbody tr:first-child td {
   padding-top: 20px;
 }

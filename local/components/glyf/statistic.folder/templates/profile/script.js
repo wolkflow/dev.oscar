@@ -103,8 +103,10 @@ $(document).ready(function() {
     
     
     // Постраничная навигаиця.
-    $(document).on('click', '', function() {
+    $(document).on('click', '#js-folder-pictures-nav-id .js-page', function() {
+        var page = $(this).data('page');
         
+        console.log(page);
     });
     
 });
