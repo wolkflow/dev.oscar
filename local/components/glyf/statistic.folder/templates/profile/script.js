@@ -1,4 +1,5 @@
 $(document).ready(function() {
+    
     $('#js-param-author-id').on('keyup', function() {
         var text = $(this).val();
         
@@ -71,6 +72,7 @@ $(document).ready(function() {
         });
     });
     
+    
     // Скачивание.
     $(document).on('click', '#js-download-id', function() {
         var pid = $(this).data('pid');
@@ -90,13 +92,19 @@ $(document).ready(function() {
     
     
     // Постраничная навигация.
-    $('#js-page-count-id').on('change', function() {
+    $(document).on('change', '#js-page-count-id', function() {
         var option = $(this).find(':selected');
         var href = $(option).data('href'); 
         
         if (href.length > 0) {
             location.href = href;
         }
+    });
+    
+    
+    // Постраничная навигаиця.
+    $(document).on('click', '', function() {
+        
     });
     
 });

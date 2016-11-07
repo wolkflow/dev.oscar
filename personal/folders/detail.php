@@ -21,36 +21,21 @@
 
 ?>
 <main class="siteMain page-cabinet">
-    <? if (CUser::IsAuthorized()) { ?>
-        <div class="container">
-            <div class="row">
-                <?	// Статистика по папке.					
-                    $APPLICATION->IncludeComponent(
-                        "glyf:statistic.folder",
-                        "profile",
-                        array(
-                            "FID"     => intval($_REQUEST['ELEMENT']),
-                            "PAGE"    => $page,
-                            "PERPAGE" => $count                            
-                        )
-                    );
-                ?>
-            </div>
+    <div class="container">
+        <div class="row">
+            <?	// Статистика по папке.					
+                $APPLICATION->IncludeComponent(
+                    "glyf:statistic.folder",
+                    "profile",
+                    array(
+                        "FID"     => intval($_REQUEST['ELEMENT']),
+                        "PAGE"    => $page,
+                        "PERPAGE" => $count                            
+                    )
+                );
+            ?>
         </div>
-    <? } else { ?>
-        <div class="container">
-            <div class="row">
-                <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3">
-                    <div class="errorPage">
-                        <div class="errorPageTitle">Ошибка доступа</div>
-                        <div class="errorPageMessage">
-                            <p>Вы не авторизованы на сайте.<br/>Для продолженя работы нажмите на ссылку "Войти"!</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    <? } ?>
+    </div>
 </main>
 
 <? require ($_SERVER['DOCUMENT_ROOT'].'/bitrix/footer.php'); ?>

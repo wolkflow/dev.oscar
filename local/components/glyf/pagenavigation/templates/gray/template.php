@@ -13,10 +13,10 @@
 		<?= $arResult['COUNT'] ?>
 	</div>
 	<div class="cabinet-pagination__buttons">
-		<a href="javascript:void(0)" class="cabinet-pagination__button cabinet-pagination__button--prev js-prev">
+		<a href="javascript:void(0)" class="cabinet-pagination__button cabinet-pagination__button--prev js-page js-prev" data-page="<?= $arResult['PREV'] ?>">
             &lsaquo;
         </a>
-		<a href="javascript:void(0)" class="cabinet-pagination__button cabinet-pagination__button--next js-next <?= ($arResult['CURRENT'] < $arResult['COUNT']) ? ('is-active') : ('') ?>">
+		<a href="javascript:void(0)" class="cabinet-pagination__button cabinet-pagination__button--next js-page js-next <?= ($arResult['CURRENT'] < $arResult['COUNT']) ? ('is-active') : ('') ?>" data-page="<?= $arResult['NEXT'] ?>">
             &rsaquo;
         </a>
 	</div>

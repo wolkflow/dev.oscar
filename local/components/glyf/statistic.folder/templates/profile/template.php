@@ -30,7 +30,6 @@
                 
                 <div class="cabinet-panel__menu-pages hidden-xs">
                     <span>Показывать по</span>
-                    
                     <select id="js-page-count-id" class="styler shortSelect cabinet-panel__menu-pages-select">
                         <option value="30" <?= ($arParams['PERPAGE'] == 30) ? ('selected') : ('') ?> data-href="<?= $APPLICATION->GetCurPageParam('count=30', array('count', 'ELEMENT'), false) ?>">
                             30
@@ -50,9 +49,7 @@
             <thead>
                 <th></th>
                 <th class="has-sort">
-                    <a href="#">
-                    ID<span class="cabinet-table__sort"></span>
-                    </a>
+                    ID <span class="cabinet-table__sort"></span>
                 </th>
                 <th class="has-sort">Название<span class="cabinet-table__sort"></th>
                 <th class="has-sort">Дата<span class="cabinet-table__sort"></th>
@@ -88,21 +85,26 @@
                         </td>
                     </tr>
                 <? } ?>
+                <tr class="separate">
+                    <td colspan="6">
+                        <?  // Постраничная навигация
+                            $APPLICATION->IncludeComponent(
+                                "glyf:pagenavigation",
+                                "gray",
+                                array(
+                                    'JSID'    => 'js-folder-pictures-nav-id',
+                                    'TOTAL'   => $arResult['TOTAL'],
+                                    'PERPAGE' => $arParams['PERPAGE'],
+                                    'CURRENT' => $arParams['PAGE'],
+                                )
+                            );
+                        ?>
+                    </td>
+                </tr>
             </tbody>
         </table>
         
-        <?  // Постраничная навигация
-            $APPLICATION->IncludeComponent(
-                "glyf:pagenavigation",
-                "gray",
-                array(
-                    'JSID'    => 'js-folder-pictures-nav-id',
-                    'TOTAL'   => $arResult['TOTAL'],
-                    'PERPAGE' => $arParams['PERPAGE'],
-                    'CURRENT' => $arParams['PAGE'],
-                )
-            );
-        ?>
+        
         
         <div class="cabinet-table-mobile visible-xs">
             <div class="cabinet-table-mobile__item row">
