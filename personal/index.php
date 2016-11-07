@@ -1,6 +1,6 @@
-<? define('PAGE', 'UPLOAD') ?>
+<? define('NEED_AUTH', 'Y') ?>
 <? require ($_SERVER['DOCUMENT_ROOT'].'/bitrix/header.php'); ?>
-<? $APPLICATION->SetTitle("Загрузка изображения"); ?>
+<? $APPLICATION->SetTitle("Персональная статистика"); ?>
 
 <?  // Строка поиска.
 	$APPLICATION->IncludeComponent('bitrix:main.include', '', array(

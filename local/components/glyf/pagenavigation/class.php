@@ -49,6 +49,9 @@ class PageNavigationComponent extends \CBitrixComponent
            
         // Общее количество страниц.
         $this->arResult['COUNT'] = ceil($this->arParams['TOTAL'] / $this->arParams['PERPAGE']);
+        if ($this->arResult['COUNT'] <= 0) {
+            $this->arResult['COUNT'] = 1;
+        }
         
         // Предыдущая страница.
         $this->arResult['PREV'] = ($this->arResult['CURRENT'] <= 1) 

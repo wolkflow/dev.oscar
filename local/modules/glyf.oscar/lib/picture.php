@@ -858,7 +858,6 @@ class Picture extends HLBlockModel
     }
     
     
-    
     /**
      * Получение количества продаж.
      */

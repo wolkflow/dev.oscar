@@ -1,6 +1,6 @@
 <? define('NEED_AUTH', 'Y') ?>
 <? require ($_SERVER['DOCUMENT_ROOT'].'/bitrix/header.php'); ?>
-<? $APPLICATION->SetTitle("Каталог"); ?>
+<? $APPLICATION->SetTitle("Персональная статистика"); ?>
 
 <?  // Строка поиска.
 	$APPLICATION->IncludeComponent('bitrix:main.include', '', array(
@@ -9,27 +9,30 @@
 		'EDIT_TEMPLATE' => 'html'
 	));
 ?>
+<?  // Данные отображения.
 
+    // Запрос.
+    $request = Bitrix\Main\Application::getInstance()->getContext()->getRequest();
+
+    
+    $order = $request->get('order');
+    $count = $request->get('count');
+    $page  = $request->get('page');
+
+?>
 <main class="siteMain page-cabinet">
     <? if (CUser::IsAuthorized()) { ?>
-        <? $user = new Glyf\Oscar\User() ?>
-        
-        <? if (!$user->isPartner()) { ?>
-            <? LocalRedirect('/personal/') ?>
-        <? } ?>
-        
-        <div class="cabinet-menu">
-            <a href="/personal/">Общие сведения пользователя</a>
-            <a class="is-active" href="/personal/catalog/">Каталог</a>
-        </div>
-        
         <div class="container">
             <div class="row">
-                <?	// Статистика.					
+                <?	// Статистика по папке.					
                     $APPLICATION->IncludeComponent(
-                        "glyf:statistic.collections",
+                        "glyf:statistic.folder",
                         "profile",
-                        array()
+                        array(
+                            "FID"   => intval($_REQUEST['ELEMENT']),
+                            "PAGE"  => $page,
+                            "COUNT" => $count                            
+                        )
                     );
                 ?>
             </div>

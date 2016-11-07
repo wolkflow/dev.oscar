@@ -33,6 +33,12 @@ $arUrlRewrite = array(
 		"ID" => "",
 		"PATH" => "/personal/card.php",
 	),
+    array(
+		"CONDITION" => "#^/personal/folders/([\d]+)/#",
+		"RULE" => "ELEMENT=\$1&",
+		"ID" => "",
+		"PATH" => "/personal/folders/detail.php",
+	),
     
     array(
 		"CONDITION" => "#^/collections/([\d]+)/#",
