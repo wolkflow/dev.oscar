@@ -429,6 +429,21 @@ switch ($action) {
         jsonresponse(true);
         break;
     
+    
+    // Получение HTML.
+    case ('get-html'):
+        $include = (string) $request->get('inc');
+        
+        $html = null;
+        
+        if ($include == 'user.statistic.folder') {
+            $html = gethtmlremote('user.statistic.folder.php');
+        }
+        jsonresponse(true, '', array('html' => $html));
+        break;
+    
+    
+    
 	default:
 		jsonresponse(false, '', array(), 'Internal error');
 		break;

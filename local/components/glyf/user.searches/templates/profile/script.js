@@ -1,4 +1,5 @@
 $(document).ready(function() {
+    
     $('#js-search-save-id').on('click', function() {
         var title  = $('#js-search-title-id').val();
         var filter = $('#js-filter-sideform-id').objectize();
@@ -16,7 +17,6 @@ $(document).ready(function() {
             }
         });
     });
-    
     
     $('#js-search-remove-id').on('click', function() {
         $.ajax({

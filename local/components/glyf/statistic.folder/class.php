@@ -25,9 +25,9 @@ class StatisticFolderDetail extends \CBitrixComponent
         // Количество на странице.
         $arParams['PERPAGE'] = (int) $arParams['PERPAGE'];
         
-        //if (!in_array($arParams['PERPAGE'], array(30, 60, 90))) {
-           // $arParams['PERPAGE'] = self::PERPAGE;
-        //}
+        if (!in_array($arParams['PERPAGE'], array(30, 60, 90))) {
+           $arParams['PERPAGE'] = self::PERPAGE;
+        }
         
         // Страница.
         $arParams['PAGE'] = (int) $arParams['PAGE'];
@@ -36,9 +36,35 @@ class StatisticFolderDetail extends \CBitrixComponent
             $arParams['PAGE'] = 1;
         }
         
-        if (empty($arParams['ORDER'])) {
-             $arParams['ORDER'] = array(Picture::FIELD_LANG_TITLE_SFX . CURRENT_LANG_UP => 'ASC');
+        // Сортировка.
+        $arParams['ORDER'] = (string) $arParams['ORDER'];
+        
+        switch ($arParams['ORDER']) {
+            case ('ID'):
+                $arParams['ORDER'] = array(Picture::FIELD_ID => 'DESC');
+                break;
+            
+             case ('title'):
+                $arParams['ORDER'] = array(Picture::FIELD_LANG_TITLE_SFX . CURRENT_LANG_UP => 'ASC');
+                break;
+            
+            case ('date'):
+                $arParams['ORDER'] = array(Picture::FIELD_MODERATE => 'DESC', Picture::FIELD_MODERATE_TIME => 'ASC');
+                break;
+                
+            case ('views'):
+                $arParams['ORDER'] = array(Picture::FIELD_STAT_VIEWS => 'DESC');
+                break;
+                
+            case ('sales'):
+                $arParams['ORDER'] = array(Picture::FIELD_STAT_SALES => 'DESC');
+                break;
+                
+            default:
+                $arParams['ORDER'] = array(Picture::FIELD_ID => 'DESC');
+                break;
         }
+        
         
         return $arParams;
 	}

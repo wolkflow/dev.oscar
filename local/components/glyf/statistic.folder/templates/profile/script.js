@@ -91,22 +91,75 @@ $(document).ready(function() {
     });
     
     
-    // Постраничная навигация.
-    $(document).on('change', '#js-page-count-id', function() {
+    
+    // Изменение колчиества страниц.
+    $(document).on('change', '#js-folder-pictures-page-count-id', function() {
+        var count = parseInt($('#js-folder-pictures-page-count-id option:selected').val());
+        var order = $('#js-folder-pictures-order-id .js-active-order').data('order');
+        var page  = 1; // parseInt($('#js-folder-pictures-nav-id .current').text());
+        var fid   = parseInt($('#js-folder-pictures-wrapper-id').data('fid'));
+        
+        $.ajax({
+            url: '/remote/',
+            type: 'post',
+            data: {'action': 'get-html', 'inc': 'user.statistic.folder', 'fid': fid, 'count': count, 'page': page, 'order': order},
+            dataType: 'json',
+            success: function(response) {
+                if (response.status) {
+                    $('#js-folder-pictures-wrapper-id').html(response.data['html']);
+                }
+            }
+        });
+        /*
         var option = $(this).find(':selected');
         var href = $(option).data('href'); 
         
         if (href.length > 0) {
             location.href = href;
-        }
+        }*/
     });
     
-    
-    // Постраничная навигаиця.
+    // Изменение текущей страницы.
     $(document).on('click', '#js-folder-pictures-nav-id .js-page', function() {
-        var page = $(this).data('page');
+        var count = parseInt($('#js-folder-pictures-page-count-id option:selected').val());
+        var order = $('#js-folder-pictures-order-id .js-active-order').data('order');
+        var page  = parseInt($(this).data('page'));
+        var fid   = parseInt($('#js-folder-pictures-wrapper-id').data('fid'));
         
-        console.log(page);
+        $.ajax({
+            url: '/remote/',
+            type: 'post',
+            data: {'action': 'get-html', 'inc': 'user.statistic.folder', 'fid': fid, 'count': count, 'page': page, 'order': order},
+            dataType: 'json',
+            success: function(response) {
+                if (response.status) {
+                    $('#js-folder-pictures-wrapper-id').html(response.data['html']);
+                }
+            }
+        });
+    });
+    
+    // Изменение сортировки.
+    $(document).on('click', '.js-order', function() {
+        $('#js-folder-pictures-order-id .js-order').removeClass('js-active-order');
+        $(this).addClass('js-active-order');
+        
+        var order = $('#js-folder-pictures-order-id .js-active-order').data('order');
+        var count = parseInt($('#js-folder-pictures-page-count-id option:selected').val());
+        var page  = parseInt($('#js-folder-pictures-nav-id .current').text());
+        var fid   = parseInt($('#js-folder-pictures-wrapper-id').data('fid'));
+        
+        $.ajax({
+            url: '/remote/',
+            type: 'post',
+            data: {'action': 'get-html', 'inc': 'user.statistic.folder', 'fid': fid, 'count': count, 'page': page, 'order': order},
+            dataType: 'json',
+            success: function(response) {
+                if (response.status) {
+                    $('#js-folder-pictures-wrapper-id').html(response.data['html']);
+                }
+            }
+        });
     });
     
 });

@@ -30,7 +30,7 @@
                 
                 <div class="cabinet-panel__menu-pages hidden-xs">
                     <span>Показывать по</span>
-                    <select id="js-page-count-id" class="styler shortSelect cabinet-panel__menu-pages-select">
+                    <select id="js-folder-pictures-page-count-id" class="styler shortSelect cabinet-panel__menu-pages-select">
                         <option value="30" <?= ($arParams['PERPAGE'] == 30) ? ('selected') : ('') ?> data-href="<?= $APPLICATION->GetCurPageParam('count=30', array('count', 'ELEMENT'), false) ?>">
                             30
                         </option>
@@ -46,17 +46,25 @@
         </div>
         
         <table class="cabinet-table hidden-xs">
-            <thead>
+            <thead id="js-folder-pictures-order-id">
                 <th></th>
-                <th class="has-sort">
+                <th class="has-sort sort-id js-order js-active-order" data-order="ID">
                     ID <span class="cabinet-table__sort"></span>
                 </th>
-                <th class="has-sort">Название<span class="cabinet-table__sort"></th>
-                <th class="has-sort">Дата<span class="cabinet-table__sort"></th>
-                <th class="has-sort">Просмотров<span class="cabinet-table__sort"></th>
-                <th class="has-sort">Продаж<span class="cabinet-table__sort"></th>
-            </thead>
-            <tbody>
+                <th class="has-sort sort-title js-order" data-order="title">
+                    Название <span class="cabinet-table__sort">
+                </th>
+                <th class="has-sort sort-date js-order" data-order="date">
+                    Дата <span class="cabinet-table__sort">
+                </th>
+                <th class="has-sort sort-views js-order" data-order="views">
+                    Просмотров <span class="cabinet-table__sort">
+                </th>
+                <th class="has-sort sort-sales js-order" data-order="sales">
+                    Продаж <span class="cabinet-table__sort">
+                </th>
+            </thead>    
+            <tbody id="js-folder-pictures-wrapper-id" data-fid="<?= $arResult['FOLDER']['ID'] ?>">
                 <? foreach ($arResult['ITEMS'] as $item) { ?>
                     <tr>
                         <td>
