@@ -168,17 +168,3 @@
         </div>
     </div>
 </div>
-
-<!-- Окно ошибки -->
-<div class="hide">
-    <div class="modal modal-error" id="error">
-        <div class="modalTitle">
-            Ошибка!		<div class="modalClose arcticmodal-close"></div>
-        </div>
-        <div class="modalContent">
-            <div class="errorCode">Шеф! Усё пропало!</div>
-            <div class="errorText">Что сломалось не знаем, но половину уже починили. Ожидайте на линии как можно дольше.</div>
-        </div>
-    </div>
-</div>
-<!--// .Окно ошибки -->

@@ -51,6 +51,17 @@
 
 
 $(document).ready(function () {
+    
+    // Фкниция вызова ошибки.
+    function error(title, text)
+    {
+        $('#js-error-popup-title-id').html(title);
+        $('#js-error-popup-text-id').html(text);
+        
+        $('#error').arcticmodal();
+    }
+    
+    
 	$(function () {
 		var pull = $('#pull'),
 		menu = $('#navbar'),

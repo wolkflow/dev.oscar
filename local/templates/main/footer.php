@@ -100,6 +100,21 @@
                 </div>
             </div>
         </div>
+        
+        <? // Форма ошибки // ?>
+        <div class="hide">
+            <div class="modal modal-error" id="error">
+                <div class="modalTitle">
+                    Ошибка!
+                    <div class="modalClose arcticmodal-close"></div>
+                </div>
+                <div class="modalContent">
+                    <div class="errorCode" id="js-error-popup-title-id"></div>
+                    <div class="errorText" id="js-error-popup-text-id"></div>
+                </div>
+            </div>
+        </div>
+        
         <div class="hide">
             <?  // Форма поиска (popup).
 				$APPLICATION->IncludeComponent('bitrix:main.include', '', array(
