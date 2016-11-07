@@ -11,7 +11,23 @@ $(document).ready(function() {
             success: function(response) {
                 if (response.status) {
                     $('#js-search-title-id').val('');
-                    $('#js-searches-id').append('<li><a href="javascript:void(0)">' + response.data['title'] + '</a></li>');
+                    $('#js-searches-id').append('<li><a href="' + response.data['filter'] + '">' + response.data['title'] + '</a></li>');
+                }
+            }
+        });
+    });
+    
+    
+    $('#js-search-remove-id').on('click', function() {
+        $.ajax({
+            url: '/remote/',
+            type: 'post',
+            data: {'action': 'remove-search'},
+            dataType: 'json',
+            success: function(response) {
+                if (response.status) {
+                    $('#js-search-title-id').val('');
+                    $('#js-searches-id').html('');
                 }
             }
         });

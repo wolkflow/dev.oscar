@@ -407,9 +407,27 @@ switch ($action) {
         if (!$search->add($data)) {
             jsonresponse(false, 'Ошибка сохрнениея поиска');
         }
-        jsonresponse(true, '', array('title' => $title));
+        
+        $filter = '/search/?' . http_build_query(array(Glyf\Oscar\Search::FILTERS_CODE => $filter));
+        
+        jsonresponse(true, '', array('title' => $title, 'filter' => $filter));
         break;
     
+    
+    
+    // Сохранение поиска.
+    case ('remove-search');
+        // Пользователь.
+        $user = new Glyf\Oscar\User();
+        
+        // Сохраненные поиски.
+        $searches = Glyf\Oscar\Search::getList(array('filter' => array(Glyf\Oscar\Search::FIELD_USER => $user->getID())));
+        
+        foreach ($searches as $search) {
+            $search->delete();
+        }
+        jsonresponse(true);
+        break;
     
 	default:
 		jsonresponse(false, '', array(), 'Internal error');

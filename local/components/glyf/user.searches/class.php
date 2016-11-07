@@ -40,7 +40,7 @@ class UserSearchesComponent extends \CBitrixComponent
         $this->arResult['ITEMS'] = array();
         $items = Search::getList(array('filter' => array(Search::FIELD_USER => $user->getID())));
         foreach ($items as $item) {
-            $this->arResult['ITEMS'][$item->getID()] = $item->getTitle();
+            $this->arResult['ITEMS'][$item->getID()] = array('TITLE' => $item->getTitle(), 'FILTER' => $item->getFields());
         }
         
         

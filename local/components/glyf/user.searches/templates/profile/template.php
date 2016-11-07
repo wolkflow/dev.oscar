@@ -13,13 +13,14 @@
         <hr/>
         
         <ul id="js-searches-id">
-            <? foreach ($arResult['ITEMS'] as $id => $title) { ?>
+            <? foreach ($arResult['ITEMS'] as $id => $item) { ?>
+                <? $link = '/search/?' . http_build_query($item['FILTER']) ?>
                 <li>
-                    <a href="javascript:void(0)"><?= $title ?></a>
+                    <a href="<?= $link ?>"><?= $item['TITLE'] ?></a>
                 </li>
             <? } ?>
         </ul>
-        <a href="javascript:void(0)" class="btn btn-light btn-filter_edit">Редактировать</a>
-        <a href="javascript:void(0)" class="btn btn-light btn-filter_delete">Удалить все</a>
+        <a href="javascript:void(0)" id="js-search-edit-id" class="btn btn-light btn-filter_edit">Редактировать</a>
+        <a href="javascript:void(0)" id="js-search-remove-id" class="btn btn-light btn-filter_delete">Удалить все</a>
     </div>
 </div>

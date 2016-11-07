@@ -12,6 +12,8 @@ class Search extends HLBlockModel
     const FIELD_TITLE  = 'UF_TITLE';
     const FIELD_FIELDS = 'UF_FIELDS';
     
+    const FILTERS_CODE = 'F';
+    
     static protected $hlblockID = HLBLOCK_SEARCHES_ID;
     
     
@@ -35,6 +37,6 @@ class Search extends HLBlockModel
     
     public function getFields()
     {
-        return json_decode($this->get(self::FIELD_FIELDS), true);
+        return array(self::FILTERS_CODE => json_decode($this->get(self::FIELD_FIELDS), true));
     }
 }
