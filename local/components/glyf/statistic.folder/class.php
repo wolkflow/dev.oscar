@@ -88,7 +88,7 @@ class StatisticFolderDetail extends \CBitrixComponent
         
         
         // Список элементов папки.
-        $pictures = Picture::getList(array(
+        $result = Picture::getList(array(
             'order'  => $this->arParams['ORDER'],
             'limit'  => $this->arParams['PERPAGE'],
             'offset' => ($this->arParams['PAGE'] - 1) * $this->arParams['PERPAGE'],
@@ -96,25 +96,18 @@ class StatisticFolderDetail extends \CBitrixComponent
                 Picture::FIELD_USER_ID => $user->getID(),
                 Picture::FIELD_FOLDER  => $folder->getID()
             )
-        ));
-        
+        ), false);
         
         
         // Картины.
-        $items = array();
-        foreach ($pictures as $picture) {
-            $item = $picture->getData();
-            
-            $item['VIEWS'] = $picture->getStatisticViewsCount();
-            $item['SALES'] = $picture->getStatisticSalesCount();
-            
-            $items []= $item;
+        $this->arResult['ITEMS'] = array();
+        while ($item = $result->fetch()) {
+            $this->arResult['ITEMS'] []= $item;
         }
+        unset($item);
         
-        
+        //  Данные папки.
         $this->arResult['FOLDER'] = $folder->getData();
-        $this->arResult['ITEMS']  = $items;
-        
         
 		// Подключение шаблона компонента.
 		$this->IncludeComponentTemplate();

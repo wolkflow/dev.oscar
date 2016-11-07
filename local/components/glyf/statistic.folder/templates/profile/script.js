@@ -89,4 +89,14 @@ $(document).ready(function() {
     });
     
     
+    // Постраничная навигация.
+    $('#js-page-count-id').on('change', function() {
+        var option = $(this).find(':selected');
+        var href = $(option).data('href'); 
+        
+        if (href.length > 0) {
+            location.href = href;
+        }
+    });
+    
 });

@@ -116,6 +116,13 @@ class Picture extends HLBlockModel
     //const FIELD_ERA_TO          = 'UF_ERA_TO';
 	
     
+    // Статистика.
+	const FIELD_STAT_VIEWS      = 'UF_STAT_VIEWS';
+    const FIELD_STAT_LOADS      = 'UF_STAT_LOADS';
+    const FIELD_STAT_SALES      = 'UF_STAT_SALES';
+    
+    
+    
     const PROP_LEGAL_FULL_ID = 30;
     const PROP_LEGAL_NOCOMMERCIAL_ID = 31;
     
@@ -849,12 +856,38 @@ class Picture extends HLBlockModel
      */
     public function getStatisticViewsCount()
     {
+        $this->load();
+        
+        return $this->get(self::FIELD_STAT_VIEWS);
+        
+        /*
         $result = \Glyf\Oscar\Statistic\View::getList(array(
             'select' => array('ID'), 
             'filter' => array(\Glyf\Oscar\Statistic\View::FIELD_ELEMENT_ID => $this->getID())
         ), false);
         
         return $result->getSelectedRowsCount();
+        */
+    }
+    
+    
+    /**
+     * Получение количества продаж.
+     */
+    public function getStatisticLoadsCount()
+    {
+        $this->load();
+        
+        return $this->get(self::FIELD_STAT_LOADS);
+        
+        /*
+        $result = \Glyf\Oscar\Statistic\Download::getList(array(
+            'select' => array('ID'), 
+            'filter' => array(\Glyf\Oscar\Statistic\Download::FIELD_ELEMENT_ID => $this->getID())
+        ), false);
+        
+        return $result->getSelectedRowsCount();
+        */
     }
     
     
@@ -863,13 +896,73 @@ class Picture extends HLBlockModel
      */
     public function getStatisticSalesCount()
     {
+        
+        $this->load();
+        
+        return $this->get(self::FIELD_STAT_SALES);
+        
+        /*
         $result = \Glyf\Oscar\Statistic\Sale::getList(array(
             'select' => array('ID'), 
             'filter' => array(\Glyf\Oscar\Statistic\Sale::FIELD_ELEMENT_ID => $this->getID())
         ), false);
         
         return $result->getSelectedRowsCount();
+        */
     }
+    
+    
+    public function recordStatisticView($uid = null)
+    {
+        $user = new \Glyf\Oscar\User($uid);
+        
+        $view = new \Glyf\Oscar\Statistic\View();
+        $view->add(array(
+            \Glyf\Oscar\Statistic\View::FIELD_TIME        => date('d.m.Y H:i:s'),
+            \Glyf\Oscar\Statistic\View::FIELD_TYPE        => 'PICTURE',
+            \Glyf\Oscar\Statistic\View::FIELD_IP          => $_SERVER['REMOTE_ADDR'],
+            \Glyf\Oscar\Statistic\View::FIELD_USER_ID     => $user->getID(),
+            \Glyf\Oscar\Statistic\View::FIELD_UPLOADER_ID => $this->getUserID(),
+            \Glyf\Oscar\Statistic\View::FIELD_ELEMENT_ID  => $this->getID(),
+        ));
+        
+        $this->update(array(self::FIELD_STAT_VIEWS => $this->getStatisticViewsCount() + 1));
+    }
+    
+    
+    public function recordStatisticLoad($uid = null)
+    {
+        $user = new \Glyf\Oscar\User($uid);
+        
+        $load = new \Glyf\Oscar\Statistic\Download();
+        $load->add(array(
+            \Glyf\Oscar\Statistic\Download::FIELD_TIME        => date('d.m.Y H:i:s'),
+            \Glyf\Oscar\Statistic\Download::FIELD_USER_ID     => $user->getID(),
+            \Glyf\Oscar\Statistic\Download::FIELD_UPLOADER_ID => $this->getUserID(),
+            \Glyf\Oscar\Statistic\Download::FIELD_ELEMENT_ID  => $this->getID(),
+        ));
+        
+        $this->update(array(self::FIELD_STAT_VIEWS => $this->getStatisticLoadsCount() + 1));
+    }
+    
+    
+    public function recordStatisticSale($license, $price, $uid = null)
+    {
+        $user = new \Glyf\Oscar\User($uid);
+        
+        $sale = new \Glyf\Oscar\Statistic\Sale();
+        $sale->add(array(
+            \Glyf\Oscar\Statistic\Sale::FIELD_TIME        => date('d.m.Y H:i:s'),
+            \Glyf\Oscar\Statistic\Sale::FIELD_USER_ID     => $user->getID(),
+            \Glyf\Oscar\Statistic\Sale::FIELD_UPLOADER_ID => $this->getUserID(),
+            \Glyf\Oscar\Statistic\Sale::FIELD_ELEMENT_ID  => $this->getID(),
+            \Glyf\Oscar\Statistic\Sale::FIELD_LICENSE     => $license,
+            \Glyf\Oscar\Statistic\Sale::FIELD_PRICE       => $price,
+        ));
+        
+        $this->update(array(self::FIELD_STAT_VIEWS => $this->getStatisticSalesCount() + 1));
+    }
+    
     
     
     /**

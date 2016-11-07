@@ -4,7 +4,7 @@
 
 <? $this->setFrameMode(true); ?>
 
-<div id="<?= $arResult['JSID'] ?>" class="cabinet-pagination hidden-xs">
+<div id="<?= $arResult['JSID'] ?>" class="cabinet-pagination hidden-xs" data-count="<?= $arResult['COUNT'] ?>">
 	<div class="cabinet-pagination__count">
         <span class="current">
             <?= $arResult['CURRENT'] ?>

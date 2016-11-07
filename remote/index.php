@@ -268,15 +268,9 @@ switch ($action) {
                     if ($picture->exists()) {
                         $link = $picture->getDownloadLink();
                         
-                        
                         // Добавление скачивания в статистику.
-                        $download = new Glyf\Oscar\Statistic\Download();
-                        $download->add(array(
-                            Glyf\Oscar\Statistic\Download::FIELD_TIME        => date('d.m.Y H:i:s'),
-                            Glyf\Oscar\Statistic\Download::FIELD_USER_ID     => $user->getID(),
-                            Glyf\Oscar\Statistic\Download::FIELD_UPLOADER_ID => $picture->getUserID(),
-                            Glyf\Oscar\Statistic\Download::FIELD_ELEMENT_ID  => $picture->getID(),
-                        ));
+                        $picture->recordStatisticLoad($user->getID());
+                        
                     } else {
                         jsonresponse(false, 'Изображение не существует');
                     }
