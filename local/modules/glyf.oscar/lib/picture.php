@@ -497,6 +497,30 @@ class Picture extends HLBlockModel
     }
     
     
+    public function isModerate()
+    {
+        $this->load();
+        
+        return $this->get(self::FIELD_MODERATE);
+    }
+    
+    public function getModerateTime()
+    {
+        $this->load();
+        
+        return $this->get(self::FIELD_MODERATE_TIME);
+    }
+    
+    public function getModerateText()
+    {
+        $this->load();
+        
+        return $this->get(self::FIELD_MODERATE_TEXT);
+    }
+    
+    
+    
+    
     /**
      * Получение информации об изображении.
      */

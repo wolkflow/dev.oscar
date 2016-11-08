@@ -5769,3 +5769,9 @@ input.input-error:not(.disabled) {
     max-height: 260px;
     margin-bottom: 20px;
 }
+
+.moderate-text {
+    font-size: 18px;
+    margin: 10px 0 45px 0;
+    
+}

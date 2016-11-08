@@ -43,7 +43,7 @@ class Lightbox extends HLBlockModel
     }
     
     
-    public function getPictures($limit = null, $asobjects = true)
+    public function getPictures($limit = null, $offset = null, $asobjects = true)
     {
         $connection = \Bitrix\Main\Application::getConnection();
         
@@ -57,9 +57,19 @@ class Lightbox extends HLBlockModel
         
         if (!empty($limit)) {
             $sql .= " LIMIT " . intval($limit);
+            
+            if (!empty($offset)) {
+                $sql .= " OFFSET " . intval($offset);
+            }
         }
         
+        // Запрос.
         $result = $connection->query($sql);
+        
+        if (!$asobjects) {
+            return $result;
+        }
+        
         $items  = array();
         while ($item = $result->fetch()) {
             if ($asobjects) {

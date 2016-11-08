@@ -11,8 +11,8 @@
     <div class="cabinet-content col-md-10 col-md-offset-1 col-sm-12">
         
         <ol class="breadcrumb">
-            <li><a href="/personal/">Личный кабинет</a></li>
-            <li><a href="/personal/folders/">Каталог</a></li>
+            <li><a href="/personal/"><?= getMessage('GL_PERSONAL_CABINET') ?></a></li>
+            <li><a href="/personal/folders/"><?= getMessage('GL_PERSONAL_CATALOG') ?></a></li>
             <li>
                 <?= $arResult['FOLDER']['UF_TITLE'] ?>
             </li>
@@ -49,19 +49,19 @@
             <thead id="js-folder-pictures-order-id">
                 <th></th>
                 <th class="has-sort sort-id js-order js-active-order" data-order="ID">
-                    ID <span class="cabinet-table__sort"></span>
+                    <?= getMessage('GL_SORT_ID') ?> <span class="cabinet-table__sort"></span>
                 </th>
                 <th class="has-sort sort-title js-order" data-order="title">
-                    Название <span class="cabinet-table__sort">
+                    <?= getMessage('GL_SORT_TITLE') ?> <span class="cabinet-table__sort">
                 </th>
                 <th class="has-sort sort-date js-order" data-order="date">
-                    Дата <span class="cabinet-table__sort">
+                    <?= getMessage('GL_SORT_DATE') ?> <span class="cabinet-table__sort">
                 </th>
                 <th class="has-sort sort-views js-order" data-order="views">
-                    Просмотров <span class="cabinet-table__sort">
+                    <?= getMessage('GL_SORT_VIEWS') ?> <span class="cabinet-table__sort">
                 </th>
                 <th class="has-sort sort-sales js-order" data-order="sales">
-                    Продаж <span class="cabinet-table__sort">
+                    <?= getMessage('GL_SORT_SALES') ?> <span class="cabinet-table__sort">
                 </th>
             </thead>    
             <tbody id="js-folder-pictures-wrapper-id" data-fid="<?= $arResult['FOLDER']['ID'] ?>">

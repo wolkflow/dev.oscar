@@ -490,6 +490,9 @@ class PictureUpload extends \CBitrixComponent
             'TECHNICAL'     => $picture->getTechnical(),
             'CUSTOMER'      => $picture->getCustomer(),
             'OTHER'         => $picture->getOther(),
+            'MODERATE'      => $picture->isModerate(),
+            'MODERATE_TIME' => $picture->getModerateTime(),
+            'MODERATE_TEXT' => $picture->getModerateText(),
         );
         
         

@@ -37,7 +37,13 @@ $arUrlRewrite = array(
 		"CONDITION" => "#^/personal/folders/([\d]+)/#",
 		"RULE" => "ELEMENT=\$1&",
 		"ID" => "",
-		"PATH" => "/personal/folders/detail.php",
+		"PATH" => "/personal/folder.php",
+	),
+    array(
+		"CONDITION" => "#^/personal/lightbox/([\d]+)/#",
+		"RULE" => "ELEMENT=\$1&",
+		"ID" => "",
+		"PATH" => "/personal/lightbox.php",
 	),
     
     array(

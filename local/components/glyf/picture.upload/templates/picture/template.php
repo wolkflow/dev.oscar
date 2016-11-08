@@ -209,6 +209,12 @@
                             </div>
                         </div>
                     </div>
+                    <? if (!$arResult['DATA']['MODERATE'] && !empty($arResult['DATA']['MODERATE_TEXT'])) { ?>
+                        <div class="moderate-text">
+                            <b><?= getMessage('GL_MODERATION') ?>:</b>
+                            <?= $arResult['DATA']['MODERATE_TEXT'] ?>
+                        </div>
+                    <? } ?>
                 <? } else { ?>
                     <div class="row">
                         <div class="col-xs-12">
@@ -216,6 +222,7 @@
                         </div>
                     </div>
                 <? } ?>
+                
                 
                 <? // Директория // ?>
                 <div class="row">
