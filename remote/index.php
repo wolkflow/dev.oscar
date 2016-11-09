@@ -199,6 +199,21 @@ switch ($action) {
 		break;
     
     
+    // Добавление в корзину.
+    case ('remove-from-cart'):
+        $bids = (array) $request->get('bids');
+        $bids = array_filter(array_map('intval', $bids));
+        
+        $result = array();
+        foreach ($bids as $bid) {
+            if (CSaleBasket::Delete($bid)) {
+                $result []= (int) $bid;
+            }
+        }
+        jsonresponse(true, '', array('bids' => $result));
+		break;
+    
+    
     // Добавление картины в сборник.
     case ('add-to-lightbox'):
         $lid = (int) $request->get('lid');
@@ -493,6 +508,9 @@ switch ($action) {
                 break;
             case ('user.orders'):
                 $html = gethtmlremote('user.orders.php');
+                break;
+            case ('picture.buyout'):
+                $html = gethtmlremote('picture.buyout.php');
                 break;
         }
         jsonresponse(true, '', array('html' => $html));

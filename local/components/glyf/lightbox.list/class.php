@@ -4,7 +4,7 @@ use Bitrix\Main\Localization\Loc;
 use Glyf\Oscar\Lightbox;
 use Glyf\Oscar\LightboxPicture;
 
-class LightboxList extends \CBitrixComponent
+class LightboxListComponent extends \CBitrixComponent
 {
     
 	/** 

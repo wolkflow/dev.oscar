@@ -693,7 +693,11 @@ class Picture extends HLBlockModel
 	{
 		$this->load();
         
-        $source = \CFile::getPath($this->getFileSmallPreview());
+        if ($this->getFileSmallPreview()) {
+            $source = \CFile::getPath($this->getFileSmallPreview());
+        } else {
+            $source = SITE_TEMPLATE_PATH . '/images/no-image.jpg';
+        }
         
         return $source;
 	}
