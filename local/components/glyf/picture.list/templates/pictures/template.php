@@ -13,7 +13,7 @@
             <? foreach ($arResult['ITEMS'] as $item) { ?>
                 <div class="col-xs-6 col-sm-4 col-md-4 col-lg-13 catalogItem-alt">
                     <a href="<?= $item['DETAIL_URL'] ?>">
-                        <div class="catalogItemImage-alt" style="background-image: url(<?= CFile::getPath($item['UF_FILE']) ?>"></div>
+                        <div class="catalogItemImage-alt" style="background-image: url(<?= CFile::getPath($item[Picture::FIELD_SMALL_FILE]) ?>"></div>
                     </a>
                     <div class="catalogItemTitle-alt">
                         <a href="<?= $item['COLLECTION']['SECTION_PAGE_URL'] ?>">
@@ -24,7 +24,7 @@
                                 <a class="card-image__button card-image__button--copyright" href="javascript:void(0)"></a>
                             <? } ?>
                             <a class="card-image__button card-image__button--add" href="#"></a>
-                            <a class="card-image__button card-image__button--cart add-to-cart" href="javascript:void(0)" data-pid="<?= $item[Picture::FIELD_ID] ?>"></a>
+                            <a class="card-image__button card-image__button--cart js-add-to-cart" href="javascript:void(0)" data-pid="<?= $item[Picture::FIELD_ID] ?>"></a>
                         </div>
                     </div>
                     <div class="catalogItemDesc-alt">

@@ -71,15 +71,14 @@
 							</li>
 						</ul>
 						
-						<? // Корзина // ?>
-						<ul class="nav navbar-cart hidden-xs">
-							<li>
-								<a href="/cart/">
-									<span id="js-cart-count-id" class="cart-count">0</span>
-									<i class="icon icon-cart"></i>
-								</a>
-							</li>
-						</ul>
+                        
+						<?	// Корзина.
+                            $APPLICATION->IncludeComponent(
+                                "bitrix:sale.basket.basket",
+                                "header",
+                                array()		
+                            );
+                        ?>
 						
 						<?  // Ссылки авториазции / регистрации.
 							$APPLICATION->IncludeComponent('bitrix:main.include', '', array(

@@ -24,7 +24,7 @@
     </div>
     <div class="cabinet-lightboxes-list clearfix">
         <? foreach ($arResult['LIGHTBOXES'] as $item) { ?>
-            <div class="cabinet-lightbox js-lightbox-wrap">
+            <div class="cabinet-lightbox js-lightbox-wrap js-lightbox" data-lid="<?= $item['ID'] ?>">
                 <div class="cabinet-lightbox__title clearfix">
                     <span>
                         <?= $item['UF_TITLE'] ?>
@@ -34,7 +34,7 @@
                     </label>
                 </div>
                 <div class="cabinet-lightbox__content">
-                    <div class="lightboxes__item-pictures">
+                    <div class="lightboxes__item-pictures js-lightbox-pictures">
                         <? if (!empty($item['PICTURES'])) { ?>
                             <? $chunks = array_chunk($item['PICTURES'], 3) ?>
                             <? foreach ($chunks as $chunk) { ?>

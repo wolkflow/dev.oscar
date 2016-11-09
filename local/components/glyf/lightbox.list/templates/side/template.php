@@ -14,12 +14,12 @@
         </div>
         <div class="lightboxes">
             <? foreach ($arResult['LIGHTBOXES'] as $item) { ?>
-                <div class="lightboxes__item">
+                <div class="lightboxes__item js-lightbox" data-lid="<?= $item['ID'] ?>">
                     <div class="lightboxes__item-title is-expanded" data-collapse-target="lightbox-<?= $item['ID'] ?>">
                         <?= $item['UF_TITLE'] ?>
                     </div>
                     <div class="lightboxes__item-content" data-collapse-block="lightbox-<?= $item['ID'] ?>">
-                        <div class="lightboxes__item-pictures">
+                        <div class="lightboxes__item-pictures js-lightbox-pictures">
                             <? if (!empty($item['PICTURES'])) { ?>
                                 <? $chunks = array_chunk($item['PICTURES'], 3) ?>
                                 <? foreach ($chunks as $chunk) { ?>

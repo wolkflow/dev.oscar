@@ -52,22 +52,4 @@ $(document).ready(function() {
             }
         });
     });
-    
-    
-    // Добавление в корзину.
-    $(document).on('click', '.add-to-cart', function() {
-        var pid = $(this).data('pid');
-        
-        $.ajax({
-            url: '/remote/',
-            type: 'post',
-            data: {'action': 'add-to-cart', 'pid': pid},
-            dataType: 'json',
-            success: function(response) {
-                if (response.status) {
-                    $('#js-cart-count-id').html(response.data['count']);
-                }
-            }
-        });
-    });
 });

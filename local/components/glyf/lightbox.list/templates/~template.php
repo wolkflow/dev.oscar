@@ -19,7 +19,7 @@
                         <?= $item['UF_TITLE'] ?>
                     </div>
                     <div class="lightboxes__item-content" data-collapse-block="lightbox-<?= $item['ID'] ?>">
-                        <div class="lightboxes__item-pictures">
+                        <div class="lightboxes__item-pictures js-lightbox-pictures">
                             <? if (!empty($item['PICTURES'])) { ?>
                                 <? $chunks = array_chunk($item['PICTURES'], 3) ?>
                                 <? foreach ($chunks as $chunk) { ?>

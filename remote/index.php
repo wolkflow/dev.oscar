@@ -167,26 +167,29 @@ switch ($action) {
     
     // Добавление в корзину.
     case ('add-to-cart'):
-        $pid = (string) $request->get('pid');
+        $pids = (array) $request->get('pid');
+        $pids = array_filter(array_map('intval', $pids));
         
-        $picture = new Glyf\Oscar\Picture($pid);
-        
-        $basket = array(
-            'FUSER_ID'   => CSaleBasket::GetBasketUserID(),
-            'PRODUCT_ID' => $picture->getID(),
-            'NAME'       => $picture->getTitle(),
-            'PRICE'      => 0,
-            'MODULE'     => 'catalog',
-            'CURRENCY'   => CURRENCY_DEFAULT,
-            'QUANTITY'   => 1,
-            'LID'        => SITE_DEFAULT,
-            'CAN_BUY'    => 'Y',
-            'DELAY'      => 'Y',
-            'PROPS'      => array()
-        );
-        
-        if (!CSaleBasket::Add($basket)) {
-            jsonresponse(false);
+        foreach ($pids as $pid) {
+            $picture = new Glyf\Oscar\Picture($pid);
+            
+            $basket = array(
+                'FUSER_ID'   => CSaleBasket::GetBasketUserID(),
+                'PRODUCT_ID' => $picture->getID(),
+                'NAME'       => $picture->getTitle(),
+                'PRICE'      => 0,
+                'MODULE'     => 'catalog',
+                'CURRENCY'   => CURRENCY_DEFAULT,
+                'QUANTITY'   => 1,
+                'LID'        => SITE_DEFAULT,
+                'CAN_BUY'    => 'Y',
+                'DELAY'      => 'Y',
+                'PROPS'      => array()
+            );
+            
+            if (!CSaleBasket::Add($basket)) {
+                jsonresponse(false);
+            }
         }
         
         $result = CSaleBasket::GetList(array(), array('FUSER_ID' => CSaleBasket::GetBasketUserID(), 'ORDER_ID' => 'NULL'));
@@ -443,8 +446,59 @@ switch ($action) {
         break;
     
     
+    // Удаление картины из сборника.
+    case ('remove-from-lightbox'):
+        $lid  = (int) $request->get('lid');
+        $pids = (array) $request->get('pid');
+        $pids = array_filter(array_map('intval', $pids));
+        
+        
+        // Пользователь.
+        $user = new Glyf\Oscar\User();
+        
+        // Сборник.
+        $lightbox = new Glyf\Oscar\Lightbox($lid);
+        
+        if (!$lightbox->exists()) {
+            jsonresponse(false, 'Сборник не найден');
+        }
+        
+        if ($lightbox->getUserID() != $user->getID()) {
+            jsonresponse(false, 'Сборник не найден');
+        }
+        
+        $pics = Glyf\Oscar\LightboxPicture::getList(array(
+            'filter' => array(
+                Glyf\Oscar\LightboxPicture::FIELD_LIGHTBOX => $lid,
+                Glyf\Oscar\LightboxPicture::FIELD_PICTURE  => $pids,
+            )
+        ));
+        
+        $pids = array();
+        foreach ($pics as $pic) {
+            $pid = (int) $pic->getPictureID();
+            if ($pic->delete()) {
+                $pids []= $pid;
+            }
+        }
+        jsonresponse(true, '', array('pids' => $pids));
+        break;
+    
+    
     
 	default:
 		jsonresponse(false, '', array(), 'Internal error');
 		break;
 }
+
+// lightbox-update
+// lightbox-list-refresh = get-html * 
+
+
+
+
+
+
+
+
+

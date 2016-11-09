@@ -76,16 +76,22 @@ class StatisticFolderDetail extends \CBitrixComponent
         }
         
         
-        // Список элементов папки.
-        $result = $lightbox->getPictures(self::PERPAGE, ($this->arParams['PAGE'] - 1) * self::PERPAGE, false);
+        // Список элементов сборника.
+        $pictures = $lightbox->getPictures(self::PERPAGE, ($this->arParams['PAGE'] - 1) * self::PERPAGE);
         
         
         // Картины.
         $this->arResult['ITEMS'] = array();
-        while ($item = $result->fetch()) {
+        foreach ($pictures as $picture) {
+            $item = $picture->getData();
+            
+            // Автор.
+            if ($picture->getAuthorID() > 0) {
+                $item['AUTHOR'] = $picture->getAuthor()->getName();
+            }
             $this->arResult['ITEMS'] []= $item;
         }
-        unset($item);
+        unset($pictures, $picture, $item);
         
         //  Данные папки.
         $this->arResult['LIGHTBOX'] = $lightbox->getData();

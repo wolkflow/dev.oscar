@@ -118,6 +118,7 @@ class Lightbox extends HLBlockModel
     }
     
     
+    
     public static function getUserLightboxes($uid, $params = array(), $objects = true)
     {
         $params['filter'] = array_merge((array) $params['filter'], array(self::FIELD_USER => intval($uid)));

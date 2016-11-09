@@ -13,11 +13,14 @@
         Сборники
     </div>
     <div class="lightboxes">
-        <div class="lightboxes__item">
-            <? foreach ($arResult['LIGHTBOXES'] as $item) { ?>
-                <div class="lightboxes__item-title is-expanded" data-collapse-target="lightboxes1">Список №1</div>
+        <? foreach ($arResult['LIGHTBOXES'] as $item) { ?>
+            <div class="lightboxes__item js-lightbox" data-lid="<?= $item['ID'] ?>">
+            
+                <div class="lightboxes__item-title is-expanded" data-collapse-target="lightboxes1">
+                    <?= $item['UF_TITLE'] ?>
+                </div>
                 <div class="lightboxes__item-content" data-collapse-block="lightboxes1">
-                    <div class="lightboxes__item-pictures">
+                    <div class="lightboxes__item-pictures js-lightbox-pictures">
                         <? if (!empty($item['PICTURES'])) { ?>
                             <? $chunks = array_chunk($item['PICTURES'], 3) ?>
                             <? foreach ($chunks as $chunk) { ?>
@@ -48,8 +51,8 @@
                         </div>
                     </div>
                 </div>
-            <? } ?>
-        </div>
+            </div>
+        <? } ?>
         <div class="lightboxes__item">
             <div class="lightboxes__item-title lightboxes__item-title--new">Создать новый</div>
             <div class="lightboxes__item-content">
