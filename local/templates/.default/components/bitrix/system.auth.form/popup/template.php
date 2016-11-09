@@ -9,6 +9,7 @@
 	<script>
 		$(document).ready(function() {
 			$('#modal-authorize').arcticmodal();
+			console.log('Document ready')
 		});
 	</script>
 <? } ?>

@@ -433,18 +433,6 @@ switch ($action) {
         break;
     
     
-    // Получение HTML.
-    case ('get-html'):
-        $include = (string) $request->get('inc');
-        
-        $html = null;
-        
-        if ($include == 'user.statistic.folder') {
-            $html = gethtmlremote('user.statistic.folder.php');
-        }
-        jsonresponse(true, '', array('html' => $html));
-        break;
-    
     
     // Удаление картины из сборника.
     case ('remove-from-lightbox'):
@@ -484,6 +472,31 @@ switch ($action) {
         jsonresponse(true, '', array('pids' => $pids));
         break;
     
+    
+    
+    
+    // Получение HTML.
+    case ('get-html'):
+        $include = (string) $request->get('inc');
+        
+        $html = null;
+        
+        switch ($include) {
+            case ('user.statistic.folder'):
+                $html = gethtmlremote('user.statistic.folder.php');
+                break;
+            case ('user.lightbox'):
+                $html = gethtmlremote('user.lightbox.php');
+                break;
+            case ('lightbox.block'):
+                $html = gethtmlremote('lightbox.block.php');
+                break;
+            case ('user.orders'):
+                $html = gethtmlremote('user.orders.php');
+                break;
+        }
+        jsonresponse(true, '', array('html' => $html));
+        break;
     
     
 	default:

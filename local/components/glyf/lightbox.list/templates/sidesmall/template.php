@@ -14,7 +14,7 @@
     </div>
     <div class="lightboxes">
         <? foreach ($arResult['LIGHTBOXES'] as $item) { ?>
-            <div class="lightboxes__item js-lightbox" data-lid="<?= $item['ID'] ?>">
+            <div id="js-side-lightbox-<?= $item['ID'] ?>-id" class="lightboxes__item js-lightbox" data-lid="<?= $item['ID'] ?>">
             
                 <div class="lightboxes__item-title is-expanded" data-collapse-target="lightboxes1">
                     <?= $item['UF_TITLE'] ?>

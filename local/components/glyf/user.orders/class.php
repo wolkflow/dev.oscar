@@ -1,24 +1,27 @@
 <?php
 
 use Bitrix\Main\Localization\Loc;
+use Glyf\Oscar\Statistic\Sale;
 use Glyf\Oscar\Collection;
 use Glyf\Oscar\Picture;
-use Glyf\Oscar\Lightbox;
 use Glyf\Oscar\User;
 
-class StatisticFolderDetail extends \CBitrixComponent
+class UserOrdersComponent extends \CBitrixComponent
 {
-    const PERPAGE = 2;
+    const PERPAGE = 30;
     
     
-	/** 
+    /** 
 	 * Установка настроек.
 	 */
     public function onPrepareComponentParams($arParams)
     {
-        // Идентификатор.
-        $arParams['LID'] = (int) $arParams['LID'];
+        // Количество на странице.
+        $arParams['PERPAGE'] = (int) $arParams['PERPAGE'];
         
+        if (!in_array($arParams['PERPAGE'], array(30, 60, 90))) {
+          $arParams['PERPAGE'] = self::PERPAGE;
+        }
         
         // Страница.
         $arParams['PAGE'] = (int) $arParams['PAGE'];
@@ -26,7 +29,6 @@ class StatisticFolderDetail extends \CBitrixComponent
         if ($arParams['PAGE'] <= 0) {
             $arParams['PAGE'] = 1;
         }
-        
         
         return $arParams;
 	}
@@ -46,62 +48,54 @@ class StatisticFolderDetail extends \CBitrixComponent
 			return;
 		}
         
-        if (empty($this->arParams['LID'])) {
-            return;
-        }
         
         // Пользователь.
         $user = new User();
         
         
-        // Папка.
-        $lightbox = new Lightbox($this->arParams['LID']);
-        
-        if (!$lightbox->exists()) {
-            die('Сборник не существует');
-        }
-        
         // Общее количество.
-        $result = $lightbox->getPictures(null, null, false);
+        $result = Sale::getList(array(
+            'filter' => array(Sale::FIELD_USER_ID => $user->getID())
+        ), false);
         
         $this->arResult['TOTAL'] = $result->getSelectedRowsCount();
         
         
-        
         // Количество страниц.
-        $pagescnt = ceil($this->arResult['TOTAL'] / self::PERPAGE);
+        $pagescnt = ceil($this->arResult['TOTAL'] / $this->arParams['PERPAGE']);
         
         if ($this->arParams['PAGE'] > $pagescnt) {
             $this->arParams['PAGE'] = $pagescnt;
         }
         
         
-        // Список элементов сборника.
-        $pictures = $lightbox->getPictures(self::PERPAGE, ($this->arParams['PAGE'] - 1) * self::PERPAGE);
+        // Список элементов папки.
+        $sales = Sale::getList(array(
+            'order'  => array(Sale::FIELD_TIME => 'DESC'),
+            'limit'  => ($this->arParams['PERPAGE']),
+            'offset' => ($this->arParams['PAGE'] - 1) * $this->arParams['PERPAGE'],
+            'filter' => array(Sale::FIELD_USER_ID => $user->getID())
+        ));
         
         
         // Картины.
         $this->arResult['ITEMS'] = array();
-        foreach ($pictures as $picture) {
-            $item = $picture->getData();
+        foreach ($sales as $sale) {
+            $item = $sale->getData();
             
-            // Автор.
-            if ($picture->getAuthorID() > 0) {
-                $item['AUTHOR'] = $picture->getAuthor()->getName();
-            }
+            $item['PICTURE'] = $sale->getPicture()->getData();
+            $item['LICENSE'] = $sale->getLicense()->getData();
+            
             $this->arResult['ITEMS'] []= $item;
         }
-        unset($pictures, $picture, $item);
-        
-        //  Данные папки.
-        $this->arResult['LIGHTBOX'] = $lightbox->getData();
-        
+        unset($item);
         
         
 		// Подключение шаблона компонента.
 		$this->IncludeComponentTemplate();
 		
+        
 		return $this->arResult;
 	}
-	
+
 }

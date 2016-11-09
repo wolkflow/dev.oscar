@@ -7,49 +7,49 @@
 
 <? $this->setFrameMode(true); ?>
 
-<? if (!empty($arResult['FOLDER'])) { ?>
-    <? foreach ($arResult['ITEMS'] as $item) { ?>
-        <tr>
-            <td>
-                <label>
-                    <input type="checkbox" name="FOLDER[]" value="<?= $item['ID'] ?>" class="js-checkbox" />
-                </label>
-            </td>
-            <td>
-                № <?= $item[Picture::FIELD_ID] ?>
-            </td>
-            <td>
-                <?= $item[Picture::FIELD_LANG_TITLE_SFX . CURRENT_LANG_UP] ?>
-            </td>
-            <td>
-                <? if ($item[Picture::FIELD_MODERATE]) { ?>
-                    <?= date('d.m.Y', strtotime($item[Picture::FIELD_MODERATE_TIME])) ?>
-                <? } else { ?>
-                    <span class="cabinet-table__bluetext">Модерация</span>
-                <? } ?>
-            </td>
-            <td>
-                <?= number_format($item[Picture::FIELD_STAT_VIEWS], 0, '.' , ' ') ?>
-            </td>
-            <td>
-                <?= number_format($item[Picture::FIELD_STAT_SALES], 0, '.' , ' ') ?>
-            </td>
-        </tr>
-    <? } ?>
-    <tr class="separate">
-        <td colspan="6">
+<? if (!empty($arResult['ITEMS'])) { ?>
+    <div class="row">
+        <? foreach ($arResult['ITEMS'] as $item) { ?>
+            <div class="col-xs-6 col-sm-4 col-md-4 col-lg-13">
+                <div class="lightboxes-setImage">
+                    <img src="<?= CFile::getPath($item[Picture::FIELD_SMALL_FILE]) ?>" />
+                </div>
+                <div class="lightboxes-setAction">
+                    <input type="checkbox" class="js-picture-item-checkbox" value="<?= $item[Picture::FIELD_ID] ?>" />
+                    <div class="lightboxes-setAction-buttons">
+                        <? if ($item[Picture::FIELD_LEGAL] == Picture::PROP_LEGAL_FULL_ID) { ?>
+                            <a class="card-image__button card-image__button--copyright" href="javascript:void(0)"></a>
+                        <? } ?>
+                        <a class="card-image__button card-image__button--cart js-add-to-cart" href="javascript:void(0)" data-pid="<?= $item[Picture::FIELD_ID] ?>"></a>
+                    </div>
+                </div>
+                <div class="lightboxes-setTitle">
+                    <?= $item[Picture::FIELD_LANG_TITLE_SFX . CURRENT_LANG_UP] ?>
+                </div>
+                <div class="lightboxes-setDesc">
+                    <?= $item['AUTHOR'] ?>
+                </div>
+            </div>
+        <? } ?>
+        <div class="clearfix visible-xs"></div>
+        <div class="clearfix visible-lg-block"></div>
+    </div>
+    <div class="row">
+        <div class="cabinet-pagination hidden-xs">
             <?  // Постраничная навигация
                 $APPLICATION->IncludeComponent(
                     "glyf:pagenavigation",
                     "gray",
                     array(
-                        'JSID'    => 'js-folder-pictures-nav-id',
+                        'JSID'    => 'js-lightbox-pictures-nav-id',
                         'TOTAL'   => $arResult['TOTAL'],
-                        'PERPAGE' => $arParams['PERPAGE'],
+                        'PERPAGE' => StatisticFolderDetail::PERPAGE,
                         'CURRENT' => $arParams['PAGE'],
                     )
                 );
             ?>
-        </td>
-    </tr>
+        </div>
+    </div>
+<? } else { ?>
+    <p><?= getMessage('GL_LAIGHTBOX_PICTURES_NO_FOUND') ?></p>
 <? } ?>

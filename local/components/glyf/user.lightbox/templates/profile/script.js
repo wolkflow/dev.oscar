@@ -49,7 +49,31 @@ $(document).ready(function() {
             dataType: 'json',
             success: function(response) {
                 if (response.status) {
-                    console.log(response.data['pids']);
+                    // Обновление общего контейнер.
+                    $.ajax({
+                        url: '/remote/',
+                        type: 'post',
+                        data: {'action': 'get-html', 'inc': 'user.lightbox', 'lid': lid, 'page': 1},
+                        dataType: 'json',
+                        success: function(response) {
+                            if (response.status) {
+                                $('#js-lightbox-pictures-wrapper-id').html(response.data['html']);
+                            }
+                        }
+                    });
+                    
+                    // Обновление контейнера сборника.
+                    $.ajax({
+                        url: '/remote/',
+                        type: 'post',
+                        data: {'action': 'get-html', 'inc': 'lightbox.block', 'lid': lid},
+                        dataType: 'json',
+                        success: function(response) {
+                            if (response.status) {
+                                $('#js-side-lightbox-' + lid + '-id').html(response.data['html']);
+                            }
+                        }
+                    });
                 }
             }
         });
@@ -57,20 +81,18 @@ $(document).ready(function() {
     
     
     // Изменение текущей страницы.
-    $(document).on('click', '#js-folder-pictures-nav-id .js-page', function() {
-        var count = parseInt($('#js-folder-pictures-page-count-id option:selected').val());
-        var order = $('#js-folder-pictures-order-id .js-active-order').data('order');
+    $(document).on('click', '#js-lightbox-pictures-nav-id .js-page', function() {
         var page  = parseInt($(this).data('page'));
-        var fid   = parseInt($('#js-folder-pictures-wrapper-id').data('fid'));
+        var lid   = parseInt($('#js-lightbox-pictures-wrapper-id').data('lid'));
         
         $.ajax({
             url: '/remote/',
             type: 'post',
-            data: {'action': 'get-html', 'inc': 'user.statistic.folder', 'fid': fid, 'count': count, 'page': page, 'order': order},
+            data: {'action': 'get-html', 'inc': 'user.lightbox', 'lid': lid, 'page': page},
             dataType: 'json',
             success: function(response) {
                 if (response.status) {
-                    $('#js-folder-pictures-wrapper-id').html(response.data['html']);
+                    $('#js-lightbox-pictures-wrapper-id').html(response.data['html']);
                 }
             }
         });

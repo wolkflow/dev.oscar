@@ -79,6 +79,7 @@ define('HLBLOCK_LIGHTBOXES_ID',         13);
 define('HLBLOCK_LIGHTBOXE_PICTURES_ID', 14);
 define('HLBLOCK_STATISTIC_SALES_ID',    15);
 define('HLBLOCK_IPADDRESSES_ID',        16);
+define('HLBLOCK_LICENSES_ID',           17);
 
 // Месторасположение.
 define('HLBLOCK_DICT_PLACE_COUNTRIES_ID', 11);
