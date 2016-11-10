@@ -488,6 +488,25 @@ switch ($action) {
         break;
     
     
+    // Получение списка лицензий.
+    case ('get-licenses'):
+        $lid = (int) $request->get('lid');
+        
+        $licenses = Glyf\Oscar\License::getList(array('filter' => array(License::FIELD_ROOT => false)));
+        
+        $items = array();
+        foreach ($licenses as $license) {
+            $item = array(
+                'id'    => $license->getID(),
+                'title' => $license->getTitle(),
+                'step'  => $license->getStepTitle(),
+                'price' => $license->getPrice(),
+            );
+            $items []= $item;
+        }
+        jsonresponse(true, '', array('items' => $items));
+        break;
+    
     
     
     // Получение HTML.

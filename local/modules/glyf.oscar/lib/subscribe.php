@@ -39,8 +39,6 @@ class Subscribe extends HLBlockModel
     public function getPeriodTime()
     {
         $period = $this->getPeriod();
-        
-        //var_dump($period);
     }
     
     

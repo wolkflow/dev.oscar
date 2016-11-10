@@ -18,7 +18,7 @@
                     <? $picture = new Picture($item['PRODUCT_ID']); ?>
                     <li id="js-cart-<?= $item['ID'] ?>-id">
                         <div class="buyoutBlockListImage">
-                            <label for="js-buyout-picture-<?= $picture->getID() ?>-id">
+                            <label class="js-buyout-item" data-bid="<?= $item['ID'] ?>" data-pid="<?= $picture->getID() ?>">
                                 <img src="<?= $picture->getSmallPreviewImageSrc() ?>" title="<?= $picture->getTitle() ?>" />
                             </label>
                         </div>

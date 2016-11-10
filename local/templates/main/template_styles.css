@@ -4830,11 +4830,16 @@ a.btn.btn-test2 {
   width: 33%;
   padding: 0 12px 5px;
   float: left;
+  min-height: 95px;
 }
 .buyoutBlockListImage img {
   display: block;
+  max-height: 190px;
   max-width: 100%;
   margin: 0 auto;
+}
+.buyoutBlockListImage label {
+  cursor: pointer;
 }
 .buyoutBlockListCheckbox {
   text-align: center;
@@ -4919,6 +4924,9 @@ a.btn.btn-test2 {
 }
 .buyoutParamsRadio li {
   margin-bottom: 10px;
+}
+.buyoutParamsRadio li label {
+    cursor: pointer;
 }
 .buyoutParamsSelect {
   padding-bottom: 35px;
@@ -5775,5 +5783,14 @@ input.input-error:not(.disabled) {
 .moderate-text {
     font-size: 18px;
     margin: 10px 0 45px 0;
-    
+}
+
+
+.buyout-no-select {
+    color: #999;
+    font-size: 30px;
+    font-weight: 200;
+    text-align: center;
+    padding: 50px 20px 0 20px;
+    line-height: 36px;
 }
