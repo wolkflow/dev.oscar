@@ -60,19 +60,97 @@ $(document).ready(function() {
         });
     });
     
+    
     // Выбор основного типа лицензии.
     $(document).on('click', '.js-license-root', function() {
-        var title = $(this).data('title');
+        var step  = $(this).data('step');
         var lid   = $(this).val();
         var html  = '';
+        var items = [];
         
-        html += '<li>';
-        html += '<label>' + title + '</label>';
-        html += '<select id="js-license-select-' + lid + '-id" class="styler"></select>';
-        html += '</label>';
-        html += '</li>';
+        $.ajax({
+            url: '/remote/',
+            type: 'post',
+            data: {'action': 'get-licenses', 'lid': lid},
+            dataType: 'json',
+            success: function(response) {
+                if (response.status) {
+                    items.push('<option> - </option>');
+                    
+                    for (var i in response.data['items']) {
+                        var element  = response.data['items'][i];
+                        var itemhtml = '';
+                        
+                        itemhtml += '<option class="js-license-option" data-step="' + element['step'] + '" data-price="' + element['price'] + '" value="' + element['id'] + '">';
+                        itemhtml += element['title'];
+                        itemhtml += '</option>';
+                        
+                        items.push(itemhtml);
+                    } 
+                    
+                    html += '<li class="js-license-wrapper">';
+                    html += '<label>' + step + '</label>';
+                    html += '<select class="styler js-license-select" data-lid="' + lid + '">';
+                    html += items.join();
+                    html += '</select>';
+                    html += '</label>';
+                    html += '</li>';
+                    
+                    $('#js-licenses-selects-id').html(html);
+                }
+            }
+        });
+    });
+    
+    
+    
+    // Выбор подтипа лицензии.
+    $(document).on('change', '.js-license-select', function() {
+        var $that    = $(this);
+        var $option  = $that.find('option:selected');
+        var $wrapper = $(this).closest('.js-license-wrapper');
         
-        $('#js-licenses-selects-id').html(html);
+        var step  = $option.data('step');
+        var root  = $that.data('lid');
+        var lid   = parseInt($that.val());
+        var html  = '';
+        var items = [];
+        
+        $.ajax({
+            url: '/remote/',
+            type: 'post',
+            data: {'action': 'get-licenses', 'lid': lid},
+            dataType: 'json',
+            beforeSend: function() {
+                $('.js-license-wrapper:gt(' + $('.js-license-wrapper').index($wrapper.get(0)) + ')').remove();
+            },
+            success: function(response) {
+                if (response.status) {
+                    items.push('<option> - </option>');
+                    
+                    for (var i in response.data['items']) {
+                        var element  = response.data['items'][i];
+                        var itemhtml = '';
+                        
+                        itemhtml += '<option data-step="' + element['step'] + '" data-price="' + element['price'] + '" value="' + element['id'] + '">';
+                        itemhtml += element['title'];
+                        itemhtml += '</option>';
+                        
+                        items.push(itemhtml);
+                    } 
+                    
+                    html += '<li class="js-license-wrapper">';
+                    html += '<label>' + step + '</label>';
+                    html += '<select class="styler js-license-select" data-lid="' + lid + '">';
+                    html += items.join();
+                    html += '</select>';
+                    html += '</label>';
+                    html += '</li>';
+                    
+                    $('#js-licenses-selects-id').append(html);
+                }
+            }
+        });
     });
 });
 

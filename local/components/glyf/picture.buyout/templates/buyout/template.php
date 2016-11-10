@@ -67,7 +67,7 @@
                         <? foreach ($arResult['LICENSES'] as $license) { ?>
                             <li>
                                 <label>
-                                    <input type="radio" name="license" class="js-license-root" value="<?= $license->getID() ?>" data-title="<?= $license->getStepTitle() ?>" />
+                                    <input type="radio" name="license" class="js-license-root" value="<?= $license->getID() ?>" data-step="<?= $license->getStepTitle() ?>" />
                                     <?= $license->getTitle() ?>
                                 </label>
                             </li>
@@ -116,8 +116,11 @@
                         </li>
                         */ ?>
                     </ul>
-                    <div class="buyoutPrice">2 456 р.</div>
-                    <input type="submit" class="btn btn-sm btn-default" value="Подтвердить">
+                    
+                    <div id="js-buyout-price-id" class="buyoutPrice"></div>
+                    
+                    <input type="submit" class="btn btn-sm btn-default" value="Подтвердить" />
+                    
                 </form>
             </div>
         </div>

@@ -492,7 +492,8 @@ switch ($action) {
     case ('get-licenses'):
         $lid = (int) $request->get('lid');
         
-        $licenses = Glyf\Oscar\License::getList(array('filter' => array(License::FIELD_ROOT => false)));
+        // Список лицензий.
+        $licenses = Glyf\Oscar\License::getList(array('filter' => array(Glyf\Oscar\License::FIELD_ROOT => $lid)));
         
         $items = array();
         foreach ($licenses as $license) {
