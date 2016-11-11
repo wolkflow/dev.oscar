@@ -520,6 +520,9 @@ switch ($action) {
             case ('user.statistic.folder'):
                 $html = gethtmlremote('user.statistic.folder.php');
                 break;
+            case ('user.statistic.folders'):
+                $html = gethtmlremote('user.statistic.folders.php');
+                break;
             case ('user.lightbox'):
                 $html = gethtmlremote('user.lightbox.php');
                 break;

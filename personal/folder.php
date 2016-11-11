@@ -29,8 +29,8 @@
                     "profile",
                     array(
                         "FID"     => intval($_REQUEST['ELEMENT']),
-                        "PAGE"    => $page,
-                        "PERPAGE" => $count                            
+                        //"PAGE"    => $page,
+                       // "PERPAGE" => $count                            
                     )
                 );
             ?>

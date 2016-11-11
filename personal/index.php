@@ -16,7 +16,7 @@
     <? if ($user->isPartner()) { ?>
         <div class="cabinet-menu">
             <a class="is-active" href="/personal/">общие сведения пользователя</a>
-            <a href="/personal/catalog/">каталог</a>
+            <a href="/personal/folders/">каталог</a>
         </div>
     <? } ?>
     
