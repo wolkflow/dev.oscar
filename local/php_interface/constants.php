@@ -136,3 +136,9 @@ define('DELYVERY_SYSTEM_DEFAULT', 2);
  */
 define('PRICE_TYPE_DEFAULT', 1);
 
+
+/*
+ * Статус заказа.
+ */
+define('STATUS_DEFAULT', 'N');
+

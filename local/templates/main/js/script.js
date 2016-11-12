@@ -202,7 +202,7 @@ $(document).ready(function () {
 	$('a.le-end').on('click', function() {
         var $that = $(this);
 		var le = $that.attr('data-le');
-
+        
 		$('[data-le="' + le + '"]').addClass('disabled');
         $('[data-link="' + le + '"]').addClass('hidden');
         
@@ -217,6 +217,10 @@ $(document).ready(function () {
                 }
 			});
 		} else {
+            // Callback-функция.
+            var callback = $that.data('callback');
+            
+            // Данные.
             var data = {'action': $that.data('action')};
             
 			$('input[data-le="' + le + '"]').each(function () {
@@ -224,6 +228,7 @@ $(document).ready(function () {
 				$(this).prop('disabled', true).addClass('disabled');
 			});
             
+            // Запрос.
             $.ajax({
                 url: '/remote/',
                 type: 'post',
@@ -241,6 +246,9 @@ $(document).ready(function () {
                                 $(this).remove();
                             }
                         });
+                    }
+                    if (callback && typeof window[callback] == 'function') {
+                        window[callback](response);
                     }
                 }
             });

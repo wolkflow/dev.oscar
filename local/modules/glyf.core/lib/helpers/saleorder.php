@@ -2,15 +2,44 @@
 
 namespace Glyf\Core\Helpers;
 
+
 class SaleOrder
 {
-	public static function getProperties($id, $key = 'CODE')
+    protected $id;
+    protected $data;
+    
+    
+    public function __construct($id)
+    {
+        $this->id = (int) $id;
+    }
+    
+    
+    public function getID()
+    {
+        return $this->id;
+    }
+    
+    
+    public function getData()
+    {
+        if (empty($this->data)) {
+            $this->data = \CSaleOrder::GetByID($this->getID());
+        }
+        return $this->data;
+    }
+    
+    
+    /**
+     * Получение свойств заказа.
+     */
+	public function getProperties($key = 'CODE')
 	{
 		if (!\Bitrix\Main\Loader::includeModule('sale')) {
 			return;
 		}
 		
-		$result = \CSaleOrderPropsValue::GetList(array('SORT' => 'ASC'), array('ORDER_ID' => $id));
+		$result = \CSaleOrderPropsValue::GetList(array('SORT' => 'ASC'), array('ORDER_ID' => $this->getID()));
 		$items  = array();
 		while ($item = $result->Fetch()) {
 			$items[$item[$key]] = $item;
@@ -19,13 +48,16 @@ class SaleOrder
 	}
 	
 	
-	public static function getProperty($id, $code, $key = 'CODE')
+    /**
+     * Получение свойства заказа.
+     */
+	public function getProperty($code, $key = 'CODE')
 	{
 		if (!\Bitrix\Main\Loader::includeModule('sale')) {
 			return;
 		}
 		
-		$result = \CSaleOrderPropsValue::GetList(array('SORT' => 'ASC'), array('ORDER_ID' => $id, 'CODE' => $code));
+		$result = \CSaleOrderPropsValue::GetList(array('SORT' => 'ASC'), array('ORDER_ID' => $this->getID(), 'CODE' => $code));
 		$items  = array();
 		if ($item = $result->Fetch()) {
 			return $item;
@@ -34,20 +66,22 @@ class SaleOrder
 	}
 	
 	
-	public static function saveProperty($id, $code, $value)
+    /**
+     * Сохранение свойства заказа.
+     */
+	public function saveProperty($code, $value)
 	{
 		if (!\Bitrix\Main\Loader::includeModule('sale')) {
 			return;
 		}
 		
 		if ($prop = \CSaleOrderProps::GetList(array(), array('CODE' => $code))->Fetch()) {
-			
-			if ($propval = \CSaleOrderPropsValue::GetList(array(), array('ORDER_ID' => $id, 'CODE' => $prop['CODE']))->Fetch()) {
+			if ($propval = \CSaleOrderPropsValue::GetList(array(), array('ORDER_ID' => $this->getID(), 'CODE' => $prop['CODE']))->Fetch()) {
 				return \CSaleOrderPropsValue::Update($propval['ID'], array(
 				   'NAME' 			=> $prop['NAME'],
 				   'CODE' 			=> $prop['CODE'],
 				   'ORDER_PROPS_ID' => $prop['ID'],
-				   'ORDER_ID' 		=> $id,
+				   'ORDER_ID' 		=> $this->getID(),
 				   'VALUE' 			=> $value,
 				));
 			} else {
@@ -55,7 +89,7 @@ class SaleOrder
 				   'NAME' 			=> $prop['NAME'],
 				   'CODE' 			=> $prop['CODE'],
 				   'ORDER_PROPS_ID' => $prop['ID'],
-				   'ORDER_ID' 		=> $id,
+				   'ORDER_ID' 		=> $this->getID(),
 				   'VALUE' 			=> $value,
 				));
 			}
@@ -63,13 +97,16 @@ class SaleOrder
 	}
 	
 	
-	public static function getBaskets($id, $withprops = true)
+    /**
+     * Получение корзин заказа.
+     */
+	public function getBaskets($withprops = true)
 	{
 		if (!\Bitrix\Main\Loader::includeModule('sale')) {
 			return;
 		}
 		
-		$result = \CSaleBasket::GetList(array('SORT' => 'ASC'), array('ORDER_ID' => $id));
+		$result = \CSaleBasket::GetList(array('SORT' => 'ASC'), array('ORDER_ID' => $this->getID()));
 		$items  = array();
 		while ($item = $result->Fetch()) {
 			if ($withprops) {
@@ -83,6 +120,9 @@ class SaleOrder
 	}
 	
 	
+    /**
+     * Получение списка статусов.
+     */
 	public static function getStatuses()
 	{
 		if (!\Bitrix\Main\Loader::includeModule('sale')) {
@@ -96,4 +136,27 @@ class SaleOrder
 		}
 		return $items;
 	}
+    
+    
+    /**
+     * Получение ссылки на оплату.
+     */
+    public function getPaymentURL()
+    {
+        if (!\Bitrix\Main\Loader::includeModule('sale')) {
+			return;
+		}
+        
+        $bxorder = \Bitrix\Sale\Order::load($this->getID());
+        $collect = $bxorder->getPaymentCollection();
+        $payment = $collect->getItemById($this->getID());
+        $params  = \Bitrix\Sale\PaySystem\Manager::getById($payment->getPaymentSystemId());
+        $service = new \Bitrix\Sale\PaySystem\Service($params);
+
+        ob_start();
+        $service->initiatePay($payment);
+        $link = ob_get_clean();
+        
+        return $link;
+    }
 }

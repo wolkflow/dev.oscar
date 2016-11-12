@@ -17,7 +17,7 @@ class Main
     /**
      * Регистрация пользователя.
      */
-    public function OnBeforeUserRegister(&$fields)
+    public static function OnBeforeUserRegister(&$fields)
     {
         $request = Application::getInstance()->getContext()->getRequest();
         
@@ -34,7 +34,7 @@ class Main
     /**
      * Регистрация пользователя.
      */
-    public function OnAfterUserRegister($fields)
+    public static function OnAfterUserRegister($fields)
     {
         if ($fields['USER_ID'] > 0) {
             if (\Bitrix\Main\Loader::includeModule('sale')) {

@@ -159,10 +159,10 @@
                             </div>
                             <div class="cabinet-profile__block-field le disabled" data-le="pay">
                                 <div class="cabinet-profile__block-field-key">Введите сумму</div>
-                                <input type="text" class="le" data-le="pay" value="1000">
+                                <input type="text" name="price" class="le" data-le="pay" value="1000" />
                             </div>
                             <div class="cabinet-profile__block-buttons">
-                                <a class="btn btn-light btn-filter_edit btn-filter_edit-small le le-end disabled" data-le="pay" href="javascript:void(0)">Пополнить</a>
+                                <a class="btn btn-light btn-filter_edit btn-filter_edit-small le le-end disabled" data-le="pay" data-action="pay-balance" data-callback="cPayBalance" href="javascript:void(0)">Пополнить</a>
                                 <a class="btn btn-light btn-filter_edit btn-filter_edit-small le le-end le-cancel disabled" data-le="pay" href="javascript:void(0)">Отменить</a>
                                 <a class="btn btn-light btn-filter_edit le le-start" href="#" data-le="pay">Пополнить баланс</a>
                             </div>

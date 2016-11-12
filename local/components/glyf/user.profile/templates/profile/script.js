@@ -1,4 +1,12 @@
+function cPayBalance(response)
+{
+    console.log('CALLBACK:', response);
+}
+
 $(document).ready(function() {
+   
+    
+    /*
     $('#js-param-author-id').on('keyup', function() {
         var text = $(this).val();
         
@@ -52,7 +60,7 @@ $(document).ready(function() {
             }
         });
     });
-    
+      */
     
     // Добавление в корзину.
     $(document).on('click', '.add-to-cart', function() {
@@ -70,6 +78,9 @@ $(document).ready(function() {
             }
         });
     });
+  
+    
+    
     
     
     // Добавление IP адреса.

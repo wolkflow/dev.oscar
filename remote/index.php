@@ -566,7 +566,7 @@ switch ($action) {
             jsonresponse(false, 'Ошибка пополеннеия счета');
         }
         
-        if ($pice <= 0) {
+        if ($price <= 0) {
             jsonresponse(false, 'Неверно указана сумма для пополнения счета');
         }
         
@@ -591,9 +591,10 @@ switch ($action) {
         
         if ($oid > 0) {
             // Добавление свойств заказа.
-            \Glyf\Core\Helpers\SaleOrder::saveProperty($oid, \Glyf\Oscar\Order::PROP_BALANCE_CODE, true);
+            $order = new \Glyf\Oscar\Order($oid);
+            $order->saveProperty(\Glyf\Oscar\Order::PROP_BALANCE_CODE, 'Y');
             
-            $order = new \Glyf\Core\Helpers\SaleOrder($oid);
+            // Ссылка на оплату.
             $link  = $order->getPaymentURL();
             
             jsonresponse(true, '', array('link' => $link));

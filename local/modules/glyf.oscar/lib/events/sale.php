@@ -17,10 +17,25 @@ class Sale
     /**
      * Регистрация пользователя.
      */
-    public function OnSalePayOrder($id, $pay)
-    {
+    public static function onSalePayOrder($id, $pay)
+	{
         if ($pay == 'Y') {
+            $user  = new \Glyf\Oscar\User();
+            $order = new \Glyf\Oscar\Order($id);
             
+            $data = $order->getData();
+            $data['PROPS'] = $order->getProperties();
+            
+            // Пополнение баланса.
+            if ($data['PROPS'][\Glyf\Oscar\Order::PROP_BALANCE_CODE]['VALUE'] == 'Y') {
+                \CSaleUserAccount::UpdateAccount(
+                    $user->getID(),
+                    $user->getBalance() + floatval($data['PRICE']),
+                    "USD",
+                    'BALANCE',
+                    $order->getID()
+                ));
+            }
         }
     }
     

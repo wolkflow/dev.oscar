@@ -83,9 +83,9 @@ class User extends \Glyf\Core\User
             return false;
         }
         $account = \CSaleUserAccount::GetByUserID($this->getID(), CURRENCY_DEFAULT);
-        $budget  = (float) $account['CURRENT_BUDGET'];
+        $balance = (float) $account['CURRENT_BUDGET'];
         
-        return $budget;
+        return $balance;
     }
     
     
