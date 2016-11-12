@@ -1553,7 +1553,9 @@ input[type='submit'].styler[disabled] {
 .row.flex{
   display: -webkit-box;
   display: -ms-flexbox;
-  display: flex; }
+  display: flex;
+}
+
 
 .sidebarRight{
   height: 100%;
@@ -1563,6 +1565,8 @@ input[type='submit'].styler[disabled] {
 /* eof fix negative padding hack */
 .card{
   padding-bottom: 80px;
+	position: relative;
+	z-index: 55;
 }
 
 .card-image::after{
@@ -4134,6 +4138,12 @@ a.btn-filter_edit {
   line-height: 12px;
   margin-bottom: 5px;
 }
+a.btn-filter_subedit {
+  margin-top: 5px;
+}
+a.btn-filter_edit.hidden {
+  display: none;
+}
 a.btn-filter_edit.btn-filter_edit-small {
   width: 47%;
   float: left;
@@ -5793,4 +5803,34 @@ input.input-error:not(.disabled) {
     text-align: center;
     padding: 50px 20px 0 20px;
     line-height: 36px;
+}
+
+.small-image {
+    max-height: 35px;
+    max-width: 35px;
+}
+
+.ui-draggable-dragging {
+	width: 70px !important;
+	height: 70px !important;
+}
+.lightboxes__item-title {position: relative;z-index: 2;}
+
+.lightboxes__item-content {
+	position: relative;
+}
+.lightboxes__item-content:after {
+	display: block;
+	content: '';
+	width: 90%;
+	height: 70%;
+	border: 2px dashed #cacaca;
+	position: absolute;
+	left: 5%;
+	top: 15%;
+	opacity: 0;
+	background: rgba(255, 255, 255, 0.6);
+}
+.ui-droppable-hover .lightboxes__item-content:after {
+ opacity: 1;
 }

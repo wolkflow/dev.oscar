@@ -33,6 +33,9 @@ class StatisticFoldersDetail extends \CBitrixComponent
             $arParams['PAGE'] = 1;
         }
         
+        // Поиск по наванию.
+        $arParams['TITLE'] = (string) $arParams['TITLE'];
+        
         
         return $arParams;
 	}
@@ -55,14 +58,21 @@ class StatisticFoldersDetail extends \CBitrixComponent
         // Пользователь.
         $user = new User();
         
+        
+        // Фильтр.
+        $filter = array(Folder::FIELD_USER => $user->getID());
+        
+        if (!empty($this->arParams['TITLE'])) {
+            $filter[Folder::FIELD_TITLE] = '%'.$this->arParams['TITLE'].'%';
+        }
+        
+        
         // Общее количество.
         $result = Folder::getList(array(
-            'filter' => array(Folder::FIELD_USER => $user->getID())
+            'filter' =>  $filter
         ), false);
         
         $this->arResult['TOTAL'] = $result->getSelectedRowsCount();
-        
-        
         
         // Количество страниц.
         $pagescnt = ceil($this->arResult['TOTAL'] / $this->arParams['PERPAGE']);
@@ -71,12 +81,13 @@ class StatisticFoldersDetail extends \CBitrixComponent
             $this->arParams['PAGE'] = $pagescnt;
         }
         
+        
         // Список элементов папки.
         $folders = Folder::getList(array(
             'order'  => array(Folder::FIELD_TITLE => 'ASC'),
             'limit'  => $this->arParams['PERPAGE'],
             'offset' => ($this->arParams['PAGE'] - 1) * $this->arParams['PERPAGE'],
-            'filter' => array(Folder::FIELD_USER => $user->getID())
+            'filter' => $filter
         ));
         
         

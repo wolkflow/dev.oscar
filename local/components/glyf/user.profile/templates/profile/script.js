@@ -70,4 +70,18 @@ $(document).ready(function() {
             }
         });
     });
+    
+    
+    // Добавление IP адреса.
+    $('#js-field-multiple-copy-insert-id').on('click', function() {
+        var $wrapper = $('#js-field-multiple-wrapper-id');
+        var $element = $('#js-field-multiple-copy-id').clone();
+        
+        $element.prop('id', '');
+        $element.prop('style', '');
+        $element.prop('name', $element.prop('name') + '[' + $wrapper.find('input').length + ']');
+        $element.addClass('removable');
+        
+        $wrapper.append($element);
+    })
 });

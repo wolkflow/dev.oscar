@@ -8,6 +8,7 @@ class IPAddress extends HLBlockModel
 {
     const FIELD_USER_ID = 'UF_USER_ID';
     const FIELD_IP      = 'UF_IP';
+    const FIELD_IPS     = 'UF_IPS';
     const FIELD_TIME    = 'UF_TIME';
     
 	static protected $hlblockID = HLBLOCK_IPADDRESSES_ID;
@@ -34,7 +35,15 @@ class IPAddress extends HLBlockModel
     {
         $this->load();
         
-        return $this->get(self::FIELD_IP)
+        return $this->get(self::FIELD_IP);
+    }
+    
+    
+    public function getIPs()
+    {
+        $this->load();
+        
+        return $this->get(self::FIELD_IPS);
     }
     
     
@@ -42,14 +51,20 @@ class IPAddress extends HLBlockModel
     {
         $this->load();
         
-        return $this->get(self::FIELD_TIME)
+        return $this->get(self::FIELD_TIME);
     }
     
     
-    public static function getUserIPs($uid, $filters = array(), $objects = true)
+    public static function check($uid, $value)
     {
-        $filter = array_merge((array) $filters, array(self::FIELD_USER_ID => intval($uid)));
+        $result = self::getList(array(
+            'filter' => array('!'.self::FIELD_USER_ID => intval($uid), self::FIELD_IPS => strval($value)), 
+            'limit' => 1
+        ), false);
         
-        return self::getList(array('filter' => $filter), $objects);
+        if ($result->getSelectedRowsCount() > 0) {
+            return false;
+        }
+        return true;
     }
 }

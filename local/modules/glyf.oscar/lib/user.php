@@ -6,6 +6,7 @@ use Glyf\Oscar\Lightbox;
 use Glyf\Oscar\Tariff;
 use Glyf\Oscar\UserTariff;
 use Glyf\Oscar\Subscribe;
+use Glyf\Oscar\IPAddress;
 
 
 class User extends \Glyf\Core\User
@@ -117,5 +118,17 @@ class User extends \Glyf\Core\User
         $subscribe = reset($subscribe);
         
         return $subscribe;
+    }
+    
+    
+    /**
+     * Получение IP адресов.
+     */
+    public function getIPAddress()
+    {
+        $ipaddress = IPAddress::getList(array('filter' => array(IPAddress::FIELD_USER_ID => $this->getID()), 'limit' => 1));
+        $ipaddress = reset($ipaddress);
+        
+        return $ipaddress;
     }
 }

@@ -1,23 +1,23 @@
-#js-folder-pictures-order-id th:first-child {
+#js-objects-order-id th:first-child {
     width: 15px;
 }
 
-#js-folder-pictures-order-id .sort-id {
+#js-objects-order-id .sort-id {
     width: 50px;
 }
 
-#js-folder-pictures-order-id .sort-title {
+#js-objects-order-id .sort-title {
     
 }
 
-#js-folder-pictures-order-id .sort-date {
+#js-objects-order-id .sort-date {
     width: 140px;
 }
 
-#js-folder-pictures-order-id .sort-views {
+#js-objects-order-id .sort-views {
     width: 140px;
 }
 
-#js-folder-pictures-order-id .sort-sales {
+#js-objects-order-id .sort-sales {
     width: 100px;
 }

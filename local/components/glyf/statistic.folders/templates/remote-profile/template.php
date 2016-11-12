@@ -12,7 +12,7 @@
         <? foreach ($arResult['ITEMS'] as $item) { ?>
             <div class="cabinet-collections__item">
                 <label>
-                    <input type="checkbox" class="js-checkbox" name="folders[]" value="<?= $item['ID'] ?>" />
+                    <input type="checkbox" class="js-checkbox" name="FOLDERS[]" value="<?= $item['ID'] ?>" />
                 </label>
                 <img src="<?= SITE_TEMPLATE_PATH ?>/images/i_folder.png" />
                 <span><?= $item[Folder::FIELD_TITLE] ?></span>

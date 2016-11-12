@@ -47,7 +47,8 @@ class UserProfileComponent extends \CBitrixComponent
             
             if ($tariff) {
                 $this->arResult['TARIFF'] = $tariff->getTariff()->getData();
-                $this->arResult['TARIFF']['EXPIRE'] = date('d.m.Y', $tariff->getExpire());
+                $this->arResult['TARIFF']['EXPIRE']   = date('d.m.Y', $tariff->getExpire());
+                $this->arResult['TARIFF']['MULTIPLE'] = $tariff->canMultipleIP();
             }
         }
         

@@ -12,7 +12,7 @@
         <div class="cabinet-search">
             <span class="cabinet-search__title">поиск по папкам</span>
             <div class="cabinet-search__form">
-                <input type="text" id="js-folders-search-id" />
+                <input type="text" id="js-folders-search-id" value="" />
             </div>
         </div>
     </div>
@@ -33,13 +33,13 @@
             <div class="cabinet-panel__menu-pages hidden-xs">
                 <span>показывать по</span>
                 <select id="js-folders-page-count-id" class="styler shortSelect cabinet-panel__menu-pages-select">
-                    <option value="1" <?= ($arParams['PERPAGE'] == 30) ? ('selected') : ('') ?> data-href="<?= $APPLICATION->GetCurPageParam('count=30', array('count', 'ELEMENT'), false) ?>">
+                    <option value="30" <?= ($arParams['PERPAGE'] == 30) ? ('selected') : ('') ?> data-href="<?= $APPLICATION->GetCurPageParam('count=30', array('count', 'ELEMENT'), false) ?>">
                         30
                     </option>
-                    <option value="2" <?= ($arParams['PERPAGE'] == 60) ? ('selected') : ('') ?> data-href="<?= $APPLICATION->GetCurPageParam('count=60', array('count', 'ELEMENT'), false) ?>">
+                    <option value="60" <?= ($arParams['PERPAGE'] == 60) ? ('selected') : ('') ?> data-href="<?= $APPLICATION->GetCurPageParam('count=60', array('count', 'ELEMENT'), false) ?>">
                         60
                     </option>
-                    <option value="3" <?= ($arParams['PERPAGE'] == 90) ? ('selected') : ('') ?> data-href="<?= $APPLICATION->GetCurPageParam('count=90', array('count', 'ELEMENT'), false) ?>">
+                    <option value="90" <?= ($arParams['PERPAGE'] == 90) ? ('selected') : ('') ?> data-href="<?= $APPLICATION->GetCurPageParam('count=90', array('count', 'ELEMENT'), false) ?>">
                         90
                     </option>
                 </select>
@@ -52,31 +52,6 @@
                 "glyf:statistic.folders",
                 "remote-profile",
                 array()
-            );
-        ?>
-        <? /*
-        <div class="cabinet-collections">
-            
-            <? foreach ($arResult['ITEMS'] as $item) { ?>
-                <div class="cabinet-collections__item">
-                    <label>
-                        <input type="checkbox" class="js-checkbox" name="folders[]" value="<?= $item['ID'] ?>" />
-                    </label>
-                    <img src="<?= SITE_TEMPLATE_PATH ?>/images/i_folder.png" />
-                    <span><?= $item[Folder::FIELD_TITLE] ?></span>
-                </div>
-            <? } ?>
-        </div>
-        <?  // Постраничная навигация.
-            $APPLICATION->IncludeComponent(
-                "glyf:pagenavigation",
-                "gray",
-                array(
-                    'JSID'    => 'js-folders-nav-id',
-                    'TOTAL'   => $arResult['TOTAL'],
-                    'PERPAGE' => $arParams['PERPAGE'],
-                    'CURRENT' => $arParams['PAGE'],
-                )
             );
         ?>
         <? /*

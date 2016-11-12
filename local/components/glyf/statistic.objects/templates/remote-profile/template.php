@@ -7,13 +7,16 @@
 
 <? $this->setFrameMode(true); ?>
 
-<? if (!empty($arResult['FOLDER'])) { ?>
+<? if (!empty($arResult['ITEMS'])) { ?>
     <? foreach ($arResult['ITEMS'] as $item) { ?>
         <tr>
             <td>
                 <label>
-                    <input type="checkbox" name="FOLDER[]" value="<?= $item['ID'] ?>" class="js-checkbox" />
+                    <input type="checkbox" name="OBJECTS[]" value="<?= $item['ID'] ?>" class="js-checkbox" />
                 </label>
+            </td>
+            <td>
+                <img class="small-image" src="<?= $item['PICTURE'] ?>" />
             </td>
             <td>
                 № <?= $item[Picture::FIELD_ID] ?>
@@ -37,13 +40,13 @@
         </tr>
     <? } ?>
     <tr class="separate">
-        <td colspan="6">
+        <td colspan="7">
             <?  // Постраничная навигация
                 $APPLICATION->IncludeComponent(
                     "glyf:pagenavigation",
                     "gray",
                     array(
-                        'JSID'    => 'js-folder-pictures-nav-id',
+                        'JSID'    => 'js-objects-nav-id',
                         'TOTAL'   => $arResult['TOTAL'],
                         'PERPAGE' => $arParams['PERPAGE'],
                         'CURRENT' => $arParams['PAGE'],

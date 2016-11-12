@@ -3,6 +3,7 @@
 namespace Glyf\Oscar;
 
 use Glyf\Oscar\Tariff;
+use Glyf\Oscar\IPAddress;
 use Glyf\Oscar\Statistic\Download;
 
 
@@ -167,6 +168,33 @@ class UserTariff extends \Glyf\Core\System\IBlockModel
         $result = array_key_exists(\Glyf\Oscar\Features\Watermark::CODE, $features);
         
         return $result;
+    }
+    
+    
+    /**
+     * Есть ли возможность просматривать изображения для указанных IP.
+     */
+    public function canMultipleIP()
+    {
+        if ($this->isExpire()) {
+            return false;
+        }
+        $features = $this->getTariff()->getFeatures();
+        $result = array_key_exists(\Glyf\Oscar\Features\Multiple::CODE, $features);
+        
+        return $result;
+    }
+    
+    
+    
+    /**
+     * Находится ли пользователь в каком-либо из указанных IP.
+     */
+    public function inZoneIP()
+    {
+        $userIP = $_SERVER['REMOTE_ADDR'];
+        
+        //return IPAddress::check()
     }
 }
 

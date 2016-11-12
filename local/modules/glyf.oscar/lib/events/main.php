@@ -46,10 +46,18 @@ class Main
                 );
             }
             
+            // Подписка пользователя.
             $subscribe = new Glyf\Oscar\Subscribe();
             $subscribe->add(array(
                 Glyf\Oscar\Subscribe::FIELD_USER_ID  => $fields['ID'],
                 Glyf\Oscar\Subscribe::FIELD_ACTIVE => false,
+            ));
+            
+            // Разрешенные IP-адреса пользователя.
+            $ipaddress = new Glyf\Oscar\IPAddress();
+            $ipaddress->add(array(
+                Glyf\Oscar\IPAddress::FIELD_USER_ID  => $fields['ID'],
+                Glyf\Oscar\IPAddress::FIELD_TIME     => date('d.m.Y H:i:s'),
             ));
         }
     }

@@ -398,6 +398,55 @@ switch ($action) {
         break;
     
     
+    // Сохранение доступных IP адресов.
+    case ('update-user-multiple-ips');
+        $ips = (array) $request->get('ips'); 
+        $ips = array_filter(array_map('strval', $ips));
+        
+        $user = new Glyf\Oscar\User();
+        
+        // Тариф.
+        $tariff = $user->getUserTariff();
+        
+        if (!$tariff) {
+            //jsonresponse(false, 'Не доступен необходимый тариф');
+        }
+        
+        if (!$tariff->canMultipleIP()) {
+            //jsonresponse(false, 'Не доступен необходимый тариф');
+        }
+        
+        
+        // Сохранение списка IP адресов.
+        $ipaddresses = array();
+        foreach ($ips as $ip) {
+            if (!Glyf\Oscar\IPAddress::check($user->getID(), $ip)) {
+                continue; // jsonresponse(false, 'Такой адрес уже зарезервирован [' . $ip . ']');
+            }
+            $ipaddresses []= $ip;
+        }
+        
+        if (!empty($ipaddresses)) {
+            $ipaddress = $user->getIPAddress();
+            
+            $result = $ipaddress->update(array(
+                Glyf\Oscar\IPAddress::FIELD_TIME => date('d.m.Y H:i:s'),
+                Glyf\Oscar\IPAddress::FIELD_IPS  => $ipaddresses,
+            ));
+            
+            if (!$result) {
+                jsonresponse(false, 'Ошибка сохрнениея IP адресов');
+            }
+        }
+        
+        if (count($ipaddresses) != count($ips)) {
+            jsonresponse(false, 'Ошибка сохрнениея IP адресов');
+        }
+        
+        jsonresponse(true);
+        break;
+    
+    
     // Сохранение поиска.
     case ('save-search');
         $title  = (string) $request->get('title');
@@ -509,6 +558,49 @@ switch ($action) {
         break;
     
     
+    // Пополнение счета.
+    case ('pay-balance'):
+        $price = (float) $request->get('price');
+        
+        if (!Bitrix\Main\Loader::includeModule('sale')) {
+            jsonresponse(false, 'Ошибка пополеннеия счета');
+        }
+        
+        if ($pice <= 0) {
+            jsonresponse(false, 'Неверно указана сумма для пополнения счета');
+        }
+        
+        $user = new Glyf\Oscar\User();
+        
+        // Добавление заказа.
+        $oid = CSaleOrder::Add(array(
+            'LID'              => SITE_DEFAULT,
+            'PERSON_TYPE_ID'   => PERSON_TYPE_DEFAULT,
+            'PAYED'            => 'N',
+            'CANCELED'         => 'N',
+            'STATUS_ID'        => STATUS_DEFAULT,
+            'DISCOUNT_VALUE'   => '',
+            'USER_DESCRIPTION' => 'Пополнение счета',
+            'PRICE'            => $price,
+            'CURRENCY'         => CURRENCY_DEFAULT,
+            'USER_ID'          => $user->getID(),
+            'PAY_SYSTEM_ID'    => PAYSYSTEM_DEFAULT,
+            'DELIVERY_ID'      => DELYVERY_SYSTEM_DEFAULT,
+            'TAX_VALUE'        => '',
+        ));
+        
+        if ($oid > 0) {
+            // Добавление свойств заказа.
+            \Glyf\Core\Helpers\SaleOrder::saveProperty($oid, \Glyf\Oscar\Order::PROP_BALANCE_CODE, true);
+            
+            $order = new \Glyf\Core\Helpers\SaleOrder($oid);
+            $link  = $order->getPaymentURL();
+            
+            jsonresponse(true, '', array('link' => $link));
+        }
+        jsonresponse(false, 'Ошибка пополеннеия счета');
+        break;
+    
     
     // Получение HTML.
     case ('get-html'):
@@ -522,6 +614,9 @@ switch ($action) {
                 break;
             case ('user.statistic.folders'):
                 $html = gethtmlremote('user.statistic.folders.php');
+                break;
+            case ('user.statistic.objects'):
+                $html = gethtmlremote('user.statistic.objects.php');
                 break;
             case ('user.lightbox'):
                 $html = gethtmlremote('user.lightbox.php');

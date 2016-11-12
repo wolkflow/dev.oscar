@@ -12,25 +12,36 @@
         <div class="cabinet-search">
             <span class="cabinet-search__title">поиск по объектам</span>
             <div class="cabinet-search__form">
-                <input type="text" />
+                <input type="text" id="js-objects-search-id" value="" />
             </div>
         </div>
     </div>
     <div class="cabinet-panel cabinet-panel--switch clearfix">
         <div class="cabinet-panel__switch">
-            <span data-block="collections">Коллекции</span>
+            <span data-block="collections">Папки</span>
             <span class="is-active" data-block="objects">Объекты</span>
         </div>
         <div class="cabinet-panel__toggler">Объекты</div>
         <div class="cabinet-panel__menu">
-            <a class="is-active" href="#">добавить объект</a>
+            <a class="is-active" href="/personal/upload/">добавить объект</a>
             <a class="is-active" href="#">выделить всё</a>
             <a class="hidden-sm" href="#">сохранить пдф</a>
             <a class="is-active" href="#">отправить по email</a>
             <a class="is-active hidden-sm" href="#">печать</a>
+            
             <div class="cabinet-panel__menu-pages hidden-xs">
                 <span>показывать по</span>
-                <div class="cabinet-panel__menu-pages-select">30</div>
+                <select id="js-objects-page-count-id" class="styler shortSelect cabinet-panel__menu-pages-select">
+                    <option value="30" <?= ($arParams['PERPAGE'] == 30) ? ('selected') : ('') ?>>
+                        30
+                    </option>
+                    <option value="60" <?= ($arParams['PERPAGE'] == 60) ? ('selected') : ('') ?>>
+                        60
+                    </option>
+                    <option value="90" <?= ($arParams['PERPAGE'] == 90) ? ('selected') : ('') ?>>
+                        90
+                    </option>
+                </select>
             </div>
         </div>
     </div>
@@ -47,43 +58,17 @@
                 <th class="has-sort">Продаж<span class="cabinet-table__sort"></th>
             </tr>
             </thead>
-            <tbody>
-                <tr>
-                    <td><label><input type="checkbox"></label></td>
-                    <td><img class="cabinet-table__img" src="images/horse.png" alt=""></td>
-                    <td>№ 1234567</td>
-                    <td>Поль Гоген, "Женщина, держащая плод" 1893г.<span class="cabinet-table__subtext">Коллекция №1 - 123 Третьяковка</span></td>
-                    <td><span class="cabinet-table__bluetext">Модерация</span></td>
-                    <td>6 543</td>
-                    <td>61 543</td>
-                </tr>
-                <tr>
-                    <td><label><input type="checkbox"></label></td>
-                    <td><img class="cabinet-table__img" src="images/horse.png" alt=""></td>
-                    <td>№ 1234567</td>
-                    <td>Поль Гоген, "Женщина, держащая плод" 1893г.<span class="cabinet-table__subtext">Коллекция №1 - 123 Третьяковка</span></td>
-                    <td>34 223</td>
-                    <td>6 543</td>
-                    <td>61 543</td>
-                </tr>
-                <tr>
-                    <td><label><input type="checkbox"></label></td>
-                    <td><img class="cabinet-table__img" src="images/horse.png" alt=""></td>
-                    <td>№ 1234567</td>
-                    <td>Виктор Васнецов "Богатыри", 1898г.<span class="cabinet-table__subtext">Коллекция №1 - 123 Третьяковка</span></td>
-                    <td>1 234</td>
-                    <td>1 234</td>
-                    <td>1 234</td>
-                </tr>
+            <tbody id="js-objects-wrapper-id">
+                <?  // Статистика по объектам.					
+                    $APPLICATION->IncludeComponent(
+                        "glyf:statistic.objects",
+                        "remote-profile",
+                        array()
+                    );
+                ?>
             </tbody>
         </table>
-        <div class="cabinet-pagination hidden-xs">
-            <div class="cabinet-pagination__count"><span class="current">1</span> из 5</div>
-            <div class="cabinet-pagination__buttons">
-                <div class="cabinet-pagination__button cabinet-pagination__button--prev">&lsaquo;</div>
-                <div class="cabinet-pagination__button cabinet-pagination__button--next is-active">&rsaquo;</div>
-            </div>
-        </div>
+        <? /*
         <div class="cabinet-table-mobile visible-xs">
             <div class="cabinet-table-mobile__item row">
                 <div class="col-xs-1">
@@ -170,5 +155,6 @@
                 <a href="#" class="btn btn-light btn-more_params">Еще</a>
             </div>
         </div>
+        */ ?>
     </div>
 </div>

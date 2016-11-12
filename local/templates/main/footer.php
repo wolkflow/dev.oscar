@@ -165,6 +165,7 @@
             ?>
         </div>
         
+        <script src="<?= SITE_TEMPLATE_PATH ?>/js/jquery-ui.min.js"></script>
         <script src="<?= SITE_TEMPLATE_PATH ?>/js/jquery.formstyler.min.js"></script>
         <script src="<?= SITE_TEMPLATE_PATH ?>/js/script.js"></script>
         <script>

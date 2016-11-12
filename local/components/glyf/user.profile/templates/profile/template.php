@@ -125,6 +125,30 @@
                                     <a class="btn btn-light btn-filter_edit" href="#">Изменить</a>
                                 </div>
                             </div>
+                            
+                            <? if ($arResult['TARIFF']['MULTIPLE'] || 1) { ?>
+                                <input id="js-field-multiple-copy-id" type="text" name="ips" class="le disabled" style="display:none;" disabled data-le="multiple" value="" />
+                                <div class="cabinet-profile__block">
+                                    <div class="cabinet-profile__block-field">
+                                        <div class="cabinet-profile__block-field-key">Доступные IP</div>
+                                        <div id="js-field-multiple-wrapper-id" class="cabinet-profile__block-field-value">
+                                            <? if (1) { ?>
+                                                <input type="text" name="ips[0]" class="le disabled removable" disabled data-le="multiple" value="192.168.0.1" />
+                                                <input type="text" name="ips[1]" class="le disabled removable" disabled data-le="multiple" value="192.168.0.3" />
+                                                <input type="text" name="ips[2]" class="le disabled removable" disabled data-le="multiple" value="192.168.0.7" />
+                                            <? } ?>
+                                        </div>
+                                        <a id="js-field-multiple-copy-insert-id" class="btn btn-light btn-filter_edit btn-filter_subedit hidden" data-link="multiple" data-le="multiple" href="javascript:void(0)">
+                                            Добавить
+                                        </a>
+                                     </div>
+                                    <div class="cabinet-profile__block-buttons">
+                                        <a class="btn btn-light btn-filter_edit le le-start" data-le="multiple" href="javascript:void(0)">Изменить данные</a>
+                                        <a class="btn btn-light btn-filter_edit btn-filter_edit-small le le-end disabled" data-le="multiple" data-action="update-user-multiple-ips" href="javascript:void(0)">Сохранить</a>
+                                        <a class="btn btn-light btn-filter_edit btn-filter_edit-small le le-end le-cancel disabled" data-le="multiple" href="javascript:void(0)">Отменить</a>
+                                    </div>
+                                </div>
+                            <? } ?>
                         <? } ?>
                         <div class="cabinet-profile__block">
                             <div class="cabinet-profile__block-field">

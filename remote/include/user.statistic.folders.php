@@ -15,6 +15,7 @@ $request = Bitrix\Main\Application::getInstance()->getContext()->getRequest();
 
 $page  = $request->get('page');
 $count = $request->get('count');
+$title = $request->get('title');
 
 // Статистика по папке.					
 $APPLICATION->IncludeComponent(
@@ -22,6 +23,7 @@ $APPLICATION->IncludeComponent(
     "remote-profile",
     array(
         "PAGE"    => intval($page),
-        "PERPAGE" => intval($count),     
+        "PERPAGE" => intval($count), 
+        "TITLE"   => strval($title),
     )
 );

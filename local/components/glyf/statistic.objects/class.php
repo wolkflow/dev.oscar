@@ -33,34 +33,8 @@ class StatisticObjectsDetail extends \CBitrixComponent
             $arParams['PAGE'] = 1;
         }
         
-        // Сортировка.
-        $arParams['ORDER'] = (string) $arParams['ORDER'];
-        
-        switch ($arParams['ORDER']) {
-            case ('ID'):
-                $arParams['ORDER'] = array(Picture::FIELD_ID => 'DESC');
-                break;
-            
-             case ('title'):
-                $arParams['ORDER'] = array(Picture::FIELD_LANG_TITLE_SFX . CURRENT_LANG_UP => 'ASC');
-                break;
-            
-            case ('date'):
-                $arParams['ORDER'] = array(Picture::FIELD_MODERATE => 'DESC', Picture::FIELD_MODERATE_TIME => 'ASC');
-                break;
-                
-            case ('views'):
-                $arParams['ORDER'] = array(Picture::FIELD_STAT_VIEWS => 'DESC');
-                break;
-                
-            case ('sales'):
-                $arParams['ORDER'] = array(Picture::FIELD_STAT_SALES => 'DESC');
-                break;
-                
-            default:
-                $arParams['ORDER'] = array(Picture::FIELD_ID => 'DESC');
-                break;
-        }
+        // Поиск по наванию.
+        $arParams['TITLE'] = (string) $arParams['TITLE'];
         
         
         return $arParams;
@@ -81,24 +55,24 @@ class StatisticObjectsDetail extends \CBitrixComponent
 			return;
 		}
         
-        /*
-        
         // Пользователь.
         $user = new User();
         
         
-        // Папка.
-        $folder = new Folder($this->arParams['FID']);
+        // Фильтр.
+        $filter = array(Picture::FIELD_USER_ID => $user->getID());
+        
+        if (!empty($this->arParams['TITLE'])) {
+            $filter[Picture::FIELD_LANG_TITLE_SFX . CURRENT_LANG_UP] = '%'.$this->arParams['TITLE'].'%';
+        }
         
         
         // Общее количество.
         $result = Picture::getList(array(
-            'filter' => array(Picture::FIELD_FOLDER => $folder->getID())
+            'filter' =>  $filter
         ), false);
         
         $this->arResult['TOTAL'] = $result->getSelectedRowsCount();
-        
-        
         
         // Количество страниц.
         $pagescnt = ceil($this->arResult['TOTAL'] / $this->arParams['PERPAGE']);
@@ -109,27 +83,23 @@ class StatisticObjectsDetail extends \CBitrixComponent
         
         
         // Список элементов папки.
-        $result = Picture::getList(array(
-            'order'  => $this->arParams['ORDER'],
+        $pictures = Picture::getList(array(
+            'order'  => array(Picture::FIELD_LANG_TITLE_SFX . CURRENT_LANG_UP => 'ASC'),
             'limit'  => $this->arParams['PERPAGE'],
             'offset' => ($this->arParams['PAGE'] - 1) * $this->arParams['PERPAGE'],
-            'filter' => array(
-                Picture::FIELD_USER_ID => $user->getID(),
-                Picture::FIELD_FOLDER  => $folder->getID()
-            )
-        ), false);
+            'filter' => $filter
+        ));
         
         
         // Картины.
         $this->arResult['ITEMS'] = array();
-        while ($item = $result->fetch()) {
-            $this->arResult['ITEMS'] []= $item;
+        foreach ($pictures as $picture) {
+            $item = $picture->getData();
+            $item['PICTURE'] = $picture->getSmallPreviewImageSrc();
+            
+            $this->arResult['ITEMS'] []= $item ;
         }
-        unset($item);
-        
-        //  Данные папки.
-        $this->arResult['FOLDER'] = $folder->getData();
-        */
+        unset($item, $picture);
         
         
 		// Подключение шаблона компонента.

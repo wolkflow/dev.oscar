@@ -187,6 +187,7 @@ $(document).ready(function () {
 	$('a.le-start').on('click', function(){
 		var le = $(this).data('le');
 		$('[data-le="' + le + '"]').removeClass('disabled');
+        $('[data-link="' + le + '"]').removeClass('hidden');
 		$('input[data-le="' + le + '"]').each(function () {
 			var value = $(this).val();
             
@@ -203,12 +204,17 @@ $(document).ready(function () {
 		var le = $that.attr('data-le');
 
 		$('[data-le="' + le + '"]').addClass('disabled');
+        $('[data-link="' + le + '"]').addClass('hidden');
         
 		if ($that.hasClass('le-cancel')) {
 			$('input[data-le="' + le + '"]').each(function () {
 				var value = $(this).attr('placeholder');
                 
 				$(this).prop('disabled', true).addClass('disabled').val(value);
+                
+                if ($(this).hasClass('removable') && $(this).val().length == 0 && $(this).prop('placeholder').length == 0) {
+                    $(this).remove();
+                }
 			});
 		} else {
             var data = {'action': $that.data('action')};
@@ -229,10 +235,18 @@ $(document).ready(function () {
                             $(this).prop('disabled', true).addClass('disabled').val($(this).attr('placeholder'));
                         });
                         // show error popup
+                        
+                        $('input[data-le="' + le + '"]').each(function () {
+                            if ($(this).hasClass('removable') && $(this).val().length == 0) {
+                                $(this).remove();
+                            }
+                        });
                     }
                 }
             });
 		}
+        
+       
         
 		$(this).closest('div').find('.le-start').removeClass('disabled');
 		$(this).closest('div').find('.le-end').addClass('disabled');
@@ -240,6 +254,18 @@ $(document).ready(function () {
 		return false;
 	});
 
+	$('.card-image__container > img').draggable({
+		revert: 'invalid',
+		helper: 'clone',
+		cursor: "move",
+		cursorAt: { top: 25, left: 25}
+	});
+	$(".lightboxes__item").droppable({
+		drop:function(event, ui){
+			$(this).addClass("newItemAdded");
+			console.log('Элемент попал в коллекцию')
+		}
+	});
 });
 
 

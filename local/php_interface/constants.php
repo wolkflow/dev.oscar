@@ -120,7 +120,10 @@ define('PERSON_TYPE_DEFAULT', 1);
 /*
  * Платежная система.
  */
-define('PAYSYSTEM_DEFAULT', 9);
+define('PAYSYSTEM_DEFAULT',   2);
+
+define('PAYSYSTEM_ACCOUNT',   1);
+define('PAYSYSTEM_ROBOKASSA', 2);
 
 
 /*
