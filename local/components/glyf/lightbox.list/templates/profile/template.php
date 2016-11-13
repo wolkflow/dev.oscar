@@ -68,14 +68,25 @@
             </div>
         <? } ?>
         
-        <div class="cabinet-lightbox cabinet-lightbox--new">
+        <div class="cabinet-lightbox cabinet-lightbox--new newLightboxForm">
             <div class="cabinet-lightbox__title clearfix">
                 <span>Создать новый</span>
                 <span class="plus">+</span>
             </div>
             <div class="cabinet-lightbox__content">
+                <div class="le disabled" data-le="lightbox_new">
+                    <form action="">
+                        <div class="newLightboxForm-field">
+                            <div class="cabinet-profile__block-field-value">
+                                <input type="text" name="" class="le" data-le="lightbox_new" value="" placeholder="Введите название">
+                            </div>
+                        </div>
+                    </form>
+                </div>
                 <div class="cabinet-lightbox__new">
-                    <a href="#">+</a>
+                    <a href="javascript:void(0)" data-le="lightbox_new" class="le le-start">+</a>
+                    <a class="btn btn-light btn-filter_edit le le-end disabled" href="javascript:void(0)" data-le="lightbox_new">Сохранить</a>
+                    <a class="btn btn-light btn-filter_edit le le-end le-cancel disabled" href="javascript:void(0)" data-le="lightbox_new">Отменить</a>
                 </div>
             </div>
         </div>

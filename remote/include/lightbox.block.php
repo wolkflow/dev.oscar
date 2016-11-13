@@ -13,12 +13,18 @@ require ($_SERVER['DOCUMENT_ROOT'] . '/bitrix/modules/main/include/prolog_before
 // Запрос.
 $request = Bitrix\Main\Application::getInstance()->getContext()->getRequest();
 
-$lid  = $request->get('lid');
+$lid = $request->get('lid');
+$tpl = $request->get('tpl');
+
+if (!in_array($tpl, array('side', 'sidesmall'))) {
+    $tpl = 'sidesmall';
+}
+
 
 // Статистика по папке.					
 $APPLICATION->IncludeComponent(
     "glyf:lightbox.block",
-    "sidesmall",
+    $tpl,
     array(
         "LID" => intval($lid),
     )

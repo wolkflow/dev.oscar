@@ -236,7 +236,6 @@ switch ($action) {
         if (!$lightbox->addPicture($pid)) {
             jsonresponse(false, 'Ошибка добавления картины');
         }
-        
         jsonresponse(true);
         break;
     

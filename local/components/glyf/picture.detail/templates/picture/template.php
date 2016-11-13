@@ -26,13 +26,18 @@
             <div class="col-md-8 col-sm-7">
                 <div class="card-image__container">
                     <? $src = (true) ? ($arResult['PICTURE']['IMAGE_PREVIEW_SRC']) : ($arResult['PICTURE']['IMAGE_PREVIEW_WATERMAK_SRC']) ?>
-                    <img src="<?= $src ?>" alt="<?= $arResult['PICTURE'][Picture::FIELD_LANG_TITLE_SFX . CURRENT_LANG_UP] ?>" style="max-height: 545px;" />
+                    <img 
+                        src="<?= $src ?>" 
+                        alt="<?= $arResult['PICTURE'][Picture::FIELD_LANG_TITLE_SFX . CURRENT_LANG_UP] ?>" 
+                        style="max-height: 545px;"
+                        data-pid="<?= $arResult['PICTURE'][Picture::FIELD_ID] ?>"
+                    />
                     <div class="card-image__buttons">
                         <? if ($arResult['PICTURE'][Picture::FIELD_LEGAL] == Picture::PROP_LEGAL_FULL_ID) { ?>
                             <a class="card-image__button card-image__button--copyright" href="javascript:void(0)"></a>
                         <? } ?>
-                        <a class="card-image__button card-image__button--add" href="#"></a>
-                        <a class="card-image__button card-image__button--cart" href="#"></a>
+                        <a class="card-image__button card-image__button--add js-add-to-lightbox" href="javascript:void(0)" data-pid="<?= $arResult['PICTURE'][Picture::FIELD_ID] ?>"></a>
+                        <a class="card-image__button card-image__button--cart js-add-to-cart" href="javascript:void(0)" data-pid="<?= $arResult['PICTURE'][Picture::FIELD_ID] ?>"></a>
                     </div>
                 </div>
                 <div class="card-description">

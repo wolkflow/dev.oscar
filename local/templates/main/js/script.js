@@ -198,7 +198,10 @@ $(document).ready(function () {
 		$('input[data-le="' + le + '"]').each(function () {
 			var value = $(this).val();
             
-			$(this).prop('disabled', false).attr('placeholder', value).removeClass('disabled');
+			$(this).prop('disabled', false).removeClass('disabled');
+			if(value.length > 0) {
+				$(this).attr('placeholder', value)
+			}
 		});
 		$(this).closest('div').find('.le-start').addClass('disabled');
 		$(this).closest('div').find('.le-end').removeClass('disabled').attr('data-le', le);
@@ -259,6 +262,7 @@ $(document).ready(function () {
 		}
         
 		$(this).closest('div').find('.le-start').removeClass('disabled');
+		console.log($(this).closest('div'))
 		$(this).closest('div').find('.le-end').addClass('disabled');
 
 		return false;
@@ -270,10 +274,14 @@ $(document).ready(function () {
 		cursor: "move",
 		cursorAt: { top: 35, left: 35}
 	});
+    
 	$(".lightboxes__item").droppable({
-		drop:function(event, ui){
-			$(this).addClass("newItemAdded");
-			console.log('Элемент попал в коллекцию')
+		drop:function(event, ui) {
+            var $that = $(this);
+            var $item = ui.draggable;
+            
+            $that.addClass('newItemAdded');
+			addPictureToLignhbox($item.data('pid'), $that.data('lid'), 'side');
 		}
 	});
 });

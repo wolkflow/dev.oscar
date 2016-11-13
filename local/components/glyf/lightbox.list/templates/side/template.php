@@ -15,12 +15,13 @@
         <? if (CUser::IsAuthorized()) { ?>
 
             <div class="lightboxes">
+                <? $first = true ?>
                 <? foreach ($arResult['LIGHTBOXES'] as $item) { ?>
-                    <div id="js-side-lightbox-<?= $item['ID'] ?>-id" class="lightboxes__item js-lightbox" data-lid="<?= $item['ID'] ?>">
-                        <div class="lightboxes__item-title is-expanded" data-collapse-target="lightbox-<?= $item['ID'] ?>">
+                    <div id="js-side-lightbox-<?= $item['ID'] ?>-id" class="lightboxes__item js-lightbox <?= ($first) ? ('js-acitve-lightbox') : ('') ?>" data-lid="<?= $item['ID'] ?>">
+                        <div class="lightboxes__item-title <?= ($first) ? ('is-expanded') : ('') ?>" data-collapse-target="lightbox-<?= $item['ID'] ?>">
                             <?= $item['UF_TITLE'] ?>
                         </div>
-                        <div class="lightboxes__item-content" data-collapse-block="lightbox-<?= $item['ID'] ?>">
+                        <div class="lightboxes__item-content js-lightbox-content <?= ($first) ? ('') : ('collapsed') ?>" data-collapse-block="lightbox-<?= $item['ID'] ?>">
                             <div class="lightboxes__item-pictures js-lightbox-pictures">
                                 <? if (!empty($item['PICTURES'])) { ?>
                                     <? $chunks = array_chunk($item['PICTURES'], 3) ?>
@@ -53,6 +54,7 @@
                             </div>
                         </div>
                     </div>
+                    <? $first = false ?>
                 <? } ?>
 
                 <div class="lightboxes__item">

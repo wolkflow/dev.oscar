@@ -107,6 +107,15 @@ class Lightbox extends HLBlockModel
      */
     public function addPicture($pid)
     {
+        $result = LightboxPicture::getList(array(
+            'filter' => array(LightboxPicture::FIELD_LIGHTBOX => $this->getID(), LightboxPicture::FIELD_PICTURE => $pid), 
+            'limit'  => 1
+        ), false);
+        
+        if ($result->getSelectedRowsCount() > 0) {
+            return true;
+        }
+        
         $lightpic = new LightboxPicture();
         $result   = $lightpic->add(array(
             'UF_LIGHTBOX' => $this->getID(),
@@ -114,7 +123,7 @@ class Lightbox extends HLBlockModel
             'UF_TIME'     => date('d.m.Y H:i:s')
         ));
         
-        return $result->isSuccess();
+        return $result;
     }
     
     

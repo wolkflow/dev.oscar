@@ -1,4 +1,42 @@
+
+// Добавление изображение в сборник.
+function addPictureToLignhbox(pid, lid, tpl)
+{
+    pid = parseInt(pid);
+    lid = parseInt(lid);
+    
+    $.ajax({
+        url: '/remote/',
+        dataType: 'json',
+        data: {'action': 'add-to-lightbox', 'pid': pid, 'lid': lid},
+        success: function(response) {
+            if (response.status) {
+                $.ajax({
+                    url: '/remote/',
+                    type: 'post',
+                    data: {'action': 'get-html', 'inc': 'lightbox.block', 'pid': pid, 'lid': lid, 'tpl': tpl},
+                    dataType: 'json',
+                    success: function(response) {
+                        if (response.status) {
+                            $('#js-side-lightbox-' + lid + '-id .js-lightbox-content').html(response.data['html']);
+                        }
+                    }
+                });
+            }
+        }
+    });
+}
+
+
 $(document).ready(function() {
+    
+    $(document).on('click', '.js-add-to-lightbox', function() {
+        var $lightbox = $('.js-acitve-lightbox');
+        
+        addPictureToLignhbox($(this).data('pid'), $lightbox.data('lid'), 'side');
+    });
+    
+    
     $('#js-param-place-country-id').on('keydown', function(event) {
         $('#js-param-country-id').val('');
         $('#js-param-city-id').val('');

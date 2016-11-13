@@ -2651,7 +2651,7 @@ input[type=text].le.disabled {
   text-align: center;
   overflow: hidden; }
 
-.cabinet-lightbox__new a{
+.cabinet-lightbox__new a.le-start{
   display: table-cell;
   width: 100%;
   height: 100%;
@@ -2659,7 +2659,12 @@ input[type=text].le.disabled {
   font-size: 80px;
   text-decoration: none !important;
   color: white; }
-
+.cabinet-lightbox__new a.le-start:hover {
+  color: #00c3d9;
+}
+.newLightboxForm .btn-filter_edit {
+  border: 1px solid #00c3d9;
+}
 @media (max-width: 767px){
   .cabinet-block-lightboxesmobile .cabinet-lightbox{
     width: 100%; }
@@ -5834,4 +5839,11 @@ input.input-error:not(.disabled) {
 }
 .ui-droppable-hover .lightboxes__item-content:after {
  opacity: 1;
+}
+.newLightboxForm-field {
+  margin-bottom: 25px;
+}
+.newLightboxForm-field input[type=text] {
+  background: #fff;
+  font-weight: 400 !important;
 }
