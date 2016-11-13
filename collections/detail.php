@@ -15,7 +15,6 @@
     <div class="content">
         <div class="container">
             <div class="row flex">
-                
                 <?  // Картина.
                     $APPLICATION->IncludeComponent(
                         "glyf:picture.detail",
@@ -31,7 +30,6 @@
                         array()
                     );
                 ?>
-                
             </div>
         </div>
     </div>

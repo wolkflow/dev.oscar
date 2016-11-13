@@ -5813,6 +5813,7 @@ input.input-error:not(.disabled) {
 .ui-draggable-dragging {
 	width: 70px !important;
 	height: 70px !important;
+	z-index: 557;
 }
 .lightboxes__item-title {position: relative;z-index: 2;}
 

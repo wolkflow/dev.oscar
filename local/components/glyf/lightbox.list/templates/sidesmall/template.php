@@ -15,11 +15,10 @@
     <div class="lightboxes">
         <? foreach ($arResult['LIGHTBOXES'] as $item) { ?>
             <div id="js-side-lightbox-<?= $item['ID'] ?>-id" class="lightboxes__item js-lightbox" data-lid="<?= $item['ID'] ?>">
-            
-                <div class="lightboxes__item-title is-expanded" data-collapse-target="lightboxes1">
+                <div class="lightboxes__item-title is-expanded" data-collapse-target="<?= $item['ID'] ?>"> <? // добавь класс is-expanded Первому в списке ?>
                     <?= $item['UF_TITLE'] ?>
                 </div>
-                <div class="lightboxes__item-content" data-collapse-block="lightboxes1">
+                <div class="lightboxes__item-content collapsed" data-collapse-block="<?= $item['ID'] ?>"> <? // убери класс collapsed у первого в списке ?>
                     <div class="lightboxes__item-pictures js-lightbox-pictures">
                         <? if (!empty($item['PICTURES'])) { ?>
                             <? $chunks = array_chunk($item['PICTURES'], 3) ?>

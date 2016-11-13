@@ -29,9 +29,11 @@
                                         <? if (!empty($subsection['CHILDREN'])) { ?>
                                             <ul>
                                                 <? foreach ($subsection['CHILDREN'] as $subsubsection) { ?>
-                                                     <a href="<?= $subsubsection['DETAIL_PAGE_URL'] ?>">
-                                                        <?= $subsubsection['UF_LANG_TITLE_'.CURRENT_LANG_UP] ?>
-                                                    </a>
+                                                    <li>
+                                                        <a href="<?= $subsubsection['DETAIL_PAGE_URL'] ?>">
+                                                            <?= $subsubsection['UF_LANG_TITLE_'.CURRENT_LANG_UP] ?>
+                                                        </a>
+                                                    </li>
                                                 <? } ?>
                                             </ul>
                                         <? } ?>

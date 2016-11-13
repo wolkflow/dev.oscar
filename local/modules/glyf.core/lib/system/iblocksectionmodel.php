@@ -83,6 +83,16 @@ class IBlockSectionModel extends Model
     }
     
     
+    public static function getCount($filter = array())
+    {
+        $result = self::getList(array('filter' => $filter), false);
+        $count  = $result->SelectedRowsCount();
+        
+        return intval($count);
+    }
+    
+    
+    
     /**
      * @param array $params
      * @return \CIBlockResult|int

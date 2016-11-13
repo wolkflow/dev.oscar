@@ -149,6 +149,22 @@ class HLBlockModel extends Model
 	}
     
     
+    /**
+	 * Получение количества элементов.
+	 *
+	 * @param array $params
+	 */
+	public static function getCount($params = array())
+	{
+		$entity = self::getEntityClassName();
+		$result = $entity::getList($params);
+        $count  = $result->getSelectedRowsCount();
+        
+        return intval($count);
+	}
+    
+    
+    
     protected static function getEntityGateway()
     {
         if (!static::$gateway) {

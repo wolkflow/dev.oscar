@@ -22,12 +22,29 @@ class MainMenuComponent extends \CBitrixComponent
 		
 		Loader::includeModule('glyf.core');
 		
-		$this->arResult = array(
-			'COUNT_COLLECTIONS' => 30,
-			'COUNT_OBJECTS'     => 345000,
-			'COUNT_SUBSCRIBES'  => 10,
-			'COUNT_ARTICLES'    => 195,
-		);
+        $cache = new CPHPCache();
+        $ctime = 86400;
+        $ccode = 'main-counts';
+        $cpath = '/onpage/';
+        
+        if (0 && $ctime > 0 && $cache->InitCache($ctime, $ccode, $cpath)) {
+            $this->arResult = $cache->getVars();
+        } else {
+            $result = CIBlockElement::getList(array(), array('IBLOCK_ID' => IBLOCK_BLOG_ID, 'ACTIVE' => 'Y'));
+            $bcount = (int) $result->SelectedRowsCount();
+            
+            $this->arResult = array(
+                'COUNT_COLLECTIONS' => Glyf\Oscar\Collection::getCount(array('IBLOCK_ID' => IBLOCK_COLLECTIONS_ID, 'DEPTH_LEVEL' => 1)),
+                'COUNT_OBJECTS'     => Glyf\Oscar\Picture::getCount(),
+                'COUNT_SUBSCRIBES'  => Glyf\Oscar\Subscribe::getCount(),
+                'COUNT_ARTICLES'    => $bcount,
+            );
+            
+            if ($cache->StartDataCache()) {
+                 $cache->EndDataCache($this->arResult);
+            }
+        }
+        
 		
 		$this->includeComponentTemplate();
 	}

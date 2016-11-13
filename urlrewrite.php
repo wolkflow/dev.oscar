@@ -54,13 +54,13 @@ $arUrlRewrite = array(
 	),
     array(
 		"CONDITION" => "#^/collections/(.+?)/(.+?)/(.+?)/#",
-		"RULE" => "SECTION=\$1&PATH[]=\$1&PATH[]=\$2&PATH[]=\$3&",
+		"RULE" => "SECTION=\$3&PATH[]=\$1&PATH[]=\$2&PATH[]=\$3&",
 		"ID" => "",
 		"PATH" => "/collections/index.php",
 	),
     array(
 		"CONDITION" => "#^/collections/(.+?)/(.+?)/#",
-		"RULE" => "SECTION=\$1&PATH[]=\$1&PATH[]=\$2&",
+		"RULE" => "SECTION=\$2&PATH[]=\$1&PATH[]=\$2&",
 		"ID" => "",
 		"PATH" => "/collections/index.php",
 	),

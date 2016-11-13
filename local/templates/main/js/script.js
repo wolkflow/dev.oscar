@@ -83,13 +83,18 @@ $(document).ready(function () {
 	});
 
 	$('[data-collapse-target]').on('click', function(){
-		var target = $('[data-collapse-block='+$(this).data('collapse-target')+']');
-		$(this).toggleClass('is-expanded');
-		$(target).slideToggle(300, function(){
-			$(target).toggleClass('collapsed')
-		});
-
-		return false;
+		if(!$(this).hasClass('is-expanded')) {
+			var target = $('[data-collapse-block='+$(this).data('collapse-target')+']');
+			$('[data-collapse-target]').removeClass('is-expanded');
+			$('[data-collapse-block]').slideUp(200);
+			$(this).addClass('is-expanded');
+			$(target).slideDown(200, function(){
+				$(target).removeClass('collapsed');
+			});
+			$('.js-acitve-lightbox').removeClass('js-acitve-lightbox');
+			$(this).parent().addClass('js-acitve-lightbox')
+			return false;
+		}
 	});
 
 	$('.cabinet-panel__toggler').on('click', function(){
@@ -202,7 +207,7 @@ $(document).ready(function () {
 	$('a.le-end').on('click', function() {
         var $that = $(this);
 		var le = $that.attr('data-le');
-        
+
 		$('[data-le="' + le + '"]').addClass('disabled');
         $('[data-link="' + le + '"]').addClass('hidden');
         
@@ -217,10 +222,6 @@ $(document).ready(function () {
                 }
 			});
 		} else {
-            // Callback-функция.
-            var callback = $that.data('callback');
-            
-            // Данные.
             var data = {'action': $that.data('action')};
             
 			$('input[data-le="' + le + '"]').each(function () {
@@ -228,7 +229,6 @@ $(document).ready(function () {
 				$(this).prop('disabled', true).addClass('disabled');
 			});
             
-            // Запрос.
             $.ajax({
                 url: '/remote/',
                 type: 'post',
@@ -247,9 +247,6 @@ $(document).ready(function () {
                             }
                         });
                     }
-                    if (callback && typeof window[callback] == 'function') {
-                        window[callback](response);
-                    }
                 }
             });
 		}
@@ -262,11 +259,11 @@ $(document).ready(function () {
 		return false;
 	});
 
-	$('.card-image__container > img').draggable({
+	$('.card-image__container > img, .lightboxes-setImage > img').draggable({
 		revert: 'invalid',
 		helper: 'clone',
 		cursor: "move",
-		cursorAt: { top: 25, left: 25}
+		cursorAt: { top: 35, left: 35}
 	});
 	$(".lightboxes__item").droppable({
 		drop:function(event, ui){

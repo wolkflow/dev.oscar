@@ -71,7 +71,7 @@ class IBlockSection
 	 *
 	 * @param int $ID
 	 */
-	public static function GetByID($ID)
+	public static function getByID($ID)
 	{
 		$ID = (int) $ID;
 	
