@@ -50,17 +50,19 @@
 })(jQuery);
 
 
+
+// Фкниция вызова ошибки.
+function error(title, text)
+{
+    $('#js-error-popup-title-id').html(title);
+    $('#js-error-popup-text-id').html(text);
+    
+    $('#error').arcticmodal();
+}
+
+
+
 $(document).ready(function () {
-    
-    // Фкниция вызова ошибки.
-    function error(title, text)
-    {
-        $('#js-error-popup-title-id').html(title);
-        $('#js-error-popup-text-id').html(text);
-        
-        $('#error').arcticmodal();
-    }
-    
     
 	$(function () {
 		var pull = $('#pull'),
@@ -223,7 +225,8 @@ $(document).ready(function () {
 			});
 		} else {
             var data = {'action': $that.data('action')};
-            
+            var callback = $that.data('callback');
+
 			$('input[data-le="' + le + '"]').each(function () {
                 data[$(this).prop('name')] = $(this).val();
 				$(this).prop('disabled', true).addClass('disabled');
@@ -247,11 +250,13 @@ $(document).ready(function () {
                             }
                         });
                     }
+                    
+                    if (callback.length > 0 && typeof window[callback] == 'function') {
+                        window[callback](response);
+                    }
                 }
             });
 		}
-        
-       
         
 		$(this).closest('div').find('.le-start').removeClass('disabled');
 		$(this).closest('div').find('.le-end').addClass('disabled');

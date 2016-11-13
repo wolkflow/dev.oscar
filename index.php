@@ -11,7 +11,6 @@
 ?>
 
 <main class="siteMain">
-	
 	<? // Главное меню.
 		$APPLICATION->IncludeComponent(
 			"glyf:main.menu",

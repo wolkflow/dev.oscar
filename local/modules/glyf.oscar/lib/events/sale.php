@@ -31,10 +31,10 @@ class Sale
                 \CSaleUserAccount::UpdateAccount(
                     $user->getID(),
                     $user->getBalance() + floatval($data['PRICE']),
-                    "USD",
+                    CURRENCY_DEFAULT,
                     'BALANCE',
                     $order->getID()
-                ));
+                );
             }
         }
     }

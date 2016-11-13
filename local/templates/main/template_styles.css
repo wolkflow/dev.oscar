@@ -2567,7 +2567,7 @@ input[type=text].le.disabled {
 }
 .errorCode {
   font-size: 18px;
-  font-weight: 700;
+  font-weight: 400;
   margin-bottom: 20px;
 }
 .cabinet-lightboxes-list{

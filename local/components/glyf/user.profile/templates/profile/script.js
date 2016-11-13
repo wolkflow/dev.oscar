@@ -1,6 +1,10 @@
 function cPayBalance(response)
 {
-    console.log('CALLBACK:', response);
+    if (response.status) {
+        location.href = response.data['link'];
+    } else {
+        error(response.message);
+    }
 }
 
 $(document).ready(function() {
