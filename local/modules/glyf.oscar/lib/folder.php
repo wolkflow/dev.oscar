@@ -65,13 +65,21 @@ class Folder extends HLBlockModel
      */
     protected function onDelete()
     {
+        $pictures = Picture::getList(array(
+            'filter' => array(Picture::FIELD_FOLDER => $this->getID())
+        ));
+        
+        foreach ($pictures as $picture) {
+            $picture->delete();
+        }
+        /*
         $connection = \Bitrix\Main\Application::getConnection();
         
         $sql = "
             DELETE FROM `g_pictures`
             WHERE `" . Picture::FIELD_FOLDER . "` = '" . $this->getID() . "'
         ";
-        
+        */
         $result = $connection->query($sql);
     }
 }
