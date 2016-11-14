@@ -97,7 +97,7 @@
                         <div class="cabinet-profile__block-buttons">
                             <a class="btn btn-light btn-filter_edit le le-start" href="javascript:void(0)" data-le="email">Изменить логин</a>
                             <a class="btn btn-light btn-filter_edit le le-start" href="javascript:void(0)" data-le="password">Изменить пароль</a>
-                            <a class="btn btn-light btn-filter_edit btn-filter_edit-small le le-end disabled" data-action="update-user-email" href="javascript:void(0)">Сохранить</a>
+                            <a class="btn btn-light btn-filter_edit btn-filter_edit-small le le-end le-save disabled" data-action="update-user-email" href="javascript:void(0)">Сохранить</a>
                             <a class="btn btn-light btn-filter_edit btn-filter_edit-small le le-end le-cancel disabled" href="javascript:void(0)">Отменить</a>
                         </div>
                     </div>

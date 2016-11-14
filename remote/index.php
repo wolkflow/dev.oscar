@@ -238,6 +238,36 @@ switch ($action) {
         }
         jsonresponse(true);
         break;
+        
+    
+    // Создание сборника.
+    case ('create-lightbox'):
+        $title = (string) $request->get('title');
+        
+        // Пользователь.
+        $user = new Glyf\Oscar\User();
+        
+        $result = Glyf\Oscar\Lightbox::getList(array(
+            'filter' => array(Glyf\Oscar\Lightbox::FIELD_TITLE => $title, Glyf\Oscar\Lightbox::FIELD_USER => $user->getID()),
+            'limit'  => 1
+        ), false);
+        
+        if ($result->getSelectedRowsCount() > 0) { 
+            jsonresponse(false, 'Сборник с таким названием уже существует');
+        }
+        
+        // Сборник.
+        $lightbox = new Glyf\Oscar\Lightbox();
+        $data = array(
+            Glyf\Oscar\Lightbox::FIELD_TITLE => $title,
+            Glyf\Oscar\Lightbox::FIELD_USER  => $user->getID(),
+            Glyf\Oscar\Lightbox::FIELD_TIME  => date('d.m.Y H:i:s')
+        );
+        if (!$lightbox->add($data)) {
+            jsonresponse(false, 'Ошибка создания сборника');
+        }
+        jsonresponse(true);
+        break;
     
     
     // Удаление сборников.
@@ -617,6 +647,9 @@ switch ($action) {
                 break;
             case ('user.statistic.objects'):
                 $html = gethtmlremote('user.statistic.objects.php');
+                break;
+            case ('lightbox.list'):
+                $html = gethtmlremote('lightbox.list.php');
                 break;
             case ('user.lightbox'):
                 $html = gethtmlremote('user.lightbox.php');

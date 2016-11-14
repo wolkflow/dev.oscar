@@ -1,5 +1,7 @@
 <?php
 
+$MESS['GL_LAIGHTBOX_PICTURES_NO_FOUND'] = 'Сборник пуст';
+
 $MESS['GL_PERSONAL_CABINET'] = 'Личный кабинет';
 $MESS['GL_PERSONAL_CATALOG'] = 'Каталог';
 

@@ -58,7 +58,7 @@ class Lightbox extends HLBlockModel
         if (!empty($limit)) {
             $sql .= " LIMIT " . intval($limit);
             
-            if (!empty($offset)) {
+            if (!empty($offset) && $offset > 0) {
                 $sql .= " OFFSET " . intval($offset);
             }
         }

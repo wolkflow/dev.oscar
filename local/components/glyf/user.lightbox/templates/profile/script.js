@@ -70,7 +70,7 @@ $(document).ready(function() {
                         dataType: 'json',
                         success: function(response) {
                             if (response.status) {
-                                $('#js-side-lightbox-' + lid + '-id').html(response.data['html']);
+                                $('#js-side-lightbox-' + lid + '-id .js-lightbox-content').html(response.data['html']);
                             }
                         }
                     });

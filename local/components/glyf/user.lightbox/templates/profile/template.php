@@ -79,7 +79,9 @@
                 </div>
             </div>
         <? } else { ?>
-            <p><?= getMessage('GL_LAIGHTBOX_PICTURES_NO_FOUND') ?></p>
+            <div class="lightbox-empty">
+                <?= getMessage('GL_LAIGHTBOX_PICTURES_NO_FOUND') ?>
+            </div>
         <? } ?>
     </div>
 <? } else { ?>

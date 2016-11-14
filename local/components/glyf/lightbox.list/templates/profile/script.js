@@ -1,3 +1,22 @@
+function cCreateLightbox(response)
+{
+    if (response.status) {
+        $.ajax({
+            url: '/remote/',
+            type: 'post',
+            data: {'action': 'get-html', 'inc': 'lightbox.list'},
+            dataType: 'json',
+            success: function(response) {
+                if (response.status) {
+                    $('#js-porfile-lightboxes-wrapper-id').html(response.data['html']);
+                }
+            }
+        });
+    } else {
+        error('', response.message);
+    }
+}
+
 $(document).ready(function() {
     $('#js-personal-lightbox-delete-id').on('click', function() {
         var lids = [];

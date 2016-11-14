@@ -191,7 +191,7 @@ $(document).ready(function () {
     
 	// Live Edit
 
-	$('a.le-start').on('click', function(){
+	$(document).on('click', 'a.le-start', function() {
 		var le = $(this).data('le');
 		$('[data-le="' + le + '"]').removeClass('disabled');
         $('[data-link="' + le + '"]').removeClass('hidden');
@@ -205,11 +205,16 @@ $(document).ready(function () {
 		});
 		$(this).closest('div').find('.le-start').addClass('disabled');
 		$(this).closest('div').find('.le-end').removeClass('disabled').attr('data-le', le);
+		if(le == 'email') {
+			$('.le-save').attr('data-action', 'update-user-email')
+		} else if (le == 'password') {
+			$('.le-save').attr('data-action', 'update-user-password')
+		}
 
 		return false;
 	});
     
-	$('a.le-end').on('click', function() {
+    $(document).on('click', 'a.le-end', function() {
         var $that = $(this);
 		var le = $that.attr('data-le');
 
@@ -254,7 +259,7 @@ $(document).ready(function () {
                         });
                     }
                     
-                    if (callback.length > 0 && typeof window[callback] == 'function') {
+                    if (callback && typeof window[callback] == 'function') {
                         window[callback](response);
                     }
                 }
