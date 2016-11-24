@@ -209,6 +209,8 @@ $(document).ready(function () {
 			$('.le-save').attr('data-action', 'update-user-email')
 		} else if (le == 'password') {
 			$('.le-save').attr('data-action', 'update-user-password')
+		} else if (le == 'new_folder') {
+			$('body').addClass('le-active');
 		}
 
 		return false;
@@ -217,6 +219,7 @@ $(document).ready(function () {
     $(document).on('click', 'a.le-end', function() {
         var $that = $(this);
 		var le = $that.attr('data-le');
+	    $('body').removeClass('le-active');
 
 		$('[data-le="' + le + '"]').addClass('disabled');
         $('[data-link="' + le + '"]').addClass('hidden');
@@ -267,11 +270,19 @@ $(document).ready(function () {
 		}
         
 		$(this).closest('div').find('.le-start').removeClass('disabled');
-		console.log($(this).closest('div'))
 		$(this).closest('div').find('.le-end').addClass('disabled');
 
 		return false;
 	});
+
+		$(document).mouseup(function (e) {
+			if($('body').hasClass('le-active')) {
+				var container = $('.le-new-folder');
+				if (container.has(e.target).length === 0){
+					container.find('.le-cancel').click();
+				}
+			}
+		});
 
 	$('.card-image__container > img, .lightboxes-setImage > img').draggable({
 		revert: 'invalid',
@@ -289,6 +300,7 @@ $(document).ready(function () {
 			addPictureToLignhbox($item.data('pid'), $that.data('lid'), 'side');
 		}
 	});
+
 });
 
 
