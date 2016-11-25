@@ -69,8 +69,10 @@ class Folder extends HLBlockModel
             'filter' => array(Picture::FIELD_FOLDER => $this->getID())
         ));
         
-        foreach ($pictures as $picture) {
-            $picture->delete();
+        if (!empty($pictures)) {
+            foreach ($pictures as $picture) {
+                $picture->delete();
+            }
         }
         /*
         $connection = \Bitrix\Main\Application::getConnection();
@@ -80,6 +82,6 @@ class Folder extends HLBlockModel
             WHERE `" . Picture::FIELD_FOLDER . "` = '" . $this->getID() . "'
         ";
         */
-        $result = $connection->query($sql);
+        // $result = $connection->query($sql);
     }
 }

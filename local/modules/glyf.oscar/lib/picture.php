@@ -131,7 +131,7 @@ class Picture extends HLBlockModel
     
     
     // Размеры дял превью.
-    const IMAGE_WATERMARK_PATH   = '/images/img/watermark.png';
+    const IMAGE_WATERMARK_PATH   = '/local/templates/main/images/watermark.png';
     const IMAGE_WATERMARK_WIDTH  = 66;
     const IMAGE_WATERMARK_HEIGHT = 45;
     const IMAGE_PREVIEW_WIDTH    = 1000;

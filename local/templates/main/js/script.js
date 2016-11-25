@@ -205,7 +205,7 @@ $(document).ready(function () {
 		});
 		$(this).closest('div').find('.le-start').addClass('disabled');
 		$(this).closest('div').find('.le-end').removeClass('disabled').attr('data-le', le);
-		if(le == 'email') {
+		if (le == 'email') {
 			$('.le-save').attr('data-action', 'update-user-email')
 		} else if (le == 'password') {
 			$('.le-save').attr('data-action', 'update-user-password')
@@ -237,7 +237,7 @@ $(document).ready(function () {
 		} else {
             var data = {'action': $that.data('action')};
             var callback = $that.data('callback');
-
+            
 			$('input[data-le="' + le + '"]').each(function () {
                 data[$(this).prop('name')] = $(this).val();
 				$(this).prop('disabled', true).addClass('disabled');
@@ -253,7 +253,9 @@ $(document).ready(function () {
                         $('input[data-le="' + le + '"]').each(function () {
                             $(this).prop('disabled', true).addClass('disabled').val($(this).attr('placeholder'));
                         });
-                        // show error popup
+                        
+                        // Вывод ошибки.
+                        error(response.message);
                         
                         $('input[data-le="' + le + '"]').each(function () {
                             if ($(this).hasClass('removable') && $(this).val().length == 0) {
@@ -275,14 +277,14 @@ $(document).ready(function () {
 		return false;
 	});
 
-		$(document).mouseup(function (e) {
-			if($('body').hasClass('le-active')) {
-				var container = $('.le-new-folder');
-				if (container.has(e.target).length === 0){
-					container.find('.le-cancel').click();
-				}
-			}
-		});
+    $(document).mouseup(function (e) {
+        if ($('body').hasClass('le-active')) {
+            var container = $('.le-new-folder');
+            if (container.has(e.target).length === 0) {
+                container.find('.le-cancel').click();
+            }
+        }
+    });
 
 	$('.card-image__container > img, .lightboxes-setImage > img').draggable({
 		revert: 'invalid',

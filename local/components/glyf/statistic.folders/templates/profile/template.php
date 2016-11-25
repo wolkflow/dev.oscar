@@ -25,28 +25,28 @@
         <ul class="cabinet-panel__menu">
             <li>
                 <div>
-                    <span class="le-new-folder le disabled" data-le="new_folder" >
-                        <input type="text" data-le="new_folder" class="le disabled">
-                        <a href="javascript:void(0)" class="le le-end is-active" data-le="new_folder">OK</a>
-                        <a href="javascript:void(0)" class="le le-end le-cancel" data-le="new_folder"></a>
+                    <span class="le-new-folder le disabled" data-le="addfolder">
+                        <input type="text" name="title" id="js-folder-title-id" data-le="addfolder" class="le disabled" />
+                        <a href="javascript:void(0)" class="le le-end is-active" data-le="addfolder" data-action="add-folder" data-callback="cAddFolder">OK</a>
+                        <? /* <a href="javascript:void(0)" class="le le-end le-cancel" data-le="addfolder"></a> */ ?>
                     </span>
-                    <a class="is-active le le-start" data-le="new_folder" href="#">добавить коллекцию</a>
+                    <a class="is-active le le-start" data-le="addfolder" href="javascipt:void(0)">добавить коллекцию</a>
                 </div>
             </li>
             <li>
                 <a class="is-active" href="javascript:void(0)" id="js-check-all-id" data-selector=".js-checkbox">выделить всё</a>
             </li>
             <li>
-                <a class="hidden-sm" href="#">сохранить пдф</a>
+                <a class="hidden-sm js-dependence-chekbox-button" href="javascipt:void(0)">сохранить пдф</a>
             </li>
             <li>
-                <a class="is-active" href="#">отправить по email</a>
+                <a class="js-dependence-chekbox-button" href="javascipt:void(0)">отправить по email</a>
             </li>
             <li>
-                <a class="is-active hidden-sm" href="#">печать</a>
+                <a class="hidden-sm js-dependence-chekbox-button" href="javascipt:void(0)">печать</a>
             </li>
             <li>
-                <a class="" href="#">удалить</a>
+                <a id="js-remove-folders-id" class="js-dependence-chekbox-button" href="javascipt:void(0)">удалить</a>
             </li>
             <li>
                 <div class="cabinet-panel__menu-pages hidden-xs">

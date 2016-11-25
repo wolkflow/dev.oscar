@@ -90,16 +90,17 @@ class PictureUpload extends \CBitrixComponent
             // Данные.
             $this->arResult['DATA'] = $request->getPostList();
             
-            $success = false;
             try {
-                $success = $this->arResult['FIELDS'] = $this->process($this->arResult['DATA']);
+                $pid = $this->process($this->arResult['DATA']);
             } catch (Exception $e) {
                 $this->arResult['ERRORS'] []= $e->getMessage();
             }
-            $this->arResult['SUCCESS'] = $success;
             
-            if ($success) {
-                $picture->load(true);
+            if ($pid > 0) {
+                $this->arResult['SUCCESS'] = true;
+                
+                $picture = new Glyf\Oscar\Picture($pid);
+                
                 $this->arResult['DATA'] = $this->convert($picture);
             }
         }
@@ -237,6 +238,12 @@ class PictureUpload extends \CBitrixComponent
             $fields[Picture::FIELD_FOLDER] = $folder->getID();
         } else {
             $fields[Picture::FIELD_FOLDER] = (int) $data['FOLDER_ID'];
+            
+            $folder = new Glyf\Oscar\Folder($fields[Picture::FIELD_FOLDER]);
+            
+            if (!$folder->exists()) {
+                throw new Glyf\Core\System\Exception('Папка не найдена');
+            }
         }
         
         
@@ -426,16 +433,10 @@ class PictureUpload extends \CBitrixComponent
             $result  = $picture->update($fields);
         }
         
-        $success = false;
-        
         if (!$result) {
         	throw new Glyf\Core\System\Exception('Не удалось сохранить данные');
-		} else {
-            // SUCCESS .
-            $success = true;
-        }
-        
-        return $success;
+		}
+        return $result;
     }
     
     

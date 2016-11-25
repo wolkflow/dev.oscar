@@ -587,6 +587,59 @@ switch ($action) {
         break;
     
     
+    // Добавление папки.
+    case ('add-folder'):
+        $title = (string) $request->get('title');
+        $title = trim($title);
+        
+        
+        $user = new Glyf\Oscar\User();
+        
+        if (!$user->isPartner()) {
+            // jsonresponse(false, 'Нет прав для добавления папки');
+        }
+        
+        if (empty($title)) {
+            jsonresponse(false, 'Не указано название папки');
+        }
+        
+        $data = array(
+            Glyf\Oscar\Search::FIELD_TIME   => date('d.m.Y H:i:s'),
+            Glyf\Oscar\Search::FIELD_USER   => $user->getID(),
+            Glyf\Oscar\Search::FIELD_TITLE  => $title,
+        );
+        
+        $folder = new Glyf\Oscar\Folder();
+        
+        if (!$folder->add($data)) {
+            jsonresponse(false, 'Ошибка сохрнениея поиска');
+        }
+        jsonresponse(true);
+        break;
+    
+    
+    // Добавление папки.
+    case ('remove-folders'):
+        $fids = array_filter(array_map('intval', (array) $request->get('fids')));
+        
+        $user = new Glyf\Oscar\User();
+        
+        if (!$user->isPartner()) {
+            // jsonresponse(false, 'Нет прав для добавления папки');
+        }
+        
+        if (empty($fids)) {
+            jsonresponse(false, 'Не указаны папки для удаления');
+        }
+        
+        foreach ($fids as $fid) {
+            $folder = new Glyf\Oscar\Folder($fid);
+            $folder->delete();
+        }
+        jsonresponse(true);
+        break;
+    
+    
     // Пополнение счета.
     case ('pay-balance'):
         $price = (float) $request->get('price');
