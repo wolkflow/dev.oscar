@@ -21,7 +21,7 @@ function setLicense(lid, price)
 $(document).ready(function() {
     
     // Удаление товара из предварительной покупки.
-    $('#js-buyout-delete-id').on('click', function() {
+    $(document).on('click', '#js-buyout-delete-id', function() {
         var bids = [];
         
         $('#js-buyout-pictures-wrapper-id .js-buyout-picture:checked').each(function() {
@@ -224,7 +224,7 @@ $(document).ready(function() {
                     $.ajax({
                         url: '/remote/',
                         type: 'post',
-                        data: {'action': 'get-html', 'inc': 'buyout.buyout'},
+                        data: {'action': 'get-html', 'inc': 'buyout.basket'},
                         dataType: 'json',
                         success: function(response) {
                             if (response.status) {
@@ -242,6 +242,19 @@ $(document).ready(function() {
                         success: function(response) {
                             if (response.status) {
                                 $('#js-picture-basket-wrapper-id').html(response.data['html']); 
+                            }
+                        }
+                    });
+                    
+                    // Обновление товара.
+                    $.ajax({
+                        url: '/remote/',
+                        type: 'post',
+                        data: {'action': 'get-html', 'inc': 'picture.buyout', 'pid': 0},
+                        dataType: 'json',
+                        success: function(response) {
+                            if (response.status) {
+                                $('#js-picture-buyout-wrapper-id').html(response.data['html']); 
                             }
                         }
                     });

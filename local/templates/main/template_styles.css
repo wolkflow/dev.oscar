@@ -5894,3 +5894,7 @@ input.input-error:not(.disabled) {
     max-width: auto;
   }
 }
+
+.basket-note {
+    text-align: center;
+}

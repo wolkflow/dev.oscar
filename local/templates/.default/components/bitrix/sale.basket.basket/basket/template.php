@@ -18,9 +18,11 @@
 <div class="buyoutSelected">
     <? if (!empty($arResult['ITEMS']['AnDelCanBuy'])) { ?>
         <ul>
+            <? $price = 0; ?>
             <? foreach ($arResult['ITEMS']['AnDelCanBuy'] as $item) { ?>
+                <? $price += (float) $item['PRICE'] ?>
                 <? $picture = new Picture($item['PRODUCT_ID']); ?>
-                <? $license = new License(); ?>
+                <? $license = new License($item['TYPE']); ?>
                 
                 <li>
                     <label>
@@ -47,10 +49,12 @@
 <? if (!empty($arResult['ITEMS']['AnDelCanBuy'])) { ?>
     <div class="buyoutTotal">
         <div class="buyoutTotalSum">
-            Итого: 3 456 р.
+            Итого: <?= number_format($price, 0, ',', ' ') ?> р.
         </div>
         <a class="btn btn-default btn-sm buyoutSubmit" href="javascript:void(0)">
             купить
         </a>
     </div>
+<? } else { ?>
+    <div class="basket-note">Ни одной позиции не добавлено</div>
 <? } ?>

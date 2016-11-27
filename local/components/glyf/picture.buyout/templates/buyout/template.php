@@ -80,42 +80,7 @@
                         </li>
                     </ul>
                     
-                    <ul id="js-licenses-selects-id" class="buyoutParamsSelect">
-                        <? /*
-                        <li>
-                            <label for="buyoutType">Retail Book</label>
-                            <select name="" id="buyoutType" class="styler">
-                                <option value="">Retail Book</option>
-                                <option value="">Retail Book</option>
-                                <option value="">Retail Book</option>
-                            </select>
-                        </li>
-                        <li>
-                            <label for="buyoutFormat">Формат</label>
-                            <select name="" id="buyoutFormat" class="styler">
-                                <option value="">Print</option>
-                                <option value="">Print</option>
-                                <option value="">Print</option>
-                            </select>
-                        </li>
-                        <li>
-                            <label for="buyoutRegion">Регион</label>
-                            <select name="" id="buyoutRegion" class="styler">
-                                <option value="">Retail Book</option>
-                                <option value="">Retail Book</option>
-                                <option value="">Retail Book</option>
-                            </select>
-                        </li>
-                        <li>
-                            <label for="buyoutSize">Размер</label>
-                            <select name="" id="buyoutSize" class="styler">
-                                <option value="">Retail Book</option>
-                                <option value="">Retail Book</option>
-                                <option value="">Retail Book</option>
-                            </select>
-                        </li>
-                        */ ?>
-                    </ul>
+                    <ul id="js-licenses-selects-id" class="buyoutParamsSelect"></ul>
                     
                     <div id="js-buyout-other-wrap-id" class="buyoutPrice hide">
                         Если Вы не нашли нужный Вам вид использования, свяжитесь с нами, и наши менеджеры произведут расчёт цены.
