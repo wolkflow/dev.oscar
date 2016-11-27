@@ -117,10 +117,10 @@
                         */ ?>
                     </ul>
                     
-                    <div id="js-buyout-price-id" class="buyoutPrice"></div>
-                    
-                    <input type="submit" class="btn btn-sm btn-default" value="Подтвердить" />
-                    
+                    <div id="js-buyout-price-wrap-id" class="buyoutPrice hide">
+                        <span id="js-buyout-price-id"></span>р.
+                    </div>
+                    <input id="js-buyout-submit-id" type="submit" class="btn btn-sm btn-default hide" value="Подтвердить" />
                 </form>
             </div>
         </div>

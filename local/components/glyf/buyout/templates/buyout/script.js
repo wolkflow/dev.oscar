@@ -115,6 +115,16 @@ $(document).ready(function() {
         var lid   = parseInt($that.val());
         var html  = '';
         var items = [];
+        var price = parseFloat($that.data('price'));
+        
+        if (price > 0) {
+            $('#js-buyout-price-id').html(price);
+            $('#js-buyout-price-wrap-id').removeClass('hide');
+            $('#js-buyout-submit-id').removeClass('hide');
+        } else {
+            $('#js-buyout-price-wrap-id').addClass('hide');
+            $('#js-buyout-submit-id').addClass('hide');
+        }
         
         $.ajax({
             url: '/remote/',

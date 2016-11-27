@@ -22,28 +22,29 @@
             <span class="is-active" data-block="objects">Объекты</span>
         </div>
         <div class="cabinet-panel__toggler">Объекты</div>
-        <div class="cabinet-panel__menu">
-            <a class="is-active" href="/personal/upload/">добавить объект</a>
-            <a class="is-active" href="#">выделить всё</a>
-            <a class="hidden-sm" href="#">сохранить пдф</a>
-            <a class="is-active" href="#">отправить по email</a>
-            <a class="is-active hidden-sm" href="#">печать</a>
-            
-            <div class="cabinet-panel__menu-pages hidden-xs">
-                <span>показывать по</span>
-                <select id="js-objects-page-count-id" class="styler shortSelect cabinet-panel__menu-pages-select">
-                    <option value="30" <?= ($arParams['PERPAGE'] == 30) ? ('selected') : ('') ?>>
-                        30
-                    </option>
-                    <option value="60" <?= ($arParams['PERPAGE'] == 60) ? ('selected') : ('') ?>>
-                        60
-                    </option>
-                    <option value="90" <?= ($arParams['PERPAGE'] == 90) ? ('selected') : ('') ?>>
-                        90
-                    </option>
-                </select>
-            </div>
-        </div>
+        <ul class="cabinet-panel__menu">
+            <li><a class="is-active" href="/personal/upload/">добавить объект</a></li>
+            <li><a class="is-active" href="#">выделить всё</a></li>
+            <li><a class="hidden-sm" href="#">сохранить пдф</a></li>
+            <li><a class="is-active" href="#">отправить по email</a></li>
+            <li><a class="is-active hidden-sm" href="#">печать</a></li>
+            <li>
+                <div class="cabinet-panel__menu-pages hidden-xs">
+                    <span>показывать по</span>
+                    <select id="js-objects-page-count-id" class="styler shortSelect cabinet-panel__menu-pages-select">
+                        <option value="30" <?= ($arParams['PERPAGE'] == 30) ? ('selected') : ('') ?>>
+                            30
+                        </option>
+                        <option value="60" <?= ($arParams['PERPAGE'] == 60) ? ('selected') : ('') ?>>
+                            60
+                        </option>
+                        <option value="90" <?= ($arParams['PERPAGE'] == 90) ? ('selected') : ('') ?>>
+                            90
+                        </option>
+                    </select>
+                </div>
+            </li>
+        </ul>
     </div>
     <div class="cabinet-block-content">
         <table class="cabinet-table hidden-xs">

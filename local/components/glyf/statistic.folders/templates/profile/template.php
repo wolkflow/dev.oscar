@@ -64,7 +64,7 @@
                     </select>
                 </div>
             </li>
-        </div>
+        </ul>
     </div>
     <div id="js-folders-wrapper-id" class="cabinet-block-content">
         <?  // Статистика по папке.					
