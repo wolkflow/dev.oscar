@@ -1,6 +1,26 @@
+function unsetLicenseInfo()
+{
+    $('.js-license-wrapper').remove();
+    $('#js-buyout-other-wrap-id').addClass('hide');
+    $('#js-buyout-price-wrap-id').addClass('hide');
+    $('#js-buyout-submit-id').addClass('hide');
+}
+
+function setLicense(lid, price)
+{
+    var $submit = $('#js-buyout-submit-id');
+    
+    $('#js-buyout-price-id').html(price);
+    $('#js-buyout-price-wrap-id').removeClass('hide');
+    
+    $submit.data('lid', lid);
+    $submit.data('price', price);
+    $submit.removeClass('hide');
+}
+
 $(document).ready(function() {
     
-    // ”‰‡ÎÂÌËÂ ÚÓ‚‡‡ ËÁ ÔÂ‰‚‡ËÚÂÎ¸ÌÓÈ ÔÓÍÛÔÍË.
+    // –£–¥–∞–ª–µ–Ω–∏–µ —Ç–æ–≤–∞—Ä–∞ –∏–∑ –ø—Ä–µ–¥–≤–∞—Ä–∏—Ç–µ–ª—å–Ω–æ–π –ø–æ–∫—É–ø–∫–∏.
     $('#js-buyout-delete-id').on('click', function() {
         var bids = [];
         
@@ -26,7 +46,7 @@ $(document).ready(function() {
     });
     
     
-    // ¬˚·Ó ÚÓ‚‡‡ ‰Îˇ ÔÓÍÛÔÍË.
+    // –í—ã–±–æ—Ä —Ç–æ–≤–∞—Ä–∞ –¥–ª—è –ø–æ–∫—É–ø–∫–∏.
     $(document).on('click', '.js-buyout-item', function() {
         var bid = $(this).data('bid');
         var pid = $(this).data('pid');
@@ -34,7 +54,7 @@ $(document).ready(function() {
         $.ajax({
             url: '/remote/',
             type: 'post',
-            data: {'action': 'get-html', 'inc': 'picture.buyout', 'pid': pid},
+            data: {'action': 'get-html', 'inc': 'picture.buyout', 'pid': pid, 'bid': bid},
             dataType: 'json',
             success: function(response) {
                 if (response.status) {
@@ -45,7 +65,7 @@ $(document).ready(function() {
     });
     
     
-    // ”‰‡ÎÂÌËÂ ÚÓ‚‡‡ ‰Îˇ ÔÓÍÛÔÍË.
+    // –£–¥–∞–ª–µ–Ω–∏–µ —Ç–æ–≤–∞—Ä–∞ –¥–ª—è –ø–æ–∫—É–ø–∫–∏.
     $(document).on('click', '#js-buyout-picture-remove-id', function() {
         $.ajax({
             url: '/remote/',
@@ -61,12 +81,23 @@ $(document).ready(function() {
     });
     
     
-    // ¬˚·Ó ÓÒÌÓ‚ÌÓ„Ó ÚËÔ‡ ÎËˆÂÌÁËË.
+    // –í—ã–±–æ—Ä –æ—Å–Ω–æ–≤–Ω–æ–≥–æ —Ç–∏–ø–∞ –ª–∏—Ü–µ–Ω–∑–∏–∏.
     $(document).on('click', '.js-license-root', function() {
-        var step  = $(this).data('step');
-        var lid   = $(this).val();
+        var $that = $(this);
+        var step  = $that.data('step');
+        var lid   = parseInt($that.val());        
+        var price = parseFloat($that.data('price'));
         var html  = '';
         var items = [];
+        
+        
+        unsetLicenseInfo();
+        
+        if (price > 0) {
+            setLicense(lid, price);
+            return;
+        }
+        
         
         $.ajax({
             url: '/remote/',
@@ -102,9 +133,15 @@ $(document).ready(function() {
         });
     });
     
+    // –í—ã–±–æ—Ä –¥—Ä—É–≥–æ–≥–æ —Ç–∏–ø–∞ –ª–∏—Ü–µ–Ω–∑–∏–∏.
+    $(document).on('click', '.js-license-other', function() {
+        unsetLicenseInfo();
+        
+        $('#js-buyout-other-wrap-id').removeClass('hide');
+    });
     
     
-    // ¬˚·Ó ÔÓ‰ÚËÔ‡ ÎËˆÂÌÁËË.
+    // –í—ã–±–æ—Ä –ø–æ–¥—Ç–∏–ø–∞ –ª–∏—Ü–µ–Ω–∑–∏–∏.
     $(document).on('change', '.js-license-select', function() {
         var $that    = $(this);
         var $option  = $that.find('option:selected');
@@ -112,18 +149,24 @@ $(document).ready(function() {
         
         var step  = $option.data('step');
         var root  = $that.data('lid');
-        var lid   = parseInt($that.val());
+        var lid   = parseInt($option.val());
         var html  = '';
         var items = [];
-        var price = parseFloat($that.data('price'));
+        var price = parseFloat($option.data('price'));
+        
+        
+        $('.js-license-wrapper:gt(' + $('.js-license-wrapper').index($wrapper.get(0)) + ')').remove();
+        $('#js-buyout-other-wrap-id').addClass('hide');
+        $('#js-buyout-price-wrap-id').addClass('hide');
+        $('#js-buyout-submit-id').addClass('hide');
         
         if (price > 0) {
-            $('#js-buyout-price-id').html(price);
-            $('#js-buyout-price-wrap-id').removeClass('hide');
-            $('#js-buyout-submit-id').removeClass('hide');
-        } else {
-            $('#js-buyout-price-wrap-id').addClass('hide');
-            $('#js-buyout-submit-id').addClass('hide');
+            setLicense(lid, price);
+            return;
+        }
+        
+        if (!(lid > 0)) {
+            return;
         }
         
         $.ajax({
@@ -131,36 +174,82 @@ $(document).ready(function() {
             type: 'post',
             data: {'action': 'get-licenses', 'lid': lid},
             dataType: 'json',
-            beforeSend: function() {
-                $('.js-license-wrapper:gt(' + $('.js-license-wrapper').index($wrapper.get(0)) + ')').remove();
-            },
             success: function(response) {
                 if (response.status) {
-                    items.push('<option> - </option>');
-                    
-                    for (var i in response.data['items']) {
-                        var element  = response.data['items'][i];
-                        var itemhtml = '';
+                    if (response.data['items'].length > 0) {
+                        items.push('<option> - </option>');
                         
-                        itemhtml += '<option data-step="' + element['step'] + '" data-price="' + element['price'] + '" value="' + element['id'] + '">';
-                        itemhtml += element['title'];
-                        itemhtml += '</option>';
+                        for (var i in response.data['items']) {
+                            var element  = response.data['items'][i];
+                            var itemhtml = '';
+                            
+                            itemhtml += '<option data-step="' + element['step'] + '" data-price="' + element['price'] + '" value="' + element['id'] + '">';
+                            itemhtml += element['title'];
+                            itemhtml += '</option>';
+                            
+                            items.push(itemhtml);
+                        } 
                         
-                        items.push(itemhtml);
-                    } 
-                    
-                    html += '<li class="js-license-wrapper">';
-                    html += '<label>' + step + '</label>';
-                    html += '<select class="styler js-license-select" data-lid="' + lid + '">';
-                    html += items.join();
-                    html += '</select>';
-                    html += '</label>';
-                    html += '</li>';
-                    
-                    $('#js-licenses-selects-id').append(html);
+                        html += '<li class="js-license-wrapper">';
+                        html += '<label>' + step + '</label>';
+                        html += '<select class="styler js-license-select" data-lid="' + lid + '">';
+                        html += items.join();
+                        html += '</select>';
+                        html += '</label>';
+                        html += '</li>';
+                        
+                        $('#js-licenses-selects-id').append(html);
+                    }
                 }
             }
         });
     });
+    
+    
+    // –î–æ–±–∞–≤–ª–µ–Ω–∏–µ —Ç–æ–≤–∞—Ä–∞ –¥–ª—è –ø–æ–∫—É–ø–∫–∏.
+    $(document).on('click', '#js-buyout-submit-id', function() {
+        var $that = $(this);
+        var bid   = $that.data('bid');
+        var pid   = $that.data('pid');
+        var lid   = $that.data('lid');
+        
+        $.ajax({
+            url: '/remote/',
+            type: 'post',
+            data: {'action': 'basket-picture', 'bid': bid, 'pid': pid, 'lid': lid},
+            dataType: 'json',
+            success: function(response) {
+                if (response.status) {
+                    // –û–±–Ω–æ–≤–ª–µ–Ω–∏–µ –æ—Ç–ª–æ–∂–µ–Ω–Ω—ã—Ö —Ç–æ–≤–∞—Ä–æ–≤.
+                    $.ajax({
+                        url: '/remote/',
+                        type: 'post',
+                        data: {'action': 'get-html', 'inc': 'buyout.buyout'},
+                        dataType: 'json',
+                        success: function(response) {
+                            if (response.status) {
+                                $('#js-picture-delay-wrapper-id').html(response.data['html']); 
+                            }
+                        }
+                    });
+                    
+                    // –û–±–Ω–æ–≤–ª–µ–Ω–∏–µ —Ç–æ–≤–∞—Ä–æ–≤ –≤ –∫–æ—Ä–∑–∏–Ω–µ.
+                    $.ajax({
+                        url: '/remote/',
+                        type: 'post',
+                        data: {'action': 'get-html', 'inc': 'picture.basket'},
+                        dataType: 'json',
+                        success: function(response) {
+                            if (response.status) {
+                                $('#js-picture-basket-wrapper-id').html(response.data['html']); 
+                            }
+                        }
+                    });
+                }
+            }
+        });
+    });
+    
+    return false;
 });
 

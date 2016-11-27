@@ -685,6 +685,40 @@ switch ($action) {
         break;
     
     
+    // Подготовка картины к покупке по лицензии.
+    case ('basket-picture'):
+        $lid = (int) $request->get('lid');
+        $pid = (int) $request->get('pid');
+        $bid = (int) $request->get('bid');
+        
+        $user = new Glyf\Oscar\User();
+        
+        if (!CUser::IsAuthorized()) {
+            jsonresponse(false, 'Вы не авторизованы');
+        }
+        
+        if ($user->isPartner()) {
+            jsonresponse(false, 'Вы являетесь партнером');
+        }
+        
+        $basket = CSaleBasket::getByID($bid);
+        
+        if ($basket['ID'] > 0) {
+            $license = new glyf\Oscar\License($lid);
+            
+            CSaleBasket::Update($bid, array(
+                'DELAY'    => 'N', 
+                'PRICE'    => floatval($license->getPrice()), 
+                'TYPE'     => intval($license->getID()),
+                'QUANTITY' => 1,
+            ));
+        } else {
+            jsonresponse(false, 'Товар не найден');
+        }
+        jsonresponse(true, '', array('pid' => $pid));
+        break;
+    
+    
     // Получение HTML.
     case ('get-html'):
         $include = (string) $request->get('inc');
@@ -713,8 +747,14 @@ switch ($action) {
             case ('user.orders'):
                 $html = gethtmlremote('user.orders.php');
                 break;
+            case ('buyout.basket'):
+                $html = gethtmlremote('buyout.basket.php');
+                break;
             case ('picture.buyout'):
                 $html = gethtmlremote('picture.buyout.php');
+                break;
+            case ('picture.basket'):
+                $html = gethtmlremote('picture.basket.php');
                 break;
         }
         jsonresponse(true, '', array('html' => $html));

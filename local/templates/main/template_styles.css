@@ -4909,6 +4909,10 @@ a.btn.btn-test2 {
   padding-left: 28px;
   display: block;
 }
+.buyoutSelected-img img {
+  max-height: 55px;
+  max-width: 55px;
+}
 .buyoutSelected-img .jq-checkbox {
   position: absolute !important;
   left: 0;

@@ -13,16 +13,10 @@ require ($_SERVER['DOCUMENT_ROOT'] . '/bitrix/modules/main/include/prolog_before
 // Запрос.
 $request = Bitrix\Main\Application::getInstance()->getContext()->getRequest();
 
-$pid = $request->get('pid');
-$bid = $request->get('bid');
-
 
 // Заказы пользователя.					
 $APPLICATION->IncludeComponent(
-    "glyf:picture.buyout",
-    "buyout",
-    array(
-        "PID" => $pid,
-        "BID" => $bid,
-    )
+    "bitrix:sale.basket.basket",
+    "basket",
+    array()
 );

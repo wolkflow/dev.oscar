@@ -67,7 +67,7 @@
                         <? foreach ($arResult['LICENSES'] as $license) { ?>
                             <li>
                                 <label>
-                                    <input type="radio" name="license" class="js-license-root" value="<?= $license->getID() ?>" data-step="<?= $license->getStepTitle() ?>" />
+                                    <input type="radio" name="license" class="js-license-root" value="<?= $license->getID() ?>" data-step="<?= $license->getStepTitle() ?>" data-price="<?= $license->getPrice() ?>" />
                                     <?= $license->getTitle() ?>
                                 </label>
                             </li>
@@ -117,10 +117,14 @@
                         */ ?>
                     </ul>
                     
+                    <div id="js-buyout-other-wrap-id" class="buyoutPrice hide">
+                        Если Вы не нашли нужный Вам вид использования, свяжитесь с нами, и наши менеджеры произведут расчёт цены.
+                    </div>
+                    
                     <div id="js-buyout-price-wrap-id" class="buyoutPrice hide">
                         <span id="js-buyout-price-id"></span>р.
                     </div>
-                    <input id="js-buyout-submit-id" type="submit" class="btn btn-sm btn-default hide" value="Подтвердить" />
+                    <input id="js-buyout-submit-id" type="button" data-bid="<?= $arResult['BASKET']['ID'] ?>" data-pid="<?= $arResult['PICTURE']['ID'] ?>" class="btn btn-sm btn-default hide" value="Подтвердить" />
                 </form>
             </div>
         </div>

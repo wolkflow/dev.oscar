@@ -16,6 +16,9 @@ class PictureBuyoutComponent extends \CBitrixComponent
         // Идентификатор.
         $arParams['PID'] = (int) $arParams['PID'];
         
+        // Идентификатор корзины.
+        $arParams['BID'] = (int) $arParams['BID'];
+        
         return $arParams;
 	}
 	
@@ -26,6 +29,10 @@ class PictureBuyoutComponent extends \CBitrixComponent
 	 */
 	public function executeComponent()
     {
+        if (!\Bitrix\Main\Loader::includeModule('sale')) {
+			return;
+		}
+        
 		if (!\Bitrix\Main\Loader::includeModule('glyf.core')) {
 			return;
 		}
@@ -130,10 +137,11 @@ class PictureBuyoutComponent extends \CBitrixComponent
                 $this->arResult['PICTURE']['PERIOD'] = $periodF . ' &ndash; ' . $periodT;
             }
             
-            
+            // Корзина.
+            $this->arResult['BASKET'] = CSaleBasket::getByID($this->arParams['BID']);
+                        
             // Изображения.
             $this->arResult['PICTURE']['IMAGE_PREVIEW_SRC'] = $picture->getSmallPreviewImageSrc();
-            
             
             // Лицензии.
             $this->arResult['LICENSES'] = License::getList(array('filter' => array(License::FIELD_ROOT => false)));
