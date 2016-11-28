@@ -11,12 +11,12 @@
         <div class="buyoutBlockTitleText">выбранные изображения</div>
         <a class="buyoutBlockTitleLink" href="javascript:void(0)" id="js-buyout-delete-id">удалить</a>
     </div>
-    <div id="js-buyout-pictures-wrapper-id">
+    <div id="js-delays-pictures-wrapper-id">
         <? if (!empty($arResult['ITEMS']['DelDelCanBuy'])) { ?>
             <ul class="buyoutBlockList">
                 <? foreach ($arResult['ITEMS']['DelDelCanBuy'] as $item) { ?>
                     <? $picture = new Picture($item['PRODUCT_ID']); ?>
-                    <li id="js-cart-<?= $item['ID'] ?>-id">
+                    <li id="js-delay-<?= $item['ID'] ?>-id">
                         <div class="buyoutBlockListImage">
                             <label class="js-buyout-item" data-bid="<?= $item['ID'] ?>" data-pid="<?= $picture->getID() ?>">
                                 <img src="<?= $picture->getSmallPreviewImageSrc() ?>" title="<?= $picture->getTitle() ?>" />
@@ -38,6 +38,8 @@
             </div>
             */ ?>
         </div>
+    <? } else { ?>
+        <div class="basket-note">Нет выбранных изображений</div>
     <? } ?>
 </div>
 <div class="clearfix visible-xs"></div>

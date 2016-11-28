@@ -20,23 +20,23 @@ function setLicense(lid, price)
 
 
 // Обновление отложенных товаров.
-function refreshBuyouts()
+function refreshDelays()
 {
     $.ajax({
         url: '/remote/',
         type: 'post',
-        data: {'action': 'get-html', 'inc': 'buyout.basket'},
+        data: {'action': 'get-html', 'inc': 'picture.delays'},
         dataType: 'json',
         success: function(response) {
             if (response.status) {
-                $('#js-picture-delay-wrapper-id').html(response.data['html']); 
+                $('#js-picture-delays-wrapper-id').html(response.data['html']); 
             }
         }
     });
 }
 
 // Обновление товара.
-function refreshPicture()
+function refreshBuyout()
 {
     $.ajax({
         url: '/remote/',
@@ -73,7 +73,7 @@ $(document).ready(function() {
     $(document).on('click', '#js-buyout-delete-id', function() {
         var bids = [];
         
-        $('#js-buyout-pictures-wrapper-id .js-buyout-picture:checked').each(function() {
+        $('#js-delays-pictures-wrapper-id .js-buyout-picture:checked').each(function() {
             bids.push(parseInt($(this).val()));
         });
         
@@ -81,13 +81,11 @@ $(document).ready(function() {
             $.ajax({
                 url: '/remote/',
                 type: 'post',
-                data: {'action': 'remove-from-cart', 'bids': bids},
+                data: {'action': 'remove-from-delays', 'bids': bids},
                 dataType: 'json',
                 success: function(response) {
                     if (response.status) {
-                        for (var i in response.data['bids']) {
-                            $('#js-cart-' + response.data['bids'][i] + '-id').remove(); 
-                        }
+                        refreshDelays();
                     }
                 }
             });
@@ -96,7 +94,7 @@ $(document).ready(function() {
     
     
     
-    // Удаление товара из предварительной покупки.
+    // Удаление товара из покупки.
     $(document).on('click', '#js-basket-delete-id', function() {
         var bids = [];
         
@@ -112,12 +110,8 @@ $(document).ready(function() {
                 dataType: 'json',
                 success: function(response) {
                     if (response.status) {
-                        for (var i in response.data['bids']) {
-                            $('#js-basket-' + response.data['bids'][i] + '-id').remove(); 
-                        }
-                        
-                        refreshBuyouts();
                         refreshBaskets();
+                        refreshDelays();
                     }
                 }
             });
@@ -142,22 +136,13 @@ $(document).ready(function() {
                 }
             }
         });
+        return false;
     });
     
     
     // Удаление товара для покупки.
     $(document).on('click', '#js-buyout-picture-remove-id', function() {
-        $.ajax({
-            url: '/remote/',
-            type: 'post',
-            data: {'action': 'get-html', 'inc': 'picture.buyout', 'pid': 0},
-            dataType: 'json',
-            success: function(response) {
-                if (response.status) {
-                    $('#js-picture-buyout-wrapper-id').html(response.data['html']); 
-                }
-            }
-        });
+        refreshBuyout();
     });
     
     
@@ -300,9 +285,9 @@ $(document).ready(function() {
             dataType: 'json',
             success: function(response) {
                 if (response.status) {
-                    refreshBuyouts();
+                    refreshDelays();
+                    refreshBuyout();
                     refreshBaskets();
-                    refreshPicture();
                 }
             }
         });

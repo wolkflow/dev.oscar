@@ -204,7 +204,7 @@ switch ($action) {
     
     
     // Удаление из предварительной покупки.
-    case ('remove-from-cart'):
+    case ('remove-from-delays'):
         $bids = (array) $request->get('bids');
         $bids = array_filter(array_map('intval', $bids));
         
@@ -922,8 +922,8 @@ switch ($action) {
             case ('user.orders'):
                 $html = gethtmlremote('user.orders.php');
                 break;
-            case ('buyout.basket'):
-                $html = gethtmlremote('buyout.basket.php');
+            case ('picture.delays'):
+                $html = gethtmlremote('picture.delays.php');
                 break;
             case ('picture.buyout'):
                 $html = gethtmlremote('picture.buyout.php');

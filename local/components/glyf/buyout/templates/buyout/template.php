@@ -6,11 +6,11 @@
 
 <div class="container">
     <div class="row">
-        <div id="js-picture-delay-wrapper-id">
+        <div id="js-picture-delays-wrapper-id">
             <?	// Корзина (подготовка для покупки).
                 $APPLICATION->IncludeComponent(
                     "bitrix:sale.basket.basket",
-                    "buyout",
+                    "delays",
                     array(),
                     $component
                 );

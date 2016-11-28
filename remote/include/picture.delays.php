@@ -17,6 +17,6 @@ $request = Bitrix\Main\Application::getInstance()->getContext()->getRequest();
 // Заказы пользователя.					
 $APPLICATION->IncludeComponent(
     "bitrix:sale.basket.basket",
-    "buyout",
+    "delays",
     array()
 );
