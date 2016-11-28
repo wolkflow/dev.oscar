@@ -209,7 +209,7 @@ $(document).ready(function () {
 			$('.le-save').attr('data-action', 'update-user-email')
 		} else if (le == 'password') {
 			$('.le-save').attr('data-action', 'update-user-password')
-		} else if (le == 'new_folder') {
+		} else if (le == 'addfolder') {
 			$('body').addClass('le-active');
 		}
 
@@ -223,7 +223,7 @@ $(document).ready(function () {
 
 		$('[data-le="' + le + '"]').addClass('disabled');
         $('[data-link="' + le + '"]').addClass('hidden');
-        
+
 		if ($that.hasClass('le-cancel')) {
 			$('input[data-le="' + le + '"]').each(function () {
 				var value = $(this).attr('placeholder');
@@ -279,14 +279,23 @@ $(document).ready(function () {
 
 
 	$(document).on('click', '.le-lightbox-trigger', function(){
-		$('.le-lightbox-edit').each(function(){
-			var $this = $(this);
-			var $chk = $this.find('input[type=checkbox]');
+		if($(this).hasClass('active')) {
+			$('.le-lightbox-edit').each(function(){
+				var $this = $(this);
+				$this.find('.le-cancel').trigger('click');
+			});
+			$(this).removeClass('active').text('Переименовать');
+		} else {
+			$('.le-lightbox-edit').each(function(){
+				var $this = $(this);
+				var $chk = $this.find('input[type=checkbox]');
 
-			if($chk.prop('checked')) {
-				$this.find('.le-start').trigger('click');
-			}
-		});
+				if($chk.prop('checked')) {
+					$this.find('.le-start').trigger('click');
+				}
+			});
+			$(this).addClass('active').text('Отмена')
+		}
 		return false;
 	})
 

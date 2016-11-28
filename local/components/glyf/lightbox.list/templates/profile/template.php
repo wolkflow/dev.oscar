@@ -30,7 +30,7 @@
                         <span>
                             <div class="le-lightbox-edit">
                                 <span class="le-lightbox-name">
-                                    <input type="text" name="" data-le="lightbox-name-<?= $item['ID'] ?>" class="le disabled" value="<?= $item['UF_TITLE'] ?>" disabled />
+                                    <input type="text" name="" data-le="lightbox-name-<?= $item['ID'] ?>" class="le disabled" value="<?= $item['UF_TITLE'] ?>" disabled placeholder="Введите название"/>
                                     <a href="javascript:void(0)" class="le le-end disabled" data-le="lightbox-name-<?= $item['ID'] ?>">OK</a>
 
                                     <? // Служебные линки, отмена редактирования и внесение правок ?>

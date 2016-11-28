@@ -2631,6 +2631,9 @@ input[type=text].le.disabled {
   right: 5px;
   top: 0;
 }
+.le-lightbox-cancel {
+  display: none;
+}
 .cabinet-lightbox__title .jq-checkbox {
   top: -4px;
 }
