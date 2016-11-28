@@ -16,7 +16,7 @@
             <a class="is-active" href="#">отправить по email</a>
             <a class="hidden-sm" href="#">печать</a>
             <a href="#">добавить в корзину</a>
-            <a class="is-active" href="#">переименовать</a>
+            <a class="is-active le-lightbox-trigger" href="#">переименовать</a>
             <a id="js-personal-lightbox-delete-id" class="is-active" href="javascript:void(0)">
                 удалить
             </a>
@@ -29,15 +29,21 @@
                     <div class="cabinet-lightbox__title clearfix">
                         <span>
                             <div class="le-lightbox-edit">
-                                <span class="le-lightbox-name le" data-le="lightbox-name-<?= $item['ID'] ?>">
+                                <span class="le-lightbox-name">
                                     <input type="text" name="" data-le="lightbox-name-<?= $item['ID'] ?>" class="le disabled" value="<?= $item['UF_TITLE'] ?>" disabled />
                                     <a href="javascript:void(0)" class="le le-end disabled" data-le="lightbox-name-<?= $item['ID'] ?>">OK</a>
+
+                                    <? // Служебные линки, отмена редактирования и внесение правок ?>
+                                    <a href="javascript:void(0)" class="le le-end le-cancel" data-le="lightbox-name-<?= $item['ID'] ?>"></a>
+                                    <a href="javascript:void(0)" class="le le-start hide" data-le="lightbox-name-<?= $item['ID'] ?>"></a>
+                                </span>
+                                <span class="le le-start" data-le="lightbox-name-<?= $item['ID'] ?>">
+                                    <label class="checkbox-me">
+                                        <input type="checkbox" name="LIGHTBOX[]" class="js-personal-lightbox" value="<?= $item['ID']?>" /><span></span>
+                                    </label>
                                 </span>
                             </div>
                         </span>
-                        <label>
-                            <input type="checkbox" name="LIGHTBOX[]" class="js-personal-lightbox" value="<?= $item['ID']?>" />
-                        </label>
                     </div>
                     <div class="cabinet-lightbox__content">
                         <div class="lightboxes__item-pictures js-lightbox-pictures">

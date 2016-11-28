@@ -974,7 +974,7 @@ class Picture extends HLBlockModel
     }
     
     
-    public function recordStatisticSale($license, $price, $uid = null)
+    public function recordStatisticSale($price, $oid, $lid, $uid = null)
     {
         $user = new \Glyf\Oscar\User($uid);
         
@@ -984,8 +984,9 @@ class Picture extends HLBlockModel
             \Glyf\Oscar\Statistic\Sale::FIELD_USER_ID     => $user->getID(),
             \Glyf\Oscar\Statistic\Sale::FIELD_UPLOADER_ID => $this->getUserID(),
             \Glyf\Oscar\Statistic\Sale::FIELD_ELEMENT_ID  => $this->getID(),
-            \Glyf\Oscar\Statistic\Sale::FIELD_LICENSE     => $license,
-            \Glyf\Oscar\Statistic\Sale::FIELD_PRICE       => $price,
+            \Glyf\Oscar\Statistic\Sale::FIELD_ORDER_ID    => (int) $oid,
+            \Glyf\Oscar\Statistic\Sale::FIELD_LICENSE_ID  => (int) $lid,
+            \Glyf\Oscar\Statistic\Sale::FIELD_PRICE       => (float) $price,
         ));
         
         $this->update(array(self::FIELD_STAT_VIEWS => $this->getStatisticSalesCount() + 1));

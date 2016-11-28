@@ -880,6 +880,7 @@ switch ($action) {
             // Добавление свойств заказа.
             $order = new \Glyf\Oscar\Order($oid);
             $order->saveProperty(\Glyf\Oscar\Order::PROP_PICTURE_CODE, 'Y');
+            $order->recordStatisticSale();
             
             // Ссылка на оплату.
             $link  = $order->getPaymentURL();
@@ -897,6 +898,9 @@ switch ($action) {
         $html = null;
         
         switch ($include) {
+            case ('blog.archive'):
+                $html = gethtmlremote('blog.archive.php');
+                break;
             case ('user.statistic.folder'):
                 $html = gethtmlremote('user.statistic.folder.php');
                 break;

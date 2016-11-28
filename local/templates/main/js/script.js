@@ -277,12 +277,26 @@ $(document).ready(function () {
 		return false;
 	});
 
+
+	$(document).on('click', '.le-lightbox-trigger', function(){
+		$('.le-lightbox-edit').each(function(){
+			var $this = $(this);
+			var $chk = $this.find('input[type=checkbox]');
+
+			if($chk.prop('checked')) {
+				$this.find('.le-start').trigger('click');
+			}
+		});
+		return false;
+	})
+
+
     $(document).mouseup(function (e) {
         if ($('body').hasClass('le-active')) {
-            var container = $('.le-new-folder');
-            if (container.has(e.target).length === 0) {
-                container.find('.le-cancel').click();
-            }
+	        var container = $('.le-new-folder');
+	        if (container.has(e.target).length === 0) {
+		        container.find('.le-cancel').click();
+	        }
         }
     });
 

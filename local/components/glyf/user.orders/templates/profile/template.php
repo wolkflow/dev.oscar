@@ -17,8 +17,8 @@
         
             <a class="is-active" href="javascript:void(0)" id="js-check-all-id" data-selector=".js-checkbox">выделить всё</a>
             <a class="hidden-sm" href="#">загрузить пдф</a>
-            <a class="is-active" href="#">отправить по email</a>
-            <a class="is-active hidden-sm" href="#">печать</a>
+            <a class="" href="#">отправить по email</a>
+            <a class="hidden-sm" href="#">печать</a>
             <a href="#">повторить заказ</a>
             
             <div class="cabinet-panel__menu-pages hidden-xs">
@@ -50,82 +50,5 @@
                 ?>
             </tbody>
         </table>
-        
-        <? /*
-        <div class="cabinet-table-mobile visible-xs">
-            <div class="cabinet-table-mobile__item clearfix">
-                <div class="col-xs-1">
-                    <label><input type="checkbox"></label>
-                </div>
-                <div class="cabinet-table-mobile__data col-xs-11">
-                    <div class="cabinet-table-mobile__data-row">
-                        <span>№</span>
-                        <span>1234567</span>
-                    </div>
-                    <div class="cabinet-table-mobile__data-row">
-                        <span>Название:</span>
-                        <span>Поль Гоген, "Женщина, держащая плод" 1893г.</span>
-                    </div>
-                    <div class="cabinet-table-mobile__data-row">
-                        <span>Лицензия:</span>
-                        <span>Rights-managed</span>
-                    </div>
-                    <div class="cabinet-table-mobile__data-row">
-                        <span>Дата:</span>
-                        <span>23.07.2016</span>
-                    </div>
-                </div>
-            </div>
-            <div class="cabinet-table-mobile__item clearfix">
-                <div class="col-xs-1">
-                    <label><input type="checkbox"></label>
-                </div>
-                <div class="cabinet-table-mobile__data col-xs-11">
-                    <div class="cabinet-table-mobile__data-row">
-                        <span>№</span>
-                        <span>1234567</span>
-                    </div>
-                    <div class="cabinet-table-mobile__data-row">
-                        <span>Название:</span>
-                        <span>Поль Гоген, "Женщина, держащая плод" 1893г.</span>
-                    </div>
-                    <div class="cabinet-table-mobile__data-row">
-                        <span>Лицензия:</span>
-                        <span>Rights-managed</span>
-                    </div>
-                    <div class="cabinet-table-mobile__data-row">
-                        <span>Дата:</span>
-                        <span>23.07.2016</span>
-                    </div>
-                </div>
-            </div>
-            <div class="cabinet-table-mobile__item clearfix">
-                <div class="col-xs-1">
-                    <label><input type="checkbox"></label>
-                </div>
-                <div class="cabinet-table-mobile__data col-xs-11">
-                    <div class="cabinet-table-mobile__data-row">
-                        <span>№</span>
-                        <span>1234567</span>
-                    </div>
-                    <div class="cabinet-table-mobile__data-row">
-                        <span>Название:</span>
-                        <span>Поль Гоген, "Женщина, держащая плод" 1893г.</span>
-                    </div>
-                    <div class="cabinet-table-mobile__data-row">
-                        <span>Лицензия:</span>
-                        <span>Rights-managed</span>
-                    </div>
-                    <div class="cabinet-table-mobile__data-row">
-                        <span>Дата:</span>
-                        <span>23.07.2016</span>
-                    </div>
-                </div>
-            </div>
-            <div class="cabinet-table-mobile__load">
-                <a href="#" class="btn btn-light btn-more_params">Еще</a>
-            </div>
-        </div>
-        */ ?>
     </div>
 </div>

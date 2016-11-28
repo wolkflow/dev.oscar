@@ -170,7 +170,7 @@
         <script src="<?= SITE_TEMPLATE_PATH ?>/js/script.js"></script>
         <script>
             $(function() {
-                $('.styler, input[type="checkbox"], .form input').styler();
+                $('.styler, /*input[type="checkbox"],*/ .form input').styler();
             });
         </script>
     </body>

@@ -2620,24 +2620,89 @@ input[type=text].le.disabled {
   border-radius: 11px;
   height: 22px;
   line-height: 24px;
-  padding: 0 5px 0 11px;
   font-size: 14px;
   color: white;
-  background-color: black; }
+  background-color: black;
+  position: relative;
+  padding: 0 8px 2px 11px;
+}
+.cabinet-lightbox__title label {
+  position: absolute;
+  right: 5px;
+  top: 0;
+}
 .cabinet-lightbox__title .jq-checkbox {
   top: -4px;
 }
-.cabinet-lightbox__title span{
-
+.le-lightbox-edit {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+}
+.le-lightbox-edit > span {
+  display: block;
+  padding-right: 30px;
+}
+.le-lightbox-edit > span.le-start{
+  padding-right: 0
 }
 .le-lightbox-edit input[type=text].le {
-  border: 0;
+  font-weight: 400;
+  position: relative;
+  background: #fff;
+  color: #000;
+  top: -2px;
+  border-radius: 15px;
+  padding: 3px 8px 3px 8px;
+  z-index: 2;
+}
+.le-lightbox-edit input[type=text].le.disabled {
+  padding: 3px 8px 2px 11px;
   color: #fff;
+  background: transparent;
+  border: 0;
+  top: -1px;
+}
+.le-lightbox-edit .le-end {
+  border-radius: 11px;
+  text-transform: uppercase;
+  position: absolute;
+  right: 0;
+  top: -2px;
+  width: 50px;
+  padding-left: 16px;
+  text-align: center !important;
+  text-decoration: none;
+  color: #fff !important;
+  height: 24px;
+  cursor: pointer !important;
 }
 .cabinet-lightbox__title label{
   float: right;
-  margin-top: 2px; }
-
+  margin-top: 2px;
+}
+.checkbox-me input[type=checkbox] {
+  display: none;
+  opacity: 0;
+  visibility: hidden;
+}
+.checkbox-me input[type=checkbox] + span {
+  display: inline-block;
+  vertical-align: middle;
+  width: 14px;
+  height: 14px;
+  margin: 0 4px 0 0;
+  border-radius: 3px;
+  background: #fff;
+  cursor: pointer;
+  top: -4px;
+  position: relative;
+}
+.checkbox-me input[type=checkbox]:checked + span {
+  background: url(./images/sprite.png) -39px -38px;
+}
 .cabinet-lightbox__content{
   height: 100%;
   margin-top: -11px;

@@ -28,9 +28,10 @@
 						</a>
 					</article>
 				<? } ?>
-				
-				<?= $arResult['NAV_STRING'] ?>
-				
+                
+                <div id="js-blog-archive-nav-id" class="cabinet-pagination hidden-xs">
+                    <?= $arResult['NAV_STRING'] ?>
+                </div>
 			</div>
 		</div>
 	</div>
