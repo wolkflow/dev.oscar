@@ -648,7 +648,7 @@ switch ($action) {
         $user = new Glyf\Oscar\User();
         
         if (!$user->isPartner()) {
-            // jsonresponse(false, 'Нет прав для добавления папки');
+            jsonresponse(false, 'Нет прав для добавления папки');
         }
         
         if (empty($title)) {
@@ -677,7 +677,7 @@ switch ($action) {
         $user = new Glyf\Oscar\User();
         
         if (!$user->isPartner()) {
-            // jsonresponse(false, 'Нет прав для добавления папки');
+            jsonresponse(false, 'Нет прав для удаления папки');
         }
         
         if (empty($fids)) {
@@ -846,9 +846,9 @@ switch ($action) {
         $baskets = array();
         
         if (empty($bids)) {
-            $result = CSaleBasket::GetList(array(), array('FUSER_ID' => CSaleBasket::GetBasketUserID(), 'ORDER_ID' => 'NULL'));
+            $result = CSaleBasket::GetList(array(), array('FUSER_ID' => CSaleBasket::GetBasketUserID(), 'DELAY' => 'N', 'ORDER_ID' => 'NULL'));
         } else {
-            $result = CSaleBasket::GetList(array(), array('FUSER_ID' => CSaleBasket::GetBasketUserID(), 'ID' => $bids, 'ORDER_ID' => 'NULL'));
+            $result = CSaleBasket::GetList(array(), array('FUSER_ID' => CSaleBasket::GetBasketUserID(), 'ID' => $bids, 'DELAY' => 'N', 'ORDER_ID' => 'NULL'));
         }
         
         $price = 0;
@@ -877,13 +877,18 @@ switch ($action) {
         ));
         
         if ($oid > 0) {
+            // Привязка корин к заказу.
+            foreach ($baskets as $basket) {
+                CSaleBasket::Update($basket['ID'], array('ORDER_ID' => $oid));
+            }
+            
             // Добавление свойств заказа.
             $order = new \Glyf\Oscar\Order($oid);
             $order->saveProperty(\Glyf\Oscar\Order::PROP_PICTURE_CODE, 'Y');
             $order->recordStatisticSale();
             
             // Ссылка на оплату.
-            $link  = $order->getPaymentURL();
+            $link = $order->getPaymentURL();
             
             jsonresponse(true, '', array('link' => $link));
         }

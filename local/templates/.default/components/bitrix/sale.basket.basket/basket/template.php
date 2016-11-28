@@ -51,7 +51,7 @@
         <div class="buyoutTotalSum">
             Итого: <?= number_format($price, 0, ',', ' ') ?> р.
         </div>
-        <a class="btn btn-default btn-sm buyoutSubmit" href="javascript:void(0)">
+        <a id="js-basket-buyout-full-id" class="btn btn-default btn-sm buyoutSubmit" href="javascript:void(0)">
             купить
         </a>
     </div>

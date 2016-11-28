@@ -293,6 +293,46 @@ $(document).ready(function() {
         });
     });
     
-    return false;
+    
+    // Покупка выбранных изображений.
+    $(document).on('click', '#js-basket-buyout-id', function() {
+        var bids = [];
+        
+        $('#js-basket-pictures-wrapper-id .js-basket-picture:checked').each(function() {
+            bids.push(parseInt($(this).val()));
+        });
+        
+        if (bids.length > 0) {        
+            $.ajax({
+                url: '/remote/',
+                type: 'post',
+                data: {'action': 'pay-order', 'bids': bids},
+                dataType: 'json',
+                success: function(response) {
+                    if (response.status) {
+                        refreshBaskets();
+                        location.href = response.data['href'];
+                    }
+                }
+            });
+        }
+    });
+    
+    // Покупка выбранных изображений.
+    $(document).on('click', '#js-basket-buyout-full-id', function() {
+        $.ajax({
+            url: '/remote/',
+            type: 'post',
+            data: {'action': 'pay-order'},
+            dataType: 'json',
+            success: function(response) {
+                if (response.status) {
+                    refreshBaskets();
+                    location.href = response.data['href'];
+                }
+            }
+        });
+    });
+    
 });
 

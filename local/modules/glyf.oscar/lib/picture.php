@@ -970,7 +970,7 @@ class Picture extends HLBlockModel
             \Glyf\Oscar\Statistic\Download::FIELD_ELEMENT_ID  => $this->getID(),
         ));
         
-        $this->update(array(self::FIELD_STAT_VIEWS => $this->getStatisticLoadsCount() + 1));
+        $this->update(array(self::FIELD_STAT_LOADS => $this->getStatisticLoadsCount() + 1));
     }
     
     
@@ -989,7 +989,7 @@ class Picture extends HLBlockModel
             \Glyf\Oscar\Statistic\Sale::FIELD_PRICE       => (float) $price,
         ));
         
-        $this->update(array(self::FIELD_STAT_VIEWS => $this->getStatisticSalesCount() + 1));
+        $this->update(array(self::FIELD_STAT_SALES => $this->getStatisticSalesCount() + 1));
     }
     
     
@@ -1005,6 +1005,31 @@ class Picture extends HLBlockModel
         $uid = (int) $uid;
         
         return ($this->getUserID() == $uid);
+    }
+    
+    
+    /**
+     * Проверка покупки пользователем.
+     */
+    public function isBuyedByUser($uid = null)
+    {
+        if (empty($uid)) {
+            $uid = \CUser::getID();
+        }
+        $uid = (int) $uid;
+        
+        $result = \Glyf\Oscar\Statistic\Sale::getList(array(
+            'filter' => array(
+                \Glyf\Oscar\Statistic\Sale::FIELD_ELEMENT_ID => $this->getID(),
+                \Glyf\Oscar\Statistic\Sale::FIELD_USER_ID    => $user->getID(),
+            ),
+            'limit' => 1
+        ));
+        
+        if ($result && $result->getSelectedRowsCount() > 0) {
+            return true;
+        }
+        return false;
     }
     
     
