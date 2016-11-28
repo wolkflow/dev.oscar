@@ -2628,8 +2628,12 @@ input[type=text].le.disabled {
   top: -4px;
 }
 .cabinet-lightbox__title span{
-  float: left; }
 
+}
+.le-lightbox-edit input[type=text].le {
+  border: 0;
+  color: #fff;
+}
 .cabinet-lightbox__title label{
   float: right;
   margin-top: 2px; }

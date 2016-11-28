@@ -52,7 +52,7 @@
                                 <?= intval($item['CATALOG_PURCHASING_PRICE']) ?>
                                 <?= getMessage('GL_ROUBLES_PER_MONTH') ?>
                             </div>
-                            <a href="javascript:void(0)" class="buy-tariff" data-tid="<?= $item['ID'] ?>">
+                            <a href="javascript:void(0)" class="buy-tariff js-buy-tariff" data-tid="<?= $item['ID'] ?>">
                                 <?= getMessage('GL_BUY') ?>
                             </a>
                         </div>

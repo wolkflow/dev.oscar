@@ -25,7 +25,7 @@
 					<? } ?>
 				</ul>
 				<div class="partners-download">
-					<a href="/download-documents/" class="downloadDocsAll hidden-sm">
+					<a href="/upload/documents/all.zip" class="downloadDocsAll hidden-sm" target="_blank">
 						<?= getMessage('GL_DOWNLOAD_ARCHIVE') ?>
 					</a>
 				</div>

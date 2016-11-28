@@ -11,23 +11,23 @@
                 
 <div class="buyoutBlockTitle">
     <div class="buyoutBlockTitleText">ваш заказ</div>
-    <a id="js-basket-delete-button-id" href="javascript:void(0)" class="buyoutBlockTitleLink">удалить</a>
-    <a id="js-basket-buyout-button-id" href="javascript:void(0)" class="buyoutBlockTitleLink active">купить</a>
+    <a id="js-basket-delete-id" href="javascript:void(0)" class="buyoutBlockTitleLink">удалить</a>
+    <a id="js-basket-buyout-id" href="javascript:void(0)" class="buyoutBlockTitleLink active">купить</a>
 </div>
 
 <div class="buyoutSelected">
     <? if (!empty($arResult['ITEMS']['AnDelCanBuy'])) { ?>
-        <ul>
+        <ul id="js-basket-pictures-wrapper-id">
             <? $price = 0; ?>
             <? foreach ($arResult['ITEMS']['AnDelCanBuy'] as $item) { ?>
                 <? $price += (float) $item['PRICE'] ?>
                 <? $picture = new Picture($item['PRODUCT_ID']); ?>
                 <? $license = new License($item['TYPE']); ?>
                 
-                <li>
+                <li id="js-basket-<?= $item['ID'] ?>-id">
                     <label>
                         <span class="buyoutSelected-img">
-                            <input type="checkbox" class="js-basket" value="<?= $item['ID'] ?>" />
+                            <input type="checkbox" class="js-basket-picture" value="<?= $item['ID'] ?>" />
                             <img src="<?= $picture->getSmallPreviewImageSrc() ?>" title="<?= $picture->getTitle() ?>" />
                         </span>
                         <span class="buyoutSelected-meta">

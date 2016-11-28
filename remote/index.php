@@ -170,6 +170,10 @@ switch ($action) {
         $pids = (array) $request->get('pid');
         $pids = array_filter(array_map('intval', $pids));
         
+        if (!CUser::IsAuthorized()) {
+            jsonresponse(false, 'Вы не авторизованы');
+        }
+        
         foreach ($pids as $pid) {
             $picture = new Glyf\Oscar\Picture($pid);
             
@@ -199,10 +203,14 @@ switch ($action) {
 		break;
     
     
-    // Добавление в корзину.
+    // Удаление из предварительной покупки.
     case ('remove-from-cart'):
         $bids = (array) $request->get('bids');
         $bids = array_filter(array_map('intval', $bids));
+        
+        if (!CUser::IsAuthorized()) {
+            jsonresponse(false, 'Вы не авторизованы');
+        }
         
         $result = array();
         foreach ($bids as $bid) {
@@ -214,10 +222,34 @@ switch ($action) {
 		break;
     
     
+    // Удаление из корзины.
+    case ('remove-from-basket'):
+        $bids = (array) $request->get('bids');
+        $bids = array_filter(array_map('intval', $bids));
+        
+        if (!CUser::IsAuthorized()) {
+            jsonresponse(false, 'Вы не авторизованы');
+        }
+        
+        $result = array();
+        foreach ($bids as $bid) {
+            if (CSaleBasket::Update($bid, array('DELAY' => 'Y', 'PRICE' => 0, 'TYPE' => 0))) {
+                $result []= (int) $bid;
+            }
+        }
+        jsonresponse(true, '', array('bids' => $result));
+		break;
+        break;
+    
+    
     // Добавление картины в сборник.
     case ('add-to-lightbox'):
         $lid = (int) $request->get('lid');
         $pid = (int) $request->get('pid');
+        
+        if (!CUser::IsAuthorized()) {
+            jsonresponse(false, 'Вы не авторизованы');
+        }
         
         // Пользователь.
         $user = new Glyf\Oscar\User();
@@ -243,6 +275,10 @@ switch ($action) {
     // Создание сборника.
     case ('create-lightbox'):
         $title = (string) $request->get('title');
+        
+        if (!CUser::IsAuthorized()) {
+            jsonresponse(false, 'Вы не авторизованы');
+        }
         
         // Пользователь.
         $user = new Glyf\Oscar\User();
@@ -273,6 +309,10 @@ switch ($action) {
     // Удаление сборников.
     case ('lighboxes-delete');
         $lids = (array) $request->get('lids');
+        
+        if (!CUser::IsAuthorized()) {
+            jsonresponse(false, 'Вы не авторизованы');
+        }
         
         // Пользователь.
         $user = new Glyf\Oscar\User();
@@ -340,6 +380,10 @@ switch ($action) {
         $name  = (string) $request->get('name');
         $phone = (string) $request->get('phone');
         
+        if (!CUser::IsAuthorized()) {
+            jsonresponse(false, 'Вы не авторизованы');
+        }
+        
         $user = new Glyf\Oscar\User();
         $data = array(
             Glyf\Oscar\User::FIELD_NAME => $name,
@@ -358,6 +402,10 @@ switch ($action) {
         $company = (string) $request->get('company');
         $phone   = (string) $request->get('workphone');
         
+        if (!CUser::IsAuthorized()) {
+            jsonresponse(false, 'Вы не авторизованы');
+        }
+        
         $user = new Glyf\Oscar\User();
         $data = array(
             Glyf\Oscar\User::FIELD_WORK_COMPANY => $company,
@@ -374,6 +422,10 @@ switch ($action) {
     // Изменение e-mail.
     case ('update-user-email');
         $email = (string) $request->get('email');
+        
+        if (!CUser::IsAuthorized()) {
+            jsonresponse(false, 'Вы не авторизованы');
+        }
         
         if (empty($email)) {
             jsonresponse(false, 'Не введен e-mail');
@@ -640,51 +692,6 @@ switch ($action) {
         break;
     
     
-    // Пополнение счета.
-    case ('pay-balance'):
-        $price = (float) $request->get('price');
-        
-        if (!Bitrix\Main\Loader::includeModule('sale')) {
-            jsonresponse(false, 'Ошибка пополеннеия счета');
-        }
-        
-        if ($price <= 0) {
-            jsonresponse(false, 'Неверно указана сумма для пополнения счета');
-        }
-        
-        $user = new Glyf\Oscar\User();
-        
-        // Добавление заказа.
-        $oid = CSaleOrder::Add(array(
-            'LID'              => SITE_DEFAULT,
-            'PERSON_TYPE_ID'   => PERSON_TYPE_DEFAULT,
-            'PAYED'            => 'N',
-            'CANCELED'         => 'N',
-            'STATUS_ID'        => STATUS_DEFAULT,
-            'DISCOUNT_VALUE'   => '',
-            'USER_DESCRIPTION' => 'Пополнение счета',
-            'PRICE'            => $price,
-            'CURRENCY'         => CURRENCY_DEFAULT,
-            'USER_ID'          => $user->getID(),
-            'PAY_SYSTEM_ID'    => PAYSYSTEM_DEFAULT,
-            'DELIVERY_ID'      => DELYVERY_SYSTEM_DEFAULT,
-            'TAX_VALUE'        => '',
-        ));
-        
-        if ($oid > 0) {
-            // Добавление свойств заказа.
-            $order = new \Glyf\Oscar\Order($oid);
-            $order->saveProperty(\Glyf\Oscar\Order::PROP_BALANCE_CODE, 'Y');
-            
-            // Ссылка на оплату.
-            $link  = $order->getPaymentURL();
-            
-            jsonresponse(true, '', array('link' => $link));
-        }
-        jsonresponse(false, 'Ошибка пополеннеия счета');
-        break;
-    
-    
     // Подготовка картины к покупке по лицензии.
     case ('basket-picture'):
         $lid = (int) $request->get('lid');
@@ -716,6 +723,170 @@ switch ($action) {
             jsonresponse(false, 'Товар не найден');
         }
         jsonresponse(true, '', array('pid' => $pid));
+        break;
+    
+    
+    // Пополнение счета.
+    case ('pay-balance'):
+        $price = (float) $request->get('price');
+        
+        if (!Bitrix\Main\Loader::includeModule('sale')) {
+            jsonresponse(false, 'Ошибка пополеннеия счета');
+        }
+        
+        if (!CUser::IsAuthorized()) {
+            jsonresponse(false, 'Вы не авторизованы');
+        }
+        
+        if ($price <= 0) {
+            jsonresponse(false, 'Неверно указана сумма для пополнения счета');
+        }
+        
+        $user = new Glyf\Oscar\User();
+        
+        // Добавление заказа.
+        $oid = CSaleOrder::Add(array(
+            'LID'              => SITE_DEFAULT,
+            'PERSON_TYPE_ID'   => PERSON_TYPE_DEFAULT,
+            'PAYED'            => 'N',
+            'CANCELED'         => 'N',
+            'STATUS_ID'        => STATUS_DEFAULT,
+            'DISCOUNT_VALUE'   => '',
+            'USER_DESCRIPTION' => 'Пополнение счета',
+            'PRICE'            => $price,
+            'CURRENCY'         => CURRENCY_DEFAULT,
+            'USER_ID'          => $user->getID(),
+            'PAY_SYSTEM_ID'    => PAYSYSTEM_DEFAULT,
+            'DELIVERY_ID'      => DELYVERY_SYSTEM_DEFAULT,
+            'TAX_VALUE'        => '',
+            'XML_ID'           => \Glyf\Oscar\Order::PROP_BALANCE_CODE,
+        ));
+        
+        if ($oid > 0) {
+            // Добавление свойств заказа.
+            $order = new \Glyf\Oscar\Order($oid);
+            $order->saveProperty(\Glyf\Oscar\Order::PROP_BALANCE_CODE, 'Y');
+            
+            // Ссылка на оплату.
+            $link  = $order->getPaymentURL();
+            
+            jsonresponse(true, '', array('link' => $link));
+        }
+        jsonresponse(false, 'Ошибка пополеннеия счета');
+        break;
+    
+    
+    // Покупка тарифа.
+    case ('pay-tariff'):
+        $tid = (int) $request->get('tid');
+        
+        if (!Bitrix\Main\Loader::includeModule('sale')) {
+            jsonresponse(false, 'Ошибка при покупке тарифа');
+        }
+        
+        if (!CUser::IsAuthorized()) {
+            jsonresponse(false, 'Вы не авторизованы');
+        }
+        
+        $tariff = new Glyf\Oscar\Tariff($tid);
+        
+        if (!$tariff->exists()) {
+            jsonresponse(false, 'Не указан тариф');
+        }
+        
+        $user = new Glyf\Oscar\User();
+        
+        // Добавление заказа.
+        $oid = CSaleOrder::Add(array(
+            'LID'              => SITE_DEFAULT,
+            'PERSON_TYPE_ID'   => PERSON_TYPE_DEFAULT,
+            'PAYED'            => 'N',
+            'CANCELED'         => 'N',
+            'STATUS_ID'        => STATUS_DEFAULT,
+            'DISCOUNT_VALUE'   => '',
+            'USER_DESCRIPTION' => 'Опата тарифа "' . $tariff->getTitle() . '"',
+            'PRICE'            => floatval($tariff->getPrice()),
+            'CURRENCY'         => CURRENCY_DEFAULT,
+            'USER_ID'          => $user->getID(),
+            'PAY_SYSTEM_ID'    => PAYSYSTEM_DEFAULT,
+            'DELIVERY_ID'      => DELYVERY_SYSTEM_DEFAULT,
+            'TAX_VALUE'        => '',
+            'XML_ID'           => \Glyf\Oscar\Order::PROP_TARIFF_CODE,
+        ));
+        
+        if ($oid > 0) {
+            // Добавление свойств заказа.
+            $order = new \Glyf\Oscar\Order($oid);
+            $order->saveProperty(\Glyf\Oscar\Order::PROP_TARIFF_CODE, 'Y');
+            
+            // Ссылка на оплату.
+            $link  = $order->getPaymentURL();
+            
+            jsonresponse(true, '', array('link' => $link));
+        }
+        jsonresponse(false, 'Ошибка пополеннеия счета');
+        break;
+    
+    
+    // Создание заказа.
+    case ('pay-order'):
+        $bids = (array) $request->get('bids');
+        $bids = array_filter(array_map('intval', $bids));
+        
+        $user = new Glyf\Oscar\User();
+        
+        if (!CUser::IsAuthorized()) {
+            jsonresponse(false, 'Вы не авторизованы');
+        }
+        
+        if ($user->isPartner()) {
+            jsonresponse(false, 'Вы являетесь партнером');
+        }
+        
+        $baskets = array();
+        
+        if (empty($bids)) {
+            $result = CSaleBasket::GetList(array(), array('FUSER_ID' => CSaleBasket::GetBasketUserID(), 'ORDER_ID' => 'NULL'));
+        } else {
+            $result = CSaleBasket::GetList(array(), array('FUSER_ID' => CSaleBasket::GetBasketUserID(), 'ID' => $bids, 'ORDER_ID' => 'NULL'));
+        }
+        
+        $price = 0;
+        while ($basket = $result->fetch()) {
+            $baskets[$basket['ID']] = $basket;
+            
+            $price += (float) $basket['PRICE'];
+        }
+        
+        // Добавление заказа.
+        $oid = CSaleOrder::Add(array(
+            'LID'              => SITE_DEFAULT,
+            'PERSON_TYPE_ID'   => PERSON_TYPE_DEFAULT,
+            'PAYED'            => 'N',
+            'CANCELED'         => 'N',
+            'STATUS_ID'        => STATUS_DEFAULT,
+            'DISCOUNT_VALUE'   => '',
+            'USER_DESCRIPTION' => 'Покупка изображений',
+            'PRICE'            => $price,
+            'CURRENCY'         => CURRENCY_DEFAULT,
+            'USER_ID'          => $user->getID(),
+            'PAY_SYSTEM_ID'    => PAYSYSTEM_DEFAULT,
+            'DELIVERY_ID'      => DELYVERY_SYSTEM_DEFAULT,
+            'TAX_VALUE'        => '',
+            'XML_ID'           => \Glyf\Oscar\Order::PROP_PICTURE_CODE,
+        ));
+        
+        if ($oid > 0) {
+            // Добавление свойств заказа.
+            $order = new \Glyf\Oscar\Order($oid);
+            $order->saveProperty(\Glyf\Oscar\Order::PROP_PICTURE_CODE, 'Y');
+            
+            // Ссылка на оплату.
+            $link  = $order->getPaymentURL();
+            
+            jsonresponse(true, '', array('link' => $link));
+        }
+        jsonresponse(false, 'Не удалось создать заказ');
         break;
     
     

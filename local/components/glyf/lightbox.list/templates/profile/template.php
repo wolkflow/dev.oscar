@@ -28,7 +28,12 @@
                 <div class="cabinet-lightbox js-lightbox-wrap js-lightbox" data-lid="<?= $item['ID'] ?>">
                     <div class="cabinet-lightbox__title clearfix">
                         <span>
-                            <?= $item['UF_TITLE'] ?>
+                            <div class="le-lightbox-edit">
+                                <span class="le-lightbox-name le" data-le="lightbox-name-<?= $item['ID'] ?>">
+                                    <input type="text" name="" data-le="lightbox-name-<?= $item['ID'] ?>" class="le disabled" value="<?= $item['UF_TITLE'] ?>" disabled />
+                                    <a href="javascript:void(0)" class="le le-end disabled" data-le="lightbox-name-<?= $item['ID'] ?>">OK</a>
+                                </span>
+                            </div>
                         </span>
                         <label>
                             <input type="checkbox" name="LIGHTBOX[]" class="js-personal-lightbox" value="<?= $item['ID']?>" />

@@ -2,9 +2,9 @@
 
 namespace Glyf\Oscar;
 
-use Glyf\Core\System\IBlockModel;
+use Glyf\Core\System\ProductModel;
 
-class Tariff extends IBlockModel
+class Tariff extends ProductModel
 {
     const IBLOCK_ID = IBLOCK_TARIFFS_ID;
     
@@ -12,6 +12,30 @@ class Tariff extends IBlockModel
     
     
     protected $limit = 0;
+    
+    
+    /**
+     * Получение названия тарифа.
+     */
+    public function getTitle()
+    {
+        $this->load();
+        
+        $title = $this->data['PROPS']['LANG_TITLE_' . CURRENT_LANG_UP]['VALUE'];
+        
+        return $title;
+    }
+    
+    
+    /**
+     * Получение цены тарифа.
+     */
+    public function getPrice()
+    {
+        $this->load();
+        
+        return $this->data['PRICE'];
+    }
     
     
     /**

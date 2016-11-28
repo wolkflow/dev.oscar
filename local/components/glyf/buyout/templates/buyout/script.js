@@ -18,6 +18,55 @@ function setLicense(lid, price)
     $submit.removeClass('hide');
 }
 
+
+// Обновление отложенных товаров.
+function refreshBuyouts()
+{
+    $.ajax({
+        url: '/remote/',
+        type: 'post',
+        data: {'action': 'get-html', 'inc': 'buyout.basket'},
+        dataType: 'json',
+        success: function(response) {
+            if (response.status) {
+                $('#js-picture-delay-wrapper-id').html(response.data['html']); 
+            }
+        }
+    });
+}
+
+// Обновление товара.
+function refreshPicture()
+{
+    $.ajax({
+        url: '/remote/',
+        type: 'post',
+        data: {'action': 'get-html', 'inc': 'picture.buyout', 'pid': 0},
+        dataType: 'json',
+        success: function(response) {
+            if (response.status) {
+                $('#js-picture-buyout-wrapper-id').html(response.data['html']); 
+            }
+        }
+    });
+}
+
+// Обновление товаров в корзине.
+function refreshBaskets()
+{
+    $.ajax({
+        url: '/remote/',
+        type: 'post',
+        data: {'action': 'get-html', 'inc': 'picture.basket'},
+        dataType: 'json',
+        success: function(response) {
+            if (response.status) {
+                $('#js-picture-basket-wrapper-id').html(response.data['html']); 
+            }
+        }
+    });
+}
+
 $(document).ready(function() {
     
     // Удаление товара из предварительной покупки.
@@ -44,6 +93,37 @@ $(document).ready(function() {
             });
         }
     });
+    
+    
+    
+    // Удаление товара из предварительной покупки.
+    $(document).on('click', '#js-basket-delete-id', function() {
+        var bids = [];
+        
+        $('#js-basket-pictures-wrapper-id .js-basket-picture:checked').each(function() {
+            bids.push(parseInt($(this).val()));
+        });
+        
+        if (bids.length > 0) {
+            $.ajax({
+                url: '/remote/',
+                type: 'post',
+                data: {'action': 'remove-from-basket', 'bids': bids},
+                dataType: 'json',
+                success: function(response) {
+                    if (response.status) {
+                        for (var i in response.data['bids']) {
+                            $('#js-basket-' + response.data['bids'][i] + '-id').remove(); 
+                        }
+                        
+                        refreshBuyouts();
+                        refreshBaskets();
+                    }
+                }
+            });
+        }
+    });
+    
     
     
     // Выбор товара для покупки.
@@ -220,44 +300,9 @@ $(document).ready(function() {
             dataType: 'json',
             success: function(response) {
                 if (response.status) {
-                    // Обновление отложенных товаров.
-                    $.ajax({
-                        url: '/remote/',
-                        type: 'post',
-                        data: {'action': 'get-html', 'inc': 'buyout.basket'},
-                        dataType: 'json',
-                        success: function(response) {
-                            if (response.status) {
-                                $('#js-picture-delay-wrapper-id').html(response.data['html']); 
-                            }
-                        }
-                    });
-                    
-                    // Обновление товаров в корзине.
-                    $.ajax({
-                        url: '/remote/',
-                        type: 'post',
-                        data: {'action': 'get-html', 'inc': 'picture.basket'},
-                        dataType: 'json',
-                        success: function(response) {
-                            if (response.status) {
-                                $('#js-picture-basket-wrapper-id').html(response.data['html']); 
-                            }
-                        }
-                    });
-                    
-                    // Обновление товара.
-                    $.ajax({
-                        url: '/remote/',
-                        type: 'post',
-                        data: {'action': 'get-html', 'inc': 'picture.buyout', 'pid': 0},
-                        dataType: 'json',
-                        success: function(response) {
-                            if (response.status) {
-                                $('#js-picture-buyout-wrapper-id').html(response.data['html']); 
-                            }
-                        }
-                    });
+                    refreshBuyouts();
+                    refreshBaskets();
+                    refreshPicture();
                 }
             }
         });
