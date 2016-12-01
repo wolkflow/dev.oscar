@@ -23,6 +23,14 @@
         </div>
     </div>
     <div id="js-porfile-lightboxes-wrapper-id">
+        <?  //Сборники.					
+            $APPLICATION->IncludeComponent(
+                "glyf:lightbox.list",
+                "profile-remote",
+                array()
+            );
+        ?>
+        <? /*
         <div class="cabinet-lightboxes-list clearfix">
             <? foreach ($arResult['LIGHTBOXES'] as $item) { ?>
                 <div class="cabinet-lightbox js-lightbox-wrap js-lightbox" data-lid="<?= $item['ID'] ?>">

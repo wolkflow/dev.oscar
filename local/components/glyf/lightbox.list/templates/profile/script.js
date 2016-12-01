@@ -1,4 +1,4 @@
-function cCreateLightbox(response)
+function cLightboxCreate(response)
 {
     if (response.status) {
         $.ajax({
@@ -16,6 +16,16 @@ function cCreateLightbox(response)
         error('', response.message);
     }
 }
+
+function cLightboxChange(response)
+{
+    if (response.status) {
+        $('.le-lightbox-trigger').trigger('click');
+        $('.js-lightbox-' + response.data['lid'] + ' .js-personal-lightbox').prop('checked', false);
+    }
+}
+
+
 
 $(document).ready(function() {
     $('#js-personal-lightbox-delete-id').on('click', function() {

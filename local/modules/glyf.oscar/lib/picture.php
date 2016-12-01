@@ -106,7 +106,7 @@ class Picture extends HLBlockModel
 	const FIELD_MODERATE        = 'UF_MODERATE';
     const FIELD_MODERATE_TEXT   = 'UF_MODERATE_TEXT';
 	const FIELD_MODERATE_TIME   = 'UF_MODERATE_TIME';
-	
+    
     // Дата создания.
 	const FIELD_PERIOD_FROM     = 'UF_PERIOD_FROM';
     const FIELD_PERIOD_TO       = 'UF_PERIOD_TO';
@@ -968,6 +968,7 @@ class Picture extends HLBlockModel
             \Glyf\Oscar\Statistic\Download::FIELD_USER_ID     => $user->getID(),
             \Glyf\Oscar\Statistic\Download::FIELD_UPLOADER_ID => $this->getUserID(),
             \Glyf\Oscar\Statistic\Download::FIELD_ELEMENT_ID  => $this->getID(),
+            \Glyf\Oscar\Statistic\Download::FIELD_BUYED       => $this->isBuyedByUser($user->getID())
         ));
         
         $this->update(array(self::FIELD_STAT_LOADS => $this->getStatisticLoadsCount() + 1));
@@ -1018,13 +1019,15 @@ class Picture extends HLBlockModel
         }
         $uid = (int) $uid;
         
+        $user = new \Glyf\Oscar\User($uid);
+        
         $result = \Glyf\Oscar\Statistic\Sale::getList(array(
             'filter' => array(
                 \Glyf\Oscar\Statistic\Sale::FIELD_ELEMENT_ID => $this->getID(),
                 \Glyf\Oscar\Statistic\Sale::FIELD_USER_ID    => $user->getID(),
             ),
             'limit' => 1
-        ));
+        ), false);
         
         if ($result && $result->getSelectedRowsCount() > 0) {
             return true;

@@ -306,6 +306,44 @@ switch ($action) {
         break;
     
     
+    // Переименование сборника.
+    case ('lightbox-change'):
+        $lid   = (int) $request->get('lid');
+        $title = (string) $request->get('title');
+        
+        if (!CUser::IsAuthorized()) {
+            jsonresponse(false, 'Вы не авторизованы');
+        }
+        
+        // Пользователь.
+        $user = new Glyf\Oscar\User();
+        
+        // Сборник.
+        $lightbox = new Glyf\Oscar\Lightbox($lid);
+        
+        if ($lightbox->getUserID() != $user->getID()) {
+            jsonresponse(false, 'Сборник не найден');
+        }
+        
+        $result = Glyf\Oscar\Lightbox::getList(array(
+            'filter' => array(Glyf\Oscar\Lightbox::FIELD_TITLE => $title, Glyf\Oscar\Lightbox::FIELD_USER => $user->getID()),
+            'limit'  => 1
+        ), false);
+        
+        if ($result->getSelectedRowsCount() > 0) { 
+            jsonresponse(false, 'Сборник с таким названием уже существует');
+        }
+        
+        $data = array(
+            Glyf\Oscar\Lightbox::FIELD_TITLE => $title,
+        );
+        if (!$lightbox->update($data)) {
+            jsonresponse(false, 'Ошибка создания сборника');
+        }
+        jsonresponse(true, '', array('lid' => $lid));
+        break;
+    
+    
     // Удаление сборников.
     case ('lighboxes-delete');
         $lids = (array) $request->get('lids');

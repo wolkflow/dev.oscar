@@ -11,6 +11,7 @@ class Download extends HLBlockModel
     const FIELD_USER_ID     = 'UF_USER_ID';
     const FIELD_UPLOADER_ID = 'UF_UPLOADER_ID';
     const FIELD_ELEMENT_ID  = 'UF_ELEMENT_ID';
+	const FIELD_BUYED       = 'UF_BUYED';
     
     static protected $hlblockID = HLBLOCK_STATISTIC_DOWNLOAD_ID;
     

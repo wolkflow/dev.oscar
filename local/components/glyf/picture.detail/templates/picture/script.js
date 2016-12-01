@@ -89,4 +89,13 @@ $(document).ready(function() {
     });
     
     
+    if ($('img[data-zoom-image]').length > 0) {
+        $('img[data-zoom-image]').elevateZoom({
+            zoomType: "inner",
+            cursor: "crosshair",
+            zoomWindowFadeIn: 500,
+            zoomWindowFadeOut: 750,
+            scrollZoom: true
+        });
+    }
 });

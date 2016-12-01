@@ -16,11 +16,14 @@ class ProductModel extends \Glyf\Core\System\IBlockModel
 	public function load($force = false)
 	{
 		if (empty($this->data) || $force) {
-            $this->data = \CCatalogProduct::GetByIDEx($this->getID());
-            $this->data['PROPS'] = $this->data['PROPERTIES'];
-            $this->data['PRICE'] = $this->data['PRICES'][PRICE_TYPE_DEFAULT]['PRICE'];
+            $element = \CIBlockElement::GetByID($this->getID())->GetNextElement();
+			$product = \CCatalogProduct::GetByIDEx($this->getID());
             
-            unset($this->data['PROPERTIES']);
+			if ($element) {
+				$this->data = $element->getFields();
+				$this->data['PROPS'] = $element->getProperties();
+                $this->data['PRICE'] = $product['PRICES'][PRICE_TYPE_DEFAULT]['PRICE'];
+			}
 		}
 	}
     

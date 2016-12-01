@@ -42,16 +42,17 @@ class User extends \Glyf\Core\User
         
         $result = \CSaleOrder::getList(
             array('DATE_PAYED' => 'DESC'),
-            array('USER_ID' => $this->getID(), 'XML_ID' => Tariff::XML_ORDER)
+            array('USER_ID' => $this->getID(), 'XML_ID' => Tariff::XML_ORDER, 'PAYED' => 'Y')
         );
         
         $tariff = null;
         
-        if ($order = $result->fetch()) {
-            $basket = reset(\Glyf\Core\Helpers\SaleOrder::getBaskets($order['ID']));
+        if ($bxorder = $result->fetch()) {
+            $order  = new \Glyf\Oscar\Order($bxorder['ID']);
+            $basket = reset($order->getBaskets(false));
             
-            if (!empty($order['DATE_PAYED'])) {
-                $tariff = new UserTariff($this->getID(), strtotime($order['DATE_PAYED']), (new Tariff($basket['PRODUCT_ID'])));
+            if (!empty($bxorder['DATE_PAYED'])) {
+                $tariff = new UserTariff($this->getID(), strtotime($bxorder['DATE_PAYED']), (new Tariff($basket['PRODUCT_ID'])));
             }
         }
         return $tariff;

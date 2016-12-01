@@ -2700,11 +2700,23 @@ input[type=text].le.disabled {
   border-radius: 3px;
   background: #fff;
   cursor: pointer;
-  top: -4px;
+  top: -1px;
+	border: 1px solid #d6d6d6;
   position: relative;
 }
 .checkbox-me input[type=checkbox]:checked + span {
-  background: url(./images/sprite.png) -39px -38px;
+  background: url(./images/sprite.png) -40px -39px;
+	border-color: #00c3d9;
+}
+.le-lightbox-edit .checkbox-me input[type=checkbox] + span  {
+	border: 0;
+	top: -4px;
+}
+#js-objects-wrapper-id .checkbox-me input[type=checkbox] + span  {
+	top: -4px;
+}
+.le-lightbox-edit  .checkbox-me input[type=checkbox]:checked + span {
+	background: url(./images/sprite.png) -39px -38px;
 }
 .cabinet-lightbox__content{
   height: 100%;
@@ -5921,6 +5933,9 @@ input.input-error:not(.disabled) {
   background: #fff;
   font-weight: 400 !important;
 }
+.cabinet-panel__menu {
+	text-align: center;
+}
 .cabinet-panel__menu > li{
   display: inline-block;
 }
@@ -5969,4 +5984,7 @@ input.input-error:not(.disabled) {
 
 .basket-note {
     text-align: center;
+}
+.zoomContainer {
+  z-index: 55555;
 }

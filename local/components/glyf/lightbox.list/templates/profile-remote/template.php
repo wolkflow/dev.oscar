@@ -10,14 +10,33 @@
 
 <div class="cabinet-lightboxes-list clearfix">
     <? foreach ($arResult['LIGHTBOXES'] as $item) { ?>
-        <div class="cabinet-lightbox js-lightbox-wrap js-lightbox" data-lid="<?= $item['ID'] ?>">
+        <div class="cabinet-lightbox js-lightbox-wrap js-lightbox js-lightbox-<?= $item['ID'] ?>" data-lid="<?= $item['ID'] ?>">
             <div class="cabinet-lightbox__title clearfix">
+                <span>
+                    <div class="le-lightbox-edit">
+                        <span class="le-lightbox-name-<?= $item['ID'] ?>">
+                            <input type="hidden" name="lid" data-le="lightbox-name-<?= $item['ID'] ?>" value="<?= $item['ID'] ?>" />
+                            <input type="text" name="title" data-le="lightbox-name-<?= $item['ID'] ?>" class="le disabled" value="<?= $item['UF_TITLE'] ?>" disabled placeholder="Введите название"/>
+                            <a href="javascript:void(0)" class="le le-end disabled" data-le="lightbox-name-<?= $item['ID'] ?>" data-action="lightbox-change" data-callback="cLightboxChange">OK</a>
+
+                            <? // Служебные линки, отмена редактирования и внесение правок ?>
+                            <a href="javascript:void(0)" class="le le-start hide" data-le="lightbox-name-<?= $item['ID'] ?>"></a>
+                        </span>
+                        <span class="le le-start" data-le="lightbox-name-<?= $item['ID'] ?>">
+                            <label class="checkbox-me">
+                                <input type="checkbox" name="LIGHTBOX[]" class="js-personal-lightbox" value="<?= $item['ID'] ?>" /><span></span>
+                            </label>
+                        </span>
+                    </div>
+                </span>
+                <? /*
                 <span>
                     <?= $item['UF_TITLE'] ?>
                 </span>
                 <label>
                     <input type="checkbox" name="LIGHTBOX[]" class="js-personal-lightbox" value="<?= $item['ID']?>" />
                 </label>
+                */ ?>
             </div>
             <div class="cabinet-lightbox__content">
                 <div class="lightboxes__item-pictures js-lightbox-pictures">
@@ -69,7 +88,7 @@
             </div>
             <div class="cabinet-lightbox__new">
                 <a href="javascript:void(0)" data-le="lightbox" class="le le-start">+</a>
-                <a class="btn btn-light btn-filter_edit le le-end disabled" href="javascript:void(0)" data-le="lightbox" data-action="create-lightbox" data-callback="cCreateLightbox">Сохранить</a>
+                <a class="btn btn-light btn-filter_edit le le-end disabled" href="javascript:void(0)" data-le="lightbox" data-action="create-lightbox" data-callback="cLightboxCreate">Сохранить</a>
                 <a class="btn btn-light btn-filter_edit le le-end le-cancel disabled" href="javascript:void(0)" data-le="lightbox">Отменить</a>
             </div>
         </div>

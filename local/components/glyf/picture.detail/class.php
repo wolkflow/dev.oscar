@@ -150,6 +150,7 @@ class PicturesDetail extends \CBitrixComponent
             $tariff = $user->getUserTariff();
             
             if ($tariff) {
+                
                 // Доступы.
                 $this->arResult['ACCESS'] = array(
                     'BUY'         => true,

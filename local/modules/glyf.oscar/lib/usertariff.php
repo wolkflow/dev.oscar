@@ -77,7 +77,7 @@ class UserTariff extends \Glyf\Core\System\IBlockModel
     public function getDownloadsCount()
     {
         $result = Download::getList(array(
-            'filter' => array(Download::FIELD_USER_ID => $this->getUserID())
+            'filter' => array(Download::FIELD_USER_ID => $this->getUserID(), Download::FIELD_BUYED => false)
         ), false);
         
         $count = (int) $result->getSelectedRowsCount();
@@ -149,6 +149,7 @@ class UserTariff extends \Glyf\Core\System\IBlockModel
         if ($this->isExpire()) {
             return false;
         }
+        
         $features = $this->getTariff()->getFeatures();
         $result = array_key_exists(\Glyf\Oscar\Features\Zoom::CODE, $features);
         

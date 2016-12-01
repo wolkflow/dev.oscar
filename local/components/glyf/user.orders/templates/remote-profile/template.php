@@ -11,8 +11,9 @@
 <? foreach ($arResult['ITEMS'] as $item) { ?>
     <tr>
         <td>
-            <label>
+            <label class="checkbox-me">
                 <input type="checkbox" class="js-order" data-oid="<?= $item['ID'] ?>" />
+                <span></span>
             </label>
         </td>
         <td>

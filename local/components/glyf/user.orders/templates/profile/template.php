@@ -13,15 +13,15 @@
     <div class="cabinet-panel clearfix">
         <div class="cabinet-panel__toggler">История заказов</div>
         <div class="cabinet-panel__title">История заказов</div>
-        <div class="cabinet-panel__menu">
+        <ul class="cabinet-panel__menu">
         
-            <a class="is-active" href="javascript:void(0)" id="js-check-all-id" data-selector=".js-checkbox">выделить всё</a>
-            <a class="hidden-sm" href="#">загрузить пдф</a>
-            <a class="" href="#">отправить по email</a>
-            <a class="hidden-sm" href="#">печать</a>
-            <a href="#">повторить заказ</a>
-            
-            <div class="cabinet-panel__menu-pages hidden-xs">
+            <li><a class="is-active" href="javascript:void(0)" id="js-check-all-id" data-selector=".js-checkbox">выделить всё</a></li>
+            <li><a class="hidden-sm" href="#">загрузить пдф</a></li>
+            <li><a class="" href="#">отправить по email</a></li>
+            <li><a class="hidden-sm" href="#">печать</a></li>
+            <li><a href="#">повторить заказ</a></li>
+
+            <li><div class="cabinet-panel__menu-pages hidden-xs">
                 <span>показывать по</span>
                 <select id="js-orders-page-count-id" class="styler shortSelect cabinet-panel__menu-pages-select">
                     <option value="30" <?= ($arParams['PERPAGE'] == 30) ? ('selected') : ('') ?> data-href="<?= $APPLICATION->GetCurPageParam('count=30', array('count', 'ELEMENT'), false) ?>">
@@ -34,8 +34,8 @@
                         90
                     </option>
                 </select>
-            </div>
-        </div>
+            </div></li>
+        </ul>
     </div>
     <div class="cabinet-block-content">
         <table class="cabinet-table hidden-xs">

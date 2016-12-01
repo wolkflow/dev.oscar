@@ -47,6 +47,7 @@
         
         <table class="cabinet-table hidden-xs">
             <thead id="js-folder-pictures-order-id">
+            <tr>
                 <th></th>
                 <th class="has-sort sort-id js-order js-active-order" data-order="ID">
                     <?= getMessage('GL_SORT_ID') ?> <span class="cabinet-table__sort"></span>
@@ -63,6 +64,7 @@
                 <th class="has-sort sort-sales js-order" data-order="sales">
                     <?= getMessage('GL_SORT_SALES') ?> <span class="cabinet-table__sort">
                 </th>
+            </tr>
             </thead>    
             <tbody id="js-folder-pictures-wrapper-id" data-fid="<?= $arResult['FOLDER']['ID'] ?>">
                 <? foreach ($arResult['ITEMS'] as $item) { ?>
