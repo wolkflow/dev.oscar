@@ -218,7 +218,11 @@ switch ($action) {
                 $result []= (int) $bid;
             }
         }
-        jsonresponse(true, '', array('bids' => $result));
+        
+        $result = CSaleBasket::GetList(array(), array('FUSER_ID' => CSaleBasket::GetBasketUserID(), 'ORDER_ID' => 'NULL'));
+        $count  = (int) $result->SelectedRowsCount();
+        
+        jsonresponse(true, '', array('bids' => $result, 'count' => $count));
 		break;
     
     
@@ -341,6 +345,57 @@ switch ($action) {
             jsonresponse(false, 'Ошибка создания сборника');
         }
         jsonresponse(true, '', array('lid' => $lid));
+        break;
+    
+    
+    // Добавление сборника в корзину.
+    case ('lighboxes-basket');
+        $lids = (array) $request->get('lids');
+        $lids = array_filter(array_map('intval', $lids));
+        
+        if (!CUser::IsAuthorized()) {
+            jsonresponse(false, 'Вы не авторизованы');
+        }
+        
+        // Пользователь.
+        $user = new Glyf\Oscar\User();
+        
+        $bids = array();
+        foreach ($lids as $lid) {
+            // Сборник.
+            $lightbox = new Glyf\Oscar\Lightbox($lid);
+            
+            if ($lightbox->getUserID() != $user->getID()) {
+                continue;
+            }
+            
+            $pictures = $lightbox->getPictures();
+            
+            foreach ($pictures as $picture) {
+                $basket = array(
+                    'FUSER_ID'   => CSaleBasket::GetBasketUserID(),
+                    'PRODUCT_ID' => $picture->getID(),
+                    'NAME'       => $picture->getTitle(),
+                    'PRICE'      => 0,
+                    'MODULE'     => 'catalog',
+                    'CURRENCY'   => CURRENCY_DEFAULT,
+                    'QUANTITY'   => 1,
+                    'LID'        => SITE_DEFAULT,
+                    'CAN_BUY'    => 'Y',
+                    'DELAY'      => 'Y',
+                    'PROPS'      => array()
+                );
+                
+                if ($bid = CSaleBasket::Add($basket)) {
+                    $bids []= $bid
+                }
+            }
+        }
+        
+        $result = CSaleBasket::GetList(array(), array('FUSER_ID' => CSaleBasket::GetBasketUserID(), 'ORDER_ID' => 'NULL'));
+        $count  = (int) $result->SelectedRowsCount();
+        
+        jsonresponse(true, '', array('bids' => $bids, 'count' => $count));
         break;
     
     

@@ -85,6 +85,7 @@ $(document).ready(function() {
                 dataType: 'json',
                 success: function(response) {
                     if (response.status) {
+                        $('#js-cart-count-id').html(response.data['count']);
                         refreshDelays();
                     }
                 }
