@@ -369,6 +369,7 @@ switch ($action) {
                 continue;
             }
             
+            // Изображения сборника.
             $pictures = $lightbox->getPictures();
             
             foreach ($pictures as $picture) {
@@ -387,7 +388,7 @@ switch ($action) {
                 );
                 
                 if ($bid = CSaleBasket::Add($basket)) {
-                    $bids []= $bid
+                    $bids []= $bid;
                 }
             }
         }
@@ -1007,6 +1008,12 @@ switch ($action) {
                 break;
             case ('user.statistic.objects'):
                 $html = gethtmlremote('user.statistic.objects.php');
+                break;
+            case ('user.statistic.sales'):
+                $html = gethtmlremote('user.statistic.sales.php');
+                break;
+            case ('user.statistic.sales'):
+                $html = gethtmlremote('user.statistic.sales.php');
                 break;
             case ('lightbox.list'):
                 $html = gethtmlremote('lightbox.list.php');

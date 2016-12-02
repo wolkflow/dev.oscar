@@ -57,8 +57,8 @@ class Partner extends \Glyf\Core\User
             'select' => array('ID'), 
             'filter' => array(
                 Sale::FIELD_UPLOADER_ID => $this->getID(),
-                '>='.View::FIELD_TIME   => date('d.m.Y 00:00:00', $quarter['begin']),
-                '<'.View::FIELD_TIME    => date('d.m.Y 23:59:59', $quarter['finish']),
+                '>='.Sale::FIELD_TIME   => date('d.m.Y 00:00:00', $quarter['begin']),
+                '<'.Sale::FIELD_TIME    => date('d.m.Y 23:59:59', $quarter['finish']),
             )
         ), false);
         
@@ -71,6 +71,21 @@ class Partner extends \Glyf\Core\User
      */
     public function getPaymentsMonth()
     {
+        $quarter = \Glyf\Core\Helpers\DateTime::getQuarter();
         
+        $sales = Sale::getList(array(
+            'filter' => array(
+                Sale::FIELD_UPLOADER_ID => $this->getID(),
+                '>='.Sale::FIELD_TIME   => date('d.m.Y 00:00:00', $quarter['begin']),
+                '<'.Sale::FIELD_TIME    => date('d.m.Y 23:59:59', $quarter['finish']),
+            )
+        ));
+        
+        $price = 0;
+        
+        foreach ($sales as $sale) {
+            $price += (float) $sale->getPrice();
+        }
+        return $price;
     }
 }

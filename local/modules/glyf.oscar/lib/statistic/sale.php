@@ -71,15 +71,87 @@ class Sale extends HLBlockModel
     }
     
     
-    
     public function getPicture()
     {
         return (new Picture($this->getElementID()));
     }
+    
     
     public function getLicense()
     {
         return (new License($this->getLicenseID()));
     }
     
+    
+    /**
+     * Получение списка продаж.
+     */
+    public static function getSalesList($params = array(), $asobjects = true)
+    {
+        $connection = \Bitrix\Main\Application::getConnection();
+        
+        // Запрос.
+        $sql = "
+            SELECT s.*
+            FROM `g_statistic_sales` AS `s`
+            INNER JOIN `g_pictures` AS `p` ON (s.UF_ELEMENT_ID = p.ID)
+        ";
+        
+        if (!empty($params['filter'])) {
+            $wheres = array();
+            foreach ($params['filter'] as $key => $val) {
+                $op = substr($key, 0, 2);
+                
+                switch ($op) {
+                    case ('<='):
+                    case ('>='):
+                        $key = substr($key, 2);
+                        break;
+                    
+                    case ('~='):
+                        $op  = 'LIKE';
+                        $key = substr($key, 2);
+                        break;
+                    
+                    default:
+                        $op = '=';
+                        break;
+                }
+                
+                $wheres []= $key . " " . $op . " '" . $val . "'";
+            }
+            $sql .= " WHERE " . implode(' AND ', $wheres);
+        }
+        
+        if (!empty($params['order'])) {
+            $orders = array();
+            foreach ($params['order'] as $key => $val) {
+                $orders []= $key . " " . $val;
+            }
+            $sql .= " ORDER BY " . implode(', ', $orders);
+        }
+        
+        if (!empty($params['limit'])) {
+            $sql .= " LIMIT " . intval($params['limit']);
+            
+            if (!empty($params['offset']) && $params['offset'] > 0) {
+                $sql .= " OFFSET " . intval($params['offset']);
+            }
+        }
+        
+        // Запрос.
+        $result = $connection->query($sql);
+        
+        if (!$asobjects) {
+            return $result;
+        }
+        
+        $items = array();
+        while ($item = $result->fetch()) {
+            $items[$item['ID']] = new self($item['ID'], $item);
+        }
+        return $items;
+    }
 }
+
+

@@ -74,12 +74,5 @@
                 array()
             );
         ?>
-        <? /*
-        <div class="visible-xs">
-            <div class="cabinet-table-mobile__load">
-                <a href="#" class="btn btn-light btn-more_params">Еще</a>
-            </div>
-        </div>
-        */ ?>
     </div>
 </div>

@@ -21,11 +21,16 @@ class DateTime
         if (empty($date)) {
             $date = time();
         }
+        $date = strtotime('01.10.2016');
         
         $month = (int) date('n', (int) $date);
         $month = intval($month / TIME_MONTH_IN_QUARTER);
-
-        $monthB = $month * TIME_MONTH_IN_QUARTER + 1;
+        
+        if ($month == 0) {
+            $month = 1;
+        }
+        
+        $monthB = $month * TIME_MONTH_IN_QUARTER;
         $monthF = $month * TIME_MONTH_IN_QUARTER + TIME_MONTH_IN_QUARTER + 1;
 
         $dateB = new \DateTime('01.' . $monthB . '.' . date('Y'));
