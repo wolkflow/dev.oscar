@@ -73,3 +73,43 @@
         </table>
     </div>
 </div>
+
+<?
+ // Запускаем скрипт тут, так как вероятно будет модификация начальной и конечной даты.
+ // Вроде такой: начальная дата не может быть меньше даты регистрации
+ // Конечная не может быть больше текущей
+
+?>
+<script>
+    $( function() {
+        var dateFormat = "mm/dd/yy",
+            from = $("#js-sales-period-min-search-id")
+                .datepicker({
+                    defaultDate: "+1w",
+                    changeMonth: true,
+                    numberOfMonths: 1
+                })
+                .on( "change", function() {
+                    to.datepicker( "option", "minDate", getDate( this ) );
+                }),
+            to = $( "#js-sales-period-max-search-id" ).datepicker({
+                    defaultDate: "+1w",
+                    changeMonth: true,
+                    numberOfMonths: 1 
+                })
+                .on( "change", function() {
+                    from.datepicker( "option", "maxDate", getDate( this ) );
+                });
+
+        function getDate( element ) {
+            var date;
+            try {
+                date = $.datepicker.parseDate( dateFormat, element.value );
+            } catch( error ) {
+                date = null;
+            }
+
+            return date;
+        }
+    } );
+</script>

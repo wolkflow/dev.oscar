@@ -1,5 +1,6 @@
 @import "css/fonts.css";
 @import "css/new.css";
+@import "css/jquery-ui.css";
 /*
  *	@author:	Agency WOLK
  *	@site:		http://www.wolkflow.com
@@ -2267,7 +2268,8 @@ div.cabinet-panel--stats-inner {
   right: 7px;
   width: 13px;
   height: 14px;
-  background: url(./images/i_search.png) no-repeat 0 0; }
+  /*background: url(./images/i_search.png) no-repeat 0 0;*/
+}
 
 .cabinet-search__form input[type="text"]{
   box-shadow: none;
