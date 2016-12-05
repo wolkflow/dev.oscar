@@ -2,6 +2,7 @@
  
 $MESS['GL_REGISTRATION'] = 'Registration';
 $MESS['GL_NAME'] = 'Name';
+$MESS['GL_LAST_NAME'] = 'Last name';
 $MESS['GL_COMPANY'] = 'Company';
 $MESS['GL_POSITION'] = 'Position';
 $MESS['GL_EMAIL'] = 'E-mail';

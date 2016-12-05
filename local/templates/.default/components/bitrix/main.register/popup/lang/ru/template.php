@@ -2,6 +2,7 @@
  
 $MESS['GL_REGISTRATION'] = 'Регистрация';
 $MESS['GL_NAME'] = 'Имя';
+$MESS['GL_LAST_NAME'] = 'Фамилия';
 $MESS['GL_COMPANY'] = 'Организация';
 $MESS['GL_POSITION'] = 'Должность';
 $MESS['GL_EMAIL'] = 'E-mail';

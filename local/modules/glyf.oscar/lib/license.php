@@ -6,6 +6,7 @@ use Glyf\Core\System\HLBlockModel;
 
 class License extends HLBlockModel
 {
+    const FIELD_ID             = 'ID';
     const FIELD_LANG_TITLE_SFX = 'UF_LANG_TITLE_';
     const FIELD_LANG_TITLE_RU  = 'UF_LANG_TITLE_RU';
     const FIELD_LANG_TITLE_EN  = 'UF_LANG_TITLE_EN';

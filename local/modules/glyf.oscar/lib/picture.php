@@ -1045,6 +1045,93 @@ class Picture extends HLBlockModel
     }
     
     
+    /**
+     * Получение списка просмотров и продаж.
+     */
+    public static function getStats($params, $asobjects = true)
+    {
+        $connection = \Bitrix\Main\Application::getConnection();
+        
+        // Запрос.
+        $sql = "
+            SELECT p.*, COUNT(DISTINCT v.ID) as `VIEWS`, COUNT(DISTINCT s.ID) as `SALES`
+            FROM `g_pictures` AS `p`
+            INNER JOIN `g_statistic_views` AS `v` ON (v.UF_ELEMENT_ID = p.ID)
+            INNER JOIN `g_statistic_sales` AS `s` ON (s.UF_ELEMENT_ID = p.ID)
+        ";
+        
+        if (!empty($params['filter'])) {
+            $wheres = array();
+            foreach ($params['filter'] as $key => $val) {
+                $op = substr($key, 0, 2);
+                
+                switch ($op) {
+                    case ('<='):
+                    case ('>='):
+                        $key = substr($key, 2);
+                        break;
+                    
+                    case ('~='):
+                        $op  = 'LIKE';
+                        $key = substr($key, 2);
+                        break;
+                    
+                    default:
+                        $op = '=';
+                        break;
+                }
+                
+                $wheres []= $key . " " . $op . " '" . $val . "'";
+            }
+            $sql .= " WHERE " . implode(' AND ', $wheres);
+        }
+        
+        $sql .= " GROUP BY (p.ID) ";
+        
+        if (!empty($params['order'])) {
+            $orders = array();
+            foreach ($params['order'] as $key => $val) {
+                $orders []= $key . " " . $val;
+            }
+            $sql .= " ORDER BY " . implode(', ', $orders);
+        }
+        
+        if (!empty($params['limit'])) {
+            $sql .= " LIMIT " . intval($params['limit']);
+            
+            if (!empty($params['offset']) && $params['offset'] > 0) {
+                $sql .= " OFFSET " . intval($params['offset']);
+            }
+        }
+        
+        // Запрос.
+        $result = $connection->query($sql);
+        
+        if (!$asobjects) {
+            return $result;
+        }
+        
+        $items = array();
+        while ($item = $result->fetch()) {
+            $picture = new self($item['ID'], $item);
+            $picture->views = (int) $item['VIEWS'];
+            $picture->sales = (int) $item['SALES'];
+            
+            $items[$item['ID']] = $picture;
+        }
+        
+        return $items;
+    }
     
+    
+    public function getStatViews()
+    {
+        return $this->views;
+    }
+    
+    public function getStatSales()
+    {
+        return $this->sales;
+    }
     
 }

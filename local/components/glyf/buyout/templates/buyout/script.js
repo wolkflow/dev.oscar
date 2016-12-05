@@ -289,6 +289,8 @@ $(document).ready(function() {
                     refreshDelays();
                     refreshBuyout();
                     refreshBaskets();
+                } else {
+                    error(response.message);
                 }
             }
         });

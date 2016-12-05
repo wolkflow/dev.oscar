@@ -36,7 +36,17 @@
                 <li>
                     <label for="regname"><?= getMessage('GL_NAME') ?></label>
                     <input type="text" id="regname" name="REGISTER[NAME]" value="<?= $arResult['VALUES']['NAME'] ?>" />
-                    <? if (!empty($arResult['ERRORS']['LOGIN'])) { ?>
+                    <? if (!empty($arResult['ERRORS']['NAME'])) { ?>
+                        <div class="form-notice form-notice_error">
+                            <?= getMessage('GL_ERROR_REQUIRED') ?>
+                            <span class="form-notice_close"></span>
+                        </div>
+                    <? } ?>
+                </li>
+                <li>
+                    <label for="reglastname"><?= getMessage('GL_LAST_NAME') ?></label>
+                    <input type="text" id="reglastname" name="REGISTER[LAST_NAME]" value="<?= $arResult['VALUES']['LAST_NAME'] ?>" />
+                    <? if (!empty($arResult['ERRORS']['LAST_NAME'])) { ?>
                         <div class="form-notice form-notice_error">
                             <?= getMessage('GL_ERROR_REQUIRED') ?>
                             <span class="form-notice_close"></span>

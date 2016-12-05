@@ -36,6 +36,37 @@ class StatisticObjectsDetail extends \CBitrixComponent
         // Поиск по наванию.
         $arParams['TITLE'] = (string) $arParams['TITLE'];
         
+         // Период от.
+        $arParams['PERIOD_MIN'] = (string) $arParams['PERIOD_MIN'];
+        
+        // Период после.
+        $arParams['PERIOD_MAX'] = (string) $arParams['PERIOD_MAX'];
+        
+        // Сортировка.
+        $arParams['ORDER'] = (string) $arParams['ORDER'];
+        
+        switch ($arParams['ORDER']) {
+            case ('ID'):
+                $arParams['ORDER'] = array(Picture::FIELD_ORDER_ID => 'DESC');
+                break;
+            
+             case ('title'):
+                $arParams['ORDER'] = array(Picture::FIELD_LANG_TITLE_SFX . CURRENT_LANG_UP => 'ASC');
+                break;
+            
+            case ('views'):
+                $arParams['ORDER'] = array(Picture::FIELD_VIEWS => 'DESC');
+                break;
+            
+            case ('sales'):
+                $arParams['ORDER'] = array(Picture::FIELD_SALES => 'DESC');
+                break;
+            
+            default:
+                $arParams['ORDER'] = array(Picture::FIELD_ID => 'DESC');
+                break;
+        }
+        
         
         return $arParams;
 	}
@@ -66,6 +97,14 @@ class StatisticObjectsDetail extends \CBitrixComponent
             $filter[Picture::FIELD_LANG_TITLE_SFX . CURRENT_LANG_UP] = '%'.$this->arParams['TITLE'].'%';
         }
         
+        if (!empty($this->arParams['PERIOD_MIN'])) {
+            $filter['>=' . Picture::FIELD_TIME] = date('Y-m-d', strtotime($this->arParams['PERIOD_MIN']));
+        }
+        
+        if (!empty($this->arParams['PERIOD_MAX'])) {
+            $filter['<=' . Picture::FIELD_TIME] = date('Y-m-d', strtotime($this->arParams['PERIOD_MAX']));
+        }
+        
         
         // Общее количество.
         $result = Picture::getList(array(
@@ -79,6 +118,10 @@ class StatisticObjectsDetail extends \CBitrixComponent
         
         if ($this->arParams['PAGE'] > $pagescnt) {
             $this->arParams['PAGE'] = $pagescnt;
+        }
+        
+        if ($this->arParams['PAGE'] < 1) {
+            $this->arParams['PAGE'] = 1;
         }
         
         

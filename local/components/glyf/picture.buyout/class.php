@@ -144,7 +144,10 @@ class PictureBuyoutComponent extends \CBitrixComponent
             $this->arResult['PICTURE']['IMAGE_PREVIEW_SRC'] = $picture->getSmallPreviewImageSrc();
             
             // Лицензии.
-            $this->arResult['LICENSES'] = License::getList(array('filter' => array(License::FIELD_ROOT => false)));
+            $this->arResult['LICENSES'] = License::getList(array(
+                'filter' => array(License::FIELD_ROOT => false),
+                'order'  => array(Glyf\Oscar\License::FIELD_ID   => 'ASC')
+            ));
         }
         
         

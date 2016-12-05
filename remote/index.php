@@ -717,7 +717,10 @@ switch ($action) {
         $lid = (int) $request->get('lid');
         
         // Список лицензий.
-        $licenses = Glyf\Oscar\License::getList(array('filter' => array(Glyf\Oscar\License::FIELD_ROOT => $lid)));
+        $licenses = Glyf\Oscar\License::getList(array(
+            'filter' => array(Glyf\Oscar\License::FIELD_ROOT => $lid), 
+            'order'  => array(Glyf\Oscar\License::FIELD_ID   => 'ASC')
+        ));
         
         $items = array();
         foreach ($licenses as $license) {
@@ -1012,8 +1015,8 @@ switch ($action) {
             case ('user.statistic.sales'):
                 $html = gethtmlremote('user.statistic.sales.php');
                 break;
-            case ('user.statistic.sales'):
-                $html = gethtmlremote('user.statistic.sales.php');
+            case ('user.statistic.sales.objects'):
+                $html = gethtmlremote('user.statistic.sales.objects.php');
                 break;
             case ('lightbox.list'):
                 $html = gethtmlremote('lightbox.list.php');

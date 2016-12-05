@@ -7,26 +7,26 @@
 
 <? $this->setFrameMode(true); ?>
 
-<div id="js-sales-block-id" class="cabinet-block cabinet-block-history is-active">
+<div id="js-sales-objects-block-id" class="cabinet-block cabinet-block-statistics">
     <div class="clearfix">
         <div class="cabinet-search">
             <span class="cabinet-search__title">поиск по продажам</span>
             <div class="cabinet-search__form">
-                <input id="js-sales-search-id" type="text" name="title" value="" />
+                <input id="js-sales-objects-search-id" type="text" name="title" value="" />
             </div>
         </div>
         <div class="cabinet-search">
             <span class="cabinet-search__title">выбрать период</span>
             <div class="cabinet-search__form">
-                <input id="js-sales-period-min-search-id" type="text" name="PERIOD_MIN" value="<?= date('d.m.Y', strtotime('-1 month')) ?>" />
-                <input id="js-sales-period-max-search-id" type="text" name="PERIOD_MAX" value="<?= date('d.m.Y') ?>" />
+                <input id="js-sales-objects-period-min-search-id" type="text" name="PERIOD_MIN" value="<?= date('d.m.Y', strtotime('-1 month')) ?>" />
+                <input id="js-sales-objects-period-max-search-id" type="text" name="PERIOD_MAX" value="<?= date('d.m.Y') ?>" />
             </div>
         </div>
     </div>
     <div class="cabinet-panel cabinet-panel--switch clearfix">
         <div class="cabinet-panel__switch">
-            <span class="is-active" data-block="history">История продаж</span>
-            <span data-block="statistics">Статистика просмотров / продаж</span>
+            <span data-block="history">История продаж</span>
+            <span class="is-active" data-block="statistics">Статистика просмотров/продаж</span>
         </div>
         <div class="cabinet-panel__toggler">История продаж</div>
         <div class="cabinet-panel__menu">
@@ -36,7 +36,7 @@
             <a class="js-dependence-chekbox-button hidden-sm" href="javascript:void(0)">печать</a>
             <div class="cabinet-panel__menu-pages hidden-xs">
                 <span>показывать по</span>
-                <select id="js-sales-page-count-id" class="styler shortSelect cabinet-panel__menu-pages-select">
+                <select id="js-sales-objects-page-count-id" class="styler shortSelect cabinet-panel__menu-pages-select">
                     <option value="30" <?= ($arParams['PERPAGE'] == 30) ? ('selected') : ('') ?>>
                         30
                     </option>
@@ -57,14 +57,14 @@
                     <th></th>
                     <th class="has-sort js-sort js-sort-active" data-sort="ID">ID<span class="cabinet-table__sort"></span></th>
                     <th class="has-sort js-sort" data-sort="title">Название<span class="cabinet-table__sort"></th>
-                    <th class="has-sort js-sort" data-sort="price">Цена (руб)<span class="cabinet-table__sort"></th>
-                    <th class="has-sort js-sort" data-sort="date">Дата<span class="cabinet-table__sort"></th>
+                    <th class="has-sort js-sort" data-sort="views">Просмотров<span class="cabinet-table__sort"></th>
+                    <th class="has-sort js-sort" data-sort="sales">Продаж<span class="cabinet-table__sort"></th>
                 </tr>
             </thead>
-            <tbody id="js-sales-wrapper-id">
+            <tbody id="js-sales-objects-wrapper-id">
                 <?  // Статистика по объектам.					
                     $APPLICATION->IncludeComponent(
-                        "glyf:statistic.sales",
+                        "glyf:statistic.sales.objects",
                         "remote-profile",
                         array()
                     );

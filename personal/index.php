@@ -55,14 +55,15 @@
                         ?>
                         
                         <?	// Статистика продаж по объектам.					
-                            /*$APPLICATION->IncludeComponent(
+                            $APPLICATION->IncludeComponent(
                                 "glyf:statistic.sales.objects",
                                 "profile",
                                 array()
-                            );*/
+                            );
                         ?>
-                    
+                        
                     <? } else { ?>
+                    
                         <?	// Сборники.					
                             $APPLICATION->IncludeComponent(
                                 "glyf:lightbox.list",

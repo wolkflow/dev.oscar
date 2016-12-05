@@ -1,0 +1,23 @@
+#js-objects-order-id th:first-child {
+    width: 15px;
+}
+
+#js-objects-order-id .sort-id {
+    width: 50px;
+}
+
+#js-objects-order-id .sort-title {
+    
+}
+
+#js-objects-order-id .sort-date {
+    width: 140px;
+}
+
+#js-objects-order-id .sort-views {
+    width: 140px;
+}
+
+#js-objects-order-id .sort-sales {
+    width: 100px;
+}

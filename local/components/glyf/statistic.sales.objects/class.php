@@ -9,10 +9,11 @@ use Glyf\Oscar\Picture;
 use Glyf\Oscar\Folder;
 use Glyf\Oscar\User;
 
-class StatisticSalesComponent extends \CBitrixComponent
+class StatisticSalesObjectsComponent extends \CBitrixComponent
 {
     const PERPAGE = 30;
     
+    const PREFIX_TABLE_VIEWS    = 'v.';
     const PREFIX_TABLE_SALES    = 's.';
     const PREFIX_TABLE_PICTURES = 'p.';
     
@@ -59,12 +60,12 @@ class StatisticSalesComponent extends \CBitrixComponent
                 $arParams['ORDER'] = array(self::PREFIX_TABLE_PICTURES . Picture::FIELD_LANG_TITLE_SFX . CURRENT_LANG_UP => 'ASC');
                 break;
             
-            case ('price'):
-                $arParams['ORDER'] = array(self::PREFIX_TABLE_SALES . Sale::FIELD_PRICE => 'DESC');
+            case ('views'):
+                $arParams['ORDER'] = array('VIEWS' => 'DESC');
                 break;
             
-            case ('date'):
-                $arParams['ORDER'] = array(self::PREFIX_TABLE_SALES . Sale::FIELD_TIME => 'DESC');
+            case ('sales'):
+                $arParams['ORDER'] = array('SALES' => 'DESC');
                 break;
             
             default:
@@ -95,22 +96,20 @@ class StatisticSalesComponent extends \CBitrixComponent
         
         
         // Фильтр.
-        $filter = array(self::PREFIX_TABLE_SALES . Sale::FIELD_UPLOADER_ID => $user->getID());
+        $filter = array(self::PREFIX_TABLE_PICTURES . Picture::FIELD_USER_ID => $user->getID());
         
         if (!empty($this->arParams['TITLE'])) {
             $filter['~=' . self::PREFIX_TABLE_PICTURES . Picture::FIELD_LANG_TITLE_SFX . CURRENT_LANG_UP] = '%'.$this->arParams['TITLE'].'%';
         }
         
         if (!empty($this->arParams['PERIOD_MIN'])) {
+            $filter['>=' . self::PREFIX_TABLE_VIEWS . View::FIELD_TIME] = date('Y-m-d', strtotime($this->arParams['PERIOD_MIN']));
             $filter['>=' . self::PREFIX_TABLE_SALES . Sale::FIELD_TIME] = date('Y-m-d', strtotime($this->arParams['PERIOD_MIN']));
-        } else {
-            
         }
         
         if (!empty($this->arParams['PERIOD_MAX'])) {
+            $filter['<=' . self::PREFIX_TABLE_VIEWS . View::FIELD_TIME] = date('Y-m-d', strtotime($this->arParams['PERIOD_MAX']));
             $filter['<=' . self::PREFIX_TABLE_SALES . Sale::FIELD_TIME] = date('Y-m-d', strtotime($this->arParams['PERIOD_MAX']));
-        } else {
-            
         }
         
         // Параметры поиска.
@@ -123,7 +122,7 @@ class StatisticSalesComponent extends \CBitrixComponent
         
         
         // Общее количество.
-        $result = Sale::getSalesList(array('filter' => $params['filter']), false);
+        $result = Picture::getStats(array('filter' => $params['filter']), false);
         
         $this->arResult['TOTAL'] = $result->getSelectedRowsCount();
         
@@ -136,7 +135,7 @@ class StatisticSalesComponent extends \CBitrixComponent
         
         
         // Список элементов папки.
-        $this->arResult['ITEMS'] = Sale::getSalesList($params);
+        $this->arResult['ITEMS'] = Picture::getStats($params);
         
         
 		// Подключение шаблона компонента.

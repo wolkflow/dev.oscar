@@ -103,13 +103,12 @@ $(document).ready(function () {
 		$(this).toggleClass('is-expanded').closest('.cabinet-block').toggleClass('is-expanded');
 	});
 
-	$('.cabinet-panel__switch span').on('click', function(){
+	$('.cabinet-panel__switch span').on('click', function() {
 		var $self = $(this);
-
-		$self.siblings().each(function(){
+        
+		$self.siblings().each(function() {
 			$('.cabinet-block-' + $(this).data('block')).removeClass('is-active');
 		});
-
 		$('.cabinet-block-' + $self.data('block')).addClass('is-active');
 	});
 

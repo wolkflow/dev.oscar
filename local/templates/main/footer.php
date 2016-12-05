@@ -146,6 +146,7 @@
                         "SEF_MODE" => "N",
                         "SHOW_FIELDS" => array(
                             "NAME",
+                            "LAST_NAME",
                             "EMAIL",
                             "WORK_COMPANY",
                             "WORK_POSITION",
