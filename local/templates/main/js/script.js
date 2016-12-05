@@ -324,8 +324,11 @@ $(document).ready(function () {
 			addPictureToLignhbox($item.data('pid'), $that.data('lid'), 'side');
 		}
 	});
-
+    
+    $('.styler, /*input[type="checkbox"],*/ .form input').styler();
 });
+
+
 
 
 /*

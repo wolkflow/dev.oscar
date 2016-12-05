@@ -1,5 +1,9 @@
 <?php
 
+// Глобальный js-переменные.
+$GLOBALS['JSVARS'] = array();
+
+
 // Константы.
 include ('constants.php');
 
@@ -44,4 +48,8 @@ define('CURRENT_LANG_UP', strtoupper(CURRENT_LANG));
 
 // События.
 include ('events.php');
+
+
+// JS-переменные.
+$GLOBALS['JSVARS']['CURRENT_LANG'] = CURRENT_LANG;
 

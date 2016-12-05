@@ -166,18 +166,13 @@
             ?>
         </div>
         
+        <script>
+            var jsvars = <?= json_encode($GLOBALS['JSVARS']) ?>;
+        </script>
+        <script src="<?= SITE_TEMPLATE_PATH ?>/js/i18n/datepicker-<?= CURRENT_LANG ?>.js"></script>
         <script src="<?= SITE_TEMPLATE_PATH ?>/js/jquery.elevatezoom.js"></script>
         <script src="<?= SITE_TEMPLATE_PATH ?>/js/jquery-ui.min.js"></script>
         <script src="<?= SITE_TEMPLATE_PATH ?>/js/jquery.formstyler.min.js"></script>
         <script src="<?= SITE_TEMPLATE_PATH ?>/js/script.js"></script>
-        <script>
-            $(function() {
-                $('.styler, /*input[type="checkbox"],*/ .form input').styler();
-            });
-        </script>
-
-            <?/**
-             * Тут работаем с зумом, вероятно подключение и обработку скрипта надо будет выносить под условие "если это можно"
-             */?>
     </body>
 </html>

@@ -26,7 +26,7 @@
     <div class="cabinet-panel cabinet-panel--switch clearfix">
         <div class="cabinet-panel__switch">
             <span data-block="history">История продаж</span>
-            <span class="is-active" data-block="statistics">Статистика просмотров/продаж</span>
+            <span class="is-active" data-block="statistics">Статистика просмотров / продаж</span>
         </div>
         <div class="cabinet-panel__toggler">История продаж</div>
         <div class="cabinet-panel__menu">

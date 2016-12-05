@@ -22,6 +22,42 @@ function getRemoteSales(page)
 
 $(document).ready(function() {
     
+    $(function() {
+        var format = 'dd.mm.yy';
+        
+        var from = $('#js-sales-period-min-search-id')
+                .datepicker({
+                    defaultDate: "+1w",
+                    changeMonth: true,
+                    numberOfMonths: 1,
+                    dateFormat: format,
+                })
+                .on('change', function() {
+                    to.datepicker('option', 'minDate', getDate(this));
+                });
+        var to = $('#js-sales-period-max-search-id')
+                .datepicker({
+                    defaultDate: "+1w",
+                    changeMonth: true,
+                    numberOfMonths: 1,
+                    dateFormat: format,
+                })
+                .on('change', function() {
+                    from.datepicker('option', 'maxDate', getDate(this));
+                });
+
+        function getDate(element) {
+            var date;
+            try {
+                date = $.datepicker.parseDate(format, element.value);
+            } catch (error) {
+                date = null;
+            }
+            return date;
+        }
+    });
+    
+    
     // Выбор элемента.
     $(document).on('click', '#js-sales-wrapper-id .js-checkbox', function() {
         if ($('#js-sales-wrapper-id .js-checkbox:checked').length > 0) {
