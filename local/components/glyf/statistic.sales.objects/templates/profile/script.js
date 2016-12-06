@@ -34,6 +34,7 @@ $(document).ready(function() {
                 })
                 .on('change', function() {
                     to.datepicker('option', 'minDate', getDate(this));
+                    getRemoteSalesObjects();
                 });
         var to = $('#js-sales-objects-period-max-search-id')
                 .datepicker({
@@ -44,6 +45,7 @@ $(document).ready(function() {
                 })
                 .on('change', function() {
                     from.datepicker('option', 'maxDate', getDate(this));
+                    getRemoteSalesObjects();
                 });
 
         function getDate(element) {

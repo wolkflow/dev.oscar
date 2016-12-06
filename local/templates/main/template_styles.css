@@ -2271,6 +2271,10 @@ div.cabinet-panel--stats-inner {
   /*background: url(./images/i_search.png) no-repeat 0 0;*/
 }
 
+.cabinet-search:first-child .cabinet-search__form::after {
+    background: url(./images/i_search.png) no-repeat 0 0;
+}
+
 .cabinet-search__form input[type="text"]{
   box-shadow: none;
   outline: none;
@@ -5990,3 +5994,20 @@ input.input-error:not(.disabled) {
 .zoomContainer {
   z-index: 55555;
 }
+
+#ui-datepicker-div {
+    font-family: Circe, Arial, helvetika, sans-serif !important;
+}
+
+.ui-datepicker-title select {
+    font-family: Circe, Arial, helvetika, sans-serif !important;
+}
+
+.ui-datepicker-calendar a {
+    font-family: 'Ristretto Pro', Georgia, 'Times New Roman', Times, serif !important;
+}
+
+.ui-datepicker select.ui-datepicker-month, .ui-datepicker select.ui-datepicker-year {
+    width: 60% !important;
+}
+

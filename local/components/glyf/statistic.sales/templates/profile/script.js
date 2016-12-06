@@ -25,6 +25,8 @@ $(document).ready(function() {
     $(function() {
         var format = 'dd.mm.yy';
         
+        
+        
         var from = $('#js-sales-period-min-search-id')
                 .datepicker({
                     defaultDate: "+1w",
@@ -34,6 +36,7 @@ $(document).ready(function() {
                 })
                 .on('change', function() {
                     to.datepicker('option', 'minDate', getDate(this));
+                    getRemoteSales();
                 });
         var to = $('#js-sales-period-max-search-id')
                 .datepicker({
@@ -44,6 +47,7 @@ $(document).ready(function() {
                 })
                 .on('change', function() {
                     from.datepicker('option', 'maxDate', getDate(this));
+                    getRemoteSales();
                 });
 
         function getDate(element) {

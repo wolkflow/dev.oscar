@@ -66,7 +66,10 @@
                     $APPLICATION->IncludeComponent(
                         "glyf:statistic.sales",
                         "remote-profile",
-                        array()
+                        array(
+                            "PERIOD_MIN" => date('d.m.Y', strtotime('-1 month')),
+                            "PERIOD_MAX" => date('d.m.Y')
+                        )
                     );
                 ?>
             </tbody>
