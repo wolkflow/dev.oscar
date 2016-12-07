@@ -27,6 +27,11 @@ class MailSubscribeComponent extends \CBitrixComponent
 			return;
 		}
         
+        $this->arResult = array(
+            'BLOHS'    => array(),
+            'PICTURES' => array(),
+            'SEARCHES' => array(),
+        );
         
         // Подключение шаблона компонента.
 		$this->IncludeComponentTemplate();
@@ -34,4 +39,30 @@ class MailSubscribeComponent extends \CBitrixComponent
 		return $this->arResult;
 	}
     
+    
+    /**
+     * Получение новыйх статей блога.
+     */
+    public function getBlogs()
+    {
+        
+    }
+    
+    
+    /**
+     * Получение новыйх ихображений в коллекциях.
+     */
+    public function getPictures()
+    {
+        
+    }
+    
+    
+    /**
+     * Получение новыйх ихображений в поиске.
+     */
+    public function getSearches()
+    {
+        
+    }
 }

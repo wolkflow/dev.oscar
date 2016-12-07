@@ -66,8 +66,19 @@ class Subscribe extends HLBlockModel
     }
     
     
-    public function getlastTime()
+    public function getLastTime()
     {
         return $this->get(self::FIELD_LAST_TIME);
+    }
+    
+    
+    /**
+     * Обновление времени последней отправки.
+     */
+    public function retime()
+    {
+        $this->update(array(
+            self::FIELD_LAST_TIME => new \Bitrix\Main\Type\DateTime()
+        ));
     }
 }

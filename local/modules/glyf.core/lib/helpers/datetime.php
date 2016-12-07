@@ -21,7 +21,6 @@ class DateTime
         if (empty($date)) {
             $date = time();
         }
-        $date = strtotime('01.10.2016');
         
         $month = (int) date('n', (int) $date);
         $month = intval($month / TIME_MONTH_IN_QUARTER);

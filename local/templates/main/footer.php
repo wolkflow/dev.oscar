@@ -3,7 +3,7 @@
                     <div class="row">
                         <ul class="nav navbar-cart footer-cart visible-xs">
                             <li>
-                                <a href="#">
+                                <a href="/buyout/">
                                     <span class="cart-count">0</span>
                                     <i class="icon icon-cart"></i>
                                 </a>

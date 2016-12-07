@@ -18,7 +18,7 @@ use Glyf\Oscar\User;
 
 class PictureUpload extends \CBitrixComponent
 {
-    const IMAGE_MIN_SIZE = 700;
+    const IMAGE_MIN_SIZE = 3000;
     
     
     protected static $user;
