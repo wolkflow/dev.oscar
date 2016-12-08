@@ -50,6 +50,21 @@ class License extends HLBlockModel
     }
     
     
+    public function getLicenseRoot()
+    {
+        $lid = $this->getRoot();
+        
+        while (!empty($lid)) {
+            $license = new self($lid);
+            $lid = $license->getRoot();
+        }
+        
+        if (!empty($license)) {
+            return $license;
+        }
+        return null;
+    }
+    
     public function getStepTitle()
     {
         // Свойства HL-блока.

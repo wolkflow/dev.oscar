@@ -198,13 +198,13 @@ body {
   padding-top: 20px;
 }
 .pdfTable th {
-  font-size: 7px;
+  font-size: 11px;
   color: #808080 !important;
   text-transform: uppercase;
 }
 .pdfTable td {
   padding: 0 10px 5px 0;
-  font-size: 9px;
+  font-size: 13px;
   width: 10%;
 }
 .pdfTable td + td {

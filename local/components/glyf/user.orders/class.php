@@ -84,7 +84,7 @@ class UserOrdersComponent extends \CBitrixComponent
             $item = $sale->getData();
             
             $item['PICTURE'] = $sale->getPicture()->getData();
-            $item['LICENSE'] = $sale->getLicense()->getData();
+            $item['LICENSE'] = $sale->getLicenseRoot()->getData();
             
             $this->arResult['ITEMS'] []= $item;
         }

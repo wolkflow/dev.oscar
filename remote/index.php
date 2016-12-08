@@ -791,9 +791,10 @@ switch ($action) {
     
     // Подготовка картины к покупке по лицензии.
     case ('basket-picture'):
-        $lid = (int) $request->get('lid');
-        $pid = (int) $request->get('pid');
-        $bid = (int) $request->get('bid');
+        $lid  = (int) $request->get('lid');
+        $pid  = (int) $request->get('pid');
+        $bid  = (int) $request->get('bid');
+        $rlid = (int) $request->get('rlid');
         
         $user = new Glyf\Oscar\User();
         

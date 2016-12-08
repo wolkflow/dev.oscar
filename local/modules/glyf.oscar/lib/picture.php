@@ -979,15 +979,24 @@ class Picture extends HLBlockModel
     {
         $user = new \Glyf\Oscar\User($uid);
         
+        $license = new \Glyf\Oscar\License($lid);
+        $license = $license->getLicenseRoot();
+        
+        $rid = 0;
+        if (!empty($license)) {
+            $rid = $license->getID();
+        }
+        
         $sale = new \Glyf\Oscar\Statistic\Sale();
         $sale->add(array(
-            \Glyf\Oscar\Statistic\Sale::FIELD_TIME        => date('d.m.Y H:i:s'),
-            \Glyf\Oscar\Statistic\Sale::FIELD_USER_ID     => $user->getID(),
-            \Glyf\Oscar\Statistic\Sale::FIELD_UPLOADER_ID => $this->getUserID(),
-            \Glyf\Oscar\Statistic\Sale::FIELD_ELEMENT_ID  => $this->getID(),
-            \Glyf\Oscar\Statistic\Sale::FIELD_ORDER_ID    => (int) $oid,
-            \Glyf\Oscar\Statistic\Sale::FIELD_LICENSE_ID  => (int) $lid,
-            \Glyf\Oscar\Statistic\Sale::FIELD_PRICE       => (float) $price,
+            \Glyf\Oscar\Statistic\Sale::FIELD_TIME          => date('d.m.Y H:i:s'),
+            \Glyf\Oscar\Statistic\Sale::FIELD_USER_ID       => $user->getID(),
+            \Glyf\Oscar\Statistic\Sale::FIELD_UPLOADER_ID   => $this->getUserID(),
+            \Glyf\Oscar\Statistic\Sale::FIELD_ELEMENT_ID    => $this->getID(),
+            \Glyf\Oscar\Statistic\Sale::FIELD_ORDER_ID      => (int) $oid,
+            \Glyf\Oscar\Statistic\Sale::FIELD_LICENSE_ID    => (int) $lid,
+            \Glyf\Oscar\Statistic\Sale::FIELD_LICENSE_ROOT  => (int) $rid,
+            \Glyf\Oscar\Statistic\Sale::FIELD_PRICE         => (float) $price,
         ));
         
         $this->update(array(self::FIELD_STAT_SALES => $this->getStatisticSalesCount() + 1));
