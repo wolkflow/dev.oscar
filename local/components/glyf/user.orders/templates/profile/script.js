@@ -1,5 +1,14 @@
 $(document).ready(function() {
     
+    $(document).on('click', '#js-orders-block-id .js-button-print', function() {
+        if ($('#js-orders-block-id .js-checkbox:checked').length == 0) {
+            return;
+        }
+        var query = $('#js-orders-block-id form').serialize();
+        
+        location.href = '/screens/orders/?print=yes&' + query;
+    });
+    
     // Выбор элемента.
     $(document).on('click', '#js-orders-block-id .js-checkbox', function() {
         if ($('#js-orders-wrapper-id .js-checkbox:checked').length > 0) {
