@@ -2,7 +2,7 @@
 
 namespace Glyf\Oscar\Agents;
 
-use \Bitrix\Main\Type\DateTime;
+use Bitrix\Main\Type\DateTime;
 use Glyf\Oscar\Subscribe;
 
 class Mailing
@@ -48,8 +48,28 @@ class Mailing
             )
         ));
         
+        
+        // Генерация и отправка рассылок.
         foreach ($subscibes as $subscribe) {
-            echo $this->make($subscribe); break;
+            
+            // HTML.
+            $html = $this->make($subscribe);
+            
+            // Пользователь.
+            $user = new \Glyf\Oscar\User($subscibe->getUserID());
+             
+            // Отправка письма.
+            \Bitrix\Main\Mail\Event::send(array( 
+                'EVENT_NAME' => 'GL_SUBSCRIBE', 
+                'LID'        => SITE_DEFAULT, 
+                'C_FIELDS'   => array(
+                    'EMAIL' => $user->getEmail(),
+                    'HTML'  => $html,
+                ), 
+            ));
+            
+            // Изменение времени последней отправки.
+            $subscribe->retime();
         }
     }
     

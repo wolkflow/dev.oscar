@@ -1081,7 +1081,11 @@ class Picture extends HLBlockModel
                         break;
                 }
                 
-                $wheres []= $key . " " . $op . " '" . $val . "'";
+                if (is_array($val)) {
+                    $wheres []= $key . " IN ('" . implode("', '", $val) . "')";
+                } else {
+                    $wheres []= $key . " " . $op . " '" . $val . "'";
+                }
             }
             $sql .= " WHERE " . implode(' AND ', $wheres);
         }

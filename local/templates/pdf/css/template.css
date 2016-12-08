@@ -1,0 +1,266 @@
+@import "fonts.css";
+/*
+ *	@author:	Agency WOLK
+ *	@site:		http://www.wolkflow.com
+ *	@mail:		hello@wolkflow.com
+ *
+ *	@date:		05.05.2016
+ *
+*/
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+main,
+menu,
+nav,
+section {
+  display: block;
+}
+body {
+  line-height: 1;
+}
+ol,
+ul {
+  list-style: none;
+}
+blockquote,
+q {
+  quotes: none;
+}
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: '';
+  content: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+* {
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+}
+body {
+  font: 400 15px 'Circe', Arial, helvetika, sans-serif;
+}
+.clearfix {
+  clear: both;
+}
+.pdf {
+  padding: 30px;
+}
+.pdfTop {
+  margin-bottom: 30px;
+}
+.pdfLogoText {
+  font-size: 10px;
+  line-height: 1.2;
+  float: right;
+  padding: 5px 15px 0 0;
+  text-align: right;
+  font-weight: 300;
+}
+.pdfLogoImage {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #000;
+  text-align: center;
+  position: relative;
+  float: right;
+}
+.pdfLogoImage img {
+  position: absolute;
+  width: 26px;
+  left: 50%;
+  top: 50%;
+  margin: -8px 0 0 -13px;
+}
+.pdfTitle {
+  float: left;
+  font-size: 15px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #00c3d9;
+  text-align: left;
+  line-height: 2;
+}
+.pdfTable table,
+.pdfTable tr,
+.pdfTable td,
+.pdfTable th {
+  vertical-align: middle;
+  text-align: left;
+}
+.pdfTable table {
+  width: 100%;
+}
+.pdfTable thead {
+  padding-bottom: 5px;
+  border-bottom: 1px solid #e6e6e6;
+}
+.pdfTable thead + tbody tr:first-child td {
+  padding-top: 20px;
+}
+.pdfTable th {
+  font-size: 7px;
+  color: #808080 !important;
+  text-transform: uppercase;
+}
+.pdfTable td {
+  padding: 0 10px 5px 0;
+  font-size: 9px;
+  width: 10%;
+}
+.pdfTable td + td {
+  width: 15%;
+}
+.pdfTable td + td + td {
+  width: 35%;
+}
+.pdfTable td + td + td + td {
+  width: 25%;
+}
+.pdfTable td + td + td + td + td {
+  width: 15%;
+}
+.pdfTable span {
+  color: #808080 !important;
+}
+.pdfTableStats td {
+  width: 15%;
+}
+.pdfTableStats td + td {
+  width: 45%;
+}
+.pdfTableStats td + td + td {
+  width: 15%;
+}
+.pdfTableStats td + td + td + td {
+  width: 15%;
+}
+.pdfGrid {
+  margin-left: -12px;
+}
+.pdfCol {
+  font-size: 7px;
+  color: #4d4d4d;
+  float: left;
+  margin: 0 0 8px 12px;
+  width: 95px;
+}
+.pdfColImage {
+  width: 95px;
+  height: 95px;
+  background: #b3b3b3;
+}
+.pdfColImage img {
+  display: block;
+  width: 100%;
+}
+.pdfColTitle {
+  font: 13px/15px 'Ristretto Pro', Arial, helvetika, sans-serif;
+  text-transform: uppercase;
+  color: #000;
+  padding: 5px 0 8px;
+}
+.pdfColAuthor {
+  text-transform: uppercase;
+  color: #000;
+}
+/*# sourceMappingURL=template.css.map */

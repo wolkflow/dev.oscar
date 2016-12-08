@@ -278,11 +278,12 @@ $(document).ready(function() {
         var bid   = $that.data('bid');
         var pid   = $that.data('pid');
         var lid   = $that.data('lid');
+        var rlid  = $('.js-license-root:checked').val();
         
         $.ajax({
             url: '/remote/',
             type: 'post',
-            data: {'action': 'basket-picture', 'bid': bid, 'pid': pid, 'lid': lid},
+            data: {'action': 'basket-picture', 'bid': bid, 'pid': pid, 'lid': lid, 'rlid': rlid},
             dataType: 'json',
             success: function(response) {
                 if (response.status) {

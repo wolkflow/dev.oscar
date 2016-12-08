@@ -1,5 +1,15 @@
 $(document).ready(function() {
     
+    // Выбор элемента.
+    $(document).on('click', '#js-orders-wrapper-id .js-checkbox', function() {
+        if ($('#js-orders-wrapper-id .js-checkbox:checked').length > 0) {
+            $('.js-dependence-chekbox-button').addClass('is-active');
+        } else {
+            $('.js-dependence-chekbox-button').removeClass('is-active');
+        }
+    });
+    
+    
     // Изменение колчиества страниц.
     $(document).on('change', '#js-orders-page-count-id', function() {
         var count = parseInt($('#js-orders-page-count-id option:selected').val());

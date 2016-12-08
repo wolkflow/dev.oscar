@@ -8,15 +8,16 @@ use Glyf\Oscar\Picture;
 
 class Sale extends HLBlockModel
 {
-    const FIELD_ID          = 'ID';
-    const FIELD_TIME        = 'UF_TIME';
-    const FIELD_USER_ID     = 'UF_USER_ID';
-    const FIELD_UPLOADER_ID = 'UF_UPLOADER_ID';
-    const FIELD_ELEMENT_ID  = 'UF_ELEMENT_ID';
-    const FIELD_LICENSE     = 'UF_LICENSE';
-    const FIELD_LICENSE_ID  = 'UF_LICENSE_ID';
-    const FIELD_PRICE       = 'UF_PRICE';
-    const FIELD_ORDER_ID    = 'UF_ORDER_ID';
+    const FIELD_ID           = 'ID';
+    const FIELD_TIME         = 'UF_TIME';
+    const FIELD_USER_ID      = 'UF_USER_ID';
+    const FIELD_UPLOADER_ID  = 'UF_UPLOADER_ID';
+    const FIELD_ELEMENT_ID   = 'UF_ELEMENT_ID';
+    const FIELD_LICENSE      = 'UF_LICENSE';
+    const FIELD_LICENSE_ID   = 'UF_LICENSE_ID';
+    const FIELD_LICENSE_ROOT = 'UF_LICENSE_ROOT';
+    const FIELD_PRICE        = 'UF_PRICE';
+    const FIELD_ORDER_ID     = 'UF_ORDER_ID';
     
     static protected $hlblockID = HLBLOCK_STATISTIC_SALES_ID;
     
@@ -58,6 +59,10 @@ class Sale extends HLBlockModel
         return $this->get(self::FIELD_LICENSE_ID);
     }
     
+    public function getLicenseRootID()
+    {
+        return $this->get(self::FIELD_LICENSE_ROOT);
+    }
     
     public function getPrice()
     {
@@ -80,6 +85,12 @@ class Sale extends HLBlockModel
     public function getLicense()
     {
         return (new License($this->getLicenseID()));
+    }
+    
+    
+    public function getLicenseRoot()
+    {
+        return (new License($this->getLicenseRootID()));
     }
     
     
@@ -118,11 +129,15 @@ class Sale extends HLBlockModel
                         break;
                 }
                 
-                $wheres []= $key . " " . $op . " '" . $val . "'";
+                if (is_array($val)) {
+                    $wheres []= $key . " IN ('" . implode("', '", $val) . "')";
+                } else {
+                    $wheres []= $key . " " . $op . " '" . $val . "'";
+                }
             }
             $sql .= " WHERE " . implode(' AND ', $wheres);
         }
-        
+                
         if (!empty($params['order'])) {
             $orders = array();
             foreach ($params['order'] as $key => $val) {

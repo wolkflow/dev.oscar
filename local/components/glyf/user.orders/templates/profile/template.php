@@ -16,10 +16,10 @@
         <ul class="cabinet-panel__menu">
         
             <li><a class="is-active" href="javascript:void(0)" id="js-check-all-id" data-selector=".js-checkbox">выделить всё</a></li>
-            <li><a class="hidden-sm" href="#">загрузить пдф</a></li>
-            <li><a class="" href="#">отправить по email</a></li>
-            <li><a class="hidden-sm" href="#">печать</a></li>
-            <li><a href="#">повторить заказ</a></li>
+            <li><a class="js-dependence-chekbox-button hidden-sm" href="javascript:void(0)">загрузить пдф</a></li>
+            <li><a class="js-dependence-chekbox-button" href="javascript:void(0)">отправить по email</a></li>
+            <li><a class="js-dependence-chekbox-button hidden-sm" href="javascript:void(0)">печать</a></li>
+            <li><a class="js-dependence-chekbox-button" href="javascript:void(0)">повторить заказ</a></li>
 
             <li><div class="cabinet-panel__menu-pages hidden-xs">
                 <span>показывать по</span>
