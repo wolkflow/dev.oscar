@@ -8,6 +8,7 @@ use Glyf\Oscar\Picture;
 
 class Folder extends HLBlockModel
 {
+    const FIELD_ID    = 'ID';
     const FIELD_TITLE = 'UF_TITLE';
     const FIELD_USER  = 'UF_USER';
     const FIELD_TIME  = 'UF_TIME';
@@ -57,6 +58,45 @@ class Folder extends HLBlockModel
         $filter = array_merge((array) $filters, array(self::FIELD_USER => intval($uid)));
         
         return self::getList(array('filter' => $filter), $objects);
+    }
+    
+    
+    public function getPictures($limit = null, $offset = null, $asobjects = true)
+    { 
+        $connection = \Bitrix\Main\Application::getConnection();
+        
+        $sql = "
+            SELECT *
+            FROM `g_folders` AS `f`
+            INNER JOIN `g_pictures` AS `p` ON (p.UF_FOLDER = f.ID)
+            WHERE p.UF_FOLDER = '" . $this->getID() . "'
+            ORDER BY p.UF_TIME DESC
+        ";
+        
+        if (!empty($limit)) {
+            $sql .= " LIMIT " . intval($limit);
+            
+            if (!empty($offset) && $offset > 0) {
+                $sql .= " OFFSET " . intval($offset);
+            }
+        }
+        
+        // Запрос.
+        $result = $connection->query($sql);
+        
+        if (!$asobjects) {
+            return $result;
+        }
+        
+        $items  = array();
+        while ($item = $result->fetch()) {
+            if ($asobjects) {
+                $items[$item['ID']] = new Picture($item['ID'], $item);
+            } else {
+                $items[$item['ID']] = $item;
+            }
+        }
+        return $items;
     }
     
     

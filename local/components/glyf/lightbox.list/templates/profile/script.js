@@ -30,11 +30,11 @@ function cLightboxChange(response)
 $(document).ready(function() {
     
     // Выбор элемента.
-    $(document).on('click', '.js-personal-lightbox', function() {
+    $(document).on('click', '#js-lightboxes-block-id .js-personal-lightbox', function() {
         if ($('.js-personal-lightbox:checked').length > 0) {
-            $('.js-dependence-chekbox-button').addClass('is-active');
+            $('#js-lightboxes-block-id .js-dependence-chekbox-button').addClass('is-active');
         } else {
-            $('.js-dependence-chekbox-button').removeClass('is-active');
+            $('#js-lightboxes-block-id .js-dependence-chekbox-button').removeClass('is-active');
         }
     });
     

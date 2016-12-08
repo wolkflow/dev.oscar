@@ -9,7 +9,7 @@
 
 <? $this->setFrameMode(true); ?>
 
-<div class="cabinet-block cabinet-block-profilehistory is-active">
+<div id="js-orders-block-id" class="cabinet-block cabinet-block-profilehistory is-active">
     <div class="cabinet-panel clearfix">
         <div class="cabinet-panel__toggler">История заказов</div>
         <div class="cabinet-panel__title">История заказов</div>

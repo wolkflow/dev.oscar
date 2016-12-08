@@ -264,3 +264,16 @@ body {
   color: #000;
 }
 /*# sourceMappingURL=template.css.map */
+
+.pdfRowTitle {
+    float: left;
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #00c3d9;
+    text-align: left;
+    line-height: 2;
+    margin: 0 0 10px 0;
+    clear: both;
+    width: 100%;
+}

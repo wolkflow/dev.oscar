@@ -11,6 +11,7 @@ class Lightbox extends HLBlockModel
 {
     const COUNT_LAST_PICTURES = 6;
     
+    const FIELD_ID    = 'ID';
     const FIELD_TITLE = 'UF_TITLE';
     const FIELD_USER  = 'UF_USER';
     const FIELD_TIME  = 'UF_TIME';
