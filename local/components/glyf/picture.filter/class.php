@@ -76,7 +76,6 @@ class PictureFilterComponent extends \CBitrixComponent
         $props = HLBlockHelper::getProps(HLBLOCK_PICTURES_ID, 'FIELD_NAME', 'ID');
         
         
-        
         // Тип объекта (коллекции).
         $this->filter['COLLECTION'] = array();
         $collections = Collection::getList(array('filter' => array('ACTIVE' => 'Y', 'DEPTH_LEVEL' => 1)));
@@ -111,8 +110,6 @@ class PictureFilterComponent extends \CBitrixComponent
         foreach ($props[Picture::FIELD_LEGAL]['ENUMS'] as $enum) {
             $this->filter['LEGAL'][$enum['ID']] = $enum['XML_ID'];
         }
-        
-       //  print_r($this->filter);
     }
 	
 }

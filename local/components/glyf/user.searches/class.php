@@ -44,7 +44,6 @@ class UserSearchesComponent extends \CBitrixComponent
         }
         
         
-        
 		// Подключение шаблона компонента.
 		$this->IncludeComponentTemplate();
 		

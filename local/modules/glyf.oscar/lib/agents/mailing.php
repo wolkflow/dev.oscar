@@ -49,7 +49,7 @@ class Mailing
         ));
         
         foreach ($subscibes as $subscribe) {
-            $this->make($subscribe); break;
+            echo $this->make($subscribe); break;
         }
     }
     
@@ -64,7 +64,7 @@ class Mailing
         $GLOBALS['APPLICATION']->IncludeComponent(
             'glyf:mail.subscribe', 
             'subscribe', 
-            array('SUBSRIBE' => $subscribe->getID())
+            array('SID' => $subscribe->getID())
         );
         
         $html = ob_get_clean();

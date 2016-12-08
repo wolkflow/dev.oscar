@@ -266,6 +266,20 @@ class Picture extends \Glyf\Core\Filters\HLBlockElement
     /**
      * Фильтр по модерации.
      */
+    public function setModerateTime($min = false, $max = false)
+    {
+        if (!empty($min)) {
+            $this->params['filter']['>'.PictureElement::FIELD_MODERATE_TIME] = $min;
+        }
+        if (!empty($max)) {
+            $this->params['filter']['<'.PictureElement::FIELD_MODERATE_TIME] = $max;
+        }
+    }
+    
+    
+    /**
+     * Фильтр по модерации.
+     */
     public function setModerate($value)
     {
         $this->params['filter'][PictureElement::FIELD_MODERATE] = (bool) $value;
