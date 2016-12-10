@@ -8,7 +8,7 @@
 <? $this->setFrameMode(true); ?>
 
 
-<div class="cabinet-block cabinet-block-lightboxes is-active hidden-xs clearfix">
+<div class="cabinet-block cabinet-block-lightboxes is-active clearfix">
     <div class="cabinet-panel cabinet-panel--switch clearfix">
         <div class="cabinet-panel__title">Сборники</div>
         <div class="cabinet-panel__menu">
