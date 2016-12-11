@@ -16,9 +16,9 @@
         <ul class="cabinet-panel__menu">
         
             <li><a class="is-active" href="javascript:void(0)" id="js-check-all-id" data-selector=".js-checkbox">выделить всё</a></li>
-            <li><a class="js-dependence-chekbox-button hidden-sm" href="javascript:void(0)">загрузить пдф</a></li>
-            <li><a class="js-dependence-chekbox-button" href="javascript:void(0)">отправить по email</a></li>
-            <li><a class="js-dependence-chekbox-button hidden-sm js-button-print" href="javascript:void(0)">печать</a></li>
+            <li><a class="js-dependence-chekbox-button js-group-action hidden-sm" href="javascript:void(0)" data-action="loadpdf">загрузить пдф</a></li>
+            <li><a class="js-dependence-chekbox-button js-group-action" href="javascript:void(0)" data-action="email">отправить по email</a></li>
+            <li><a class="js-dependence-chekbox-button js-group-action hidden-sm" href="javascript:void(0)" data-action="print">печать</a></li>
             <li><a class="js-dependence-chekbox-button" href="javascript:void(0)">повторить заказ</a></li>
 
             <li><div class="cabinet-panel__menu-pages hidden-xs">
@@ -39,7 +39,7 @@
     </div>
     <div class="cabinet-block-content">
         <form>
-            <table class="cabinet-table hidden-xs">
+            <table class="cabinet-table">
                 <tbody id="js-orders-wrapper-id">
                     <?  // Список заказов.
                         $APPLICATION->IncludeComponent(

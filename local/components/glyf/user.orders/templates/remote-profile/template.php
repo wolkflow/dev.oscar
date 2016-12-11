@@ -10,13 +10,13 @@
 <? $this->setFrameMode(true); ?>
 <? foreach ($arResult['ITEMS'] as $item) { ?>
     <tr>
-        <td>
+        <td class="ordersTable-checkbox">
             <label class="checkbox-me">
                 <input type="checkbox" name="IDS[]" class="js-order js-checkbox" value="<?= $item[Sale::FIELD_ID] ?>" data-oid="<?= $item[Sale::FIELD_ID] ?>" />
                 <span></span>
             </label>
         </td>
-        <td>
+        <td class="ordersTable-img">
             <img class="cabinet-table__img" src="<?= CFile::getPath($item['PICTURE'][Picture::FIELD_SMALL_FILE]) ?>" />
         </td>
         <td>

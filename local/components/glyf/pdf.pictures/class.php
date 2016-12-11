@@ -18,6 +18,9 @@ class PDFPicturesComponent extends \CBitrixComponent
 	 */
     public function onPrepareComponentParams($arParams)
     {
+        // ID пользовател€.
+        $arParams['UID'] = (int) $arParams['UID'];
+        
         // ID изображений.
         $arParams['PIDS'] = (array) $arParams['PIDS'];
         
@@ -46,13 +49,19 @@ class PDFPicturesComponent extends \CBitrixComponent
 			return;
 		}
         
+        if (empty($this->arParams['UID'])) {
+            return;
+        }
+        
         $this->arResult = array(
             'PICTURES'   => array(),
             'FOLDERS'    => array(),
             'LIGHTBOXES' => array(),
         );
         
-        $this->arResult['USER'] = new Glyf\Oscar\User();
+        // ѕользователь.
+        $this->arResult['USER'] = new Glyf\Oscar\User($this->arParams['UID']);
+        
         
         $this->arParams['PIDS'] = array_filter(array_map('intval', $this->arParams['PIDS']));
         $this->arParams['FIDS'] = array_filter(array_map('intval', $this->arParams['FIDS']));

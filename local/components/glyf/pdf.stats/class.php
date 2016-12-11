@@ -21,6 +21,9 @@ class PDFStatsComponent extends \CBitrixComponent
 	 */
     public function onPrepareComponentParams($arParams)
     {
+        // ID пользователя.
+        $arParams['UID'] = (int) $arParams['UID'];
+        
         // Количество на странице.
         $arParams['IDS'] = (array) $arParams['IDS'];
         
@@ -48,6 +51,14 @@ class PDFStatsComponent extends \CBitrixComponent
 		if (!\Bitrix\Main\Loader::includeModule('glyf.oscar')) {
 			return;
 		}
+        
+        if (empty($this->arParams['UID'])) {
+            return;
+        }
+        
+        // Пользователь.
+        $this->arResult['USER'] = new Glyf\Oscar\User($this->arParams['UID']);
+        
         
         $this->arParams['IDS'] = array_filter(array_map('intval', $this->arParams['IDS']));
         

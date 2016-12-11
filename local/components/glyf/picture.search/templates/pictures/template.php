@@ -8,7 +8,7 @@
 <? $this->setFrameMode(true); ?>
 
 <? if (!empty($arResult['ITEMS'])) { ?>
-    <div class="col-sm-9 col-lg-10">
+    <div class="col-sm-6 col-lg-8">
         <div class="row">
             <? foreach ($arResult['ITEMS'] as $item) { ?>
                 <div class="col-xs-6 col-sm-4 col-md-4 col-lg-13 catalogItem-alt">
@@ -23,7 +23,7 @@
                             <? if ($item[Picture::FIELD_LEGAL] == Picture::PROP_LEGAL_FULL_ID) { ?>
                                 <a class="card-image__button card-image__button--copyright" href="javascript:void(0)"></a>
                             <? } ?>
-                            <a class="card-image__button card-image__button--add" href="#"></a>
+                            <a class="card-image__button card-image__button--add js-add-to-lightbox" href="javascript:void(0)" data-pid="<?= $item[Picture::FIELD_ID] ?>"></a>
                             <a class="card-image__button card-image__button--cart add-to-cart" href="javascript:void(0)" data-pid="<?= $item[Picture::FIELD_ID] ?>"></a>
                         </div>
                     </div>
@@ -34,6 +34,13 @@
             <? } ?>
         </div>
     </div>
+    <? /*
+    <div class="col-sm-3 col-lg-2 ">2
+
+    </div>
+    */ ?>
 <? } else { ?>
     <p><?= getMessage('GL_NO_FOUND') ?></p>
 <? } ?>
+
+

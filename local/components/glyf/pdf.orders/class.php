@@ -20,7 +20,10 @@ class PDFOrdersComponent extends \CBitrixComponent
 	 */
     public function onPrepareComponentParams($arParams)
     {
-        // Количество на странице.
+        // ID пользователя.
+        $arParams['UID'] = (int) $arParams['UID'];
+        
+        // ID заказов (продаж).
         $arParams['IDS'] = (array) $arParams['IDS'];
         
         return $arParams;
@@ -41,13 +44,20 @@ class PDFOrdersComponent extends \CBitrixComponent
 			return;
 		}
         
+        if (empty($this->arParams['UID'])) {
+            return;
+        }
+        
+        // Пользователь.
+        $this->arResult['USER'] = new Glyf\Oscar\User($this->arParams['UID']);
+        
+        
         $this->arParams['IDS'] = array_filter(array_map('intval', $this->arParams['IDS']));
         
-        $user = new Glyf\Oscar\User();
         
         // Список элементов.
         $sales = Sale::getList(array(
-            'filter' => array(Sale::FIELD_USER_ID => $user->getID(), Sale::FIELD_ID => $this->arParams['IDS'])
+            'filter' => array(Sale::FIELD_USER_ID => $this->arResult['USER']->getID(), Sale::FIELD_ID => $this->arParams['IDS'])
         ));
         
         
@@ -62,6 +72,7 @@ class PDFOrdersComponent extends \CBitrixComponent
             $this->arResult['ITEMS'] []= $item;
         }
         unset($item);
+        
         
         
 		// Подключение шаблона компонента.

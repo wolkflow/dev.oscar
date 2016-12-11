@@ -198,13 +198,13 @@ body {
   padding-top: 20px;
 }
 .pdfTable th {
-  font-size: 11px;
+  font-size: 7px;
   color: #808080 !important;
   text-transform: uppercase;
 }
 .pdfTable td {
   padding: 0 10px 5px 0;
-  font-size: 13px;
+  font-size: 9px;
   width: 10%;
 }
 .pdfTable td + td {
@@ -263,6 +263,7 @@ body {
   text-transform: uppercase;
   color: #000;
 }
+
 /*# sourceMappingURL=template.css.map */
 
 .pdfRowTitle {

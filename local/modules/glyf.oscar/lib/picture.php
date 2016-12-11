@@ -788,7 +788,7 @@ class Picture extends HLBlockModel
             'PREVIEW' => tempnam('/tmp', 'preview').'.jpg',
             'PREVIEW_WM' => tempnam('/tmp', 'preview').'.jpg',
             'SMALL_PREVIEW' => tempnam('/tmp', 'preview').'.jpg',
-            'SMALL_PREVIEW_WM' => tempnam('/tmp', 'preview').'.jpg',
+            //'SMALL_PREVIEW_WM' => tempnam('/tmp', 'preview').'.jpg',
         );
         
         // Среднее изображение без знака.
@@ -820,6 +820,7 @@ class Picture extends HLBlockModel
         );
         
         // Малое изображение со знаком.
+        /*
         self::makePreview(
             $filepath,
             $filenames['SMALL_PREVIEW_WM'],
@@ -827,6 +828,7 @@ class Picture extends HLBlockModel
             self::IMAGE_SMALL_HEIGHT,
             true
         );
+        */
         
         return $filenames;
     }

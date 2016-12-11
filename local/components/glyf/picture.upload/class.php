@@ -264,7 +264,7 @@ class PictureUpload extends \CBitrixComponent
             $fields[Picture::FIELD_PREVIEW_FILE] = $unames['PREVIEW'];
             $fields[Picture::FIELD_PREVIEW_FILE_WATERMARK] = $unames['PREVIEW_WM'];
             $fields[Picture::FIELD_SMALL_FILE] = $unames['SMALL_PREVIEW'];
-            $fields[Picture::FIELD_SMALL_FILE_WATERMARK] = $unames['SMALL_PREVIEW_WM'];
+            // $fields[Picture::FIELD_SMALL_FILE_WATERMARK] = $unames['SMALL_PREVIEW_WM'];
         }
         
         

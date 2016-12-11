@@ -1,19 +1,21 @@
 <?php
 
-namespace Wolk\Core\System;
+namespace Glyf\Core\System;
 
 class ScreenShot
 {
-	const PATH   = '/upload/screenshot/';
+	const PATH = '/upload/screenshot/';
 	
 	protected $url;
 	protected $name;
+    protected $path;
 	
 	
 	public function __construct($url, $name)
 	{
 		$this->url  = (string) $url;
 		$this->name = (string) $name;
+        $this->path = static::PATH;
 	}
 	
 	
@@ -28,13 +30,19 @@ class ScreenShot
 		return $this->name;
 	}
 
+    
+    public function getPath()
+    {
+        return $this->path;
+    }
+    
 	
 	/**
 	 * Получение ссылки на файл.
 	 */
 	public function getLink($absolute = false)
 	{
-		$link = static::PATH . $this->getName() . '.pdf';
+		$link = $this->getPath() . $this->getName() . '.pdf';
 		
 		if ($absolute) {
 			$site = \CSite::GetByID(SITE_DEFAULT)->Fetch();
@@ -51,6 +59,8 @@ class ScreenShot
 	{	
 		$url  = $this->getURL();
 		$link = $this->getLink(true); 
+        
+        // TODO: mkdir ($this->getPath(), 0755, true); // рекурисвное создание директории.
 		
 		// Аргументы.
 		$args = array('-q' => '', '--no-stop-slow-scripts' => ''); // , '--enable-javascript' => '', '--run-script' => '', '--load-error-handling' => 'ignore');

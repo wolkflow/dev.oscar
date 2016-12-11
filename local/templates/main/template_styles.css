@@ -2736,7 +2736,9 @@ input[type=text].le.disabled {
   height: 100%;
   vertical-align: middle;
   text-align: center;
-  overflow: hidden; }
+  overflow: hidden;
+  min-height: 60px;
+}
 
 .cabinet-lightbox__new a.le-start{
   display: table-cell;
@@ -6010,4 +6012,41 @@ input.input-error:not(.disabled) {
 .ui-datepicker select.ui-datepicker-month, .ui-datepicker select.ui-datepicker-year {
     width: 60% !important;
 }
-
+@media all and (max-width: 767px) {
+  #js-orders-wrapper-id td {
+    display: block;
+    margin-left: 73px;
+    padding-top: 10px;
+  }
+  #js-orders-wrapper-id td.ordersTable-checkbox {
+    float: left;
+    margin: 0;
+    width: 28px;
+  }
+  #js-orders-wrapper-id td.ordersTable-img {
+    float: left;
+    margin: 0;
+    width: 45px;
+  }
+  #js-orders-wrapper-id tr td + td + td + td  {
+    padding-top: 0;
+  }
+  #js-orders-wrapper-id tr td:last-child {
+    padding-bottom: 9px;
+  }
+  #js-orders-wrapper-id tr {
+    border-bottom: 1px solid #f2f2f2;
+  }
+  #js-porfile-lightboxes-wrapper-id {
+    display: none;
+  }
+  .is-expanded #js-porfile-lightboxes-wrapper-id {
+    display: block;
+  }
+  .cabinet-block-lightboxes {
+    margin-bottom: 0;
+  }
+  .cabinet-table tbody tr.separate {
+    border-bottom: 0 !important;
+  }
+}

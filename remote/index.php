@@ -994,6 +994,27 @@ switch ($action) {
         break;
     
     
+    // Скачивание PDF - заказы пользователя.
+    case ('load-user-orders-pdf'):
+        $ids = (array) $request->get('ids');
+        
+        $user = new \Glyf\Oscar\User();
+        
+        if (!CUser::IsAuthorized()) {
+            jsonresponse(false, 'Вы не авторизованы');
+        }
+        $data = array('IDS' => $ids, 'UID' => $user->getID());
+        $link = 'http://' . SITENAME . '/screens/orders/' . http_build_query($data);
+        $name = 'PDF_ORDERS_' . date('YmdHi') . '.pdf';
+        
+        $pdf = new \Glyf\Oscar\System\ScreenPDF($link, $name);
+        $pdf->make();
+        
+        jsonresponse(true, '', array('link' => $pdf->getLink());
+        break;
+    
+    
+    
     // Получение HTML.
     case ('get-html'):
         $include = (string) $request->get('inc');
@@ -1049,10 +1070,6 @@ switch ($action) {
 		jsonresponse(false, '', array(), 'Internal error');
 		break;
 }
-
-// lightbox-update
-// lightbox-list-refresh = get-html * 
-
 
 
 
