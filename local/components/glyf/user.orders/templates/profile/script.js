@@ -20,42 +20,49 @@ $(document).ready(function() {
     
     $('#js-orders-block-id .js-group-action').on('click', function() {
         var action = $(this).data('action');
+        var data = $('#js-orders-block-id form').objectize();
         
         if ($('#js-orders-block-id .js-checkbox:checked').length == 0) {
             return;
         }
-        var ids = $('#js-orders-block-id form').objectize();
         
-        console.log(ids);
-        return;
         switch (action) {
             case ('print'):
                 location.href = '/screens/orders/?print=yes&' + $('#js-orders-block-id form').serialize();
                 break;
                 
             case ('email'):
+                data['action'] = 'mail-user-orders-pdf';
+                
                 $.ajax({
                     url: '/remote/',
                     type: 'post',
-                    data: {'action': 'mail-user-orders-pdf', 'ids': ids},
+                    data: data,
                     dataType: 'json',
                     success: function(response) {
                         if (response.status) {
-                            error(response.data['title'], response.data['message']);
+                            inform(response.message);
+                        } else {
+                            error(response.message);
                         }
                     }
                 });
                 break;
                 
             case ('loadpdf'):
+                data['action'] = 'load-user-orders-pdf';
+            
                 $.ajax({
                     url: '/remote/',
                     type: 'post',
-                    data: {'action': 'load-user-orders-pdf', 'ids': ids},
+                    data: data,
                     dataType: 'json',
                     success: function(response) {
                         if (response.status) {
-                            error(response.data['title'], response.data['message']);
+                            location.href = response.data['link'];
+                            //error(response.data['title'], response.data['message']);
+                        } else {
+                            error(response.message);
                         }
                     }
                 });

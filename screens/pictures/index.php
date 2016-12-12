@@ -5,6 +5,7 @@
         "glyf:pdf.pictures",
         "",
         array(
+            "UID"  => $_REQUEST['UID'],
             "PIDS" => $_REQUEST['PIDS'],
             "FIDS" => $_REQUEST['FIDS'],
             "LIDS" => $_REQUEST['LIDS'],

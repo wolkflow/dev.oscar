@@ -39,6 +39,58 @@ $(document).ready(function() {
     });
     
     
+    $('#js-lightboxes-block-id .js-group-action').on('click', function() {
+        var action = $(this).data('action');
+        var data = $('#js-lightboxes-block-id form').objectize();
+        
+        if ($('#js-lightboxes-block-id .js-checkbox:checked').length == 0) {
+            return;
+        }
+        
+        switch (action) {
+            case ('print'):
+                location.href = '/screens/pictures/?print=yes&' + $('#js-lightboxes-block-id form').serialize();
+                break;
+                
+            case ('email'):
+                data['action'] = 'mail-user-lightboxes-pdf';
+                
+                $.ajax({
+                    url: '/remote/',
+                    type: 'post',
+                    data: data,
+                    dataType: 'json',
+                    success: function(response) {
+                        if (response.status) {
+                            inform(response.message);
+                        } else {
+                            error(response.message);
+                        }
+                    }
+                });
+                break;
+                
+            case ('loadpdf'):
+                data['action'] = 'load-user-lightboxes-pdf';
+            
+                $.ajax({
+                    url: '/remote/',
+                    type: 'post',
+                    data: data,
+                    dataType: 'json',
+                    success: function(response) {
+                        if (response.status) {
+                            location.href = response.data['link'];
+                        } else {
+                            error(response.message);
+                        }
+                    }
+                });
+                break;
+        }
+    });
+    
+    
     // Добавление сборника в корзину.
     $('#js-personal-lightbox-basket-id').on('click', function() {
         var lids = [];

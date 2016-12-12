@@ -60,6 +60,14 @@ function error(title, text)
     $('#error').arcticmodal();
 }
 
+// Фкниция вызова окна информации.
+function inform(title, text)
+{
+    $('#js-inform-popup-title-id').html(title);
+    $('#js-inform-popup-text-id').html(text);
+    
+    $('#inform').arcticmodal();
+}
 
 
 $(document).ready(function () {

@@ -24,11 +24,11 @@ $(document).ready(function() {
     
     
     // Выбор элемента.
-    $(document).on('click', '.js-picture-item-checkbox', function() {
-        if ($('.js-picture-item-checkbox:checked').length > 0) {
-            $('.js-dependence-chekbox-button').addClass('is-active');
+    $(document).on('click', '#js-user-lightbox-block-id .js-checkbox', function() {
+        if ($('#js-user-lightbox-block-id .js-checkbox:checked').length > 0) {
+            $('#js-user-lightbox-block-id .js-dependence-chekbox-button').addClass('is-active');
         } else {
-            $('.js-dependence-chekbox-button').removeClass('is-active');
+            $('#js-user-lightbox-block-id .js-dependence-chekbox-button').removeClass('is-active');
         }
     });
     

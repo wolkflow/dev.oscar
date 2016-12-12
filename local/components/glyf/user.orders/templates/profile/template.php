@@ -39,6 +39,7 @@
     </div>
     <div class="cabinet-block-content">
         <form>
+            <input type="hidden" name="UID" value="<?= CUser::getID() ?>" />
             <table class="cabinet-table">
                 <tbody id="js-orders-wrapper-id">
                     <?  // Список заказов.

@@ -4,7 +4,10 @@
     $APPLICATION->IncludeComponent(
         "glyf:pdf.sales",
         "",
-        array("IDS" => $_REQUEST['IDS'])
+        array(
+            "UID" => $_REQUEST['UID'],
+            "IDS" => $_REQUEST['IDS'],
+        )
     );
 ?>
 

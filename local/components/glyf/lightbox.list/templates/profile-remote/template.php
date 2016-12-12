@@ -24,7 +24,8 @@
                         </span>
                         <span class="le le-start" data-le="lightbox-name-<?= $item['ID'] ?>">
                             <label class="checkbox-me">
-                                <input type="checkbox" name="LIGHTBOX[]" class="js-personal-lightbox" value="<?= $item['ID'] ?>" /><span></span>
+                                <input type="checkbox" name="LIDS[]" class="js-personal-lightbox js-checkbox" value="<?= $item['ID'] ?>" />
+                                <span></span>
                             </label>
                         </span>
                     </div>

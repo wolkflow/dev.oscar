@@ -115,6 +115,20 @@
             </div>
         </div>
         
+        <? // Форма информации // ?>
+        <div class="hide">
+            <div class="modal modal-error" id="inform">
+                <div class="modalTitle">
+                    Информация
+                    <div class="modalClose arcticmodal-close"></div>
+                </div>
+                <div class="modalContent">
+                    <div class="errorCode" id="js-inform-popup-title-id"></div>
+                    <div class="errorText" id="js-inform-popup-text-id"></div>
+                </div>
+            </div>
+        </div>
+        
         <div class="hide">
             <?  // Форма поиска (popup).
 				$APPLICATION->IncludeComponent('bitrix:main.include', '', array(

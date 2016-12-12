@@ -36,6 +36,20 @@ class ScreenShot
         return $this->path;
     }
     
+    
+    /**
+	 * Получение ссылки на файл.
+	 */
+	public function getFile($absolute = false)
+	{
+		$file = $this->getPath() . $this->getName() . '.pdf';
+		
+		if ($absolute) {
+			$file = $_SERVER['DOCUMENT_ROOT'] . $file;
+		}
+		return $file;
+	}
+    
 	
 	/**
 	 * Получение ссылки на файл.
