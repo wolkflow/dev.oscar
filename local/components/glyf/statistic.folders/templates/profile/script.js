@@ -19,11 +19,63 @@ function cAddFolder(response)
 $(document).ready(function() {
     
     // Выбор элемента.
-    $(document).on('click', '#js-folders-wrapper-id .js-checkbox', function() {
-        if ($('#js-folders-wrapper-id .js-checkbox:checked').length > 0) {
-            $('.js-dependence-chekbox-button').addClass('is-active');
+    $(document).on('click', '#js-folders-block-id .js-checkbox', function() {
+        if ($('#js-folders-block-id .js-checkbox:checked').length > 0) {
+            $('#js-folders-block-id .js-dependence-chekbox-button').addClass('is-active');
         } else {
-            $('.js-dependence-chekbox-button').removeClass('is-active');
+            $('#js-folders-block-id .js-dependence-chekbox-button').removeClass('is-active');
+        }
+    });
+    
+    
+    $('#js-folders-block-id .js-group-action').on('click', function() {
+        var action = $(this).data('action');
+        var data = $('#js-folders-block-id form').objectize();
+        
+        if ($('#js-folders-block-id .js-checkbox:checked').length == 0) {
+            return;
+        }
+        
+        switch (action) {
+            case ('print'):
+                location.href = '/screens/pictures/?print=yes&' + $('#js-folders-block-id form').serialize();
+                break;
+                
+            case ('email'):
+                data['action'] = 'mail-folders-pdf';
+                
+                $.ajax({
+                    url: '/remote/',
+                    type: 'post',
+                    data: data,
+                    dataType: 'json',
+                    success: function(response) {
+                        if (response.status) {
+                            inform(response.message);
+                        } else {
+                            error(response.message);
+                        }
+                    }
+                });
+                break;
+                
+            case ('loadpdf'):
+                data['action'] = 'load-folders-pdf';
+            
+                $.ajax({
+                    url: '/remote/',
+                    type: 'post',
+                    data: data,
+                    dataType: 'json',
+                    success: function(response) {
+                        if (response.status) {
+                            location.href = response.data['link'];
+                        } else {
+                            error(response.message);
+                        }
+                    }
+                });
+                break;
         }
     });
     

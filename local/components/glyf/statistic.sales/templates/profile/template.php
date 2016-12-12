@@ -31,9 +31,9 @@
         <div class="cabinet-panel__toggler">История продаж</div>
         <div class="cabinet-panel__menu">
             <a class="is-active js-check-all" href="javascript:void(0)">выделить всё</a>
-            <a class="js-dependence-chekbox-button hidden-sm" href="javascript:void(0)">сохранить пдф</a>
-            <a class="js-dependence-chekbox-button" href="javascript:void(0)">отправить по email</a>
-            <a class="js-dependence-chekbox-button hidden-sm" href="javascript:void(0)">печать</a>
+            <a class="js-dependence-chekbox-button js-group-action hidden-sm" data-action="loadpdf" href="javascript:void(0)">сохранить пдф</a>
+            <a class="js-dependence-chekbox-button js-group-action" data-action="email" href="javascript:void(0)">отправить по email</a>
+            <a class="js-dependence-chekbox-button js-group-action hidden-sm" data-action="print" href="javascript:void(0)">печать</a>
             <div class="cabinet-panel__menu-pages hidden-xs">
                 <span>показывать по</span>
                 <select id="js-sales-page-count-id" class="styler shortSelect cabinet-panel__menu-pages-select">
@@ -62,16 +62,19 @@
                 </tr>
             </thead>
             <tbody id="js-sales-wrapper-id">
-                <?  // Статистика по объектам.					
-                    $APPLICATION->IncludeComponent(
-                        "glyf:statistic.sales",
-                        "remote-profile",
-                        array(
-                            "PERIOD_MIN" => date('d.m.Y', strtotime('-1 month')),
-                            "PERIOD_MAX" => date('d.m.Y')
-                        )
-                    );
-                ?>
+                <form>
+                    <input type="hidden" name="UID" value="<?= CUser::getID() ?>" />
+                    <?  // Статистика по объектам.					
+                        $APPLICATION->IncludeComponent(
+                            "glyf:statistic.sales",
+                            "remote-profile",
+                            array(
+                                "PERIOD_MIN" => date('d.m.Y', strtotime('-1 month')),
+                                "PERIOD_MAX" => date('d.m.Y')
+                            )
+                        );
+                    ?>
+                </form>
             </tbody>
         </table>
     </div>

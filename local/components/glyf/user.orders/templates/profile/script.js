@@ -11,7 +11,7 @@ $(document).ready(function() {
     */
     // Выбор элемента.
     $(document).on('click', '#js-orders-block-id .js-checkbox', function() {
-        if ($('#js-orders-wrapper-id .js-checkbox:checked').length > 0) {
+        if ($('#js-orders-block-id .js-checkbox:checked').length > 0) {
             $('#js-orders-block-id .js-dependence-chekbox-button').addClass('is-active');
         } else {
             $('#js-orders-block-id .js-dependence-chekbox-button').removeClass('is-active');
@@ -60,7 +60,6 @@ $(document).ready(function() {
                     success: function(response) {
                         if (response.status) {
                             location.href = response.data['link'];
-                            //error(response.data['title'], response.data['message']);
                         } else {
                             error(response.message);
                         }

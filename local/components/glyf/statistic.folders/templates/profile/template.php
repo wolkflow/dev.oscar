@@ -7,7 +7,7 @@
 
 <? $this->setFrameMode(true); ?>
 
-<div class="cabinet-block cabinet-block-collections is-active">
+<div id="js-folders-block-id" class="cabinet-block cabinet-block-collections is-active">
     <div class="clearfix">
         <div class="cabinet-search">
             <span class="cabinet-search__title">поиск по папкам</span>
@@ -37,13 +37,13 @@
                 <a class="is-active" href="javascript:void(0)" id="js-check-all-id" data-selector=".js-checkbox">выделить всё</a>
             </li>
             <li>
-                <a class="hidden-sm js-dependence-chekbox-button" href="javascipt:void(0)">сохранить пдф</a>
+                <a class="hidden-sm js-dependence-chekbox-button js-group-action" data-action="loadpdf" href="javascipt:void(0)">сохранить пдф</a>
             </li>
             <li>
-                <a class="js-dependence-chekbox-button" href="javascipt:void(0)">отправить по email</a>
+                <a class="js-dependence-chekbox-button js-group-action" data-action="email" href="javascipt:void(0)">отправить по email</a>
             </li>
             <li>
-                <a class="hidden-sm js-dependence-chekbox-button" href="javascipt:void(0)">печать</a>
+                <a class="hidden-sm js-dependence-chekbox-button js-group-action" data-action="print" href="javascipt:void(0)">печать</a>
             </li>
             <li>
                 <a id="js-remove-folders-id" class="js-dependence-chekbox-button" href="javascipt:void(0)">удалить</a>
@@ -67,12 +67,15 @@
         </ul>
     </div>
     <div id="js-folders-wrapper-id" class="cabinet-block-content">
-        <?  // Статистика по папке.					
-            $APPLICATION->IncludeComponent(
-                "glyf:statistic.folders",
-                "remote-profile",
-                array()
-            );
-        ?>
+        <form>
+            <input type="hidden" name="UID" value="<?= CUser::getID() ?>" />
+            <?  // Статистика по папке.					
+                $APPLICATION->IncludeComponent(
+                    "glyf:statistic.folders",
+                    "remote-profile",
+                    array()
+                );
+            ?>
+        </form>
     </div>
 </div>

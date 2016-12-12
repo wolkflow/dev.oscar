@@ -33,6 +33,58 @@ $(document).ready(function() {
     });
     
     
+    $('#js-user-lightbox-block-id .js-group-action').on('click', function() {
+        var action = $(this).data('action');
+        var data = $('#js-user-lightbox-block-id form').objectize();
+        
+        if ($('#js-user-lightbox-block-id .js-checkbox:checked').length == 0) {
+            return;
+        }
+        
+        switch (action) {
+            case ('print'):
+                location.href = '/screens/pictures/?print=yes&' + $('#js-user-lightbox-block-id form').serialize();
+                break;
+                
+            case ('email'):
+                data['action'] = 'mail-pictures-pdf';
+                
+                $.ajax({
+                    url: '/remote/',
+                    type: 'post',
+                    data: data,
+                    dataType: 'json',
+                    success: function(response) {
+                        if (response.status) {
+                            inform(response.message);
+                        } else {
+                            error(response.message);
+                        }
+                    }
+                });
+                break;
+                
+            case ('loadpdf'):
+                data['action'] = 'load-pictures-pdf';
+            
+                $.ajax({
+                    url: '/remote/',
+                    type: 'post',
+                    data: data,
+                    dataType: 'json',
+                    success: function(response) {
+                        if (response.status) {
+                            location.href = response.data['link'];
+                        } else {
+                            error(response.message);
+                        }
+                    }
+                });
+                break;
+        }
+    });
+    
+    
     // Удаление картины из сборника.
     $(document).on('click', '#js-remove-list-from-lightbox-id', function() {
         var lid  = $(this).data('lid');

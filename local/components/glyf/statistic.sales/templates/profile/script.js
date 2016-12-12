@@ -63,13 +63,66 @@ $(document).ready(function() {
     
     
     // Выбор элемента.
-    $(document).on('click', '#js-sales-wrapper-id .js-checkbox', function() {
-        if ($('#js-sales-wrapper-id .js-checkbox:checked').length > 0) {
-            $('.js-dependence-chekbox-button').addClass('is-active');
+    $(document).on('click', '#js-sales-block-id .js-checkbox', function() {
+        if ($('#js-sales-block-id .js-checkbox:checked').length > 0) {
+            $('#js-sales-block-id .js-dependence-chekbox-button').addClass('is-active');
         } else {
-            $('.js-dependence-chekbox-button').removeClass('is-active');
+            $('#js-sales-block-id .js-dependence-chekbox-button').removeClass('is-active');
         }
     });
+    
+    
+     $('#js-sales-block-id .js-group-action').on('click', function() {
+        var action = $(this).data('action');
+        var data = $('#js-sales-block-id form').objectize();
+        
+        if ($('#js-sales-block-id .js-checkbox:checked').length == 0) {
+            return;
+        }
+        
+        switch (action) {
+            case ('print'):
+                location.href = '/screens/sales/?print=yes&' + $('#js-sales-block-id form').serialize();
+                break;
+                
+            case ('email'):
+                data['action'] = 'mail-sales-pdf';
+                
+                $.ajax({
+                    url: '/remote/',
+                    type: 'post',
+                    data: data,
+                    dataType: 'json',
+                    success: function(response) {
+                        if (response.status) {
+                            inform(response.message);
+                        } else {
+                            error(response.message);
+                        }
+                    }
+                });
+                break;
+                
+            case ('loadpdf'):
+                data['action'] = 'load-sales-pdf';
+            
+                $.ajax({
+                    url: '/remote/',
+                    type: 'post',
+                    data: data,
+                    dataType: 'json',
+                    success: function(response) {
+                        if (response.status) {
+                            location.href = response.data['link'];
+                        } else {
+                            error(response.message);
+                        }
+                    }
+                });
+                break;
+        }
+    });
+    
     
     // Выделение всех элементов.
     $(document).on('click', '#js-sales-block-id .js-check-all', function() {

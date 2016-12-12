@@ -1058,7 +1058,7 @@ switch ($action) {
         }
         $data = array('LIDS' => $ids, 'UID' => $user->getID());
         $link = 'http://' . SITENAME . '/screens/pictures/?' . http_build_query($data);
-        $name = 'PDF_ORDERS_' . $user->getID() . '_' . date('YmdHi');
+        $name = 'PDF_LIGHBOXES_' . $user->getID() . '_' . date('YmdHi');
         
         $pdf = new \Glyf\Oscar\System\ScreenPDF($link, $name);
         $pdf->make();
@@ -1078,7 +1078,223 @@ switch ($action) {
         }
         $data = array('LIDS' => $ids, 'UID' => $user->getID());
         $link = 'http://' . SITENAME . '/screens/pictures/?' . http_build_query($data);
-        $name = 'PDF_ORDERS_' . $user->getID() . '_' . date('YmdHi');
+        $name = 'PDF_LIGHBOXES_' . $user->getID() . '_' . date('YmdHi');
+        
+        $pdf = new \Glyf\Oscar\System\ScreenPDF($link, $name);
+        $pdf->make();
+        
+        // Отправка сообщения.
+        $result = CEvent::Send(
+            'GL_PDF', 
+            SITE_ID, 
+            array('EMAIL' => $user->getEmail()), 
+            'Y', 
+            '', 
+            array($pdf->getFile(true))
+        );
+        
+        if ($result > 0) {
+            jsonresponse(true, 'Письмо успешно отправлено');
+        }
+        jsonresponse(false, 'Не удалось отправить письмо');
+        break;
+    
+    
+    // Скачивание PDF - изображения пользователя.
+    case ('load-pictures-pdf'):
+        $ids = (array) $request->get('PIDS');
+        
+        $user = new \Glyf\Oscar\User();
+        
+        if (!CUser::IsAuthorized()) {
+            jsonresponse(false, 'Вы не авторизованы');
+        }
+        $data = array('PIDS' => $ids, 'UID' => $user->getID());
+        $link = 'http://' . SITENAME . '/screens/pictures/?' . http_build_query($data);
+        $name = 'PDF_PICTURES_' . $user->getID() . '_' . date('YmdHi');
+        
+        $pdf = new \Glyf\Oscar\System\ScreenPDF($link, $name);
+        $pdf->make();
+        
+        jsonresponse(true, '', array('link' => $pdf->getLink()));
+        break;
+    
+    
+    // Отправка PDF - изображения пользователя.
+    case ('mail-pictures-pdf'):
+        $ids = (array) $request->get('PIDS');
+        
+        $user = new \Glyf\Oscar\User();
+        
+        if (!CUser::IsAuthorized()) {
+            jsonresponse(false, 'Вы не авторизованы');
+        }
+        $data = array('PIDS' => $ids, 'UID' => $user->getID());
+        $link = 'http://' . SITENAME . '/screens/pictures/?' . http_build_query($data);
+        $name = 'PDF_PICTURES_' . $user->getID() . '_' . date('YmdHi');
+        
+        $pdf = new \Glyf\Oscar\System\ScreenPDF($link, $name);
+        $pdf->make();
+        
+        // Отправка сообщения.
+        $result = CEvent::Send(
+            'GL_PDF', 
+            SITE_ID, 
+            array('EMAIL' => $user->getEmail()), 
+            'Y', 
+            '', 
+            array($pdf->getFile(true))
+        );
+        
+        if ($result > 0) {
+            jsonresponse(true, 'Письмо успешно отправлено');
+        }
+        jsonresponse(false, 'Не удалось отправить письмо');
+        break;
+    
+    
+    // Скачивание PDF - папки пользователя.
+    case ('load-folders-pdf'):
+        $ids = (array) $request->get('FIDS');
+        
+        $user = new \Glyf\Oscar\User();
+        
+        if (!CUser::IsAuthorized()) {
+            jsonresponse(false, 'Вы не авторизованы');
+        }
+        $data = array('FIDS' => $ids, 'UID' => $user->getID());
+        $link = 'http://' . SITENAME . '/screens/pictures/?' . http_build_query($data);
+        $name = 'PDF_FOLDERS_' . $user->getID() . '_' . date('YmdHi');
+        
+        $pdf = new \Glyf\Oscar\System\ScreenPDF($link, $name);
+        $pdf->make();
+        
+        jsonresponse(true, '', array('link' => $pdf->getLink()));
+        break;
+    
+    
+    // Отправка PDF - папки пользователя.
+    case ('mail-folders-pdf'):
+        $ids = (array) $request->get('FIDS');
+        
+        $user = new \Glyf\Oscar\User();
+        
+        if (!CUser::IsAuthorized()) {
+            jsonresponse(false, 'Вы не авторизованы');
+        }
+        $data = array('FIDS' => $ids, 'UID' => $user->getID());
+        $link = 'http://' . SITENAME . '/screens/pictures/?' . http_build_query($data);
+        $name = 'PDF_FOLDERS_' . $user->getID() . '_' . date('YmdHi');
+        
+        $pdf = new \Glyf\Oscar\System\ScreenPDF($link, $name);
+        $pdf->make();
+        
+        // Отправка сообщения.
+        $result = CEvent::Send(
+            'GL_PDF', 
+            SITE_ID, 
+            array('EMAIL' => $user->getEmail()), 
+            'Y', 
+            '', 
+            array($pdf->getFile(true))
+        );
+        
+        if ($result > 0) {
+            jsonresponse(true, 'Письмо успешно отправлено');
+        }
+        jsonresponse(false, 'Не удалось отправить письмо');
+        break;
+    
+    
+    // Скачивание PDF - история продаж.
+    case ('load-sales-pdf'):
+        $ids = (array) $request->get('IDS');
+        
+        $user = new \Glyf\Oscar\User();
+        
+        if (!CUser::IsAuthorized()) {
+            jsonresponse(false, 'Вы не авторизованы');
+        }
+        $data = array('IDS' => $ids, 'UID' => $user->getID());
+        $link = 'http://' . SITENAME . '/screens/sales/?' . http_build_query($data);
+        $name = 'PDF_SALES_' . $user->getID() . '_' . date('YmdHi');
+        
+        $pdf = new \Glyf\Oscar\System\ScreenPDF($link, $name);
+        $pdf->make();
+        
+        jsonresponse(true, '', array('link' => $pdf->getLink()));
+        break;
+    
+    
+    // Отправка PDF - история продаж.
+    case ('mail-sales-pdf'):
+        $ids = (array) $request->get('IDS');
+        
+        $user = new \Glyf\Oscar\User();
+        
+        if (!CUser::IsAuthorized()) {
+            jsonresponse(false, 'Вы не авторизованы');
+        }
+        $data = array('IDS' => $ids, 'UID' => $user->getID());
+        $link = 'http://' . SITENAME . '/screens/sales/?' . http_build_query($data);
+        $name = 'PDF_SALES_' . $user->getID() . '_' . date('YmdHi');
+        
+        $pdf = new \Glyf\Oscar\System\ScreenPDF($link, $name);
+        $pdf->make();
+        
+        // Отправка сообщения.
+        $result = CEvent::Send(
+            'GL_PDF', 
+            SITE_ID, 
+            array('EMAIL' => $user->getEmail()), 
+            'Y', 
+            '', 
+            array($pdf->getFile(true))
+        );
+        
+        if ($result > 0) {
+            jsonresponse(true, 'Письмо успешно отправлено');
+        }
+        jsonresponse(false, 'Не удалось отправить письмо');
+        break;
+    
+    
+    // Скачивание PDF - статистика продаж.
+    case ('load-stats-pdf'):
+        $ids  = (array)  $request->get('IDS');
+        $pmin = (string) $request->get('PERIOD_MIN');
+        $pmax = (string) $request->get('PERIOD_MAX');
+        
+        $user = new \Glyf\Oscar\User();
+        
+        if (!CUser::IsAuthorized()) {
+            jsonresponse(false, 'Вы не авторизованы');
+        }
+        $data = array('IDS' => $ids, 'UID' => $user->getID(), 'PERIOD_MIN' => $pmin, 'PERIOD_MAX' => $pmax);
+        $link = 'http://' . SITENAME . '/screens/stats/?' . http_build_query($data);
+        $name = 'PDF_STATS_' . $user->getID() . '_' . date('YmdHi');
+        
+        $pdf = new \Glyf\Oscar\System\ScreenPDF($link, $name);
+        $pdf->make();
+        
+        jsonresponse(true, '', array('link' => $pdf->getLink()));
+        break;
+    
+    
+    // Отправка PDF - статистика продаж.
+    case ('mail-stats-pdf'):
+        $ids  = (array) $request->get('IDS');
+        $pmin = (string) $request->get('PERIOD_MIN');
+        $pmax = (string) $request->get('PERIOD_MAX');
+        
+        $user = new \Glyf\Oscar\User();
+        
+        if (!CUser::IsAuthorized()) {
+            jsonresponse(false, 'Вы не авторизованы');
+        }
+        $data = array('IDS' => $ids, 'UID' => $user->getID(), 'PERIOD_MIN' => $pmin, 'PERIOD_MAX' => $pmax);
+        $link = 'http://' . SITENAME . '/screens/stats/?' . http_build_query($data);
+        $name = 'PDF_STATS_' . $user->getID() . '_' . date('YmdHi');
         
         $pdf = new \Glyf\Oscar\System\ScreenPDF($link, $name);
         $pdf->make();

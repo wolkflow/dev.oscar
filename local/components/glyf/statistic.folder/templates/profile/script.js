@@ -1,5 +1,67 @@
 $(document).ready(function() {
     
+    // Выбор элемента.
+    $(document).on('click', '#js-folder-block-id .js-checkbox', function() {
+        if ($('#js-folder-block-id .js-checkbox:checked').length > 0) {
+            $('#js-folder-block-id .js-dependence-chekbox-button').addClass('is-active');
+        } else {
+            $('#js-folder-block-id .js-dependence-chekbox-button').removeClass('is-active');
+        }
+    });
+    
+    
+    $('#js-folder-block-id .js-group-action').on('click', function() {
+        var action = $(this).data('action');
+        var data = $('#js-folder-block-id form').objectize();
+        
+        if ($('#js-folder-block-id .js-checkbox:checked').length == 0) {
+            return;
+        }
+        
+        switch (action) {
+            case ('print'):
+                location.href = '/screens/pictures/?print=yes&' + $('#js-folder-block-id form').serialize();
+                break;
+                
+            case ('email'):
+                data['action'] = 'mail-folder-pdf';
+                
+                $.ajax({
+                    url: '/remote/',
+                    type: 'post',
+                    data: data,
+                    dataType: 'json',
+                    success: function(response) {
+                        if (response.status) {
+                            inform(response.message);
+                        } else {
+                            error(response.message);
+                        }
+                    }
+                });
+                break;
+                
+            case ('loadpdf'):
+                data['action'] = 'load-folder-pdf';
+            
+                $.ajax({
+                    url: '/remote/',
+                    type: 'post',
+                    data: data,
+                    dataType: 'json',
+                    success: function(response) {
+                        if (response.status) {
+                            location.href = response.data['link'];
+                        } else {
+                            error(response.message);
+                        }
+                    }
+                });
+                break;
+        }
+    });
+    
+    
     $('#js-param-author-id').on('keyup', function() {
         var text = $(this).val();
         

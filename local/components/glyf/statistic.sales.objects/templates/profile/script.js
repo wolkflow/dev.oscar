@@ -61,19 +61,71 @@ $(document).ready(function() {
     
     
     // Выбор элемента.
-    $(document).on('click', '#js-sales-objects-wrapper-id .js-checkbox', function() {
-        if ($('#js-sales-objects-wrapper-id .js-checkbox:checked').length > 0) {
-            $('.js-dependence-chekbox-button').addClass('is-active');
+    $(document).on('click', '#js-sales-objects-block-id .js-checkbox', function() {
+        if ($('#js-sales-objects-block-id .js-checkbox:checked').length > 0) {
+            $('#js-sales-objects-block-id .js-dependence-chekbox-button').addClass('is-active');
         } else {
-            $('.js-dependence-chekbox-button').removeClass('is-active');
+            $('#js-sales-objects-block-id .js-dependence-chekbox-button').removeClass('is-active');
         }
     });
+    
     
     // Выделение всех элементов.
     $(document).on('click', '#js-sales-objects-block-id .js-check-all', function() {
         $('#js-sales-objects-wrapper-id input.js-checkbox').prop('checked', 'checked');
         $('#js-sales-objects-wrapper-id input.js-checkbox').parent('div').addClass('checked');
         $('.js-dependence-chekbox-button').addClass('is-active');
+    });
+    
+     $('#js-sales-objects-block-id .js-group-action').on('click', function() {
+        var action = $(this).data('action');
+        var data = $('#js-sales-objects-block-id form').objectize();
+        
+        if ($('#js-sales-objects-block-id .js-checkbox:checked').length == 0) {
+            return;
+        }
+        
+        switch (action) {
+            case ('print'):
+                location.href = '/screens/stats/?print=yes&' + $('#js-sales-objects-block-id form').serialize();
+                break;
+                
+            case ('email'):
+                data['action'] = 'mail-stats-pdf';
+                
+                $.ajax({
+                    url: '/remote/',
+                    type: 'post',
+                    data: data,
+                    dataType: 'json',
+                    success: function(response) {
+                        if (response.status) {
+                            inform(response.message);
+                        } else {
+                            error(response.message);
+                        }
+                    }
+                });
+                break;
+                
+            case ('loadpdf'):
+                data['action'] = 'load-stats-pdf';
+            
+                $.ajax({
+                    url: '/remote/',
+                    type: 'post',
+                    data: data,
+                    dataType: 'json',
+                    success: function(response) {
+                        if (response.status) {
+                            location.href = response.data['link'];
+                        } else {
+                            error(response.message);
+                        }
+                    }
+                });
+                break;
+        }
     });
     
     // Поиск по названию.

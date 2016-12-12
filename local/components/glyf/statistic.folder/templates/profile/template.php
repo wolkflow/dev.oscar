@@ -8,7 +8,7 @@
 <? $this->setFrameMode(true); ?>
 
 <? if (!empty($arResult['FOLDER'])) { ?>
-    <div class="cabinet-content col-md-10 col-md-offset-1 col-sm-12">
+    <div id="js-folder-block-id" class="cabinet-content col-md-10 col-md-offset-1 col-sm-12">
         
         <ol class="breadcrumb">
             <li><a href="/personal/"><?= getMessage('GL_PERSONAL_CABINET') ?></a></li>
@@ -24,9 +24,9 @@
             </div>
             <div class="cabinet-panel__menu">
                 <a class="is-active" href="javascript:void(0)" id="js-check-all-id" data-selector=".js-checkbox">выделить всё</a>
-                <a class="hidden-sm" href="#">сохранить пдф</a>
-                <a class="is-active" href="#">отправить по email</a>
-                <a class="hidden-sm is-active" href="#">печать</a>
+                <a class="js-dependence-chekbox-button js-group-action hidden-sm" data-action="loadpdf" href="javascript:void(0)">сохранить пдф</a>
+                <a class="js-dependence-chekbox-button js-group-action" data-action="email" href="javascript:void(0)">отправить по email</a>
+                <a class="js-dependence-chekbox-button js-group-action hidden-sm" data-action="print" href="javascript:void(0)">печать</a>
                 
                 <div class="cabinet-panel__menu-pages hidden-xs">
                     <span>Показывать по</span>
@@ -67,11 +67,25 @@
             </tr>
             </thead>    
             <tbody id="js-folder-pictures-wrapper-id" data-fid="<?= $arResult['FOLDER']['ID'] ?>">
+                <form>
+                    <input type="hidden" name="UID" value="<?= CUser::getID() ?>" />
+                    
+                    <?  // Статистика по папке.					
+                        $APPLICATION->IncludeComponent(
+                            "glyf:statistic.folder",
+                            "remote-profile",
+                            array(
+                                "FID"  => $arResult['FOLDER']['ID'],
+                                "PAGE" => 1,       
+                            )
+                        );
+                    ?>
+                    <? /*
                 <? foreach ($arResult['ITEMS'] as $item) { ?>
                     <tr>
                         <td>
                             <label>
-                                <input type="checkbox" name="FOLDER[]" value="<?= $item['ID'] ?>" class="js-checkbox" />
+                                <input type="checkbox" name="PIDS[]" value="<?= $item['ID'] ?>" class="js-checkbox" />
                             </label>
                         </td>
                         <td>
@@ -111,6 +125,8 @@
                         ?>
                     </td>
                 </tr>
+                */ ?>
+                </form>
             </tbody>
         </table>
         

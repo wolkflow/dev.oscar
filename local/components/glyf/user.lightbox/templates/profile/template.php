@@ -22,9 +22,9 @@
             </div>
             <div class="cabinet-panel__toggler">Коллекции</div>
             <div class="cabinet-panel__menu">
-                <a class="js-dependence-chekbox-button" href="#">сохранить пдф</a>
-                <a class="js-dependence-chekbox-button" href="#">отправить по email</a>
-                <a class="js-dependence-chekbox-button" href="#">печать</a>
+                <a class="js-dependence-chekbox-button js-group-action" data-action="loadpdf" href="javascript:void(0)">сохранить пдф</a>
+                <a class="js-dependence-chekbox-button js-group-action" data-action="email" href="javascript:void(0)">отправить по email</a>
+                <a class="js-dependence-chekbox-button js-group-action" data-action="print" href="javascript:void(0)">печать</a>
                 <a class="js-dependence-chekbox-button" href="javascript:void(0)" id="js-add-list-to-cart-id">
                     Добавить в корзину
                 </a>

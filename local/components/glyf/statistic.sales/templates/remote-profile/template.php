@@ -12,7 +12,7 @@
         <tr>
             <td>
                 <label class="checkbox-me">
-                    <input type="checkbox" name="SALES[]" value="<?= $item->getID() ?>" class="js-checkbox" />
+                    <input type="checkbox" name="IDS[]" value="<?= $item->getID() ?>" class="js-checkbox" />
                     <span></span>
                 </label>
             </td>
