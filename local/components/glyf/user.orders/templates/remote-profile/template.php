@@ -13,7 +13,7 @@
         <tr>
             <td class="ordersTable-checkbox">
                 <label class="checkbox-me">
-                    <input type="checkbox" name="IDS[]" class="js-order js-checkbox" value="<?= $item[Sale::FIELD_ID] ?>" data-oid="<?= $item[Sale::FIELD_ID] ?>" />
+                    <input type="checkbox" name="IDS[]" class="js-order js-checkbox" value="<?= $item[Sale::FIELD_ID] ?>" data-oid="<?= $item[Sale::FIELD_ORDER_ID] ?>" />
                     <span></span>
                 </label>
             </td>

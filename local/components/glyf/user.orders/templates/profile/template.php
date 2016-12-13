@@ -18,7 +18,7 @@
             <li><a class="js-dependence-chekbox-button js-group-action hidden-sm" href="javascript:void(0)" data-action="loadpdf">загрузить пдф</a></li>
             <li><a class="js-dependence-chekbox-button js-group-action" href="javascript:void(0)" data-action="email">отправить по email</a></li>
             <li><a class="js-dependence-chekbox-button js-group-action hidden-sm" href="javascript:void(0)" data-action="print">печать</a></li>
-            <li><a class="js-dependence-chekbox-button" href="javascript:void(0)">повторить заказ</a></li>
+            <li><a class="js-dependence-chekbox-button" id="js-orders-repeat-id" href="javascript:void(0)">повторить заказ</a></li>
 
             <li><div class="cabinet-panel__menu-pages hidden-xs">
                 <span>показывать по</span>

@@ -948,6 +948,31 @@ switch ($action) {
         break;
     
     
+    // Повторение заказа.
+    case ('repeat-orders'):
+        $oids = (array) $request->get('oids');
+        $oids = array_filter(array_map('intval', $oids));
+        
+        if (empty($oids)) {
+            jsonresponse(false, getMessage('GL_ERROR_EMPTY_ORDERS'));
+        }
+        
+        if (!CUser::IsAuthorized()) {
+            jsonresponse(false, getMessage('GL_ERROR_NOT_AUTHORIZED'));
+        }
+        
+        foreach ($oids as $oid) {
+            $order = new Glyf\Oscar\Order($oid
+            try {
+                $order->repeat();
+            } catch (\Exception $e) {
+                jsonresponse(true, getMessage('GL_ERROR_CANT_REPEAT_ORDER'));
+            }
+        }
+        jsonresponse(true, getMessage('GL_ORDERS_REPEATED'));
+        break;
+    
+    
     // Создание заказа.
     case ('pay-order'):
         $bids = (array) $request->get('bids');

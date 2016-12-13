@@ -1,14 +1,5 @@
 $(document).ready(function() {
-    /*
-    $(document).on('click', '#js-orders-block-id .js-button-print', function() {
-        if ($('#js-orders-block-id .js-checkbox:checked').length == 0) {
-            return;
-        }
-        var query = $('#js-orders-block-id form').serialize();
-        
-        location.href = '/screens/orders/?print=yes&' + query;
-    });
-    */
+
     // Выбор элемента.
     $(document).on('click', '#js-orders-block-id .js-checkbox', function() {
         if ($('#js-orders-block-id .js-checkbox:checked').length > 0) {
@@ -69,6 +60,32 @@ $(document).ready(function() {
         }
     });
     
+    // Повтор заказов.
+    $(document).on('click', '#js-orders-repeat-id', function() {
+        var oids = [];
+        
+        $('#js-orders-block-id .js-checkbox:checked').each(function() {
+            oids.push($(this).data('oid'));
+        });
+        
+        if (oids.length == 0) {
+            return;
+        }
+        
+        $.ajax({
+            url: '/remote/',
+            type: 'post',
+            data: {'action': 'repeat-orders', 'oids': oids},
+            dataType: 'json',
+            success: function(response) {
+                if (response.status) {
+                    inform(response.message);
+                } else {
+                    error(response.message);
+                }
+            }
+        });
+    });
     
     // Изменение колчиества страниц.
     $(document).on('change', '#js-orders-page-count-id', function() {

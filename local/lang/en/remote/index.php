@@ -36,8 +36,11 @@ $MESS['GL_ERROR_NO_TARIFF'] = 'Not Set tariff';
 $MESS['GL_ERROR_CREATE_ORDER'] = 'Failed to create custom';
 $MESS['GL_ERROR_SEND_MAIL'] = 'Could not send email';
 $MESS['GL_ERROR_UNKNOWN'] = 'Unknown error';
+$MESS['GL_ERROR_EMPTY_ORDERS'] = 'Missing orders';
+$MESS['GL_ERROR_CANT_REPEAT_ORDER'] = 'Repeat order error';
 
 $MESS['GL_PAY_BALANCE'] = 'Deposit';
 $MESS['GL_PAY_TARIFF'] = 'tariff payment';
 $MESS['GL_PAY_IMAGES'] = 'image Buy';
 $MESS['GL_SEND_MAIL_SUCCESS'] = 'A letter has been sent successfully';
+$MESS['GL_ORDERS_REPEATED'] = 'Images added to the purchase';

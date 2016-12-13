@@ -71,7 +71,7 @@ class Order extends \Glyf\Core\Helpers\SaleOrder
             );
             
             if (!\CSaleBasket::Add($cart)) {
-                // TODO: 
+                throw new \Exception('Error insert basket');
             }
         }
         
