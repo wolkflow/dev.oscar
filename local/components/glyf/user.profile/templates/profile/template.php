@@ -38,7 +38,7 @@
                                 <input type="text" name="workphone" class="le disabled" disabled data-le="company" value="<?= $arResult['USER']['WORK_PHONE'] ?>">
                             </div>
                             <div class="cabinet-profile__block-buttons">
-                                <a class="btn btn-light btn-filter_edit le le-start" data-le="company" href="#"><?= getMessage('GL_CHANGE_DATA') ?></a>
+                                <a class="btn btn-light btn-filter_edit le le-start" data-le="company" href="javascript:void(0)"><?= getMessage('GL_CHANGE_DATA') ?></a>
                                 <a class="btn btn-light btn-filter_edit btn-filter_edit-small le le-end disabled" data-le="company" data-action="update-user-company" href="javascript:void(0)"><?= getMessage('GL_SAVE') ?></a>
                                 <a class="btn btn-light btn-filter_edit btn-filter_edit-small le le-end le-cancel disabled" data-le="company" href="javascript:void(0)"><?= getMessage('GL_CANCEL') ?></a>
                             </div>
@@ -117,12 +117,14 @@
                                 </div>
                                 <div class="cabinet-profile__block-field">
                                     <div class="cabinet-profile__block-field-key">
-                                        Срок действия истекает <?= $arResult['TARIFF']['EXPIRE'] ?>
+                                        <?= getMessage('GL_TIME_EXPIRED') ?> <?= $arResult['TARIFF']['EXPIRE'] ?>
                                     </div>
                                 </div>
                                 <div class="cabinet-profile__block-buttons">
-                                    <a class="btn btn-light btn-filter_edit" href="#"><?= getMessage('Extend') ?></a>
-                                    <a class="btn btn-light btn-filter_edit" href="#"><?= getMessage('GL_CHANGE') ?></a>
+                                    <? /*
+                                    <a class="btn btn-light btn-filter_edit" href="javascript:void(0)"><?= getMessage('GL_EXTEND') ?></a>
+                                    */ ?>
+                                    <a class="btn btn-light btn-filter_edit" href="/tariffs/"><?= getMessage('GL_CHANGE') ?></a>
                                 </div>
                             </div>
                             
@@ -154,7 +156,7 @@
                             <div class="cabinet-profile__block-field">
                                 <div class="cabinet-profile__block-field-key"><?= getMessage('GL_AVAILABLE') ?></div>
                                 <div class="cabinet-profile__block-field-value">
-                                    <?= $arResult['USER']['BALANCE'] ?> <gl>GL_R</gl>
+                                    <?= $arResult['USER']['BALANCE'] ?> <?= getMessage('GL_RUB') ?>
                                 </div>
                             </div>
                             <div class="cabinet-profile__block-field le disabled" data-le="pay">
@@ -181,9 +183,6 @@
                             </ul>
                             <div class="cabinet-profile__block-buttons">
                                 <a class="btn btn-light btn-filter_edit" href="/personal/subscribe/"><?= getMessage('GL_CHANGE') ?></a>
-                                <? /*
-                                <a class="btn btn-light btn-filter_edit" data-modal="#error">Окно ошибки</a>
-                                */ ?>
                             </div>
                         </div>
                     </div>
