@@ -960,7 +960,7 @@ switch ($action) {
         }
         
         if ($user->isPartner()) {
-            jsonresponse(false, 'Вы являетесь партнером');
+            jsonresponse(false, getMessage('GL_ERROR_YOU_ARE_PARTNER'));
         }
         
         $baskets = array();
@@ -986,7 +986,7 @@ switch ($action) {
             'CANCELED'         => 'N',
             'STATUS_ID'        => STATUS_DEFAULT,
             'DISCOUNT_VALUE'   => '',
-            'USER_DESCRIPTION' => 'Покупка изображений',
+            'USER_DESCRIPTION' => getMessage('GL_PAY_TARIFF'),
             'PRICE'            => $price,
             'CURRENCY'         => CURRENCY_DEFAULT,
             'USER_ID'          => $user->getID(),
@@ -1011,7 +1011,7 @@ switch ($action) {
             
             jsonresponse(true, '', array('link' => $link));
         }
-        jsonresponse(false, 'Не удалось создать заказ');
+        jsonresponse(false, getMessage('GL_ERROR_CREATE_ORDER'));
         break;
     
     
@@ -1062,9 +1062,9 @@ switch ($action) {
         );
         
         if ($result > 0) {
-            jsonresponse(true, 'Письмо успешно отправлено');
+            jsonresponse(true, getMessage('GL_SEND_MAIL_SUCCESS'));
         }
-        jsonresponse(false, 'Не удалось отправить письмо');
+        jsonresponse(false, getMessage('GL_ERROR_SEND_MAIL'));
         break;
     
     
@@ -1115,9 +1115,9 @@ switch ($action) {
         );
         
         if ($result > 0) {
-            jsonresponse(true, 'Письмо успешно отправлено');
+            jsonresponse(true, getMessage('GL_SEND_MAIL_SUCCESS'));
         }
-        jsonresponse(false, 'Не удалось отправить письмо');
+        jsonresponse(false, getMessage('GL_ERROR_SEND_MAIL'));
         break;
     
     
@@ -1168,9 +1168,9 @@ switch ($action) {
         );
         
         if ($result > 0) {
-            jsonresponse(true, 'Письмо успешно отправлено');
+            jsonresponse(true, getMessage('GL_SEND_MAIL_SUCCESS'));
         }
-        jsonresponse(false, 'Не удалось отправить письмо');
+        jsonresponse(false, getMessage('GL_ERROR_SEND_MAIL'));
         break;
     
     
@@ -1221,9 +1221,9 @@ switch ($action) {
         );
         
         if ($result > 0) {
-            jsonresponse(true, 'Письмо успешно отправлено');
+            jsonresponse(true, getMessage('GL_SEND_MAIL_SUCCESS'));
         }
-        jsonresponse(false, 'Не удалось отправить письмо');
+        jsonresponse(false, getMessage('GL_ERROR_SEND_MAIL'));
         break;
     
     
@@ -1274,9 +1274,9 @@ switch ($action) {
         );
         
         if ($result > 0) {
-            jsonresponse(true, 'Письмо успешно отправлено');
+            jsonresponse(true, getMessage('GL_SEND_MAIL_SUCCESS'));
         }
-        jsonresponse(false, 'Не удалось отправить письмо');
+        jsonresponse(false, getMessage('GL_ERROR_SEND_MAIL'));
         break;
     
     
@@ -1327,9 +1327,9 @@ switch ($action) {
         );
         
         if ($result > 0) {
-            jsonresponse(true, 'Письмо успешно отправлено');
+            jsonresponse(true, getMessage('GL_SEND_MAIL_SUCCESS'));
         }
-        jsonresponse(false, 'Не удалось отправить письмо');
+        jsonresponse(false, getMessage('GL_ERROR_SEND_MAIL'));
         break;
     
     
@@ -1384,9 +1384,9 @@ switch ($action) {
         );
         
         if ($result > 0) {
-            jsonresponse(true, 'Письмо успешно отправлено');
+            jsonresponse(true, getMessage('GL_SEND_MAIL_SUCCESS'));
         }
-        jsonresponse(false, 'Не удалось отправить письмо');
+        jsonresponse(false, getMessage('GL_ERROR_SEND_MAIL'));
         break;
     
     
@@ -1443,7 +1443,7 @@ switch ($action) {
     
     
 	default:
-		jsonresponse(false, '', array(), 'Internal error');
+		jsonresponse(false, getMessage('GL_ERROR_UNKNOWN'), array(), getMessage('GL_ERROR_UNKNOWN'));
 		break;
 }
 
