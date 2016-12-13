@@ -63,18 +63,23 @@ switch ($action) {
     
     // Отправка формы контактов.
     case ('send-form-contacts'):
-        /*
-        $APPLICATION->IncludeComponent(
+        
+        $result = $APPLICATION->IncludeComponent(
 			"glyf:form.mail",
 			"contacts",
 			array(
-				'FORM'     => 'CONTACTS',
+				'FORM'     => 'GL_CONTACT',
 				'CAPTCHA'  => 'N',
 				'FIELDS'   => array('NAME', 'PHONE', 'EMAIL'),
 				'REQUIRED' => array('NAME', 'PHONE', 'EMAIL'),
+                'VISUAL'   => 'N'
 			)		
 		);
-        */
+        
+        if ($result['SUCCESS']) {
+            jsonresponse(true, $result['MESSAGE']);
+        }
+        jsonresponse(false, implode('<br/>', $result['ERRORS']));
         break;
 	
 	// Вывод статей блога.	

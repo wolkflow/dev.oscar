@@ -1,15 +1,21 @@
 $(document).ready(function() {
 	$('#js-form-mail-contacts-submit-id').on('click', function(e) {
+        e.preventDefault();
+        
 		var $that = $(this);
-		
+        var $form = $that.closest('#js-form-mail-contacts-id');
+		var data  = $form.objectize();
+        
+        data['action'] = 'send-form-contacts';
+        
 		$.ajax({
 			url: '/remote/',
 			type: 'post',
-			data: {'action': 'send-form-contacts'},
+			data: data,
 			beforeSend: function () {
 				$that.prop('disabled', 'disabled');
 			},
-			succees: function (response) {
+			success: function (response) {
                 if (response.status) {
                     inform(response.message);
                 } else {
@@ -18,5 +24,6 @@ $(document).ready(function() {
 				$that.prop('disabled', false);
 			}
 		});
+        return false;
 	});
 });

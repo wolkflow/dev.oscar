@@ -22,7 +22,7 @@ class FormMailComponent extends \CBitrixComponent
 		$arParams['CAPTCHA'] = ($arParams['CAPTCHA'] == 'Y'); 
 		
         // Не выводить шшаблон.
-		$arParams['NOVISUAL'] = ($arParams['NOVISUAL'] == 'Y');
+		$arParams['VISUAL'] = ($arParams['VISUAL'] != 'N');
         
 		
         return $arParams;
@@ -47,23 +47,24 @@ class FormMailComponent extends \CBitrixComponent
 		
 		$this->arResult['ERRORS']  = array(); 
 		$this->arResult['MESSAGE'] = null; 
+        $this->arResult['SUCCESS'] = null;
 		$this->arResult['DATA']    = array(); 
 
 		/* 
 		 * Отправка формы. 
 		 */ 
-		if (!empty($_POST) && isset($_REQUEST[$arParams['FORM']])) { 
+		if (!empty($_POST) && isset($_REQUEST[$this->arParams['FORM']])) { 
 			 
 			$this->arResult['FIELDS'] = array(); 
-			 
-			foreach ($arParams['FIELDS'] as $field) {
+			
+			foreach ($this->arParams['FIELDS'] as $field) {
 				if (is_array($_POST[$field])) {
 					$value = array_map('strval', $_POST[$field]);
 				} else {
 					$value = (string) $_POST[$field];
 				}
 				
-				if (in_array($field, $arParams['REQUIRED']) && empty($value)) { 
+				if (in_array($field, $this->arParams['REQUIRED']) && empty($value)) { 
 					$this->arResult['ERRORS'][$field] = GetMessage('GL_FORM_MAIL_ERROR_EMPTY_REQUIRED');
 				} else { 
 					if (is_array($value)) {
@@ -78,20 +79,20 @@ class FormMailComponent extends \CBitrixComponent
 			}
 			 
 			// Проверка CAPTCHA. 
-			if ($arParams['CAPTCHA']) {
+			if ($this->arParams['CAPTCHA']) {
 				if (!$APPLICATION->CaptchaCheckCode($_POST['CAPTCHA_WORD'], $_POST['CAPTCHA_CODE'])) { 
 					$this->arResult['ERRORS']['CAPTCHA'] = GetMessage('GL_FORM_MAIL_ERROR_EMPTY_CAPTCHA'); 
 				} 
 			} 
 			 
-			// Событие. 
+			// Событие.
 			foreach (GetModuleEvents('glyf.core', 'OnBeforeFormMailSend', true) as $arEvent) { 
-				ExecuteModuleEventEx($arEvent, array(&$arParams, &$this->arResult)); 
+				ExecuteModuleEventEx($arEvent, array(&$this->arParams, &$this->arResult)); 
 			} 
 			
-			// Отправка сообщения. 
+			// Отправка сообщения.
 			if (empty($this->arResult['ERRORS'])) {
-				if (CEvent::Send($arParams['FORM'], SITE_ID, $this->arResult['FIELDS'])) { 
+				if (CEvent::Send($this->arParams['FORM'], SITE_ID, $this->arResult['FIELDS'])) { 
 					$this->arResult['SUCCESS'] = true;
 					$this->arResult['MESSAGE'] = GetMessage('GL_FORM_MAIL_SUCCESS_MAIL_SEND');
 					$this->arResult['DATA'] = array(); 
@@ -100,14 +101,14 @@ class FormMailComponent extends \CBitrixComponent
 				$this->arResult['SUCCESS'] = false;
 			}
 			 
-			// Событие. 
+			// Событие.
 			foreach (GetModuleEvents('glyf.core', 'OnAfterFormMailSend', true) as $arEvent) { 
-				ExecuteModuleEventEx($arEvent, array($arParams, $this->arResult)); 
+				ExecuteModuleEventEx($arEvent, array($this->arParams, $this->arResult)); 
 			}
 		} 
 
 		// CAPTCHA. 
-		if ($arParams['CAPTCHA']) { 
+		if ($this->arParams['CAPTCHA']) { 
 			include_once ($_SERVER['DOCUMENT_ROOT'].'/bitrix/modules/main/classes/general/captcha.php'); 
 			$cpt = new CCaptcha();
 			$captchaPass = COption::GetOptionString("main", "captcha_password", "");
@@ -122,11 +123,11 @@ class FormMailComponent extends \CBitrixComponent
 
 		// Событие. 
 		foreach (GetModuleEvents('glyf.core', 'OnFormMailShow', true) as $arEvent) {
-			ExecuteModuleEventEx($arEvent, array(&$arParams, &$this->arResult));
+			ExecuteModuleEventEx($arEvent, array(&$this->arParams, &$this->arResult));
 		}
 		
 		// Подключение шаблона компонента.
-        if (!$this->arParams['NOVISUAL']) {
+        if ($this->arParams['VISUAL']) {
             $this->IncludeComponentTemplate();
         }
 		

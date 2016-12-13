@@ -99,7 +99,7 @@
 			"glyf:form.mail",
 			"contacts",
 			array(
-				'FORM'     => 'CONTACTS',
+				'FORM'     => 'GL_CONTACT',
 				'CAPTCHA'  => 'N',
 				'FIELDS'   => array('NAME', 'PHONE', 'EMAIL'),
 				'REQUIRED' => array('NAME', 'PHONE', 'EMAIL'),

@@ -154,10 +154,13 @@ $(document).ready(function () {
 			return false;
 		}
 	});
-
+    
+    /*
 	$('.js-contacts_submit').on('click', function () {
 		$(this).parents('form').submit();
 	});
+    */
+    
 	function setEqualHeight(columns)
 	{
 		var tallestcolumn = 0;
