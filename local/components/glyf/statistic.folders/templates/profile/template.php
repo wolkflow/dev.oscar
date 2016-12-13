@@ -66,9 +66,10 @@
             </li>
         </ul>
     </div>
-    <div id="js-folders-wrapper-id" class="cabinet-block-content">
-        <form>
-            <input type="hidden" name="UID" value="<?= CUser::getID() ?>" />
+    <form>
+        <input type="hidden" name="UID" value="<?= CUser::getID() ?>" />
+        <div id="js-folders-wrapper-id" class="cabinet-block-content">
+        
             <?  // Статистика по папке.					
                 $APPLICATION->IncludeComponent(
                     "glyf:statistic.folders",
@@ -76,6 +77,6 @@
                     array()
                 );
             ?>
-        </form>
-    </div>
+        </div>
+    </form>
 </div>

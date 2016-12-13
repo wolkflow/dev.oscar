@@ -986,7 +986,6 @@ switch ($action) {
             // Добавление свойств заказа.
             $order = new \Glyf\Oscar\Order($oid);
             $order->saveProperty(\Glyf\Oscar\Order::PROP_PICTURE_CODE, 'Y');
-            $order->recordStatisticSale();
             
             // Ссылка на оплату.
             $link = $order->getPaymentURL();

@@ -36,6 +36,11 @@ class Sale
                     $order->getID()
                 );
             }
+            
+            // Запись в статистику о покупке изображения.
+            if ($data['PROPS'][\Glyf\Oscar\Order::PROP_PICTURE_CODE]['VALUE'] == 'Y') {
+                $order->recordStatisticSale();
+            }
         }
     }
     

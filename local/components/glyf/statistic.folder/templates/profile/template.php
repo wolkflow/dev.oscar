@@ -45,31 +45,30 @@
             </div>
         </div>
         
-        <table class="cabinet-table hidden-xs">
-            <thead id="js-folder-pictures-order-id">
-            <tr>
-                <th></th>
-                <th class="has-sort sort-id js-order js-active-order" data-order="ID">
-                    <?= getMessage('GL_SORT_ID') ?> <span class="cabinet-table__sort"></span>
-                </th>
-                <th class="has-sort sort-title js-order" data-order="title">
-                    <?= getMessage('GL_SORT_TITLE') ?> <span class="cabinet-table__sort">
-                </th>
-                <th class="has-sort sort-date js-order" data-order="date">
-                    <?= getMessage('GL_SORT_DATE') ?> <span class="cabinet-table__sort">
-                </th>
-                <th class="has-sort sort-views js-order" data-order="views">
-                    <?= getMessage('GL_SORT_VIEWS') ?> <span class="cabinet-table__sort">
-                </th>
-                <th class="has-sort sort-sales js-order" data-order="sales">
-                    <?= getMessage('GL_SORT_SALES') ?> <span class="cabinet-table__sort">
-                </th>
-            </tr>
-            </thead>    
-            <tbody id="js-folder-pictures-wrapper-id" data-fid="<?= $arResult['FOLDER']['ID'] ?>">
-                <form>
-                    <input type="hidden" name="UID" value="<?= CUser::getID() ?>" />
-                    
+        <form>
+            <input type="hidden" name="UID" value="<?= CUser::getID() ?>" />
+            <table class="cabinet-table hidden-xs">
+                <thead id="js-folder-pictures-order-id">
+                <tr>
+                    <th></th>
+                    <th class="has-sort sort-id js-order js-active-order" data-order="ID">
+                        <?= getMessage('GL_SORT_ID') ?> <span class="cabinet-table__sort"></span>
+                    </th>
+                    <th class="has-sort sort-title js-order" data-order="title">
+                        <?= getMessage('GL_SORT_TITLE') ?> <span class="cabinet-table__sort">
+                    </th>
+                    <th class="has-sort sort-date js-order" data-order="date">
+                        <?= getMessage('GL_SORT_DATE') ?> <span class="cabinet-table__sort">
+                    </th>
+                    <th class="has-sort sort-views js-order" data-order="views">
+                        <?= getMessage('GL_SORT_VIEWS') ?> <span class="cabinet-table__sort">
+                    </th>
+                    <th class="has-sort sort-sales js-order" data-order="sales">
+                        <?= getMessage('GL_SORT_SALES') ?> <span class="cabinet-table__sort">
+                    </th>
+                </tr>
+                </thead>    
+                <tbody id="js-folder-pictures-wrapper-id" data-fid="<?= $arResult['FOLDER']['ID'] ?>">
                     <?  // Статистика по папке.					
                         $APPLICATION->IncludeComponent(
                             "glyf:statistic.folder",
@@ -80,56 +79,9 @@
                             )
                         );
                     ?>
-                    <? /*
-                <? foreach ($arResult['ITEMS'] as $item) { ?>
-                    <tr>
-                        <td>
-                            <label>
-                                <input type="checkbox" name="PIDS[]" value="<?= $item['ID'] ?>" class="js-checkbox" />
-                            </label>
-                        </td>
-                        <td>
-                            № <?= $item[Picture::FIELD_ID] ?>
-                        </td>
-                        <td>
-                            <?= $item[Picture::FIELD_LANG_TITLE_SFX . CURRENT_LANG_UP] ?>
-                        </td>
-                        <td>
-                            <? if ($item[Picture::FIELD_MODERATE]) { ?>
-                                <?= date('d.m.Y', strtotime($item[Picture::FIELD_MODERATE_TIME])) ?>
-                            <? } else { ?>
-                                <span class="cabinet-table__bluetext">Модерация</span>
-                            <? } ?>
-                        </td>
-                        <td>
-                            <?= number_format($item[Picture::FIELD_STAT_VIEWS], 0, '.' , ' ') ?>
-                        </td>
-                        <td>
-                            <?= number_format($item[Picture::FIELD_STAT_SALES], 0, '.' , ' ') ?>
-                        </td>
-                    </tr>
-                <? } ?>
-                <tr class="separate">
-                    <td colspan="6">
-                        <?  // Постраничная навигация
-                            $APPLICATION->IncludeComponent(
-                                "glyf:pagenavigation",
-                                "gray",
-                                array(
-                                    'JSID'    => 'js-folder-pictures-nav-id',
-                                    'TOTAL'   => $arResult['TOTAL'],
-                                    'PERPAGE' => $arParams['PERPAGE'],
-                                    'CURRENT' => $arParams['PAGE'],
-                                )
-                            );
-                        ?>
-                    </td>
-                </tr>
-                */ ?>
-                </form>
-            </tbody>
-        </table>
-        
+                </tbody>
+            </table>
+        </form>
         
         
         <div class="cabinet-table-mobile visible-xs">
