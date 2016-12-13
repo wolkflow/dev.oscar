@@ -3920,6 +3920,12 @@ a.catmark:hover {
   position: relative;
   margin-bottom: 20px;
 }
+.categoryList .no-blogs {
+  font-size: 16px;
+  margin: 40px 0 40px 0;
+  text-align: center;
+}
+
 @media screen and (max-width: 991px) {
   .categoryLinks ul {
     text-align: center;

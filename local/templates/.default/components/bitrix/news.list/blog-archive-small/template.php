@@ -4,8 +4,8 @@
 
 <? $this->setFrameMode(true); ?>
 
-<? if (!empty($arResult['ITEMS'])) { ?>
-	<div class="col-sm-4 col-md-4 hidden-xs">
+<div class="col-sm-4 col-md-4 hidden-xs">
+    <? if (!empty($arResult['ITEMS'])) { ?>
 		<div class="sidebarRight">
 			<div class="sidebarRightTitle">
 				<a href="/blog/archive/">
@@ -34,5 +34,5 @@
                 </div>
 			</div>
 		</div>
-	</div>
-<? } ?>
+	<? } ?>
+</div>

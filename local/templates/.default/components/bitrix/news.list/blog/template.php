@@ -4,8 +4,8 @@
 
 <? $this->setFrameMode(true); ?>
 
-<? if (!empty($arResult['ITEMS'])) { ?>
-	<div class="categoryList">
+<div class="categoryList">
+    <? if (!empty($arResult['ITEMS'])) { ?>
 		<? foreach ($arResult['ITEMS'] as $item) { ?>
 			<article class="text">
 				<div class="articleImage">
@@ -26,5 +26,9 @@
 				</div>
 			</article>
 		<? } ?>
-	</div>
-<? } ?>
+	<? } else { ?>
+        <p class="no-blogs">
+            <?= getMessage('GL_NO_BLOG_TOPICS') ?>
+        </p>
+    <? } ?>
+</div>

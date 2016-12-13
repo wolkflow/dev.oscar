@@ -40,7 +40,7 @@
                 <a class="hidden-sm js-dependence-chekbox-button js-group-action" data-action="loadpdf" href="javascipt:void(0)"><?= getMessage('GL_SAVE_PDF') ?></a>
             </li>
             <li>
-                <a class="js-dependence-chekbox-button js-group-action" data-action="email" href="javascipt:void(0)"><?= getMessage('GL_SELECT_ALL') ?></a>
+                <a class="js-dependence-chekbox-button js-group-action" data-action="email" href="javascipt:void(0)"><?= getMessage('GL_SEND_VIA_EMAIL') ?></a>
             </li>
             <li>
                 <a class="hidden-sm js-dependence-chekbox-button js-group-action" data-action="print" href="javascipt:void(0)"><?= getMessage('GL_PRINT') ?></a>
