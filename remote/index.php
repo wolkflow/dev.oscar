@@ -63,7 +63,6 @@ switch ($action) {
     
     // Отправка формы контактов.
     case ('send-form-contacts'):
-        
         $result = $APPLICATION->IncludeComponent(
 			"glyf:form.mail",
 			"contacts",
@@ -82,6 +81,7 @@ switch ($action) {
         jsonresponse(false, implode('<br/>', $result['ERRORS']));
         break;
 	
+    
 	// Вывод статей блога.	
 	case ('blog-archive-page'):
 		$html = gethtmlremote('blog.archive.php');
@@ -962,11 +962,11 @@ switch ($action) {
         }
         
         foreach ($oids as $oid) {
-            $order = new Glyf\Oscar\Order($oid
+            $order = new Glyf\Oscar\Order($oid);
             try {
                 $order->repeat();
             } catch (\Exception $e) {
-                jsonresponse(true, getMessage('GL_ERROR_CANT_REPEAT_ORDER'));
+                jsonresponse(false, getMessage('GL_ERROR_CANT_REPEAT_ORDER'));
             }
         }
         jsonresponse(true, getMessage('GL_ORDERS_REPEATED'));
@@ -1468,14 +1468,7 @@ switch ($action) {
     
     
 	default:
-		jsonresponse(false, getMessage('GL_ERROR_UNKNOWN'), array(), getMessage('GL_ERROR_UNKNOWN'));
+		jsonresponse(false, getMessage('GL_ERROR_UNKNOWN'));
 		break;
 }
-
-
-
-
-
-
-
 

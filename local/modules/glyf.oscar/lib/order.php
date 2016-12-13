@@ -36,8 +36,6 @@ class Order extends \Glyf\Core\Helpers\SaleOrder
 			return;
 		}
         
-        // Новая корзина для заказа.
-        $cart = array();
         
         // Заказ.
         $order = new self($id);
@@ -56,7 +54,7 @@ class Order extends \Glyf\Core\Helpers\SaleOrder
             );
             
             // Добавление товара в корзину.
-            $cart = array(
+            $data = array(
                 'FUSER_ID'   => \CSaleBasket::GetBasketUserID(),
                 'PRODUCT_ID' => $basket['PRODUCT_ID'],
                 'NAME'       => $basket['NAME'],
@@ -70,7 +68,7 @@ class Order extends \Glyf\Core\Helpers\SaleOrder
                 'PROPS'      => $props,
             );
             
-            if (!\CSaleBasket::Add($cart)) {
+            if (!\CSaleBasket::add($data)) {
                 throw new \Exception('Error insert basket');
             }
         }

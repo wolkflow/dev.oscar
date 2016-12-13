@@ -88,6 +88,9 @@ $(document).ready(function() {
                         $('#js-cart-count-id').html(response.data['count']);
                         refreshDelays();
                     }
+                },
+                error: function(response) {
+                    console.log(response);
                 }
             });
         }
