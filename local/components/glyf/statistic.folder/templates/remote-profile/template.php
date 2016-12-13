@@ -12,7 +12,7 @@
         <tr>
             <td>
                 <label>
-                    <input type="checkbox" name="PICS[]" value="<?= $item[Picture::FIELD_ID] ?>" class="js-checkbox" />
+                    <input type="checkbox" name="PIDS[]" value="<?= $item[Picture::FIELD_ID] ?>" class="js-checkbox" />
                 </label>
             </td>
             <td>

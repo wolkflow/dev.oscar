@@ -1,3 +1,4 @@
+<? define('NEED_AUTH', 'Y') ?>
 <? define('PAGE', 'UPLOAD') ?>
 <? require ($_SERVER['DOCUMENT_ROOT'].'/bitrix/header.php'); ?>
 <? $APPLICATION->SetTitle("Загрузка изображения"); ?>

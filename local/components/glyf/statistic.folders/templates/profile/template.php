@@ -69,7 +69,6 @@
     <form>
         <input type="hidden" name="UID" value="<?= CUser::getID() ?>" />
         <div id="js-folders-wrapper-id" class="cabinet-block-content">
-        
             <?  // Статистика по папке.					
                 $APPLICATION->IncludeComponent(
                     "glyf:statistic.folders",
