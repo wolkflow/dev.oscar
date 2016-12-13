@@ -315,7 +315,7 @@ $(document).ready(function() {
                 success: function(response) {
                     if (response.status) {
                         refreshBaskets();
-                        location.href = response.data['href'];
+                        location.href = response.data['link'];
                     }
                 }
             });
@@ -332,7 +332,7 @@ $(document).ready(function() {
             success: function(response) {
                 if (response.status) {
                     refreshBaskets();
-                    location.href = response.data['href'];
+                    location.href = response.data['link'];
                 }
             }
         });
