@@ -1,3 +1,29 @@
 <?php
 
-$MESS['GL_NO_FOUND'] = 'Sorry, picture not found.';
+$MESS['GL_NO_FOUND'] = 'Unfortunately, the image is not found.';
+$MESS['GL_TYPE_AND_SIZE'] = 'The type and size of the image';
+$MESS['GL_PROFILE'] = 'Profile';
+$MESS['GL_ORGANIZATION'] = 'Organization';
+$MESS['GL_PHONE'] = 'Phone';
+$MESS['GL_CHANGE_DATA'] = 'Change data';
+$MESS['GL_SAVE'] = 'Save';
+$MESS['GL_CANCEL'] = 'Cancel';
+$MESS['GL_USER'] = 'User';
+$MESS['GL_PASSWORD'] = 'Password';
+$MESS['GL_CONFIRM_PASSWORD'] = 'Confirm the password';
+$MESS['GL_CHANGE_LOGIN'] = 'Change login';
+$MESS['GL_CHANGE_PASSWORD'] = 'Change password';
+$MESS['GL_TARIFF_BALANCE'] = 'Tariff plan and the balance';
+$MESS['Extend'] = 'Extend';
+$MESS['GL_CHANGE'] = 'Change';
+$MESS['GL_AVAILABLE_IP'] = 'Available IP';
+$MESS['GL_ADD'] = 'Add';
+$MESS['GL_AVAILABLE'] = 'Available';
+$MESS['GL_R'] = 'RUB';
+$MESS['GL_ENTER_AMOUNT'] = 'Enter an amount';
+$MESS['GL_REFILL'] = 'Refill';
+$MESS['GL_REPLENISH_BALANCE'] = 'To replenish the balance';
+$MESS['GL_SUBSCRIPTION'] = 'Subscription';
+$MESS['GL_NEW_COLLECTION'] = 'New collection';
+$MESS['GL_NEWS_BLOG'] = 'News blog';
+$MESS['GL_STOCK'] = 'Action';

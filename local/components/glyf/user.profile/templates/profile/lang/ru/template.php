@@ -1,5 +1,29 @@
 <?php
 
 $MESS['GL_NO_FOUND'] = 'К сожалению, изображение не найдено.';
-
 $MESS['GL_TYPE_AND_SIZE'] = 'Тип и размер изображения';
+$MESS['GL_PROFILE'] = 'Профиль';
+$MESS['GL_ORGANIZATION'] = 'Организация';
+$MESS['GL_PHONE'] = 'Телефон';
+$MESS['GL_CHANGE_DATA'] = 'Изменить данные';
+$MESS['GL_SAVE'] = 'Сохранить';
+$MESS['GL_CANCEL'] = 'Отменить';
+$MESS['GL_USER'] = 'Пользователь';
+$MESS['GL_PASSWORD'] = 'Пароль';
+$MESS['GL_CONFIRM_PASSWORD'] = 'Подтвердите пароль';
+$MESS['GL_CHANGE_LOGIN'] = 'Изменить логин';
+$MESS['GL_CHANGE_PASSWORD'] = 'Изменить пароль';
+$MESS['GL_TARIFF_BALANCE'] = 'Тарифный план и баланс';
+$MESS['Extend'] = 'Продлить';
+$MESS['GL_CHANGE'] = 'Изменить';
+$MESS['GL_AVAILABLE_IP'] = 'Доступные IP';
+$MESS['GL_ADD'] = 'Добавить';
+$MESS['GL_AVAILABLE'] = 'Доступно';
+$MESS['GL_R'] = 'р.';
+$MESS['GL_ENTER_AMOUNT'] = 'Введите сумму';
+$MESS['GL_REFILL'] = 'Пополнить';
+$MESS['GL_REPLENISH_BALANCE'] = 'Пополнить баланс';
+$MESS['GL_SUBSCRIPTION'] = 'Подписки';
+$MESS['GL_NEW_COLLECTION'] = 'Новые коллекции';
+$MESS['GL_NEWS_BLOG'] = 'Новости блога';
+$MESS['GL_STOCK'] = 'Акции';

@@ -194,7 +194,7 @@ switch ($action) {
         $pids = array_filter(array_map('intval', $pids));
         
         if (!CUser::IsAuthorized()) {
-            jsonresponse(false, 'Вы не авторизованы');
+            jsonresponse(false, getMessage('GL_ERROR_NOT_AUTHORIZED'));
         }
         
         foreach ($pids as $pid) {
@@ -232,7 +232,7 @@ switch ($action) {
         $bids = array_filter(array_map('intval', $bids));
         
         if (!CUser::IsAuthorized()) {
-            jsonresponse(false, 'Вы не авторизованы');
+            jsonresponse(false, getMessage('GL_ERROR_NOT_AUTHORIZED'));
         }
         
         $result = array();
@@ -255,7 +255,7 @@ switch ($action) {
         $bids = array_filter(array_map('intval', $bids));
         
         if (!CUser::IsAuthorized()) {
-            jsonresponse(false, 'Вы не авторизованы');
+            jsonresponse(false, getMessage('GL_ERROR_NOT_AUTHORIZED'));
         }
         
         $result = array();
@@ -275,7 +275,7 @@ switch ($action) {
         $pid = (int) $request->get('pid');
         
         if (!CUser::IsAuthorized()) {
-            jsonresponse(false, 'Вы не авторизованы');
+            jsonresponse(false, getMessage('GL_ERROR_NOT_AUTHORIZED'));
         }
         
         // Пользователь.
@@ -285,15 +285,15 @@ switch ($action) {
         $lightbox = new Glyf\Oscar\Lightbox($lid);
         
         if (!$lightbox->exists()) {
-            jsonresponse(false, 'Сборник не существует');
+            jsonresponse(false, getMessage('GL_ERROR_LIGHTBOX_NO_EXISTS'));
         }
         
         if ($lightbox->getUserID() != $user->getID()) {
-            jsonresponse(false, 'Сборник не найден');
+            jsonresponse(false, getMessage('GL_ERROR_LIGHTBOX_NOT_FOUND'));
         }
         
         if (!$lightbox->addPicture($pid)) {
-            jsonresponse(false, 'Ошибка добавления картины');
+            jsonresponse(false, getMessage('GL_ERROR_NO_INSERT_PICTURE'));
         }
         jsonresponse(true);
         break;
@@ -304,7 +304,7 @@ switch ($action) {
         $title = (string) $request->get('title');
         
         if (!CUser::IsAuthorized()) {
-            jsonresponse(false, 'Вы не авторизованы');
+            jsonresponse(false, getMessage('GL_ERROR_NOT_AUTHORIZED'));
         }
         
         // Пользователь.
@@ -316,7 +316,7 @@ switch ($action) {
         ), false);
         
         if ($result->getSelectedRowsCount() > 0) { 
-            jsonresponse(false, 'Сборник с таким названием уже существует');
+            jsonresponse(false, getMessage('GL_ERROR_LIGHTBOX_TITLE_NOT_FOUND'));
         }
         
         // Сборник.
@@ -327,7 +327,7 @@ switch ($action) {
             Glyf\Oscar\Lightbox::FIELD_TIME  => date('d.m.Y H:i:s')
         );
         if (!$lightbox->add($data)) {
-            jsonresponse(false, 'Ошибка создания сборника');
+            jsonresponse(false, getMessage('GL_ERROR_NO_INSERT_LIGHTBOX'));
         }
         jsonresponse(true);
         break;
@@ -339,7 +339,7 @@ switch ($action) {
         $title = (string) $request->get('title');
         
         if (!CUser::IsAuthorized()) {
-            jsonresponse(false, 'Вы не авторизованы');
+            jsonresponse(false, getMessage('GL_ERROR_NOT_AUTHORIZED'));
         }
         
         // Пользователь.
@@ -349,7 +349,7 @@ switch ($action) {
         $lightbox = new Glyf\Oscar\Lightbox($lid);
         
         if ($lightbox->getUserID() != $user->getID()) {
-            jsonresponse(false, 'Сборник не найден');
+            jsonresponse(false, getMessage('GL_ERROR_LIGHTBOX_NOT_FOUND'));
         }
         
         $result = Glyf\Oscar\Lightbox::getList(array(
@@ -358,14 +358,14 @@ switch ($action) {
         ), false);
         
         if ($result->getSelectedRowsCount() > 0) { 
-            jsonresponse(false, 'Сборник с таким названием уже существует');
+            jsonresponse(false, getMessage('GL_ERROR_LIGHTBOX_TITLE_ALREADY_EXISTS'));
         }
         
         $data = array(
             Glyf\Oscar\Lightbox::FIELD_TITLE => $title,
         );
         if (!$lightbox->update($data)) {
-            jsonresponse(false, 'Ошибка создания сборника');
+            jsonresponse(false, getMessage('GL_ERROR_NO_INSERT_LIGHTBOX'));
         }
         jsonresponse(true, '', array('lid' => $lid));
         break;
@@ -377,7 +377,7 @@ switch ($action) {
         $lids = array_filter(array_map('intval', $lids));
         
         if (!CUser::IsAuthorized()) {
-            jsonresponse(false, 'Вы не авторизованы');
+            jsonresponse(false, getMessage('GL_ERROR_NOT_AUTHORIZED'));
         }
         
         // Пользователь.
@@ -428,7 +428,7 @@ switch ($action) {
         $lids = (array) $request->get('lids');
         
         if (!CUser::IsAuthorized()) {
-            jsonresponse(false, 'Вы не авторизованы');
+            jsonresponse(false, getMessage('GL_ERROR_NOT_AUTHORIZED'));
         }
         
         // Пользователь.
@@ -446,7 +446,6 @@ switch ($action) {
             
             $rmids []= $lid;
         }
-        
         jsonresponse(true, '', $rmids);
         break;
     
@@ -476,16 +475,16 @@ switch ($action) {
                         $picture->recordStatisticLoad($user->getID());
                         
                     } else {
-                        jsonresponse(false, 'Изображение не существует');
+                        jsonresponse(false, getMessage('GL_ERROR_IMAGE_NOT_EXISTS'));
                     }
                 } else {
-                    jsonresponse(false, 'У вас исчерпан лимит скачиваний');
+                    jsonresponse(false, getMessage('GL_ERROR_DOWNLOAD_LIMIT'));
                 }
             } else {
-                jsonresponse(false, 'У вас нет нужного тарифа');
+                jsonresponse(false, getMessage('GL_ERROR_NO_NEEDED_TARIFF'));
             }
         } else {
-            jsonresponse(false, 'Вы не можете скачать изображение');
+            jsonresponse(false, getMessage('GL_ERROR_CANT_DOWNLOAD_IMAGE'));
         }
         
         jsonresponse(true, '', array('link' => $link));
@@ -498,7 +497,7 @@ switch ($action) {
         $phone = (string) $request->get('phone');
         
         if (!CUser::IsAuthorized()) {
-            jsonresponse(false, 'Вы не авторизованы');
+            jsonresponse(false, getMessage('GL_ERROR_NOT_AUTHORIZED'));
         }
         
         $user = new Glyf\Oscar\User();
@@ -508,7 +507,7 @@ switch ($action) {
         );
         
         if (!$user->update($data)) {
-            jsonresponse(false, 'Ошибка сохранения данных');
+            jsonresponse(false, getMessage('GL_ERROR_SAVE_DATA'));
         }
         jsonresponse(true);
         break;
@@ -520,7 +519,7 @@ switch ($action) {
         $phone   = (string) $request->get('workphone');
         
         if (!CUser::IsAuthorized()) {
-            jsonresponse(false, 'Вы не авторизованы');
+            jsonresponse(false, getMessage('GL_ERROR_NOT_AUTHORIZED'));
         }
         
         $user = new Glyf\Oscar\User();
@@ -530,7 +529,7 @@ switch ($action) {
         );
         
         if (!$user->update($data)) {
-            jsonresponse(false, 'Ошибка сохранения данных');
+            jsonresponse(false, getMessage('GL_ERROR_SAVE_DATA'));
         }
         jsonresponse(true);
         break;
@@ -541,7 +540,7 @@ switch ($action) {
         $email = (string) $request->get('email');
         
         if (!CUser::IsAuthorized()) {
-            jsonresponse(false, 'Вы не авторизованы');
+            jsonresponse(false, getMessage('GL_ERROR_NOT_AUTHORIZED'));
         }
         
         if (empty($email)) {
@@ -550,7 +549,7 @@ switch ($action) {
         
         $exist = Glyf\Oscar\User::findByLogin($email);
         if (!is_null($exist)) {
-            jsonresponse(false, 'Такой e-mail уже существует');
+            jsonresponse(false, getMessage('GL_ERROR_EMAIL_ALREADY_EXISTS'));
         }
         
         $user = new Glyf\Oscar\User();
@@ -560,7 +559,7 @@ switch ($action) {
         );
         
         if (!$user->update($data)) {
-            jsonresponse(false, 'Ошибка сохранения e-mail');
+            jsonresponse(false, getMessage('GL_ERROR_SAVE_EMAIL'));
         }
         
         jsonresponse(true);
@@ -573,15 +572,15 @@ switch ($action) {
         $confirm  = (string) $request->get('confirm');
         
         if (empty($password)) {
-            jsonresponse(false, 'Не введен пароль');
+            jsonresponse(false, getMessage('GL_ERROR_NO_PASSWORD'));
         }
         
         if (empty($confirm)) {
-            jsonresponse(false, 'Не введено подтверждение пароля');
+            jsonresponse(false, getMessage('GL_ERROR_NO_CONFIRM_PASSWORD'));
         }
         
         if ($password != $confirm) {
-            jsonresponse(false, 'Пароль и подтверждение не совпадают');
+            jsonresponse(false, getMessage('GL_ERROR_DIFFERENT_CONFIRM'));
         }
         
         $user = new Glyf\Oscar\User();
@@ -590,7 +589,7 @@ switch ($action) {
         );
         
         if (!$user->update($data)) {
-            jsonresponse(false, 'Ошибка изменения пароля');
+            jsonresponse(false, getMessage('GL_ERROR_SAVE_PASSWORD'));
         }
         jsonresponse(true);
         break;
@@ -607,11 +606,11 @@ switch ($action) {
         $tariff = $user->getUserTariff();
         
         if (!$tariff) {
-            //jsonresponse(false, 'Не доступен необходимый тариф');
+            jsonresponse(false, getMessage('GL_ERROR_NO_NEEDED_TARIFF'));
         }
         
         if (!$tariff->canMultipleIP()) {
-            //jsonresponse(false, 'Не доступен необходимый тариф');
+            jsonresponse(false, getMessage('GL_ERROR_NO_NEEDED_TARIFF'));
         }
         
         
@@ -633,12 +632,12 @@ switch ($action) {
             ));
             
             if (!$result) {
-                jsonresponse(false, 'Ошибка сохрнениея IP адресов');
+                jsonresponse(false, getMessage('GL_ERROR_SAVE_IPS'));
             }
         }
         
         if (count($ipaddresses) != count($ips)) {
-            jsonresponse(false, 'Ошибка сохрнениея IP адресов');
+            jsonresponse(false, getMessage('GL_ERROR_SAVE_IPS'));
         }
         
         jsonresponse(true);
@@ -653,7 +652,7 @@ switch ($action) {
         $title = trim($title);
         
         if (empty($title)) {
-            jsonresponse(false, 'Не введено название поиска');
+            jsonresponse(false, getMessage('GL_ERROR_NO_SEARCH_TITLE'));
         }
 
         // Пользователь.
@@ -670,7 +669,7 @@ switch ($action) {
         );
         
         if (!$search->add($data)) {
-            jsonresponse(false, 'Ошибка сохрнениея поиска');
+            jsonresponse(false, getMessage('GL_ERROR_SAVE_SEARCH'));
         }
         
         $filter = '/search/?' . http_build_query(array(Glyf\Oscar\Search::FILTERS_CODE => $filter));
@@ -710,11 +709,11 @@ switch ($action) {
         $lightbox = new Glyf\Oscar\Lightbox($lid);
         
         if (!$lightbox->exists()) {
-            jsonresponse(false, 'Сборник не найден');
+            jsonresponse(false, getMessage('GL_ERROR_LIGHTBOX_NOT_FOUND'));
         }
         
         if ($lightbox->getUserID() != $user->getID()) {
-            jsonresponse(false, 'Сборник не найден');
+            jsonresponse(false, getMessage('GL_ERROR_LIGHTBOX_NOT_FOUND'));
         }
         
         $pics = Glyf\Oscar\LightboxPicture::getList(array(
@@ -768,11 +767,11 @@ switch ($action) {
         $user = new Glyf\Oscar\User();
         
         if (!$user->isPartner()) {
-            jsonresponse(false, 'Нет прав для добавления папки');
+            jsonresponse(false, getMessage('GL_ERROR_NO_PERMISSION_FOLDER_INSERT'));
         }
         
         if (empty($title)) {
-            jsonresponse(false, 'Не указано название папки');
+            jsonresponse(false, getMessage('GL_ERROR_NO_ENTER_FOLDER_TITLE'));
         }
         
         $data = array(
@@ -784,7 +783,7 @@ switch ($action) {
         $folder = new Glyf\Oscar\Folder();
         
         if (!$folder->add($data)) {
-            jsonresponse(false, 'Ошибка сохрнениея поиска');
+            jsonresponse(false, getMessage('GL_ERROR_SAVE_FOLDER'));
         }
         jsonresponse(true);
         break;
@@ -797,11 +796,11 @@ switch ($action) {
         $user = new Glyf\Oscar\User();
         
         if (!$user->isPartner()) {
-            jsonresponse(false, 'Нет прав для удаления папки');
+            jsonresponse(false, getMessage('GL_ERROR_NO_PERMISSION_FOLDER_DELETE'));
         }
         
         if (empty($fids)) {
-            jsonresponse(false, 'Не указаны папки для удаления');
+            jsonresponse(false, getMessage('GL_ERROR_NO_FOLDERS_FOR_DELETE'));
         }
         
         foreach ($fids as $fid) {
@@ -822,11 +821,11 @@ switch ($action) {
         $user = new Glyf\Oscar\User();
         
         if (!CUser::IsAuthorized()) {
-            jsonresponse(false, 'Вы не авторизованы');
+            jsonresponse(false, getMessage('GL_ERROR_NOT_AUTHORIZED'));
         }
         
         if ($user->isPartner()) {
-            jsonresponse(false, 'Вы являетесь партнером');
+            jsonresponse(false, getMessage('GL_ERROR_YOU_ARE_PARTNER'));
         }
         
         $basket = CSaleBasket::getByID($bid);
@@ -841,7 +840,7 @@ switch ($action) {
                 'QUANTITY' => 1,
             ));
         } else {
-            jsonresponse(false, 'Товар не найден');
+            jsonresponse(false, getMessage('GL_ERROR_PICTURE_NOT_FOUND'));
         }
         jsonresponse(true, '', array('pid' => $pid));
         break;
@@ -852,15 +851,15 @@ switch ($action) {
         $price = (float) $request->get('price');
         
         if (!Bitrix\Main\Loader::includeModule('sale')) {
-            jsonresponse(false, 'Ошибка пополеннеия счета');
+            jsonresponse(false, getMessage('GL_ERROR_PAY_BALANCE'));
         }
         
         if (!CUser::IsAuthorized()) {
-            jsonresponse(false, 'Вы не авторизованы');
+            jsonresponse(false, getMessage('GL_ERROR_NOT_AUTHORIZED'));
         }
         
         if ($price <= 0) {
-            jsonresponse(false, 'Неверно указана сумма для пополнения счета');
+            jsonresponse(false, getMessage('GL_ERROR_INCORRECT_SUM_BALANCE'));
         }
         
         $user = new Glyf\Oscar\User();
@@ -873,7 +872,7 @@ switch ($action) {
             'CANCELED'         => 'N',
             'STATUS_ID'        => STATUS_DEFAULT,
             'DISCOUNT_VALUE'   => '',
-            'USER_DESCRIPTION' => 'Пополнение счета',
+            'USER_DESCRIPTION' => getMessage('GL_PAY_BALANCE'),
             'PRICE'            => $price,
             'CURRENCY'         => CURRENCY_DEFAULT,
             'USER_ID'          => $user->getID(),
@@ -893,7 +892,7 @@ switch ($action) {
             
             jsonresponse(true, '', array('link' => $link));
         }
-        jsonresponse(false, 'Ошибка пополеннеия счета');
+        jsonresponse(false, getMessage('GL_ERROR_PAY_BALANCE'));
         break;
     
     
@@ -902,17 +901,17 @@ switch ($action) {
         $tid = (int) $request->get('tid');
         
         if (!Bitrix\Main\Loader::includeModule('sale')) {
-            jsonresponse(false, 'Ошибка при покупке тарифа');
+            jsonresponse(false, getMessage('GL_ERROR_BUY_TARIFF'));
         }
         
         if (!CUser::IsAuthorized()) {
-            jsonresponse(false, 'Вы не авторизованы');
+            jsonresponse(false, getMessage('GL_ERROR_NOT_AUTHORIZED'));
         }
         
         $tariff = new Glyf\Oscar\Tariff($tid);
         
         if (!$tariff->exists()) {
-            jsonresponse(false, 'Не указан тариф');
+            jsonresponse(false, getMessage('GL_ERROR_NO_TARIFF'));
         }
         
         $user = new Glyf\Oscar\User();
@@ -925,7 +924,7 @@ switch ($action) {
             'CANCELED'         => 'N',
             'STATUS_ID'        => STATUS_DEFAULT,
             'DISCOUNT_VALUE'   => '',
-            'USER_DESCRIPTION' => 'Опата тарифа "' . $tariff->getTitle() . '"',
+            'USER_DESCRIPTION' => getMessage('GL_PAY_TARIFF') . ' "' . $tariff->getTitle() . '"',
             'PRICE'            => floatval($tariff->getPrice()),
             'CURRENCY'         => CURRENCY_DEFAULT,
             'USER_ID'          => $user->getID(),
@@ -945,7 +944,7 @@ switch ($action) {
             
             jsonresponse(true, '', array('link' => $link));
         }
-        jsonresponse(false, 'Ошибка пополеннеия счета');
+        jsonresponse(false, getMessage('GL_ERROR_PAY_BALANCE'));
         break;
     
     
@@ -957,7 +956,7 @@ switch ($action) {
         $user = new Glyf\Oscar\User();
         
         if (!CUser::IsAuthorized()) {
-            jsonresponse(false, 'Вы не авторизованы');
+            jsonresponse(false, getMessage('GL_ERROR_NOT_AUTHORIZED'));
         }
         
         if ($user->isPartner()) {
@@ -1023,7 +1022,7 @@ switch ($action) {
         $user = new \Glyf\Oscar\User();
         
         if (!CUser::IsAuthorized()) {
-            jsonresponse(false, 'Вы не авторизованы');
+            jsonresponse(false, getMessage('GL_ERROR_NOT_AUTHORIZED'));
         }
         $data = array('IDS' => $ids, 'UID' => $user->getID());
         $link = 'http://' . SITENAME . '/screens/orders/?' . http_build_query($data);
@@ -1043,7 +1042,7 @@ switch ($action) {
         $user = new \Glyf\Oscar\User();
         
         if (!CUser::IsAuthorized()) {
-            jsonresponse(false, 'Вы не авторизованы');
+            jsonresponse(false, getMessage('GL_ERROR_NOT_AUTHORIZED'));
         }
         $data = array('IDS' => $ids, 'UID' => $user->getID());
         $link = 'http://' . SITENAME . '/screens/orders/?' . http_build_query($data);
@@ -1076,7 +1075,7 @@ switch ($action) {
         $user = new \Glyf\Oscar\User();
         
         if (!CUser::IsAuthorized()) {
-            jsonresponse(false, 'Вы не авторизованы');
+            jsonresponse(false, getMessage('GL_ERROR_NOT_AUTHORIZED'));
         }
         $data = array('LIDS' => $ids, 'UID' => $user->getID());
         $link = 'http://' . SITENAME . '/screens/pictures/?' . http_build_query($data);
@@ -1096,7 +1095,7 @@ switch ($action) {
         $user = new \Glyf\Oscar\User();
         
         if (!CUser::IsAuthorized()) {
-            jsonresponse(false, 'Вы не авторизованы');
+            jsonresponse(false, getMessage('GL_ERROR_NOT_AUTHORIZED'));
         }
         $data = array('LIDS' => $ids, 'UID' => $user->getID());
         $link = 'http://' . SITENAME . '/screens/pictures/?' . http_build_query($data);
@@ -1129,7 +1128,7 @@ switch ($action) {
         $user = new \Glyf\Oscar\User();
         
         if (!CUser::IsAuthorized()) {
-            jsonresponse(false, 'Вы не авторизованы');
+            jsonresponse(false, getMessage('GL_ERROR_NOT_AUTHORIZED'));
         }
         $data = array('PIDS' => $ids, 'UID' => $user->getID());
         $link = 'http://' . SITENAME . '/screens/pictures/?' . http_build_query($data);
@@ -1149,7 +1148,7 @@ switch ($action) {
         $user = new \Glyf\Oscar\User();
         
         if (!CUser::IsAuthorized()) {
-            jsonresponse(false, 'Вы не авторизованы');
+            jsonresponse(false, getMessage('GL_ERROR_NOT_AUTHORIZED'));
         }
         $data = array('PIDS' => $ids, 'UID' => $user->getID());
         $link = 'http://' . SITENAME . '/screens/pictures/?' . http_build_query($data);
@@ -1182,7 +1181,7 @@ switch ($action) {
         $user = new \Glyf\Oscar\User();
         
         if (!CUser::IsAuthorized()) {
-            jsonresponse(false, 'Вы не авторизованы');
+            jsonresponse(false, getMessage('GL_ERROR_NOT_AUTHORIZED'));
         }
         $data = array('FIDS' => $ids, 'UID' => $user->getID());
         $link = 'http://' . SITENAME . '/screens/pictures/?' . http_build_query($data);
@@ -1202,7 +1201,7 @@ switch ($action) {
         $user = new \Glyf\Oscar\User();
         
         if (!CUser::IsAuthorized()) {
-            jsonresponse(false, 'Вы не авторизованы');
+            jsonresponse(false, getMessage('GL_ERROR_NOT_AUTHORIZED'));
         }
         $data = array('FIDS' => $ids, 'UID' => $user->getID());
         $link = 'http://' . SITENAME . '/screens/pictures/?' . http_build_query($data);
@@ -1235,7 +1234,7 @@ switch ($action) {
         $user = new \Glyf\Oscar\User();
         
         if (!CUser::IsAuthorized()) {
-            jsonresponse(false, 'Вы не авторизованы');
+            jsonresponse(false, getMessage('GL_ERROR_NOT_AUTHORIZED'));
         }
         $data = array('PIDS' => $ids, 'UID' => $user->getID());
         $link = 'http://' . SITENAME . '/screens/pictures/?' . http_build_query($data);
@@ -1255,7 +1254,7 @@ switch ($action) {
         $user = new \Glyf\Oscar\User();
         
         if (!CUser::IsAuthorized()) {
-            jsonresponse(false, 'Вы не авторизованы');
+            jsonresponse(false, getMessage('GL_ERROR_NOT_AUTHORIZED'));
         }
         $data = array('PIDS' => $ids, 'UID' => $user->getID());
         $link = 'http://' . SITENAME . '/screens/pictures/?' . http_build_query($data);
@@ -1288,7 +1287,7 @@ switch ($action) {
         $user = new \Glyf\Oscar\User();
         
         if (!CUser::IsAuthorized()) {
-            jsonresponse(false, 'Вы не авторизованы');
+            jsonresponse(false, getMessage('GL_ERROR_NOT_AUTHORIZED'));
         }
         $data = array('IDS' => $ids, 'UID' => $user->getID());
         $link = 'http://' . SITENAME . '/screens/sales/?' . http_build_query($data);
@@ -1308,7 +1307,7 @@ switch ($action) {
         $user = new \Glyf\Oscar\User();
         
         if (!CUser::IsAuthorized()) {
-            jsonresponse(false, 'Вы не авторизованы');
+            jsonresponse(false, getMessage('GL_ERROR_NOT_AUTHORIZED'));
         }
         $data = array('IDS' => $ids, 'UID' => $user->getID());
         $link = 'http://' . SITENAME . '/screens/sales/?' . http_build_query($data);
@@ -1343,7 +1342,7 @@ switch ($action) {
         $user = new \Glyf\Oscar\User();
         
         if (!CUser::IsAuthorized()) {
-            jsonresponse(false, 'Вы не авторизованы');
+            jsonresponse(false, getMessage('GL_ERROR_NOT_AUTHORIZED'));
         }
         $data = array('IDS' => $ids, 'UID' => $user->getID(), 'PERIOD_MIN' => $pmin, 'PERIOD_MAX' => $pmax);
         $link = 'http://' . SITENAME . '/screens/stats/?' . http_build_query($data);
@@ -1365,7 +1364,7 @@ switch ($action) {
         $user = new \Glyf\Oscar\User();
         
         if (!CUser::IsAuthorized()) {
-            jsonresponse(false, 'Вы не авторизованы');
+            jsonresponse(false, getMessage('GL_ERROR_NOT_AUTHORIZED'));
         }
         $data = array('IDS' => $ids, 'UID' => $user->getID(), 'PERIOD_MIN' => $pmin, 'PERIOD_MAX' => $pmax);
         $link = 'http://' . SITENAME . '/screens/stats/?' . http_build_query($data);
