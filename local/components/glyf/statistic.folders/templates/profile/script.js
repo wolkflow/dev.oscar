@@ -80,9 +80,10 @@ $(document).ready(function() {
     });
     
     // Выделение всех элементов.
-    $(document).on('click', '#js-check-all-id', function() {
-        $('#js-folders-wrapper-id input' + $(this).data('selector')).prop('checked', 'checked');
-        $('#js-folders-wrapper-id input' + $(this).data('selector')).parent('div').addClass('checked');
+    $(document).on('click', '#js-folders-block-id .js-check-all', function() {
+        $('#js-folders-block-id input' + $(this).data('selector')).prop('checked', 'checked');
+        $('#js-folders-block-id input' + $(this).data('selector')).parent('div').addClass('checked');
+        $('#js-folders-block-id .js-dependence-chekbox-button').addClass('is-active');
     });
     
     

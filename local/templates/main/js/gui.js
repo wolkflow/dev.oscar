@@ -7,6 +7,7 @@ function addPictureToLignhbox(pid, lid, tpl)
     
     $.ajax({
         url: '/remote/',
+        type: 'post',
         dataType: 'json',
         data: {'action': 'add-to-lightbox', 'pid': pid, 'lid': lid},
         success: function(response) {
@@ -19,9 +20,13 @@ function addPictureToLignhbox(pid, lid, tpl)
                     success: function(response) {
                         if (response.status) {
                             $('#js-side-lightbox-' + lid + '-id .js-lightbox-content').html(response.data['html']);
+                        } else {
+                            error(response.message);
                         }
                     }
                 });
+            } else {
+                error(response.message);
             }
         }
     });
@@ -177,6 +182,8 @@ $(document).ready(function() {
             success: function(response) {
                 if (response.status) {
                     $('#js-cart-count-id').html(response.data['count']);
+                } else {
+                    error(response.message);
                 }
             }
         });

@@ -34,7 +34,7 @@
                 </div>
             </li>
             <li>
-                <a class="is-active" href="javascript:void(0)" id="js-check-all-id" data-selector=".js-checkbox"><?= getMessage('GL_SELECT_ALL') ?></a>
+                <a class="is-active js-check-all" href="javascript:void(0)" data-selector=".js-checkbox"><?= getMessage('GL_SELECT_ALL') ?></a>
             </li>
             <li>
                 <a class="hidden-sm js-dependence-chekbox-button js-group-action" data-action="loadpdf" href="javascipt:void(0)"><?= getMessage('GL_SAVE_PDF') ?></a>

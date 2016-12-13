@@ -44,4 +44,23 @@ $MESS['GL_OTHER'] = 'Other:';
 $MESS['GL_CUSTOMER'] = 'Customer:';
 
 
+$MESS['GL_GENRE_SELFPORTRAIT'] = 'Self portrait';
+$MESS['GL_GENRE_ANIMALISM'] = 'Animalism';
+$MESS['GL_GENRE_BATTLE'] = 'Battle';
+$MESS['GL_GENRE_EPIC'] = 'Epic';
+$MESS['GL_GENRE_CITYSCAPE'] = 'The urban landscape';
+$MESS['GL_GENRE_GENRE'] = 'Genre';
+$MESS['GL_GENRE_HISTORICAL'] = 'Historical';
+$MESS['GL_GENRE_CARICATURE'] = 'Caricature';
+$MESS['GL_GENRE_STILLLIFE'] = 'Still life';
+$MESS['GL_GENRE_PASTORAL'] = 'Pastoral';
+$MESS['GL_GENRE_LANDSCAPE'] = 'Landscape';
+$MESS['GL_GENRE_PORTRAIT'] = 'Portrait';
+$MESS['GL_GENRE_RELIGIOUS'] = ' Religious';
+
+$MESS['GL_COLOR_COLOR'] = 'Color';
+$MESS['GL_COLOR_BLACKWHITE'] = 'Black and white';
+
+$MESS['GL_LEGAL_FULL'] = 'Full package';
+$MESS['GL_LEGAL_NOCOMMERCIAL'] = 'Non-commercial use';
 

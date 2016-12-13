@@ -7,7 +7,7 @@
 
 <? $this->setFrameMode(true); ?>
 
-<div class="cabinet-block cabinet-block-objects">
+<div id="js-objects-block-id" class="cabinet-block cabinet-block-objects">
     <div class="clearfix">
         <div class="cabinet-search">
             <span class="cabinet-search__title"><?= getMessage('GL_SEARCH_OBJECTS') ?></span>

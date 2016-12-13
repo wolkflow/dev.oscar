@@ -1,5 +1,12 @@
 $(document).ready(function() {
     
+    // Выделение всех элементов.
+    $(document).on('click', '#js-folder-block-id .js-check-all', function() {
+        $('#js-folder-block-id input' + $(this).data('selector')).prop('checked', 'checked');
+        $('#js-folder-block-id input' + $(this).data('selector')).parent('div').addClass('checked');
+        $('#js-folder-block-id .js-dependence-chekbox-button').addClass('is-active');
+    });
+    
     // Выбор элемента.
     $(document).on('click', '#js-folder-block-id .js-checkbox', function() {
         if ($('#js-folder-block-id .js-checkbox:checked').length > 0) {

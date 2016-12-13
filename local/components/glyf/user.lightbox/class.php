@@ -8,7 +8,7 @@ use Glyf\Oscar\User;
 
 class StatisticFolderDetail extends \CBitrixComponent
 {
-    const PERPAGE = 2;
+    const PERPAGE = 30;
     
     
 	/** 
@@ -18,7 +18,6 @@ class StatisticFolderDetail extends \CBitrixComponent
     {
         // Идентификатор.
         $arParams['LID'] = (int) $arParams['LID'];
-        
         
         // Страница.
         $arParams['PAGE'] = (int) $arParams['PAGE'];

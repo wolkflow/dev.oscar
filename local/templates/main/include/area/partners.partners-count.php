@@ -8,6 +8,6 @@
 	}
 ?>
 
-<?= $count ?>
-<?= TextHelper::decofnum($count, array(getMessage('GL_MUSEUMS_1N'), getMessage('GL_MUSEUMS_2N'), getMessage('GL_MUSEUMS_3N'), )) ?>
+<?= $count ?> 
+<?= TextHelper::decofnum($count, array(getMessage('GL_MUSEUMS_1N'), getMessage('GL_MUSEUMS_2N'), getMessage('GL_MUSEUMS_3N'))) ?> 
 <?= getMessage('GL_TRUST_US') ?>

@@ -11,8 +11,9 @@
     <? foreach ($arResult['ITEMS'] as $item) { ?>
         <tr>
             <td>
-                <label>
+                <label class="checkbox-me">
                     <input type="checkbox" name="PIDS[]" value="<?= $item[Picture::FIELD_ID] ?>" class="js-checkbox" />
+                    <span></span>
                 </label>
             </td>
             <td>

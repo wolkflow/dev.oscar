@@ -18,7 +18,7 @@
 						</a>
 					</div>
 					<div class="col-sm-6 shortcut shortcutDocs">
-						<a href="/documents/">
+						<a href="/partners/">
 							<div class="shortcutIcon"></div>
 							<div class="shortcutTitle">
 								<?= getMessage('GL_MAIN_DOCUMENTS') ?>

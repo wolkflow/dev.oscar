@@ -18,7 +18,7 @@ use Glyf\Oscar\User;
 
 class PictureUpload extends \CBitrixComponent
 {
-    const IMAGE_MIN_SIZE = 3000;
+    const IMAGE_MIN_SIZE = 1000;
     
     
     protected static $user;
@@ -80,7 +80,6 @@ class PictureUpload extends \CBitrixComponent
         
         
         
-        
         // Запрос.
         $request = Context::getCurrent()->getRequest();
         
@@ -97,11 +96,14 @@ class PictureUpload extends \CBitrixComponent
             }
             
             if ($pid > 0) {
+                LocalRedirect('/personal/folders/');
+                /*
                 $this->arResult['SUCCESS'] = true;
                 
                 $picture = new Glyf\Oscar\Picture($pid);
                 
                 $this->arResult['DATA'] = $this->convert($picture);
+                */
             }
         }
         

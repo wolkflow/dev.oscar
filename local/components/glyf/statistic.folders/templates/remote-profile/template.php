@@ -16,7 +16,9 @@
                     <span></span>
                 </label>
                 <img src="<?= SITE_TEMPLATE_PATH ?>/images/i_folder.png" />
-                <span><?= $item[Folder::FIELD_TITLE] ?></span>
+                <a href="/personal/folders/<?= $item[Folder::FIELD_ID] ?>/">
+                    <span><?= $item[Folder::FIELD_TITLE] ?></span>
+                </a>
             </div>
         <? } ?>
     </div>

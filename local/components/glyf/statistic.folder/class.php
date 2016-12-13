@@ -112,6 +112,9 @@ class StatisticFolderDetail extends \CBitrixComponent
             $this->arParams['PAGE'] = $pagescnt;
         }
         
+        if ($this->arParams['PAGE'] <= 0) {
+            $this->arParams['PAGE'] = 1;
+        }
         
         // Список элементов папки.
         $result = Picture::getList(array(

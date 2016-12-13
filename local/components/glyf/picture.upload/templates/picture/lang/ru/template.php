@@ -44,3 +44,23 @@ $MESS['GL_TECHNICAL_CONDITION'] = 'Техническое состояние:';
 $MESS['GL_SKETCHES'] = 'Эскизы:';
 $MESS['GL_OTHER'] = 'Прочее:';
 $MESS['GL_CUSTOMER'] = 'Заказчик:';
+
+$MESS['GL_GENRE_SELFPORTRAIT'] = 'Автопортрет';
+$MESS['GL_GENRE_ANIMALISM'] = 'Анимализм ';
+$MESS['GL_GENRE_BATTLE'] = 'Батальный';
+$MESS['GL_GENRE_EPIC'] = 'Былинный';
+$MESS['GL_GENRE_CITYSCAPE'] = 'Городской пейзаж';
+$MESS['GL_GENRE_GENRE'] = 'Жанровый';
+$MESS['GL_GENRE_HISTORICAL'] = 'Исторический';
+$MESS['GL_GENRE_CARICATURE'] = 'Карикатура';
+$MESS['GL_GENRE_STILLLIFE'] = 'Натюрморт';
+$MESS['GL_GENRE_PASTORAL'] = 'Пастораль'; 
+$MESS['GL_GENRE_LANDSCAPE'] = 'Пейзаж';
+$MESS['GL_GENRE_PORTRAIT'] = 'Портрет';
+$MESS['GL_GENRE_RELIGIOUS'] = 'Религиозный';
+
+$MESS['GL_COLOR_COLOR'] = 'Цветное';
+$MESS['GL_COLOR_BLACKWHITE'] = 'Черно-белое';
+
+$MESS['GL_LEGAL_FULL'] = 'Полный пакет';
+$MESS['GL_LEGAL_NOCOMMERCIAL'] = 'Некоммерческое использование';

@@ -42,5 +42,5 @@ $MESS['GL_ERROR_CANT_REPEAT_ORDER'] = 'Repeat orders error: ';
 $MESS['GL_PAY_BALANCE'] = 'Deposit';
 $MESS['GL_PAY_TARIFF'] = 'tariff payment';
 $MESS['GL_PAY_IMAGES'] = 'image Buy';
-$MESS['GL_SEND_MAIL_SUCCESS'] = 'A letter has been sent successfully';
+$MESS['GL_SEND_MAIL_SUCCESS'] = 'A letter has been sent to the e-mail successfully';
 $MESS['GL_ORDERS_REPEATED'] = 'Images added to the purchase';

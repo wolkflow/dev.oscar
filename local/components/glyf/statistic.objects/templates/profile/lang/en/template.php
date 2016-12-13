@@ -21,3 +21,4 @@ $MESS['GL_ADD_COLLECTION'] = 'add a collection';
 $MESS['GL_ADD_OBJECT'] = 'add a object';
 $MESS['GL_SELECT_ALL'] = 'select all';
 $MESS['GL_DELETE'] = 'Delete';
+$MESS['GL_ADD_OBJECT'] = 'Add object';

@@ -19,3 +19,4 @@ $MESS['GL_OBJECTS'] = 'Объекты';
 $MESS['GL_ADD_COLLECTION'] = 'добавить коллекцию';
 $MESS['GL_SELECT_ALL'] = 'выделить всё';
 $MESS['GL_DELETE'] = 'удалить';
+$MESS['GL_ADD_OBJECT'] = 'Добавить объект';

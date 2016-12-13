@@ -11,9 +11,9 @@ $(document).ready(function() {
     
     // Выделение всех элементов.
     $(document).on('click', '#js-objects-block-id .js-check-all', function() {
-        $('#js-objects-wrapper-id input.js-checkbox').prop('checked', 'checked');
-        $('#js-objects-wrapper-id input.js-checkbox').parent('div').addClass('checked');
-        $('.js-dependence-chekbox-button').addClass('is-active');
+        $('#js-objects-block-id input.js-checkbox').prop('checked', 'checked');
+        $('#js-objects-block-id input.js-checkbox').parent('div').addClass('checked');
+        $('#js-objects-block-id .js-dependence-chekbox-button').addClass('is-active');
     });
     
     

@@ -23,7 +23,7 @@
                 <?= $arResult['FOLDER']['UF_TITLE'] ?>
             </div>
             <div class="cabinet-panel__menu">
-                <a class="is-active" href="javascript:void(0)" id="js-check-all-id" data-selector=".js-checkbox">
+                <a class="is-active js-check-all" href="javascript:void(0)" data-selector=".js-checkbox">
                     <?= getMessage('GL_SELECT_ALL') ?>
                 </a>
                 <a class="js-dependence-chekbox-button js-group-action hidden-sm" data-action="loadpdf" href="javascript:void(0)">

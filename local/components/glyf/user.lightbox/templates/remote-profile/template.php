@@ -15,7 +15,10 @@
                     <img src="<?= CFile::getPath($item[Picture::FIELD_SMALL_FILE]) ?>" />
                 </div>
                 <div class="lightboxes-setAction">
-                    <input type="checkbox" name="PIDS[]" class="js-picture-item-checkbox js-checkbox" value="<?= $item[Picture::FIELD_ID] ?>" />
+                    <label class="checkbox-me">
+                        <input type="checkbox" name="PIDS[]" class="js-picture-item-checkbox js-checkbox" value="<?= $item[Picture::FIELD_ID] ?>" />
+                        <span></span>
+                    </label>
                     <div class="lightboxes-setAction-buttons">
                         <? if ($item[Picture::FIELD_LEGAL] == Picture::PROP_LEGAL_FULL_ID) { ?>
                             <a class="card-image__button card-image__button--copyright" href="javascript:void(0)"></a>

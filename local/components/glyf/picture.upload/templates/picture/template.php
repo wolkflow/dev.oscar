@@ -412,11 +412,11 @@
                         <div class="uploadBlock">
                             <div class="uploadBlock-title uploadBlock-title_bold">Жанр</div>
                             <ul class="ddup">
-                                <? foreach ($arResult['PARAMS']['GENRE'] as $id => $title) { ?>
+                                <? foreach ($arResult['PARAMS']['GENRE'] as $id => $code) { ?>
                                     <li>
                                         <label>
                                             <input type="radio" name="GENRE" value="<?= $id ?>" <?= ($id == $arResult['DATA']['GENRE']) ? ('checked') : ('') ?> />
-                                            <?= $title ?>
+                                            <?= getMessage('GL_GENRE_' . $code) ?>
                                         </label>
                                     </li>
                                 <? } ?>
@@ -450,11 +450,11 @@
                         <div class="uploadBlock uploadColor">
                             <div class="uploadBlock-title">Цвет изображения</div>
                             <ul class="ddup">
-                                <? foreach ($arResult['PARAMS']['COLOR'] as $id => $title) { ?>
+                                <? foreach ($arResult['PARAMS']['COLOR'] as $id => $code) { ?>
                                     <li>
                                         <label>
                                             <input type="radio" name="COLOR" value="<?= $id ?>" <?= ($id == $arResult['DATA']['COLOR']) ? ('checked') : ('') ?> />
-                                            <?= $title ?>
+                                            <?= getMessage('GL_COLOR_' . $code) ?>
                                         </label>
                                     </li>
                                 <? } ?>
@@ -465,11 +465,11 @@
                         <div class="uploadBlock uploadCopy">
                             <div class="uploadBlock-title">Правовой режим</div>
                             <ul class="ddup">
-                                <? foreach ($arResult['PARAMS']['LEGAL'] as $id => $title) { ?>
+                                <? foreach ($arResult['PARAMS']['LEGAL'] as $id => $code) { ?>
                                     <li>
                                         <label>
                                             <input type="radio" name="LEGAL" value="<?= $id ?>" <?= ($id == $arResult['DATA']['LEGAL']) ? ('checked') : ('') ?> />
-                                            <?= $title ?>
+                                            <?= getMessage('GL_LEGAL_' . $code) ?>
                                         </label>
                                     </li>
                                 <? } ?>

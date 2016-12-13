@@ -1,1 +1,1 @@
-<span>Development <a href="http://wolkflow.com/" target="_blank">WOLK</a>. 2016</span>
+<span>Development <a href="http://glyf.ru/" target="_blank">GLYF</a>. 2016</span>
