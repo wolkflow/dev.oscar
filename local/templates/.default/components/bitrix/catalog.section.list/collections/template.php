@@ -55,4 +55,13 @@
             )
         );
     ?>
+    
+    <?  // Сборники.
+        $APPLICATION->IncludeComponent(
+            "glyf:lightbox.list",
+            "side",
+            array(),
+            $component
+        );
+    ?>
 <? } ?>

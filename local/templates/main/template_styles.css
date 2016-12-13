@@ -1934,6 +1934,10 @@ div.cabinet-panel--stats-inner {
 .cabinet-panel__menu-pages{
   color: #00c3d9;
 }
+.cabinet-block-statistics .cabinet-panel__menu-pages,
+.cabinet-block-history .cabinet-panel__menu-pages{
+  float: right;
+}
 .cabinet-panel__menu-pages > span {
   line-height: 24px;
   height: 24px;

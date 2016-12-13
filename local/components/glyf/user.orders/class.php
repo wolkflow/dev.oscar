@@ -68,6 +68,10 @@ class UserOrdersComponent extends \CBitrixComponent
             $this->arParams['PAGE'] = $pagescnt;
         }
         
+        if ($this->arParams['PAGE'] < 1) {
+            $this->arParams['PAGE'] = 1;
+        }
+        
         
         // Список элементов папки.
         $sales = Sale::getList(array(

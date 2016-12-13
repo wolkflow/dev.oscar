@@ -23,14 +23,14 @@
                             <ul class="collectionsList">
                                 <? foreach ($section['CHILDREN'] as $subsection) { ?>
                                     <li>
-                                        <a href="<?= $subsection['DETAIL_PAGE_URL'] ?>">
+                                        <a href="<?= $subsection['SECTION_PAGE_URL'] ?>">
                                             <?= $subsection['UF_LANG_TITLE_'.CURRENT_LANG_UP] ?>
                                         </a>
                                         <? if (!empty($subsection['CHILDREN'])) { ?>
                                             <ul>
                                                 <? foreach ($subsection['CHILDREN'] as $subsubsection) { ?>
                                                     <li>
-                                                        <a href="<?= $subsubsection['DETAIL_PAGE_URL'] ?>">
+                                                        <a href="<?= $subsubsection['SECTION_PAGE_URL'] ?>">
                                                             <?= $subsubsection['UF_LANG_TITLE_'.CURRENT_LANG_UP] ?>
                                                         </a>
                                                     </li>

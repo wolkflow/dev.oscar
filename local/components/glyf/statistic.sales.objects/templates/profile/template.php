@@ -33,11 +33,11 @@
             <div class="cabinet-panel__toggler">История продаж</div>
             <div class="cabinet-panel__menu">
                 <a class="is-active js-check-all" href="javascript:void(0)">выделить всё</a>
-                <a class="js-dependence-chekbox-button js-group-action hidden-sm"  data-action="loadpdf" href="javascript:void(0)">сохранить пдф</a>
+                <a class="js-dependence-chekbox-button js-group-action hidden-sm"  data-action="loadpdf" href="javascript:void(0)">pdf</a>
                 <a class="js-dependence-chekbox-button js-group-action" data-action="email" href="javascript:void(0)">отправить по email</a>
                 <a class="js-dependence-chekbox-button js-group-action hidden-sm" data-action="print" href="javascript:void(0)">печать</a>
                 <div class="cabinet-panel__menu-pages hidden-xs">
-                    <span>показывать по</span>
+                    <span>показать по</span>
                     <select id="js-sales-objects-page-count-id" class="styler shortSelect cabinet-panel__menu-pages-select">
                         <option value="30" <?= ($arParams['PERPAGE'] == 30) ? ('selected') : ('') ?>>
                             30

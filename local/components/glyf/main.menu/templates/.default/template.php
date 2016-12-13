@@ -46,7 +46,7 @@
 			</div>
 		</div>
 		<div class="col-sm-6 col-lg-3 mainBlock mainBlock-3">
-			<a href="/subscribe/">
+			<a href="/personal/subscribe/">
 				<div class="mainBlockTitle">
 					<?= getMessage('GL_MENU_SUBSCRIBE') ?>
 				</div>

@@ -178,7 +178,7 @@
                         </a>
                     <? } ?>
                     <? if ($arResult['ACCESS']['BUY']) { ?>
-                        <a class="btn" href="#">
+                        <a class="btn js-add-to-cart" href="javascript:void(0)" data-pid="<?= $arResult['PICTURE'][Picture::FIELD_ID] ?>">
                             Добавить в корзину
                         </a>
                     <? } ?>

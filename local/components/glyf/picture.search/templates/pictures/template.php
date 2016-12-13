@@ -11,7 +11,7 @@
     <div class="col-sm-6 col-lg-8">
         <div class="row">
             <? foreach ($arResult['ITEMS'] as $item) { ?>
-                <div class="col-xs-6 col-sm-4 col-md-4 col-lg-13 catalogItem-alt">
+                <div class="col-xs-6 col-sm-4 col-md-4 col-lg-3 catalogItem-alt">
                     <a href="<?= $item['DETAIL_URL'] ?>">
                         <div class="catalogItemImage-alt" style="background-image: url(<?= CFile::getPath($item['UF_FILE']) ?>"></div>
                     </a>

@@ -48,7 +48,7 @@
                                         <?= $item['COUNT'] ?>
                                     </div>
                                     <div class="col-sm-6 lightboxes__item-bottom-link">
-                                        <a href="/personal/lightbox/<?= $lightbox['ID'] ?>/">ПЕРЕЙТИ</a>
+                                        <a href="/personal/lightbox/<?= $item['ID'] ?>/">ПЕРЕЙТИ</a>
                                     </div>
                                 </div>
                             </div>

@@ -39,25 +39,25 @@ class Main
         if ($fields['USER_ID'] > 0) {
             if (\Bitrix\Main\Loader::includeModule('sale')) {
                 // Создание аккаунта.
-                CSaleUserAccount::Add(
+                \CSaleUserAccount::Add(array(
                     'USER_ID' => $fields['ID'],
                     'CURRENT_BUDGET' => 0,
                     'CURRENCY' => CURRENCY_DEFAULT
-                );
+                ));
             }
             
             // Подписка пользователя.
-            $subscribe = new Glyf\Oscar\Subscribe();
+            $subscribe = new \Glyf\Oscar\Subscribe();
             $subscribe->add(array(
-                Glyf\Oscar\Subscribe::FIELD_USER_ID  => $fields['ID'],
-                Glyf\Oscar\Subscribe::FIELD_ACTIVE => false,
+                \Glyf\Oscar\Subscribe::FIELD_USER_ID  => $fields['ID'],
+                \Glyf\Oscar\Subscribe::FIELD_ACTIVE => false,
             ));
             
             // Разрешенные IP-адреса пользователя.
-            $ipaddress = new Glyf\Oscar\IPAddress();
+            $ipaddress = new \Glyf\Oscar\IPAddress();
             $ipaddress->add(array(
-                Glyf\Oscar\IPAddress::FIELD_USER_ID  => $fields['ID'],
-                Glyf\Oscar\IPAddress::FIELD_TIME     => date('d.m.Y H:i:s'),
+                \Glyf\Oscar\IPAddress::FIELD_USER_ID  => $fields['ID'],
+                \Glyf\Oscar\IPAddress::FIELD_TIME     => date('d.m.Y H:i:s'),
             ));
         }
     }

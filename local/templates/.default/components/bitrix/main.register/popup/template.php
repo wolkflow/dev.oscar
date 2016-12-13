@@ -19,9 +19,16 @@
     </div>
     <div class="modalContent">
         <form id="js-register-form-id" method="post" action="<?= POST_FORM_ACTION_URI ?>">
-            <? if (!empty($arResult['ERROR'])) { ?>
+            <? if (!empty($arResult['ERRORS'])) { ?>
                 <div class="form-error">
-                    <?= $arResult['ERROR'] ?>
+                    <?  // Замена названи
+                        foreach ($arResult['ERRORS'] as $key => &$error) {
+                            if (intval($key) == 0 && $key !== 0)  {
+                                $error = str_replace('#FIELD_NAME#', '&quot;'.GetMessage('GL_' . $key).'&quot;', $error);
+                            }
+                        }
+                    ?>
+                    <?= implode('<br/>', $arResult['ERRORS']) ?>
                 </div>
             <? } ?>
             
@@ -95,7 +102,8 @@
                 <li class="reginfo">
                     <label for="regacept">
                         <input type="checkbox" id="regacept" name="AGREEMENT" value="Y" /> 
-                        <?= getMessage('GL_AGREE_WITH') ?> <a href="#"><?= getMessage('GL_OFFER_CONTRACT') ?></a>
+                        <?= getMessage('GL_AGREE_WITH') ?> 
+                        <a href="#"><?= getMessage('GL_OFFER_CONTRACT') ?></a>
                     </label>
                 </li>
                 <li>

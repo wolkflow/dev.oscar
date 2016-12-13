@@ -95,10 +95,10 @@ $(document).ready(function () {
 	$('[data-collapse-target]').on('click', function(){
 		if(!$(this).hasClass('is-expanded')) {
 			var target = $('[data-collapse-block='+$(this).data('collapse-target')+']');
-			$('[data-collapse-target]').removeClass('is-expanded');
-			$('[data-collapse-block]').slideUp(200);
+			$(this).parents('.col-lg-2').find($('[data-collapse-target]')).removeClass('is-expanded');
+			$(this).parents('.col-lg-2').find($('[data-collapse-block]')).slideUp(200);
 			$(this).addClass('is-expanded');
-			$(target).slideDown(200, function(){
+			$(target).stop().slideDown(200, function(){
 				$(target).removeClass('collapsed');
 			});
 			$('.js-acitve-lightbox').removeClass('js-acitve-lightbox');
@@ -242,14 +242,14 @@ $(document).ready(function () {
                 }
 			});
 		} else {
-            var data = {'action': $that.data('action')};
+            var data = {'action': $that.attr('data-action')};
             var callback = $that.data('callback');
             
 			$('input[data-le="' + le + '"]').each(function () {
                 data[$(this).prop('name')] = $(this).val();
 				$(this).prop('disabled', true).addClass('disabled');
 			});
-            
+
             $.ajax({
                 url: '/remote/',
                 type: 'post',

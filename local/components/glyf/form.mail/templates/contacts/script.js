@@ -3,13 +3,18 @@ $(document).ready(function() {
 		var $that = $(this);
 		
 		$.ajax({
-			url: '/remote',
+			url: '/remote/',
 			type: 'post',
 			data: {'action': 'send-form-contacts'},
 			beforeSend: function () {
 				$that.prop('disabled', 'disabled');
 			},
 			succees: function (response) {
+                if (response.status) {
+                    inform(response.message);
+                } else {
+                    error(response.message);
+                }
 				$that.prop('disabled', false);
 			}
 		});

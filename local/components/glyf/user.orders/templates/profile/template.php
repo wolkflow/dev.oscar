@@ -14,7 +14,6 @@
         <div class="cabinet-panel__toggler">История заказов</div>
         <div class="cabinet-panel__title">История заказов</div>
         <ul class="cabinet-panel__menu">
-        
             <li><a class="is-active" href="javascript:void(0)" id="js-check-all-id" data-selector=".js-checkbox">выделить всё</a></li>
             <li><a class="js-dependence-chekbox-button js-group-action hidden-sm" href="javascript:void(0)" data-action="loadpdf">загрузить пдф</a></li>
             <li><a class="js-dependence-chekbox-button js-group-action" href="javascript:void(0)" data-action="email">отправить по email</a></li>

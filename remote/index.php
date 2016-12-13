@@ -58,6 +58,9 @@ $token = (string) $request->get('TOKEN');
 
 // Обработка действий.
 switch ($action) {
+    
+    case ('send-form-contacts'):
+        break;
 	
 	// Вывод статей блога.	
 	case ('blog-archive-page'):
