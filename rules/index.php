@@ -1,6 +1,6 @@
 <? define('PAGE', 'RULES') ?>
 <? require ($_SERVER['DOCUMENT_ROOT'].'/bitrix/header.php'); ?>
-<? $APPLICATION->SetTitle("Правила"); ?>
+<? $APPLICATION->SetTitle("Oscar Art Agency"); ?>
 
 <?  // Строка поиска.
 	$APPLICATION->IncludeComponent('bitrix:main.include', '', array(

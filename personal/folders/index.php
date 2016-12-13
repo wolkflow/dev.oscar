@@ -1,6 +1,12 @@
 <? define('NEED_AUTH', 'Y') ?>
 <? require ($_SERVER['DOCUMENT_ROOT'].'/bitrix/header.php'); ?>
 <? $APPLICATION->SetTitle("Персональная статистика"); ?>
+<?  // Проверка пользователя.
+    $user = new Glyf\Oscar\User();
+    if (!$user->isPartner()) {
+        LocalRedirect('/personal/');
+    }
+?>
 
 <?  // Строка поиска.
 	$APPLICATION->IncludeComponent('bitrix:main.include', '', array(
@@ -20,7 +26,7 @@
           <div class="cabinet-content col-md-12 col-sm-12">
             
             <ol class="breadcrumb">
-                <li><a href="/perosanl/">Личный кабинет</a></li>
+                <li><a href="/personal/">Личный кабинет</a></li>
                 <li>Каталог</li>
             </ol>
 

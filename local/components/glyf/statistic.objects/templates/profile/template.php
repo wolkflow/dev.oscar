@@ -7,7 +7,7 @@
 
 <? $this->setFrameMode(true); ?>
 
-<div class="cabinet-block cabinet-block-objects">
+<div id="js-objects-block-id" class="cabinet-block cabinet-block-objects">
     <div class="clearfix">
         <div class="cabinet-search">
             <span class="cabinet-search__title">поиск по объектам</span>
@@ -24,10 +24,10 @@
         <div class="cabinet-panel__toggler">Объекты</div>
         <ul class="cabinet-panel__menu">
             <li><a class="is-active" href="/personal/upload/">добавить объект</a></li>
-            <li><a class="is-active" href="#">выделить всё</a></li>
-            <li><a class="hidden-sm" href="#">сохранить пдф</a></li>
-            <li><a class="is-active" href="#">отправить по email</a></li>
-            <li><a class="is-active hidden-sm" href="#">печать</a></li>
+            <li><a class="is-active js-check-all" href="javascript:void(0)">выделить всё</a></li>
+            <li><a class="js-dependence-chekbox-button js-group-action hidden-sm" data-action="loadpdf" href="javascript:void(0)">сохранить пдф</a></li>
+            <li><a class="js-dependence-chekbox-button js-group-action" data-action="email" href="javascript:void(0)">отправить по email</a></li>
+            <li><a class="js-dependence-chekbox-button js-group-action hidden-sm" data-action="print" href="javascript:void(0)">печать</a></li>
             <li>
                 <div class="cabinet-panel__menu-pages hidden-xs">
                     <span>показывать по</span>
@@ -47,27 +47,30 @@
         </ul>
     </div>
     <div class="cabinet-block-content">
-        <table class="cabinet-table hidden-xs">
-            <thead>
-            <tr>
-                <th></th>
-                <th></th>
-                <th class="has-sort">ID<span class="cabinet-table__sort"></span></th>
-                <th class="has-sort">Название<span class="cabinet-table__sort"></th>
-                <th class="has-sort">Дата<span class="cabinet-table__sort"></th>
-                <th class="has-sort">Просмотров<span class="cabinet-table__sort"></th>
-                <th class="has-sort">Продаж<span class="cabinet-table__sort"></th>
-            </tr>
-            </thead>
-            <tbody id="js-objects-wrapper-id">
-                <?  // Статистика по объектам.					
-                    $APPLICATION->IncludeComponent(
-                        "glyf:statistic.objects",
-                        "remote-profile",
-                        array()
-                    );
-                ?>
-            </tbody>
-        </table>
+        <form>
+            <input type="hidden" name="UID" value="<?= CUser::GetID() ?>" />
+            <table class="cabinet-table hidden-xs">
+                <thead>
+                <tr>
+                    <th></th>
+                    <th></th>
+                    <th class="has-sort">ID<span class="cabinet-table__sort"></span></th>
+                    <th class="has-sort">Название<span class="cabinet-table__sort"></th>
+                    <th class="has-sort">Дата<span class="cabinet-table__sort"></th>
+                    <th class="has-sort">Просмотров<span class="cabinet-table__sort"></th>
+                    <th class="has-sort">Продаж<span class="cabinet-table__sort"></th>
+                </tr>
+                </thead>
+                <tbody id="js-objects-wrapper-id">
+                    <?  // Статистика по объектам.					
+                        $APPLICATION->IncludeComponent(
+                            "glyf:statistic.objects",
+                            "remote-profile",
+                            array()
+                        );
+                    ?>
+                </tbody>
+            </table>
+        </form>
     </div>
 </div>

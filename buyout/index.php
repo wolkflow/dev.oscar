@@ -1,5 +1,5 @@
 <? require ($_SERVER['DOCUMENT_ROOT'].'/bitrix/header.php'); ?>
-<? $APPLICATION->SetTitle("Покупка"); ?>
+<? $APPLICATION->SetTitle("Oscar Art Agency"); ?>
 
 <? IncludeFileLangFile(__FILE__) ?>
 

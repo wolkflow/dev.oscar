@@ -1,5 +1,5 @@
 <? require ($_SERVER['DOCUMENT_ROOT'].'/bitrix/header.php'); ?>
-<? $APPLICATION->SetTitle("Блог"); ?>
+<? $APPLICATION->SetTitle("Oscar Art Agency"); ?>
 
 <?  // Строка поиска.
 	$APPLICATION->IncludeComponent('bitrix:main.include', '', array(

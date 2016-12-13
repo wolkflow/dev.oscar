@@ -12,7 +12,7 @@
         <tr>
             <td>
                 <label class="checkbox-me">
-                    <input type="checkbox" name="OBJECTS[]" value="<?= $item['ID'] ?>" class="js-checkbox" />
+                    <input type="checkbox" name="IDS[]" value="<?= $item['ID'] ?>" class="js-checkbox" />
                     <span></span>
                 </label>
             </td>

@@ -1,3 +1,6 @@
+    <? use Bitrix\Main\Localization\Loc; ?>
+	<? IncludeAreaLangFile(__FILE__); ?>
+    
             <div class="siteFooter">
                 <div class="container">
                     <div class="row">
@@ -105,7 +108,7 @@
         <div class="hide">
             <div class="modal modal-error" id="error">
                 <div class="modalTitle">
-                    Ошибка!
+                    <?= getMessage('GL_POPUP_ERROR') ?>
                     <div class="modalClose arcticmodal-close"></div>
                 </div>
                 <div class="modalContent">
@@ -119,7 +122,7 @@
         <div class="hide">
             <div class="modal modal-error" id="inform">
                 <div class="modalTitle">
-                    Информация
+                    <?= getMessage('GL_POPUP_INFORM') ?>
                     <div class="modalClose arcticmodal-close"></div>
                 </div>
                 <div class="modalContent">
