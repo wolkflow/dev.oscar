@@ -8,7 +8,7 @@
 <? IncludeComponentTemplateLangFile(__FILE__, $this->GetFolder()) ?>
 
 <? $this->setFrameMode(true); ?>
-<? if (!empty($this->arParams['PAGE'])) { ?>
+<? if (!empty($arResult['ITEMS'])) { ?>
     <? foreach ($arResult['ITEMS'] as $item) { ?>
         <tr>
             <td class="ordersTable-checkbox">
