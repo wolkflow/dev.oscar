@@ -20,7 +20,9 @@
                     <? $alt = $arResult['PICTURE'][Picture::FIELD_LANG_TITLE_SFX . CURRENT_LANG_UP] ?>
                     <img src="<?= $src ?>" alt="<?= $alt ?>" />
                 </div>
-                <div class="buyoutBlockName">Богатыри</div>
+                <div class="buyoutBlockName">
+                    <?= $arResult['PICTURE'][Picture::FIELD_LANG_TITLE_SFX . CURRENT_LANG_UP] ?>
+                </div>
                 <div class="buyoutBlockMeta">
                     <ul>
                         <li>

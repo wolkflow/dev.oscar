@@ -61,7 +61,20 @@ $token = (string) $request->get('TOKEN');
 // Обработка действий.
 switch ($action) {
     
+    // Отправка формы контактов.
     case ('send-form-contacts'):
+        /*
+        $APPLICATION->IncludeComponent(
+			"glyf:form.mail",
+			"contacts",
+			array(
+				'FORM'     => 'CONTACTS',
+				'CAPTCHA'  => 'N',
+				'FIELDS'   => array('NAME', 'PHONE', 'EMAIL'),
+				'REQUIRED' => array('NAME', 'PHONE', 'EMAIL'),
+			)		
+		);
+        */
         break;
 	
 	// Вывод статей блога.	

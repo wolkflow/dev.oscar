@@ -19,8 +19,11 @@ class FormMailComponent extends \CBitrixComponent
 		$arParams['REQUIRED'] = (array) $arParams['REQUIRED']; 
 
 		// Использовать CAPTCHA. 
-		$arParams['CAPTCHA'] = ($arParams['CAPTCHA'] == "Y"); 
+		$arParams['CAPTCHA'] = ($arParams['CAPTCHA'] == 'Y'); 
 		
+        // Не выводить шшаблон.
+		$arParams['NOVISUAL'] = ($arParams['NOVISUAL'] == 'Y');
+        
 		
         return $arParams;
 	}
@@ -123,7 +126,9 @@ class FormMailComponent extends \CBitrixComponent
 		}
 		
 		// Подключение шаблона компонента.
-		$this->IncludeComponentTemplate();
+        if (!$this->arParams['NOVISUAL']) {
+            $this->IncludeComponentTemplate();
+        }
 		
 		return $this->arResult;
 	}
