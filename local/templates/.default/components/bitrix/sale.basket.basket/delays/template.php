@@ -23,20 +23,14 @@
                             </label>
                         </div>
                         <div class="buyoutBlockListCheckbox">
-                            <input type="checkbox" class="js-buyout-picture" id="js-buyout-picture-<?= $picture->getID() ?>-id" value="<?= $item['ID'] ?>" />
+                            <label class="checkbox-me">
+                                <input type="checkbox" class="js-buyout-picture" id="js-buyout-picture-<?= $picture->getID() ?>-id" value="<?= $item['ID'] ?>" />
+                                <span></span>
+                            </label>
                         </div>
                     </li>
                 <? } ?>
             </ul>
-            <? /*
-            <div class="cabinet-pagination hidden-xs">
-                <div class="cabinet-pagination__count"><span class="current">1</span> из 5</div>
-                <div class="cabinet-pagination__buttons">
-                    <div class="cabinet-pagination__button cabinet-pagination__button--prev">&lsaquo;</div>
-                    <div class="cabinet-pagination__button cabinet-pagination__button--next is-active">&rsaquo;</div>
-                </div>
-            </div>
-            */ ?>
         </div>
     <? } else { ?>
         <div class="basket-note">Нет выбранных изображений</div>

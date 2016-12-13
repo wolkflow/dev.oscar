@@ -36,7 +36,6 @@ class Order extends \Glyf\Core\Helpers\SaleOrder
 			return;
 		}
         
-        
         // Заказ.
         $order = new self($id);
         
@@ -65,14 +64,13 @@ class Order extends \Glyf\Core\Helpers\SaleOrder
                 'LID'        => SITE_DEFAULT,
                 'CAN_BUY'    => 'Y',
                 'DELAY'      => 'Y',
-                'PROPS'      => $props,
+                'PROPS'      => array(), // $props,
             );
             
             if (!\CSaleBasket::add($data)) {
                 throw new \Exception('Error insert basket');
             }
         }
-        
         return true;
     }
 }

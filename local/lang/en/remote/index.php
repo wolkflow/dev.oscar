@@ -37,7 +37,7 @@ $MESS['GL_ERROR_CREATE_ORDER'] = 'Failed to create custom';
 $MESS['GL_ERROR_SEND_MAIL'] = 'Could not send email';
 $MESS['GL_ERROR_UNKNOWN'] = 'Unknown error';
 $MESS['GL_ERROR_EMPTY_ORDERS'] = 'Missing orders';
-$MESS['GL_ERROR_CANT_REPEAT_ORDER'] = 'Repeat order error';
+$MESS['GL_ERROR_CANT_REPEAT_ORDER'] = 'Repeat orders error: ';
 
 $MESS['GL_PAY_BALANCE'] = 'Deposit';
 $MESS['GL_PAY_TARIFF'] = 'tariff payment';

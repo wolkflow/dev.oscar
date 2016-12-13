@@ -27,7 +27,10 @@
                 <li id="js-basket-<?= $item['ID'] ?>-id">
                     <label>
                         <span class="buyoutSelected-img">
-                            <input type="checkbox" class="js-basket-picture" value="<?= $item['ID'] ?>" />
+                            <label class="checkbox-me">
+                                <input type="checkbox" class="js-basket-picture" value="<?= $item['ID'] ?>" />
+                                <span></span>
+                            </label>
                             <img src="<?= $picture->getSmallPreviewImageSrc() ?>" title="<?= $picture->getTitle() ?>" />
                         </span>
                         <span class="buyoutSelected-meta">

@@ -37,7 +37,7 @@ $MESS['GL_ERROR_CREATE_ORDER'] = 'Не удалось создать заказ'
 $MESS['GL_ERROR_SEND_MAIL'] = 'Не удалось отправить письмо';
 $MESS['GL_ERROR_UNKNOWN'] = 'Неизвестная ошибка';
 $MESS['GL_ERROR_EMPTY_ORDERS'] = 'Не указаны заказы';
-$MESS['GL_ERROR_CANT_REPEAT_ORDER'] = 'Ошибка повторения заказа';
+$MESS['GL_ERROR_CANT_REPEAT_ORDER'] = 'Ошибка повторения заказов: ';
 
 $MESS['GL_PAY_BALANCE'] = 'Пополнение счета';
 $MESS['GL_PAY_TARIFF'] = 'Оплата тарифа';

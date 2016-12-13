@@ -961,13 +961,19 @@ switch ($action) {
             jsonresponse(false, getMessage('GL_ERROR_NOT_AUTHORIZED'));
         }
         
+        $errorIDs = array();
+        
         foreach ($oids as $oid) {
             $order = new Glyf\Oscar\Order($oid);
             try {
                 $order->repeat();
             } catch (\Exception $e) {
-                jsonresponse(false, getMessage('GL_ERROR_CANT_REPEAT_ORDER'));
+                $errorIDs []= $oid;
             }
+        }
+        
+        if (!empty($errorIDs)) {
+            jsonresponse(false, getMessage('GL_ERROR_CANT_REPEAT_ORDER') . implode(', ', $errorIDs));
         }
         jsonresponse(true, getMessage('GL_ORDERS_REPEATED'));
         break;
