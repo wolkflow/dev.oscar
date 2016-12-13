@@ -12,6 +12,8 @@ require ($_SERVER['DOCUMENT_ROOT'] . '/bitrix/modules/main/include/prolog_before
 // Директория для ajax-скриптов.
 define ('DIR_REMOTE', $_SERVER['DOCUMENT_ROOT'] . '/remote/include/');
 
+IncludeFileLangFile(__FILE__);
+
 /**
  * Ответ в формате JSON.
  */
@@ -525,7 +527,7 @@ switch ($action) {
         }
         
         if (empty($email)) {
-            jsonresponse(false, 'Не введен e-mail');
+            jsonresponse(false, getMessage('GL_ERROR_NO_ENTER_EMAIL'));
         }
         
         $exist = Glyf\Oscar\User::findByLogin($email);
