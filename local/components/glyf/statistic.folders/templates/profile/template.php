@@ -10,7 +10,7 @@
 <div id="js-folders-block-id" class="cabinet-block cabinet-block-collections is-active">
     <div class="clearfix">
         <div class="cabinet-search">
-            <span class="cabinet-search__title">поиск по папкам</span>
+            <span class="cabinet-search__title"><?= getMessage('GL_SEARCH_FOLDERS') ?></span>
             <div class="cabinet-search__form">
                 <input type="text" id="js-folders-search-id" value="" />
             </div>
@@ -18,10 +18,10 @@
     </div>
     <div class="cabinet-panel cabinet-panel--switch clearfix">
         <div class="cabinet-panel__switch">
-            <span class="is-active" data-block="collections">Папки</span>
-            <span data-block="objects">Объекты</span>
+            <span class="is-active" data-block="collections"><?= getMessage('GL_FOLDERS') ?></span>
+            <span data-block="objects"><?= getMessage('GL_OBJECTS') ?></span>
         </div>
-        <div class="cabinet-panel__toggler">Папки</div>
+        <div class="cabinet-panel__toggler"><?= getMessage('GL_FOLDERS') ?></div>
         <ul class="cabinet-panel__menu">
             <li>
                 <div>
@@ -30,27 +30,27 @@
                         <a href="javascript:void(0)" class="le le-end is-active" data-le="addfolder" data-action="add-folder" data-callback="cAddFolder">OK</a>
                         <? /* <a href="javascript:void(0)" class="le le-end le-cancel" data-le="addfolder"></a> */ ?>
                     </span>
-                    <a class="is-active le le-start" data-le="addfolder" href="javascipt:void(0)">добавить коллекцию</a>
+                    <a class="is-active le le-start" data-le="addfolder" href="javascipt:void(0)"><?= getMessage('GL_ADD_COLLECTION') ?></a>
                 </div>
             </li>
             <li>
-                <a class="is-active" href="javascript:void(0)" id="js-check-all-id" data-selector=".js-checkbox">выделить всё</a>
+                <a class="is-active" href="javascript:void(0)" id="js-check-all-id" data-selector=".js-checkbox"><?= getMessage('GL_SELECT_ALL') ?></a>
             </li>
             <li>
-                <a class="hidden-sm js-dependence-chekbox-button js-group-action" data-action="loadpdf" href="javascipt:void(0)">сохранить пдф</a>
+                <a class="hidden-sm js-dependence-chekbox-button js-group-action" data-action="loadpdf" href="javascipt:void(0)"><?= getMessage('GL_SAVE_PDF') ?></a>
             </li>
             <li>
-                <a class="js-dependence-chekbox-button js-group-action" data-action="email" href="javascipt:void(0)">отправить по email</a>
+                <a class="js-dependence-chekbox-button js-group-action" data-action="email" href="javascipt:void(0)"><?= getMessage('GL_SELECT_ALL') ?></a>
             </li>
             <li>
-                <a class="hidden-sm js-dependence-chekbox-button js-group-action" data-action="print" href="javascipt:void(0)">печать</a>
+                <a class="hidden-sm js-dependence-chekbox-button js-group-action" data-action="print" href="javascipt:void(0)"><?= getMessage('GL_PRINT') ?></a>
             </li>
             <li>
-                <a id="js-remove-folders-id" class="js-dependence-chekbox-button" href="javascipt:void(0)">удалить</a>
+                <a id="js-remove-folders-id" class="js-dependence-chekbox-button" href="javascipt:void(0)"><?= getMessage('GL_DELETE') ?></a>
             </li>
             <li>
                 <div class="cabinet-panel__menu-pages hidden-xs">
-                    <span>показывать по</span>
+                    <span><?= getMessage('GL_SHOW') ?></span>
                     <select id="js-folders-page-count-id" class="styler shortSelect cabinet-panel__menu-pages-select">
                         <option value="30" <?= ($arParams['PERPAGE'] == 30) ? ('selected') : ('') ?> data-href="<?= $APPLICATION->GetCurPageParam('count=30', array('count', 'ELEMENT'), false) ?>">
                             30

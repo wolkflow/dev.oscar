@@ -53,7 +53,7 @@
 
                 <div class="card-description">
                     <div class="card-description__title">
-                        Тип и размер изображения
+                        <?= getMessage('GL_TYPE_AND_SIZE') ?>
                     </div>
                     <div class="card-description__text card-description__text--big">
                         <?= strtoupper($arResult['PICTURE']['FILE']['EXT']) ?>, 
@@ -63,52 +63,52 @@
                     </div>
                 </div>
                 <div class="card-description">
-                    <div class="card-description__title">Описание</div>
+                    <div class="card-description__title"><?= getMessage('GL_DESCRIPTION') ?></div>
                     <div class="card-description__text">
                         <?= $arResult['PICTURE'][Picture::FIELD_LANG_DESC_SFX . CURRENT_LANG_UP] ?>
                     </div>
                 </div>
                 <div class="card-description">
-                    <div class="card-description__title">Дополнительная информация</div>
+                    <div class="card-description__title"><?= getMessage('GL_ADDITIONAL_INFORMATION') ?></div>
                     <div class="card-description__text">
                         <div class="card-meta">
-                            <span class="card-meta__key">Провенанс:</span>
+                            <span class="card-meta__key"><?= getMessage('GL_PROVENANCE') ?></span>
                             <span class="card-meta__value">
                                 <?= $arResult['PICTURE'][Picture::FIELD_PROVENANCE_SFX . CURRENT_LANG_UP] ?>
                             </span>
                         </div>
                         <div class="card-meta">
-                            <span class="card-meta__key">Реставрационные работы:</span>
+                            <span class="card-meta__key"><?= getMessage('GL_RESTORATION_WORK') ?></span>
                             <span class="card-meta__value">
                                 <?= $arResult['PICTURE'][Picture::FIELD_RESTORATION_SFX . CURRENT_LANG_UP] ?>
                             </span>
                         </div>
                         <div class="card-meta">
-                            <span class="card-meta__key">Техническое состояние:</span>
+                            <span class="card-meta__key"><?= getMessage('GL_TECHNICAL_CONDITION') ?></span>
                             <span class="card-meta__value">
                                 <?= $arResult['PICTURE'][Picture::FIELD_TECHNICAL_SFX . CURRENT_LANG_UP] ?>
                             </span>
                         </div>
                         <div class="card-meta">
-                            <span class="card-meta__key">Заказчик:</span>
+                            <span class="card-meta__key"><?= getMessage('GL_CUSTOMER') ?></span>
                             <span class="card-meta__value">
                                 <?= $arResult['PICTURE'][Picture::FIELD_CUSTOMER_SFX . CURRENT_LANG_UP] ?>
                             </span>
                         </div>
                         <div class="card-meta">
-                            <span class="card-meta__key">Модель:</span>
+                            <span class="card-meta__key"><?= getMessage('GL_MODEL') ?></span>
                             <span class="card-meta__value">
                                 <?= $arResult['PICTURE'][Picture::FIELD_RESTORATION_SFX . CURRENT_LANG_UP] ?>
                             </span>
                         </div>
                         <div class="card-meta">
-                            <span class="card-meta__key">Эскизы:</span>
+                            <span class="card-meta__key"><?= getMessage('GL_SKETCHES') ?></span>
                             <span class="card-meta__value">
                                 <?= $arResult['PICTURE'][Picture::FIELD_SKETCHES_SFX . CURRENT_LANG_UP] ?>
                             </span>
                         </div>
                         <div class="card-meta">
-                            <span class="card-meta__key">Прочее:</span>
+                            <span class="card-meta__key"><?= getMessage('GL_OTHER') ?></span>
                             <span class="card-meta__value">
                                 <?= $arResult['PICTURE'][Picture::FIELD_OTHER_SFX . CURRENT_LANG_UP] ?>
                             </span>
@@ -121,31 +121,31 @@
                     <?= $arResult['PICTURE'][Picture::FIELD_LANG_TITLE_SFX . CURRENT_LANG_UP] ?>
                 </h1>
                 <div class="card-meta">
-                    <span class="card-meta__key">Автор:</span>
+                    <span class="card-meta__key"><?= getMessage('GL_AUTHOR') ?></span>
                     <span class="card-meta__value">
                         <?= $arResult['PICTURE']['AUTHOR'] ?>
                     </span>
                 </div>
                 <div class="card-meta">
-                    <span class="card-meta__key">Место создания:</span>
+                    <span class="card-meta__key"><?= getMessage('GL_PLACE_CREATION') ?></span>
                     <span class="card-meta__value">
                         <?= implode(', ', $arResult['PICTURE']['PLACE']) ?>
                     </span>
                 </div>
                 <div class="card-meta">
-                    <span class="card-meta__key">Время создания:</span>
+                    <span class="card-meta__key"><?= getMessage('GL_CREATION_TIME') ?></span>
                     <span class="card-meta__value">
                         <?= $arResult['PICTURE']['PERIOD'] ?>
                     </span>
                 </div>
                 <div class="card-meta">
-                    <span class="card-meta__key">Техника:</span>
+                    <span class="card-meta__key"><?= getMessage('GL_TECHNIQUE') ?></span>
                     <span class="card-meta__value">
                         <?= implode(', ', $arResult['PICTURE']['TECHNIQUES']) ?>
                     </span>
                 </div>
                 <div class="card-meta">
-                    <span class="card-meta__key">Размеры:</span>
+                    <span class="card-meta__key"><?= getMessage('GL_DIMENSIONS') ?></span>
                     <span class="card-meta__value">
                         <?= number_format(($arResult['PICTURE'][Picture::FIELD_WIDTH] / 10), 1, ',', '') ?>
                         &times;
@@ -154,13 +154,13 @@
                     </span>
                 </div>
                 <div class="card-meta">
-                    <span class="card-meta__key">Правообладатель:</span>
+                    <span class="card-meta__key"><?= getMessage('GL_COPYRIGHT_HOLDER') ?></span>
                     <span class="card-meta__value">
                         <?= $arResult['PICTURE']['HOLDER'] ?>
                     </span>
                 </div>
                 <div class="card-meta">
-                    <span class="card-meta__key">Категория:</span>
+                    <span class="card-meta__key"><?= getMessage('GL_CATEGORY') ?></span>
                     <span class="card-meta__value">
                         <?= $arResult['PICTURE']['COLLECTION']['TITLE'] ?>
                     </span>
@@ -174,17 +174,17 @@
                 <div class="card-right__add-to-cart">
                     <? if ($arResult['ACCESS']['DOWNLOAD']) { ?>
                         <a id="js-download-id" class="btn btn-blue" href="javascript:void(0)" data-pid="<?= $arResult['PICTURE']['ID'] ?>">
-                            Скачать
+                            <?= getMessage('GL_DOWNLOAD') ?>
                         </a>
                     <? } ?>
                     <? if ($arResult['ACCESS']['BUY']) { ?>
                         <a class="btn js-add-to-cart" href="javascript:void(0)" data-pid="<?= $arResult['PICTURE'][Picture::FIELD_ID] ?>">
-                            Добавить в корзину
+                            <?= getMessage('GL_ADD_TO_CART') ?>
                         </a>
                     <? } ?>
                 </div>
                 <div class="card-description hidden-xs">
-                    <div class="card-description__title">Ключевые слова</div>
+                    <div class="card-description__title"><?= getMessage('GL_KEYWORDS') ?></div>
                     <div class="card-description__text">
                         <?  // Ключевые слова.
                             $keywords = array();

@@ -10,7 +10,7 @@
 
 <div class="pdf">
     <div class="pdfTop">
-        <div class="pdfTitle">Статистика продаж</div>
+        <div class="pdfTitle"><?= getMessage('GL_SALES_STATISTICS') ?></div>
         <div class="pdfLogo">
             <div class="pdfLogoImage">
                 <img src="<?= SITE_TEMPLATE_PATH ?>/images/logo.png" />
@@ -30,9 +30,9 @@
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Название</th>
-                        <th>Цена (руб)</th>
-                        <th>Дата</th>
+                        <th><?= getMessage('GL_NAME') ?></th>
+                        <th><?= getMessage('GL_PRICE') ?></th>
+                        <th><?= getMessage('GL_DATE_2') ?></th>
                     </tr>
                 </thead>
                 <tbody>

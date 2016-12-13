@@ -5,11 +5,11 @@
 <? $this->setFrameMode(true); ?>
 
 <div class="filterSave">
-    <a href="javascript:void(0)" class="btn btn-filter_save" data-collapse-target="searchSave">сохранить поиск</a>
+    <a href="javascript:void(0)" class="btn btn-filter_save" data-collapse-target="searchSave"><?= getMessage('GL_SAVE_SEARCH') ?></a>
     <div class="filterSaveInner hide" data-collapse-block="searchSave">
         
         <input id="js-search-title-id" type="text" placeholder="Введите название" />
-        <a href="javascript:void(0)" id="js-search-save-id" class="btn btn-light btn-filter_edit">Сохранить</a>
+        <a href="javascript:void(0)" id="js-search-save-id" class="btn btn-light btn-filter_edit"><?= getMessage('GL_SAVE') ?></a>
         <hr/>
         
         <ul id="js-searches-id">
@@ -20,7 +20,7 @@
                 </li>
             <? } ?>
         </ul>
-        <a href="javascript:void(0)" id="js-search-edit-id" class="btn btn-light btn-filter_edit">Редактировать</a>
-        <a href="javascript:void(0)" id="js-search-remove-id" class="btn btn-light btn-filter_delete">Удалить все</a>
+        <a href="javascript:void(0)" id="js-search-edit-id" class="btn btn-light btn-filter_edit"><?= getMessage('GL_EDIT') ?></a>
+        <a href="javascript:void(0)" id="js-search-remove-id" class="btn btn-light btn-filter_delete"><?= getMessage('GL_REMOVE_ALL') ?></a>
     </div>
 </div>

@@ -9,7 +9,7 @@
 
 <div class="pdf">
     <div class="pdfTop">
-        <div class="pdfTitle">Статистика продаж</div>
+        <div class="pdfTitle">GL_SALES_STATISTICS</div>
         <div class="pdfLogo">
             <div class="pdfLogoImage">
                 <img src="<?= SITE_TEMPLATE_PATH ?>/images/logo.png" />
@@ -29,9 +29,9 @@
                 <thead>
                     <tr>
                         <th>id</th>
-                        <th>название</th>
-                        <th>просмотров</th>
-                        <th>продаж</th>
+                        <th><?= getMessage('GL_NAME') ?></th>
+                        <th><?= getMessage('GL_VIEWS') ?></th>
+                        <th><?= getMessage('GL_SALES') ?></th>
                     </tr>
                 </thead>
                 <tbody>

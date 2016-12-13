@@ -23,7 +23,7 @@
         <? } ?>
     <? } else { ?>
         <div class="lightboxes__item-empty">
-            <span>Вы не добавили ещё ни одного изображения</span>
+            <span><?= getMessage('GL_NO_NEW_IMAGE') ?></span>
         </div>
     <? } ?>
 </div>

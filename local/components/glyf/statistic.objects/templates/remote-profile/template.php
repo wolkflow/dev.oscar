@@ -29,7 +29,7 @@
                 <? if ($item[Picture::FIELD_MODERATE]) { ?>
                     <?= date('d.m.Y', strtotime($item[Picture::FIELD_MODERATE_TIME])) ?>
                 <? } else { ?>
-                    <span class="cabinet-table__bluetext">Модерация</span>
+                    <span class="cabinet-table__bluetext"><?= getMessage('GL_MODERATION') ?></span>
                 <? } ?>
             </td>
             <td>

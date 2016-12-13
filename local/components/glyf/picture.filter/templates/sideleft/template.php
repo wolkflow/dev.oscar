@@ -100,7 +100,7 @@
             </ul>
         </div>
     
-        <div class="sidebarLeftTitle is-expanded" data-collapse-target="formFilters">
+        <div class="sidebarLeftTitle" data-collapse-target="formFilters">
             <?= getMessage('GL_SEARCH_FILTERS') ?>
         </div>
         

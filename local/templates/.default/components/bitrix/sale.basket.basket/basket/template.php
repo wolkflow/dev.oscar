@@ -25,12 +25,12 @@
                 <? $license = new License($item['TYPE']); ?>
                 
                 <li id="js-basket-<?= $item['ID'] ?>-id">
-                    <label>
+                    <label class="checkbox-me">
                         <span class="buyoutSelected-img">
-                            <label class="checkbox-me">
+                            <span class="basket-chk">
                                 <input type="checkbox" class="js-basket-picture" value="<?= $item['ID'] ?>" />
                                 <span></span>
-                            </label>
+                            </span>
                             <img src="<?= $picture->getSmallPreviewImageSrc() ?>" title="<?= $picture->getTitle() ?>" />
                         </span>
                         <span class="buyoutSelected-meta">

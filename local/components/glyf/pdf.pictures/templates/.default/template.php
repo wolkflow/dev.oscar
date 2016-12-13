@@ -13,11 +13,11 @@
     <div class="pdfTop">
         <div class="pdfTitle">
             <? if (!empty($arResult['FOLDERS'])) { ?>
-                Папки
+                <?= getMessage('GL_FOLDER') ?>
             <? } elseif (!empty($arResult['LIGHTBOXES'])) { ?>
-                Сборники
+                <?= getMessage('GL_COLLECTIONS') ?>
             <? } else { ?>
-                Изображения
+                <?= getMessage('GL_IMAGE') ?>
             <? }?>
         </div>
         <div class="pdfLogo">

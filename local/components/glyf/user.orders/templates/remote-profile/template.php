@@ -27,11 +27,11 @@
                 <?= $item['PICTURE'][Picture::FIELD_LANG_TITLE_SFX . CURRENT_LANG_UP] ?>
             </td>
             <td>
-                <span class="cabinet-table__graytext">лицензия:</span>
+                <span class="cabinet-table__graytext"><?= getMessage('GL_LICENSE') ?>:</span>
                 <?= $item['LICENSE'][License::FIELD_LANG_TITLE_SFX . CURRENT_LANG_UP] ?>
             </td>
             <td>
-                <span class="cabinet-table__graytext">дата:</span>
+                <span class="cabinet-table__graytext"><?= getMessage('GL_DATE') ?></span>
                 <?= date('d.m.Y', strtotime($item[Sale::FIELD_TIME])) ?>
             </td>
         </tr>
@@ -39,7 +39,7 @@
 <? } else { ?>
     <tr>
         <td colspan="6">
-            На текущий момент у вас нет заказов.
+            <?= getMessage('GL_NO_ORDERS') ?>
         </td>
     </tr>
 <? } ?>

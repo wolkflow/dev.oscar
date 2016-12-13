@@ -43,4 +43,4 @@ $MESS['GL_RESTORATION_WORK'] = 'Реставрационные работы:';
 $MESS['GL_TECHNICAL_CONDITION'] = 'Техническое состояние:';
 $MESS['GL_SKETCHES'] = 'Эскизы:';
 $MESS['GL_OTHER'] = 'Прочее:';
-MESS['GL_CUSTOMER'] = 'Заказчик:';
+$MESS['GL_CUSTOMER'] = 'Заказчик:';

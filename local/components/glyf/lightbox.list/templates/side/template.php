@@ -10,7 +10,7 @@
 <div class="col-sm-3 col-lg-2"><? /* "col-md-3 col-sm-3 hidden-xs"> */ ?>
     <div class="sidebarRight">
         <div class="sidebarRightTitle">
-            Сборники
+            <?= getMessage('GL_COLLECTIONS') ?>
         </div>
         
         <? if (CUser::IsAuthorized()) { ?>
@@ -38,7 +38,7 @@
                                     <? } ?>
                                 <? } else { ?>
                                     <div class="lightboxes__item-empty">
-                                        <span>вы не добавили ещё ни одного изображения</span>
+                                        <span><?= getMessage('GL_NO_NEW_IMAGE') ?></span>
                                     </div>
                                 <? } ?>
                             </div>
@@ -48,7 +48,7 @@
                                         <?= $item['COUNT'] ?>
                                     </div>
                                     <div class="col-sm-6 lightboxes__item-bottom-link">
-                                        <a href="/personal/lightbox/<?= $item['ID'] ?>/">ПЕРЕЙТИ</a>
+                                        <a href="/personal/lightbox/<?= $lightbox['ID'] ?>/"><?= getMessage('GL_GO') ?></a>
                                     </div>
                                 </div>
                             </div>
@@ -58,15 +58,15 @@
                 <? } ?>
 
                 <div class="lightboxes__item">
-                    <div class="lightboxes__item-title is-expanded lightboxes__item-title--new">Создать новый</div>
+                    <div class="lightboxes__item-title is-expanded lightboxes__item-title--new"><?= getMessage('GL_TO_CREATE_A_NEW') ?></div>
                     <div class="lightboxes__item-content">
-                        <span class="lightboxes__item-new">Перетащите изображения сюда, чтобы добавить в лайтбокс</span>
+                        <span class="lightboxes__item-new"><?= getMessage('GL_DRAG_IMAGE_COLLECTION') ?></span>
                     </div>
                 </div>
             </div>
         <? } else { ?>
             <div>
-                Для создания сборников вам необходимо авторизоваться.
+                <?= getMessage('GL_COLLECTIONS_LOG_IN') ?>
             </div>
         <? } ?>
     </div>

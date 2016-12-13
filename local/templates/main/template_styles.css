@@ -5995,7 +5995,10 @@ input.input-error:not(.disabled) {
     max-width: auto;
   }
 }
-
+.basket-chk {
+  position: absolute;
+  left: 0;
+}
 .basket-note {
     text-align: center;
 }

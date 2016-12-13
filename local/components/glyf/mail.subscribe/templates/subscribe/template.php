@@ -85,7 +85,7 @@
                     <tr>
                         <td>
                             <p style="margin-top: 0;margin-right: 0;margin-bottom: 0;margin-left: 0;padding-top: 23px;padding-right: 0;padding-bottom: 0;padding-left: 0;font-family: Arial, helvetika, sans-serif;font-size: 18px;text-align: center;color: #000000;text-transform: uppercase;">
-                            Новые статьи в разделе блог
+                            <?= getMessage('GL_NEW_ARTICLE_SECTION') ?>
                         </p>
                         </td>
                     </tr>
@@ -98,9 +98,9 @@
                                         $sections []= $section['UF_LANG_TITLE_RU'];
                                     }
                                 ?>
-                                В этом месяце появилось 
-                                <?= TextHelper::decofnum(count($arResult['BLOGS']['ITEMS']), array('новая статья', 'новые статьи', 'новых статей'), true) ?>
-                                в разделах: <br> 
+                                <?= getMessage('GL_MONTH_APPEARED') ?> 
+                                <?= TextHelper::decofnum(count($arResult['BLOGS']['ITEMS']), array('<?= getMessage('GL_NEW_ARTICLE') ?>', '<?= getMessage('GL_NEW ARTICLES') ?>', '<?= getMessage('GL_NEW ARTICL') ?>'), true) ?>
+                                <?= getMessage('GL_IN_THE_SECTIONS') ?> <br> 
                                 <?= implode(', ', $sections) ?>.
                             </p>
                         </td>
@@ -136,7 +136,7 @@
                     </tr>
                     <tr>
                         <td style="font-family: Arial, helvetika, sans-serif;font-size: 14px;text-align: center;color: #666666;padding-top: 45px;padding-bottom: 10px;">
-                            Читайте все наши новые статьи за последний месяц
+                            <?= getMessage('GL_NEW_ARTICLES_FO_MONTH') ?>
                         </td>
                     </tr>
                     <tr>
@@ -146,7 +146,7 @@
                                     <td><img src="<?= $folder ?>/images/mail_btn_left.png" style="display: block;margin: 0;" alt=""></td>
                                     <td style="background-color: #00c3d9;">
                                         <a href="http://<?= SITENAME ?>/blog/" style="color: #ffffff;text-decoration: none;text-transform: uppercase;font-size: 12px;">
-                                            перейти
+                                            <?= getMessage('GL_GO_MIN') ?>
                                         </a>
                                     </td>
                                     <td><img src="<?= $folder ?>/images/mail_btn_right.png" style="display: block;margin: 0;" /></td>
@@ -198,14 +198,14 @@
                     <tr>
                         <td>
                             <p style="margin-top: 0;margin-right: 0;margin-bottom: 0;margin-left: 0;padding-top: 23px;padding-right: 0;padding-bottom: 0;padding-left: 0;font-family: Arial, helvetika, sans-serif;font-size: 18px;text-align: center;color: #000000;text-transform: uppercase;">
-                                Коллекции
+                                <?= getMessage('GL_COLLECTION_NO_LIGHTBOX') ?>
                             </p>
                         </td>
                     </tr>
                     <tr>
                         <td>
                             <p style="margin-top: 0;margin-right: 0;margin-bottom: 0;margin-left: 0;padding-top: 23px;padding-right: 0;padding-bottom: 25px;padding-left: 0;font-family: Arial, helvetika, sans-serif;font-size: 11px;text-align: center;color: #00c3d9;text-transform: uppercase;line-height: 15px;">
-                                В коллекциях есть пополнение:
+                                <?= getMessage('GL_COLLECTIONS_ADDITION') ?>
                             </p>
                         </td>
                     </tr>

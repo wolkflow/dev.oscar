@@ -16,7 +16,7 @@
                     <div class="le-lightbox-edit">
                         <span class="le-lightbox-name-<?= $item['ID'] ?>">
                             <input type="hidden" name="lid" data-le="lightbox-name-<?= $item['ID'] ?>" value="<?= $item['ID'] ?>" />
-                            <input type="text" name="title" data-le="lightbox-name-<?= $item['ID'] ?>" class="le disabled" value="<?= $item['UF_TITLE'] ?>" disabled placeholder="Введите название"/>
+                            <input type="text" name="title" data-le="lightbox-name-<?= $item['ID'] ?>" class="le disabled" value="<?= $item['UF_TITLE'] ?>" disabled placeholder="<?= getMessage('GL_ENTER_THE_NAME') ?>"/>
                             <a href="javascript:void(0)" class="le le-end disabled" data-le="lightbox-name-<?= $item['ID'] ?>" data-action="lightbox-change" data-callback="cLightboxChange">OK</a>
 
                             <? // Служебные линки, отмена редактирования и внесение правок ?>
@@ -56,7 +56,7 @@
                         <? } ?>
                     <? } else { ?>
                         <div class="lightboxes__item-empty">
-                            <span>вы не добавили ещё ни одного изображения</span>
+                            <span><?= getMessage('GL_NO_NEW_IMAGE') ?></span>
                         </div>
                     <? } ?>
                 </div>
@@ -66,7 +66,7 @@
                             <?= $item['COUNT'] ?>
                         </div>
                         <div class="col-sm-6 lightboxes__item-bottom-link">
-                            <a href="/personal/lightbox/<?= $item['ID'] ?>/">ПЕРЕЙТИ</a>
+                            <a href="/personal/lightbox/<?= $item['ID'] ?>/"><?= getMessage('GL_GO') ?></a>
                         </div>
                     </div>
                 </div>
@@ -76,21 +76,21 @@
     
     <div class="cabinet-lightbox cabinet-lightbox--new newLightboxForm">
         <div class="cabinet-lightbox__title clearfix">
-            <span>Создать новый</span>
+            <span><?= getMessage('GL_TO_CREATE_A_NEW') ?></span>
             <span class="plus">+</span>
         </div>
         <div class="cabinet-lightbox__content">
             <div class="le disabled" data-le="lightbox">
                 <div class="newLightboxForm-field">
                     <div class="cabinet-profile__block-field-value">
-                        <input type="text" name="title" class="le" data-le="lightbox" value="" placeholder="Введите название" />
+                        <input type="text" name="title" class="le" data-le="lightbox" value="" placeholder="<?= getMessage('GL_ENTER_THE_NAME') ?>" />
                     </div>
                 </div>
             </div>
             <div class="cabinet-lightbox__new">
                 <a href="javascript:void(0)" data-le="lightbox" class="le le-start">+</a>
-                <a class="btn btn-light btn-filter_edit le le-end disabled" href="javascript:void(0)" data-le="lightbox" data-action="create-lightbox" data-callback="cLightboxCreate">Сохранить</a>
-                <a class="btn btn-light btn-filter_edit le le-end le-cancel disabled" href="javascript:void(0)" data-le="lightbox">Отменить</a>
+                <a class="btn btn-light btn-filter_edit le le-end disabled" href="javascript:void(0)" data-le="lightbox" data-action="create-lightbox" data-callback="cLightboxCreate"><?= getMessage('GL_SAVE') ?></a>
+                <a class="btn btn-light btn-filter_edit le le-end le-cancel disabled" href="javascript:void(0)" data-le="lightbox"><?= getMessage('GL_CANCEL') ?></a>
             </div>
         </div>
     </div>

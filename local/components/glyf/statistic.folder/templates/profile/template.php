@@ -37,7 +37,7 @@
                 </a>
                 
                 <div class="cabinet-panel__menu-pages hidden-xs">
-                    <span>Показывать по</span>
+                    <span><?= getMessage('GL_SHOW') ?></span>
                     <select id="js-folder-pictures-page-count-id" class="styler shortSelect cabinet-panel__menu-pages-select">
                         <option value="30" <?= ($arParams['PERPAGE'] == 30) ? ('selected') : ('') ?> data-href="<?= $APPLICATION->GetCurPageParam('count=30', array('count', 'ELEMENT'), false) ?>">
                             30
@@ -75,7 +75,7 @@
                         <?= getMessage('GL_SORT_SALES') ?> <span class="cabinet-table__sort">
                     </th>
                 </tr>
-                </thead>    
+                </thead>
                 <tbody id="js-folder-pictures-wrapper-id" data-fid="<?= $arResult['FOLDER']['ID'] ?>">
                     <?  // Статистика по папке.					
                         $APPLICATION->IncludeComponent(

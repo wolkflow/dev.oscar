@@ -10,8 +10,8 @@
 <div class="col-sm-12 col-lg-8 pb30">
     <? if (!empty($arResult['PICTURE'])) { ?>
         <div class="buyoutBlockTitle">
-            <div class="buyoutBlockTitleText">выбрать лицензию</div>
-            <a href="javascript:void(0)" class="buyoutBlockTitleLink" id="js-buyout-picture-remove-id">удалить</a>
+            <div class="buyoutBlockTitleText"><?= getMessage('GL_PICK_A_LICENSE') ?></div>
+            <a href="javascript:void(0)" class="buyoutBlockTitleLink" id="js-buyout-picture-remove-id"><?= getMessage('GL_DELETE') ?></a>
         </div>
         <div class="row">
             <div class="col-sm-7">
@@ -26,34 +26,34 @@
                 <div class="buyoutBlockMeta">
                     <ul>
                         <li>
-                            <b>Автор:</b> 
+                            <b><?= getMessage('GL_AUTHOR') ?></b>
                             <?= $arResult['PICTURE']['AUTHOR'] ?>
                         </li>
                         <li>
-                            <b>Место создания:</b> 
+                            <b><?= getMessage('GL_PLACE_CREATION') ?></b>
                             <?= implode(', ', $arResult['PICTURE']['PLACE']) ?>
                         </li>
                         <li>
-                            <b>Время создания:</b>
+                            <b><?= getMessage('GL_CREATION_TIME') ?></b>
                             <?= $arResult['PICTURE']['PERIOD'] ?>
                         </li>
                         <li>
-                            <b>Техника:</b>
+                            <b><?= getMessage('GL_TECHNIQUE') ?></b>
                             <?= implode(', ', $arResult['PICTURE']['TECHNIQUES']) ?>
                         </li>
                         <li>
-                            <b>Размеры:</b> 
+                            <b><?= getMessage('GL_DIMENSIONS') ?></b>
                             <?= number_format(($arResult['PICTURE'][Picture::FIELD_WIDTH] / 10), 1, ',', '') ?>
                             &times;
                             <?= number_format(($arResult['PICTURE'][Picture::FIELD_HEIGHT] / 10), 1, ',', '')  ?>
                             см
                         </li>
                         <li>
-                            <b>Правообладатель:</b>
+                            <b><?= getMessage('GL_COPYRIGHT_HOLDER') ?></b>
                             <?= $arResult['PICTURE']['HOLDER'] ?>
                         </li>
                         <li>
-                            <b>Категория:</b> 
+                            <b>gmGL_CATEGORY</b>
                             <?= $arResult['PICTURE']['COLLECTION']['TITLE'] ?>
                         </li>
                         <li>
@@ -77,7 +77,7 @@
                         <li>
                             <label>
                                 <input type="radio" name="license" class="js-license-other" value="0" /> 
-                                Другое
+                                <?= getMessage('GL_MORE') ?>
                             </label>
                         </li>
                     </ul>
@@ -85,19 +85,19 @@
                     <ul id="js-licenses-selects-id" class="buyoutParamsSelect"></ul>
                     
                     <div id="js-buyout-other-wrap-id" class="buyoutPrice hide">
-                        Если Вы не нашли нужный Вам вид использования, свяжитесь с нами, и наши менеджеры произведут расчёт цены.
+                        <?= getMessage('GL_IF_YOU_HAVE_NOT_FOUND') ?>
                     </div>
                     
                     <div id="js-buyout-price-wrap-id" class="buyoutPrice hide">
                         <span id="js-buyout-price-id"></span>р.
                     </div>
-                    <input id="js-buyout-submit-id" type="button" data-bid="<?= $arResult['BASKET']['ID'] ?>" data-pid="<?= $arResult['PICTURE']['ID'] ?>" class="btn btn-sm btn-default hide" value="Подтвердить" />
+                    <input id="js-buyout-submit-id" type="button" data-bid="<?= $arResult['BASKET']['ID'] ?>" data-pid="<?= $arResult['PICTURE']['ID'] ?>" class="btn btn-sm btn-default hide" value="<?= getMessage('GL_CONFIRM') ?>" />
                 </form>
             </div>
         </div>
     <? } else { ?>
         <div class="buyout-no-select">
-            Для покупки кликните на изображение слева.
+            <?= getMessage('GL_CLICK_IMAGE_LEFT') ?>
         </div>
     <? } ?>
 </div>

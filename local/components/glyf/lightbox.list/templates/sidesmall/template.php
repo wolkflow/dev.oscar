@@ -10,7 +10,7 @@
 
 <div class="sidebarRight">
     <div class="sidebarRightTitle">
-        Сборники
+        <?= getMessage('GL_COLLECTIONS') ?>
     </div>
     <div class="lightboxes">
         <? $first = true ?>
@@ -36,7 +36,7 @@
                             <? } ?>
                         <? } else { ?>
                             <div class="lightboxes__item-empty">
-                                <span>вы не добавили ещё ни одного изображения</span>
+                                <span><?= getMessage('GL_NO_NEW_IMAGE') ?></span>
                             </div>
                         <? } ?>
                     </div>
@@ -46,7 +46,7 @@
                                 <?= $item['COUNT'] ?>
                             </div>
                             <div class="col-sm-6 lightboxes__item-bottom-link">
-                                <a href="/personal/lightbox/<?= $item['ID'] ?>/">ПЕРЕЙТИ</a>
+                                <a href="/personal/lightbox/<?= $item['ID'] ?>/"><?= getMessage('GL_GO') ?></a>
                             </div>
                         </div>
                     </div>
@@ -55,10 +55,10 @@
             <? $first = false ?>
         <? } ?>
         <div class="lightboxes__item">
-            <div class="lightboxes__item-title lightboxes__item-title--new">Создать новый</div>
+            <div class="lightboxes__item-title lightboxes__item-title--new"><?= getMessage('GL_TO_CREATE_A_NEW') ?></div>
             <div class="lightboxes__item-content">
                 <span class="lightboxes__item-new">
-                    Перетащите изображения сюда, чтобы добавить в лайтбокс
+                    <?= getMessage('GL_DRAG_IMAGE_COLLECTION') ?>
                 </span>
             </div>
         </div>

@@ -10,7 +10,7 @@
 <div id="js-user-lightbox-block-id">
     <? if (!empty($arResult['LIGHTBOX'])) { ?>
         <ol class="breadcrumb">
-            <li><a href="/personal/">Профиль</a></li>
+            <li><a href="/personal/"><?= getMessage('GL_PROFILE') ?></a></li>
             <li><?= $arResult['LIGHTBOX']['UF_TITLE'] ?></li>
         </ol>
 
@@ -20,16 +20,16 @@
                     <?= $arResult['LIGHTBOX']['UF_TITLE'] ?>
                 </span>
             </div>
-            <div class="cabinet-panel__toggler">Коллекции</div>
+            <div class="cabinet-panel__toggler"><?= getMessage('GL_COLLECTION_NO_LIGHTBOX') ?></div>
             <div class="cabinet-panel__menu">
-                <a class="js-dependence-chekbox-button js-group-action" data-action="loadpdf" href="javascript:void(0)">сохранить пдф</a>
-                <a class="js-dependence-chekbox-button js-group-action" data-action="email" href="javascript:void(0)">отправить по email</a>
-                <a class="js-dependence-chekbox-button js-group-action" data-action="print" href="javascript:void(0)">печать</a>
+                <a class="js-dependence-chekbox-button js-group-action" data-action="loadpdf" href="javascript:void(0)">PDF</a>
+                <a class="js-dependence-chekbox-button js-group-action" data-action="email" href="javascript:void(0)"><?= getMessage('GL_SEND_VIA_EMAIL') ?></a>
+                <a class="js-dependence-chekbox-button js-group-action" data-action="print" href="javascript:void(0)"><?= getMessage('GL_PRINT') ?></a>
                 <a class="js-dependence-chekbox-button" href="javascript:void(0)" id="js-add-list-to-cart-id">
-                    Добавить в корзину
+                    <?= getMessage('GL_ADD_TO_CART') ?>
                 </a>
                 <a class="js-dependence-chekbox-button" href="javascript:void(0)" id="js-remove-list-from-lightbox-id" data-lid="<?= $arResult['LIGHTBOX']['ID'] ?>">
-                    удалить
+                    <?= getMessage('GL_DELETE') ?>
                 </a>
             </div>
         </div>

@@ -11,7 +11,7 @@
 
 <div class="pdf">
     <div class="pdfTop">
-        <div class="pdfTitle">Статистика продаж</div>
+        <div class="pdfTitle"><?= getMessage('GL_SALES_STATISTICS') ?></div>
         <div class="pdfLogo">
             <div class="pdfLogoImage">
                 <img src="<?= SITE_TEMPLATE_PATH ?>/images/logo.png" />
@@ -41,11 +41,11 @@
                                 <?= $item['PICTURE'][Picture::FIELD_LANG_TITLE_SFX . CURRENT_LANG_UP] ?>
                             </td>
                             <td>
-                                <span>лицензия:</span> 
+                                <span><?= getMessage('GL_LICENSE') ?></span> 
                                 <?= $item['LICENSE'][License::FIELD_LANG_TITLE_SFX . CURRENT_LANG_UP] ?>
                             </td>
                             <td>
-                                <span>дата:</span>
+                                <span><?= getMessage('GL_DATE') ?></span>
                                 <?= date('d.m.Y', strtotime($item[Sale::FIELD_TIME])) ?>
                             </td>
                         </tr>
