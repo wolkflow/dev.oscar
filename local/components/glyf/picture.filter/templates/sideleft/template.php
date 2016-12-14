@@ -9,11 +9,11 @@
 <div class="col-sm-3 col-lg-2 sidebarLeft">
     
     <form id="js-filter-sideform-id" action="/search/">
-        <div class="sidebarLeftTitle formParamsTitle" data-collapse-target="formParams">
+        <div class="sidebarLeftTitle formParamsTitle" data-expand-target="formParams">
             <?= getMessage('GL_SEARCH_PARAMS') ?>
         </div>
     
-        <div class="form" data-collapse-block="formParams">
+        <div class="form" data-expand-block="formParams">
             <ul class="filters filtersSet">
                 <li>
                     <label class="filtersTitle" for="js-param-title-id">
@@ -100,11 +100,11 @@
             </ul>
         </div>
     
-        <div class="sidebarLeftTitle" data-collapse-target="formFilters">
+        <div class="sidebarLeftTitle" data-expand-target="formFilters">
             <?= getMessage('GL_SEARCH_FILTERS') ?>
         </div>
         
-        <div class="form" data-collapse-block="formFilters">
+        <div class="form" data-expand-block="formFilters">
             <div class="filterBlock shortParamsSet filterBlock-type">
 
                 <div class="filterBlockTitle">

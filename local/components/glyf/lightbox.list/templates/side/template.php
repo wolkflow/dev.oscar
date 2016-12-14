@@ -7,6 +7,8 @@
 
 <? $this->setFrameMode(true); ?>
 
+<? if ($arResult['USER']->isPartner()) return ?>
+
 <div class="col-sm-3 col-lg-2"><? /* "col-md-3 col-sm-3 hidden-xs"> */ ?>
     <div class="sidebarRight">
         <div class="sidebarRightTitle">

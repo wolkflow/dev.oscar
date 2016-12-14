@@ -417,6 +417,6 @@ $(window).on('load resize', function () {
 	var windowHeight = $(window).height(),
 		wrapperHeight = $('.wrapper').height(),
 		currentHeight = $('.siteHeader').innerHeight() + $('.top').innerHeight() + $('.siteFooter').innerHeight();
-	$('.siteMain').css({'min-height': windowHeight - currentHeight})
+	$('.siteMain, .content').css({'min-height': windowHeight - currentHeight})
 	console.log(currentHeight)
 });

@@ -7,6 +7,7 @@
 
 <? $this->setFrameMode(true); ?>
 
+<? if ($arResult['USER']->isPartner()) return ?>
 
 <div class="sidebarRight">
     <div class="sidebarRightTitle">

@@ -37,13 +37,13 @@ class LightboxListComponent extends \CBitrixComponent
         
        
         // Пользователь.
-        $user = new Glyf\Oscar\User();
+        $this->arResult['USER'] = new Glyf\Oscar\User();
         
         // Справочники.
         if ($this->arParams['LIMIT'] > 0) {
-            $lightboxes = $user->getLightboxes(array('limit' => $this->arParams['LIMIT']));
+            $lightboxes = $this->arResult['USER']->getLightboxes(array('limit' => $this->arParams['LIMIT']));
         } else {
-            $lightboxes = $user->getLightboxes();
+            $lightboxes = $this->arResult['USER']->getLightboxes();
         }
         
         
@@ -62,7 +62,7 @@ class LightboxListComponent extends \CBitrixComponent
             $this->arResult['LIGHTBOXES'][$lightbox->getID()] = $data;
         }
         
-        $this->arResult['LIGHTBOXES_COUNT'] = $user->getLightboxesCount();
+        $this->arResult['LIGHTBOXES_COUNT'] = $this->arResult['USER']->getLightboxesCount();
         
         
 		// Подключение шаблона компонента.

@@ -197,6 +197,12 @@ switch ($action) {
             jsonresponse(false, getMessage('GL_ERROR_NOT_AUTHORIZED'));
         }
         
+        $user = new Glyf\Oscar\User();
+        
+        if ($user->isPartner()) {
+            jsonresponse(false, getMessage('GL_ERROR_YOU_ARE_PARTNER'));
+        }
+        
         foreach ($pids as $pid) {
             $picture = new Glyf\Oscar\Picture($pid);
             
@@ -280,6 +286,10 @@ switch ($action) {
         
         // Пользователь.
         $user = new Glyf\Oscar\User();
+        
+        if ($user->isPartner()) {
+            jsonresponse(false, getMessage('GL_ERROR_YOU_ARE_PARTNER'));
+        }
         
         // Сборник.
         $lightbox = new Glyf\Oscar\Lightbox($lid);
@@ -818,11 +828,13 @@ switch ($action) {
         $bid  = (int) $request->get('bid');
         $rlid = (int) $request->get('rlid');
         
-        $user = new Glyf\Oscar\User();
         
         if (!CUser::IsAuthorized()) {
             jsonresponse(false, getMessage('GL_ERROR_NOT_AUTHORIZED'));
         }
+        
+        // Пользователь.
+        $user = new Glyf\Oscar\User();
         
         if ($user->isPartner()) {
             jsonresponse(false, getMessage('GL_ERROR_YOU_ARE_PARTNER'));
