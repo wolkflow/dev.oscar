@@ -1284,13 +1284,16 @@ div[class^="col"] .row {
 }
 .jq-selectbox__dropdown {
   box-sizing: border-box;
-  width: 100%;
+  width: 100% !important;
   margin: -14px 0 0;
   padding: 14px 0 0;
   border-radius: 4px 4px 10px 10px;
   font: 300 12px/20px 'Circe', Arial, helvetika, sans-serif;
   color: #000;
   text-transform: uppercase;
+}
+#js-objects-block-id .jq-selectbox__dropdown {
+  margin: 0 0 10px;
 }
 .jq-selectbox__dropdown li:last-child {
   border-radius: 0 0 10px 10px;
@@ -6064,4 +6067,12 @@ input.input-error:not(.disabled) {
   .cabinet-table tbody tr.separate {
     border-bottom: 0 !important;
   }
+}
+.errros {
+  padding: 10px;
+  border: 1px solid #e13721;
+  color: #e13721;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  background: #fff;
 }
