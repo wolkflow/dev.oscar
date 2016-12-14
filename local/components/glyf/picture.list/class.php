@@ -39,11 +39,13 @@ class PicturesList extends \CBitrixComponent
         $collection = new Collection($this->arParams['COLLECTION']);
         
         // Сортировка и фильтры.
-        $sort   = array('ID' => 'ASC');
-        $filter = array();
+        $order  = array(); // 'ID' => 'ASC');
+        $filter = array(
+            Picture::FIELD_MODERATE => true
+        );
         
         // Элементы коллекции.
-        $pictures = $collection->getPictures(array('sort' => $sort, 'filter' => $filter));
+        $pictures = $collection->getPictures(array('order' => $order, 'filter' => $filter));
 		
         $this->arResult['ITEMS'] = array();
         

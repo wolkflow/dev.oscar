@@ -53,7 +53,7 @@
                             <?= $arResult['PICTURE']['HOLDER'] ?>
                         </li>
                         <li>
-                            <b>gmGL_CATEGORY</b>
+                            <b><?= getMessage('GL_CATEGORY') ?></b>
                             <?= $arResult['PICTURE']['COLLECTION']['TITLE'] ?>
                         </li>
                         <li>

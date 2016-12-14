@@ -11,6 +11,8 @@
 
 <main class="siteMain">
     <?	// Тарифы.
+        $GLOBALS['arTariffsFilter'] = array('PROPERTY_CANBUY' => 'Y');
+    
         $APPLICATION->IncludeComponent(
             "bitrix:catalog.section",
             "tariffs",
@@ -26,7 +28,7 @@
                 "ELEMENT_SORT_ORDER" => "ASC",
                 "ELEMENT_SORT_FIELD2" => "ID",
                 "ELEMENT_SORT_ORDER2" => "ASC",
-                "FILTER_NAME" => "",
+                "FILTER_NAME" => "arTariffsFilter",
                 "INCLUDE_SUBSECTIONS" => "Y",
                 "SHOW_ALL_WO_SECTION" => "Y",
                 "SECTION_URL" => "",
@@ -66,7 +68,7 @@
                 "CACHE_GROUPS" => "Y",
                 "DISPLAY_TOP_PAGER" => "N",
                 "DISPLAY_BOTTOM_PAGER" => "Y",
-                "PAGER_TITLE" => "Товары",
+                "PAGER_TITLE" => "",
                 "PAGER_SHOW_ALWAYS" => "Y",
                 "PAGER_TEMPLATE" => "",
                 "PAGER_DESC_NUMBERING" => "N",

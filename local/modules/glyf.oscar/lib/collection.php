@@ -61,8 +61,13 @@ class Collection extends IBlockSectionModel
     {
         $sids = array_merge($this->getSubsectionIDs(), array($this->getID()));
         
-        $result = Picture::getList(array('filter' => array(Picture::FIELD_COLLECTION => $sids)), false);
-        $count  = $result->getSelectedRowsCount();
+        $result = Picture::getList(array(
+            'filter' => array(
+                Picture::FIELD_COLLECTION => $sids,
+                Picture::FIELD_MODERATE   => true,
+            )
+        ), false);
+        $count = $result->getSelectedRowsCount();
         
         return $count;
     }
@@ -71,12 +76,15 @@ class Collection extends IBlockSectionModel
     /**
      * Получение количества элеметов.
      */
-    public function getPictures()
+    public function getPictures($params)
     {
         $sids = array_merge($this->getSubsectionIDs(), array($this->getID()));
         
-        $products = Picture::getList(array('filter' => array(Picture::FIELD_COLLECTION => $sids)));
+        $params = (array) $params;
+        $params['filter'][Picture::FIELD_COLLECTION] = $sids;
         
-        return $products;
+        $pictures = Picture::getList($params);
+        
+        return $pictures;
     }
 }

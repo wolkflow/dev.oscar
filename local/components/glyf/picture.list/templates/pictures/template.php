@@ -21,7 +21,7 @@
                         </a>
                         <div class="card-image__buttons catalog-image__buttons">
                             <? if ($item[Picture::FIELD_LEGAL] == Picture::PROP_LEGAL_FULL_ID) { ?>
-                                <a class="card-image__button card-image__button--copyright" href="javascript:void(0)"></a>
+                                <a class="card-image__button card-image__button--copyright" href="javascript:void(0)" title="<?= getMessage('GL_NON_COMMERCIAL') ?>"></a>
                             <? } ?>
                             <a class="card-image__button card-image__button--add js-add-to-lightbox" href="javascript:void(0)" data-pid="<?= $item[Picture::FIELD_ID] ?>"></a>
                             <a class="card-image__button card-image__button--cart js-add-to-cart" href="javascript:void(0)" data-pid="<?= $item[Picture::FIELD_ID] ?>"></a>
