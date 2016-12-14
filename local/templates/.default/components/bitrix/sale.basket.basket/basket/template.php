@@ -7,12 +7,11 @@
 
 <? $this->setFrameMode(true); ?>
 
-
                 
 <div class="buyoutBlockTitle">
-    <div class="buyoutBlockTitleText">ваш заказ</div>
-    <a id="js-basket-delete-id" href="javascript:void(0)" class="buyoutBlockTitleLink">удалить</a>
-    <a id="js-basket-buyout-id" href="javascript:void(0)" class="buyoutBlockTitleLink active">купить</a>
+    <div class="buyoutBlockTitleText"><?= getMessage('GL_YOUR_ORDER') ?></div>
+    <a id="js-basket-delete-id" href="javascript:void(0)" class="buyoutBlockTitleLink"><?= getMessage('GL_DELETE') ?></a>
+    <a id="js-basket-buyout-id" href="javascript:void(0)" class="buyoutBlockTitleLink active"><?= getMessage('GL_BUY') ?></a>
 </div>
 
 <div class="buyoutSelected">
@@ -34,7 +33,7 @@
                             <img src="<?= $picture->getSmallPreviewImageSrc() ?>" title="<?= $picture->getTitle() ?>" />
                         </span>
                         <span class="buyoutSelected-meta">
-                            <span class="buyoutSelected-title">Лицензия</span>
+                            <span class="buyoutSelected-title"><?= getMessage('GL_LICENSE') ?></span>
                             <span class="buyoutSelected-copy">
                                 <?= $license->getTitle() ?>
                             </span>
@@ -52,12 +51,12 @@
 <? if (!empty($arResult['ITEMS']['AnDelCanBuy'])) { ?>
     <div class="buyoutTotal">
         <div class="buyoutTotalSum">
-            Итого: <?= number_format($price, 0, ',', ' ') ?> р.
+            <?= getMessage('GL_TOTAL') ?>: <?= number_format($price, 0, ',', ' ') ?> р.
         </div>
         <a id="js-basket-buyout-full-id" class="btn btn-default btn-sm buyoutSubmit" href="javascript:void(0)">
-            купить
+            <?= getMessage('GL_BUY') ?>
         </a>
     </div>
 <? } else { ?>
-    <div class="basket-note">Ни одной позиции не добавлено</div>
+    <div class="basket-note"><?= getMessage('GL_NO_OBJECTS') ?></div>
 <? } ?>

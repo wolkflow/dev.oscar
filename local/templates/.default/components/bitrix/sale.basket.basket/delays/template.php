@@ -8,8 +8,10 @@
 
 <div class="col-xs-12 col-sm-4 col-md-4 col-lg-3">
     <div class="buyoutBlockTitle buyoutBlockTitle-display_block">
-        <div class="buyoutBlockTitleText">выбранные изображения</div>
-        <a class="buyoutBlockTitleLink" href="javascript:void(0)" id="js-buyout-delete-id">удалить</a>
+        <div class="buyoutBlockTitleText">
+            <?= getMessage('GL_CHOSEN_PICTURES') ?>
+        </div>
+        <a class="buyoutBlockTitleLink" href="javascript:void(0)" id="js-buyout-delete-id"><?= getMessage('GL_DELETE') ?></a>
     </div>
     <div id="js-delays-pictures-wrapper-id">
         <? if (!empty($arResult['ITEMS']['DelDelCanBuy'])) { ?>
@@ -33,7 +35,7 @@
             </ul>
         </div>
     <? } else { ?>
-        <div class="basket-note">Нет выбранных изображений</div>
+        <div class="basket-note"><?= getMessage('GL_NO_CHOSEN_PICTURES') ?></div>
     <? } ?>
 </div>
 <div class="clearfix visible-xs"></div>

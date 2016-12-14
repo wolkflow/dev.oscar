@@ -2585,24 +2585,27 @@ input[type=text].le.disabled {
 .cabinet-lightboxes-list{
   width: 100%;
   margin-top: 35px; }
-
+#js-porfile-lightboxes-wrapper-id {
+  margin-left: -24px;
+}
 .cabinet-lightbox{
   float: left;
   margin-bottom: 20px;
-  margin-right: 24px;
+  margin-left: 24px;
   height: 140px;
   background-color: #f2f2f2;
   border-radius: 11px;
-  width: calc(20% - 96px / 5); }
+  width: calc(20% - 120px / 5); }
 
 @media (min-width: 1200px){
-  .cabinet-lightbox:nth-child(5n){
-    margin-right: 0; }
+
 }
 
 @media (min-width: 992px) and (max-width: 1199px){
+
   .cabinet-lightbox{
-    width: calc(25% - 72px / 4); }
+    width: calc(25% - 96px / 4);
+  }
 
   .cabinet-lightbox:nth-child(4n){
     margin-right: 0; }
@@ -2610,7 +2613,7 @@ input[type=text].le.disabled {
 
 @media (min-width: 768px) and (max-width: 991px){
   .cabinet-lightbox{
-    width: calc(33% - 48px / 3); }
+    width: calc(33% - 72px / 3); }
 
   .cabinet-lightbox:nth-child(3n){
     margin-right: 0; }
@@ -2621,9 +2624,14 @@ input[type=text].le.disabled {
     width: 100%;
     height: auto;
     margin-right: 0;
+    margin-left: 0;
   }
   .cabinet-profile-sr {
     margin-left: 0 !important;
+  }
+
+  #js-porfile-lightboxes-wrapper-id {
+    margin-left: 0;
   }
 }
 

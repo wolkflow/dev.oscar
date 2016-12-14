@@ -4,7 +4,6 @@
 
 <? $this->setFrameMode(true); ?>
 
-
 <?  // Строка поиска.
 	$APPLICATION->IncludeComponent('bitrix:main.include', '', array(
 		'AREA_FILE_SHOW' => 'file',
@@ -18,9 +17,11 @@
         <div class="row">
             <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3">
                 <div class="errorPage">
-                    <div class="errorPageTitle">Ошибка доступа</div>
+                    <div class="errorPageTitle">
+                        <?= getMessage('GL_ERROR_ACCESS') ?>
+                    </div>
                     <div class="errorPageMessage">
-                        <p>Вы не авторизованы на сайте.<br/>Для продолженя работы нажмите на ссылку "Войти"!</p>
+                        <p><?= getMessage('GL_ERROR_NOT_AUTHORIZED') ?></p>
                     </div>
                 </div>
             </div>
