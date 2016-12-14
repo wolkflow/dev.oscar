@@ -26,9 +26,7 @@
 						</a>
 					</article>
 				<? } ?>
-				
 				<?= $arResult['NAV_STRING'] ?>
-				
 			</div>
 		</div>
 	</div>

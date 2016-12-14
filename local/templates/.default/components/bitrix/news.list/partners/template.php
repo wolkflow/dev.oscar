@@ -34,9 +34,7 @@
 							</div>
 						<? } ?>
 					</div>
-					
 					<?= $arResult['NAV_STRING'] ?>
-					
 				</article>
 			</div>
 		</div>
