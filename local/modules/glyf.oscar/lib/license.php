@@ -2,7 +2,10 @@
 
 namespace Glyf\Oscar;
 
+use Bitrix\Main\Localization\Loc;
 use Glyf\Core\System\HLBlockModel;
+
+IncludeModuleLangFile(__FILE__);
 
 class License extends HLBlockModel
 {
@@ -70,7 +73,7 @@ class License extends HLBlockModel
         // Свойства HL-блока.
         $cache = new \CPHPCache();
         $ctime = 86400;
-        $ccode = 'properties';
+        $ccode = 'properties-' . CURRENT_LANG;
         $cpath = '/properties/';
         if ($ctime > 0 && $cache->InitCache($ctime, $ccode, $cpath)) {
             $props = $cache->GetVars();
@@ -81,8 +84,10 @@ class License extends HLBlockModel
             }
         }
         
-        // Loc::getMessage();
-        $title = $props[self::FIELD_STEP]['ENUMS'][$this->getStep()]['VALUE']; //['XML_ID'];
+        $code  = $props[self::FIELD_STEP]['ENUMS'][$this->getStep()]['XML_ID'];
+        $title = Loc::getMessage('GL_LICENSE_STEP_' . $code);
+        
+        // $title = $props[self::FIELD_STEP]['ENUMS'][$this->getStep()]['VALUE'];
         
         return $title;
     }

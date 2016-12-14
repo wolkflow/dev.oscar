@@ -46,7 +46,7 @@
                             <?= number_format(($arResult['PICTURE'][Picture::FIELD_WIDTH] / 10), 1, ',', '') ?>
                             &times;
                             <?= number_format(($arResult['PICTURE'][Picture::FIELD_HEIGHT] / 10), 1, ',', '')  ?>
-                            см
+                            <?= getMessage('GL_CM') ?>
                         </li>
                         <li>
                             <b><?= getMessage('GL_COPYRIGHT_HOLDER') ?></b>

@@ -178,7 +178,20 @@ $(document).ready(function () {
 	}
 	setEqualHeight($(".subscribeCol-list"));
 	setEqualHeight($(".subscribeSearch-col"));
-    
+
+	$(window).on('load resize', function () {
+		var windowHeight = $(window).height(),
+			wrapperHeight = $('.wrapper').height(),
+			currentHeight = $('.siteHeader').height() + $('.top').height() + $('.siteFooter').height();
+		console.log($('.siteHeader').innerHeight())
+		console.log($('.top').outerHeight())
+		console.log($('.siteFooter').innerHeight())
+		console.log(currentHeight)
+		if(wrapperHeight < windowHeight) {
+			$('.siteMain').css({'min-height': windowHeight - currentHeight})
+			console.log('con')
+		}
+	});
     
     $('[data-modal]').click(function() {
 		var modal = $(this).data('modal');
