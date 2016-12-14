@@ -45,3 +45,4 @@ $MESS['GL_PAY_TARIFF'] = 'Оплата тарифа';
 $MESS['GL_PAY_IMAGES'] = 'Покупка изображений';
 $MESS['GL_SEND_MAIL_SUCCESS'] = 'Письмо успешно отправлено на e-mail';
 $MESS['GL_ORDERS_REPEATED'] = 'Изображения добавлены для покупки';
+$MESS['GL_ORDER_PAYED_SUCCESSFULLY'] = 'Заказ успешно оплачен';

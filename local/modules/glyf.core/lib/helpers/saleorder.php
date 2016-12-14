@@ -30,6 +30,14 @@ class SaleOrder
     }
     
     
+    public function getPrice()
+    {
+        $data = $this->getData();
+        
+        return (float) $data['PRICE'];
+    }
+    
+    
     /**
      * Получение свойств заказа.
      */
@@ -149,7 +157,7 @@ class SaleOrder
         
         $bxorder = \Bitrix\Sale\Order::load($this->getID());
         $collect = $bxorder->getPaymentCollection();
-        $payment = $collect->getItemById($this->getID());
+        $payment = $collect->current();
         $params  = \Bitrix\Sale\PaySystem\Manager::getById($payment->getPaymentSystemId());
         $service = new \Bitrix\Sale\PaySystem\Service($params);
 

@@ -912,6 +912,9 @@ switch ($action) {
             $order = new \Glyf\Oscar\Order($oid);
             $order->saveProperty(\Glyf\Oscar\Order::PROP_BALANCE_CODE, 'Y');
             
+            // Оплата заказа.
+            // $order->pay($user);
+            
             // Ссылка на оплату.
             $link  = $order->getPaymentURL();
             
@@ -1062,10 +1065,21 @@ switch ($action) {
             $order = new \Glyf\Oscar\Order($oid);
             $order->saveProperty(\Glyf\Oscar\Order::PROP_PICTURE_CODE, 'Y');
             
-            // Ссылка на оплату.
-            $link = $order->getPaymentURL();
+            $payaccount = true;
+            try {
+                $order->pay($user);
+            } catch (\Exception $e) {
+                $payaccount = false;
+            }
             
-            jsonresponse(true, '', array('link' => $link));
+            if (!$payaccount) {
+                // Ссылка на оплату.
+                $link = $order->getPaymentURL();
+                
+                jsonresponse(true, '', array('payed' => false, 'link' => $link));
+            } else {
+                jsonresponse(true, getMessage('GL_ORDER_PAYED_SUCCESSFULLY'), array('payed' => true));
+            }
         }
         jsonresponse(false, getMessage('GL_ERROR_CREATE_ORDER'));
         break;

@@ -332,7 +332,12 @@ $(document).ready(function() {
             success: function(response) {
                 if (response.status) {
                     refreshBaskets();
-                    location.href = response.data['link'];
+                    
+                    if (response.data['payed']) {
+                        inform(response.message);
+                    } else {
+                        location.href = response.data['link'];
+                    }
                 }
             }
         });

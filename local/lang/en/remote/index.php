@@ -45,3 +45,4 @@ $MESS['GL_PAY_TARIFF'] = 'tariff payment';
 $MESS['GL_PAY_IMAGES'] = 'image Buy';
 $MESS['GL_SEND_MAIL_SUCCESS'] = 'A letter has been sent to the e-mail successfully';
 $MESS['GL_ORDERS_REPEATED'] = 'Images added to the purchase';
+$MESS['GL_ORDER_PAYED_SUCCESSFULLY'] = 'Order successfully paid';

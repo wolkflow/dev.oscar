@@ -2,6 +2,12 @@
 
 namespace Glyf\Oscar;
 
+use Bitrix\Main\Localization\Loc;
+use Glyf\Oscar\User;
+
+
+IncludeModuleLangFile(__FILE__);
+
 
 class Order extends \Glyf\Core\Helpers\SaleOrder
 {
@@ -21,6 +27,35 @@ class Order extends \Glyf\Core\Helpers\SaleOrder
         }
     }
     
+    
+    /**
+     * Оплата заказа со внутрненнего счета.
+     */
+    public function pay(User $user)
+    {
+        global $DB;
+        
+        // Проверка наличия средств на балансе.
+        if ($user->getBalance() < $this->getPrice()) {
+            throw new \Exception('Insufficient funds');
+        }
+        
+        $DB->StartTransaction();
+        
+        // Снятие суммы с личного счета.
+        $price = \CSaleUserAccount::Withdraw($user->getID(), $this->getPrice(), CURRENCY_DEFAULT, $this->getID());
+        
+        // Оплата заказа.
+        if ($price == $this->getPrice()) {
+            \CSaleOrder::PayOrder($this->getID(), 'Y', false, false);
+        } else {
+            $DB->Rollback();
+        }
+        
+        //\CSaleUserAccount::Pay($user->getID(), $this->getPrice(), DEFAULT_CURRENCY, $this->getID());
+        
+        $DB->Commit();
+    }
     
     
     /**
