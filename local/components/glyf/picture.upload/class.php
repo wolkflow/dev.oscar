@@ -18,7 +18,7 @@ use Glyf\Oscar\User;
 
 class PictureUpload extends \CBitrixComponent
 {
-    const IMAGE_MIN_SIZE = 1000;
+    const IMAGE_MIN_SIZE = 700;
     
     
     protected static $user;
@@ -498,7 +498,8 @@ class PictureUpload extends \CBitrixComponent
             'MODERATE_TEXT' => $picture->getModerateText(),
         );
         
-        
+        // Конвертор римских чисел.
+        $numconv = new NumConvertor();
         
         $result['ISYEAR'] = ($data[Picture::FIELD_IS_YEAR_FROM]) ? ('YEAR') : ('CENTURY');
         
@@ -510,8 +511,6 @@ class PictureUpload extends \CBitrixComponent
         } else {
             $dateF = $data[Picture::FIELD_PERIOD_FROM];
             $dateT = $data[Picture::FIELD_PERIOD_TO];
-            
-            $numconv = new NumConvertor();
             
             $result['PERIOD_FROM'] = ($result['ISYEAR'] == 'YEAR') ? (abs($dateF)) : ($numconv->toRoman(abs($dateF) / TIME_YEARS_IN_CENTURY));
             $result['PERIOD_TO']   = ($result['ISYEAR'] == 'YEAR') ? (abs($dateT)) : ($numconv->toRoman(abs($dateT) / TIME_YEARS_IN_CENTURY));

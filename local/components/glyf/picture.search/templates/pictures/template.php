@@ -6,9 +6,8 @@
 <? IncludeComponentTemplateLangFile(__FILE__, $this->GetFolder()) ?>
 
 <? $this->setFrameMode(true); ?>
-
-<? if (!empty($arResult['ITEMS'])) { ?>
-    <div class="col-sm-6 col-lg-8">
+<div class="col-sm-6 col-lg-8">
+    <? if (!empty($arResult['ITEMS'])) { ?>
         <div class="row">
             <? foreach ($arResult['ITEMS'] as $item) { ?>
                 <div class="col-xs-6 col-sm-4 col-md-4 col-lg-3 catalogItem-alt">
@@ -33,14 +32,9 @@
                 </div>
             <? } ?>
         </div>
-    </div>
-    <? /*
-    <div class="col-sm-3 col-lg-2 ">2
-
-    </div>
-    */ ?>
-<? } else { ?>
-    <p><?= getMessage('GL_NO_FOUND') ?></p>
-<? } ?>
+    <? } else { ?>
+        <p><?= getMessage('GL_NO_FOUND') ?></p>
+    <? } ?>
+</div>
 
 

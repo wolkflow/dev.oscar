@@ -43,7 +43,6 @@ $MESS['GL_SKETCHES'] = 'Sketches';
 $MESS['GL_OTHER'] = 'Other:';
 $MESS['GL_CUSTOMER'] = 'Customer:';
 
-
 $MESS['GL_GENRE_SELFPORTRAIT'] = 'Self portrait';
 $MESS['GL_GENRE_ANIMALISM'] = 'Animalism';
 $MESS['GL_GENRE_BATTLE'] = 'Battle';

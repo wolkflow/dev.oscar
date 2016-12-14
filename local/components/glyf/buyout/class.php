@@ -27,6 +27,8 @@ class BuyoutComponent extends \CBitrixComponent
 			return;
 		}
         
+        $this->arResult['USER'] = new Glyf\Oscar\User();
+        
         
         // Подключение шаблона компонента.
 		$this->IncludeComponentTemplate();

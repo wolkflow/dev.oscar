@@ -157,43 +157,43 @@
                     <?= getMessage('GL_SEARCH_PARAM_GENRE') ?>
                 </div>
                 <? if (count($arResult['FILTERS']['GENRE']) > 5) { ?>
-                    <? $collections = array_slice($arResult['FILTERS']['GENRE'], 0, 5); ?>
+                    <? $genres = array_slice($arResult['FILTERS']['GENRE'], 0, 5); ?>
                         <ul>
-                            <? foreach ($collections as $value => $title) { ?>
+                            <? foreach ($genres as $value => $code) { ?>
                                 <li>
                                     <label>
                                         <input type="checkbox" name="F[GENRE][]" value="<?= $value ?>" <?= (in_array($value, $arResult['DATA']['GENRE'])) ? ('checked') : ('') ?> />
-                                        <?= $title ?>
+                                        <?= getMessage('GL_GENRE_' . $code) ?>
                                    </label>
                                 </li>
                             <? } ?>
                         </ul>
-                    <? $collections = array_slice($arResult['FILTERS']['GENRE'], 5); ?>
+                    <? $genres = array_slice($arResult['FILTERS']['GENRE'], 5); ?>
                     <ul class="moreParamsList">
-                        <? foreach ($collections as $value => $title) { ?>
+                        <? foreach ($genres as $value => $code) { ?>
                             <li>
                                 <label>
                                     <input type="checkbox" name="F[COLLECTION][]" value="<?= $value ?>" <?= (in_array($value, $arResult['DATA']['COLLECTION'])) ? ('checked') : ('') ?> />
-                                    <?= $title ?>
+                                    <?= getMessage('GL_GENRE_' . $code) ?>
                                 </label>
                             </li>
                         <? } ?>
                     </ul>
 
-                    <a href="#" class="btn btn-light btn-more_params">
+                    <a href="javascript:void(0)" class="btn btn-light btn-more_params">
                         <?= getMessage('GL_SEARCH_BUTTON_MORE') ?>
                     </a>
                 <? } else { ?>
-                <ul>
-                    <? foreach ($arResult['FILTERS']['GENRE'] as $value => $title) { ?>
-                        <li>
-                            <label>
-                                <input type="checkbox" name="F[GENRE][]" value="<?= $value ?>" <?= (in_array($value, $arResult['DATA']['GENRE'])) ? ('checked') : ('') ?> />
-                                <?= $title ?>
-                            </label>
-                        </li>
-                    <? } ?>
-                </ul>
+                    <ul>
+                        <? foreach ($arResult['FILTERS']['GENRE'] as $value => $code) { ?>
+                            <li>
+                                <label>
+                                    <input type="checkbox" name="F[GENRE][]" value="<?= $value ?>" <?= (in_array($value, $arResult['DATA']['GENRE'])) ? ('checked') : ('') ?> />
+                                    <?= getMessage('GL_GENRE_' . $code) ?>
+                                </label>
+                            </li>
+                        <? } ?>
+                    </ul>
                 <? } ?>
             </div>
             <ul class="filters">
@@ -222,11 +222,11 @@
                         <?= getMessage('GL_SEARCH_PARAM_COLOR') ?>
                     </label>
                     <ul>
-                        <? foreach ($arResult['FILTERS']['COLOR'] as $value => $title) { ?>
+                        <? foreach ($arResult['FILTERS']['COLOR'] as $value => $code) { ?>
                             <li>
                                 <label>
                                     <input type="checkbox" name="F[COLOR][]" value="<?= $value ?>" <?= (in_array($value, $arResult['DATA']['COLOR'])) ? ('checked') : ('') ?> />
-                                    <?= $title ?>
+                                    <?= getMessage('GL_COLOR_' . $code) ?>
                                </label>
                             </li>
                         <? } ?>
@@ -237,11 +237,11 @@
                         <?= getMessage('GL_SEARCH_PARAM_LEGAL') ?>
                     </label>
                     <ul>
-                        <? foreach ($arResult['FILTERS']['LEGAL'] as $value => $title) { ?>
+                        <? foreach ($arResult['FILTERS']['LEGAL'] as $value => $code) { ?>
                             <li>
                                 <label>
                                     <input type="checkbox" name="F[LEGAL][]" value="<?= $value ?>" <?= (in_array($value, $arResult['DATA']['LEGAL'])) ? ('checked') : ('') ?> />
-                                    <?= $title ?>
+                                    <?= getMessage('GL_LEGAL_' . $code) ?>
                                </label>
                             </li>
                         <? } ?>

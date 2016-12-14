@@ -6068,8 +6068,9 @@ input.input-error:not(.disabled) {
     border-bottom: 0 !important;
   }
 }
-.errros {
-  padding: 10px;
+.errros,
+.form-error {
+  padding: 7px 10px;
   border: 1px solid #e13721;
   color: #e13721;
   margin-bottom: 20px;

@@ -19,13 +19,14 @@
 		<?= getMessage('GL_AUTHORIZATION') ?>
 		<div class="modalClose arcticmodal-close"></div>
 	</div>
-	<? //print_r($arParams) ?>
-	<? //print_r($arResult) ?>
+
 	<div class="modalContent">
 		<form name="system_auth_form<?= $arResult['RND'] ?>" method="post">
-            <div class="form-error">
-                <?= $arResult['ERROR_MESSAGE'] ?>
-            </div>
+            <? if (!empty($arResult['ERROR_MESSAGE'])) { ?>
+                <div class="form-error">
+                    <?= $arResult['ERROR_MESSAGE'] ?>
+                </div>
+            <? } ?>
 			<input type="hidden" name="AUTH_FORM" value="Y" />
 			<input type="hidden" name="TYPE" value="AUTH" />
 			<? if (strlen($arResult['BACKURL']) > 0) { ?>

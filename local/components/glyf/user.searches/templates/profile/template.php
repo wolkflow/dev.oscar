@@ -5,10 +5,10 @@
 <? $this->setFrameMode(true); ?>
 
 <div class="filterSave">
-    <a href="javascript:void(0)" class="btn btn-filter_save" data-collapse-target="searchSave"><?= getMessage('GL_SAVE_SEARCH') ?></a>
+    <a href="javascript:void(0)" class="btn btn-filter_save" data-collapse-target="searchSave"><?= getMessage('GL_SEARCHES') ?></a>
     <div class="filterSaveInner hide" data-collapse-block="searchSave">
         
-        <input id="js-search-title-id" type="text" placeholder="Введите название" />
+        <input id="js-search-title-id" type="text" placeholder="<?= getMessage('GL_SEARCH_INPUT_TITLE') ?>" />
         <a href="javascript:void(0)" id="js-search-save-id" class="btn btn-light btn-filter_edit"><?= getMessage('GL_SAVE') ?></a>
         <hr/>
         
