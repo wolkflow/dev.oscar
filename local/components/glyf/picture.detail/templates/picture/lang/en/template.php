@@ -21,3 +21,4 @@ $MESS['GL_CATEGORY'] = 'Category:';
 $MESS['GL_DOWNLOAD'] = 'Download';
 $MESS['GL_ADD_TO_CART'] = 'add to cart';
 $MESS['GL_KEYWORDS'] = 'Keywords';
+$MESS['GL_CM'] = 'cm';

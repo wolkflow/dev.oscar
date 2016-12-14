@@ -9,7 +9,7 @@
 <div class="col-sm-3 col-lg-2 sidebarLeft">
     
     <form id="js-filter-sideform-id" action="/search/">
-        <div class="sidebarLeftTitle formParamsTitle" data-expand-target="formParams">
+        <div class="sidebarLeftTitle formParamsTitle  is-expanded" data-expand-target="formParams">
             <?= getMessage('GL_SEARCH_PARAMS') ?>
         </div>
     
@@ -100,7 +100,7 @@
             </ul>
         </div>
     
-        <div class="sidebarLeftTitle" data-expand-target="formFilters">
+        <div class="sidebarLeftTitle is-expanded" data-expand-target="formFilters">
             <?= getMessage('GL_SEARCH_FILTERS') ?>
         </div>
         

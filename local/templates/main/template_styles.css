@@ -4153,6 +4153,9 @@ a.catmark:hover {
   font-size: 14px;
   padding-left: 4px;
   position: relative;
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .filterSaveInner li a {
   color: #000;
@@ -5490,6 +5493,11 @@ a.btn.btn-test2 {
   position: absolute;
   left: 6px;
   top: 4px;
+}
+
+.tariffBlockPrice .tariff-buy-info {
+  font-size: 22px;
+  padding: 10px 25px 15px 25px;
 }
 
 @media (max-width: 370px) {

@@ -52,9 +52,15 @@
                                 <?= intval($item['CATALOG_PURCHASING_PRICE']) ?>
                                 <?= getMessage('GL_ROUBLES_PER_MONTH') ?>
                             </div>
-                            <a href="javascript:void(0)" class="buy-tariff js-buy-tariff" data-tid="<?= $item['ID'] ?>">
-                                <?= getMessage('GL_BUY') ?>
-                            </a>
+                            <? if ($item['PROPERTIES']['CANBUY']['VALUE'] == 'Y') { ?>
+                                <a href="javascript:void(0)" class="buy-tariff js-buy-tariff" data-tid="<?= $item['ID'] ?>">
+                                    <?= getMessage('GL_BUY') ?>
+                                </a>
+                            <? } else { ?>
+                                <div class="tariff-buy-info">
+                                    <?= getMessage('GL_BUY_INFO') ?>
+                                </div>
+                            <? } ?>
                         </div>
                     </div>
                 </div>

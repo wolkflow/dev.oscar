@@ -21,3 +21,4 @@ $MESS['GL_CATEGORY'] = 'Категория:';
 $MESS['GL_DOWNLOAD'] = 'Скачать';
 $MESS['GL_ADD_TO_CART'] = 'Добавить в корзину';
 $MESS['GL_KEYWORDS'] = 'Ключевые слова';
+$MESS['GL_CM'] = 'см';

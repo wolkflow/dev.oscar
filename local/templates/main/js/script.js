@@ -107,6 +107,26 @@ $(document).ready(function () {
 		}
 	});
 
+	$('[data-expand-target]').on('click', function(){
+		var target = $('[data-expand-block='+$(this).data('expand-target')+']');
+			if($(this).hasClass('is-expanded')) {
+				$(target).slideUp(200);
+				$(this).removeClass('is-expanded');
+			} else {
+				$(target).slideDown(200);
+				$(this).addClass('is-expanded');
+			}
+			return false;
+		console.log(target)
+	});
+
+	$('#js-searches-id li a').each(function(){
+		var str = $(this).text();
+		if(str.length > 15) {
+			$(this).attr('title', str)
+		}
+	});
+
 	$('.cabinet-panel__toggler').on('click', function(){
 		$(this).toggleClass('is-expanded').closest('.cabinet-block').toggleClass('is-expanded');
 	});

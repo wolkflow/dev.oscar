@@ -68,53 +68,56 @@
                         <?= $arResult['PICTURE'][Picture::FIELD_LANG_DESC_SFX . CURRENT_LANG_UP] ?>
                     </div>
                 </div>
-                <div class="card-description">
-                    <div class="card-description__title"><?= getMessage('GL_ADDITIONAL_INFORMATION') ?></div>
-                    <div class="card-description__text">
-                        <div class="card-meta">
-                            <span class="card-meta__key"><?= getMessage('GL_PROVENANCE') ?></span>
-                            <span class="card-meta__value">
-                                <?= $arResult['PICTURE'][Picture::FIELD_PROVENANCE_SFX . CURRENT_LANG_UP] ?>
-                            </span>
-                        </div>
-                        <div class="card-meta">
-                            <span class="card-meta__key"><?= getMessage('GL_RESTORATION_WORK') ?></span>
-                            <span class="card-meta__value">
-                                <?= $arResult['PICTURE'][Picture::FIELD_RESTORATION_SFX . CURRENT_LANG_UP] ?>
-                            </span>
-                        </div>
-                        <div class="card-meta">
-                            <span class="card-meta__key"><?= getMessage('GL_TECHNICAL_CONDITION') ?></span>
-                            <span class="card-meta__value">
-                                <?= $arResult['PICTURE'][Picture::FIELD_TECHNICAL_SFX . CURRENT_LANG_UP] ?>
-                            </span>
-                        </div>
-                        <div class="card-meta">
-                            <span class="card-meta__key"><?= getMessage('GL_CUSTOMER') ?></span>
-                            <span class="card-meta__value">
-                                <?= $arResult['PICTURE'][Picture::FIELD_CUSTOMER_SFX . CURRENT_LANG_UP] ?>
-                            </span>
-                        </div>
-                        <div class="card-meta">
-                            <span class="card-meta__key"><?= getMessage('GL_MODEL') ?></span>
-                            <span class="card-meta__value">
-                                <?= $arResult['PICTURE'][Picture::FIELD_RESTORATION_SFX . CURRENT_LANG_UP] ?>
-                            </span>
-                        </div>
-                        <div class="card-meta">
-                            <span class="card-meta__key"><?= getMessage('GL_SKETCHES') ?></span>
-                            <span class="card-meta__value">
-                                <?= $arResult['PICTURE'][Picture::FIELD_SKETCHES_SFX . CURRENT_LANG_UP] ?>
-                            </span>
-                        </div>
-                        <div class="card-meta">
-                            <span class="card-meta__key"><?= getMessage('GL_OTHER') ?></span>
-                            <span class="card-meta__value">
-                                <?= $arResult['PICTURE'][Picture::FIELD_OTHER_SFX . CURRENT_LANG_UP] ?>
-                            </span>
+                
+                <? if ($arResult['ACCESS']['INFO']) { ?>
+                    <div class="card-description">
+                        <div class="card-description__title"><?= getMessage('GL_ADDITIONAL_INFORMATION') ?></div>
+                        <div class="card-description__text">
+                            <div class="card-meta">
+                                <span class="card-meta__key"><?= getMessage('GL_PROVENANCE') ?></span>
+                                <span class="card-meta__value">
+                                    <?= $arResult['PICTURE'][Picture::FIELD_PROVENANCE_SFX . CURRENT_LANG_UP] ?>
+                                </span>
+                            </div>
+                            <div class="card-meta">
+                                <span class="card-meta__key"><?= getMessage('GL_RESTORATION_WORK') ?></span>
+                                <span class="card-meta__value">
+                                    <?= $arResult['PICTURE'][Picture::FIELD_RESTORATION_SFX . CURRENT_LANG_UP] ?>
+                                </span>
+                            </div>
+                            <div class="card-meta">
+                                <span class="card-meta__key"><?= getMessage('GL_TECHNICAL_CONDITION') ?></span>
+                                <span class="card-meta__value">
+                                    <?= $arResult['PICTURE'][Picture::FIELD_TECHNICAL_SFX . CURRENT_LANG_UP] ?>
+                                </span>
+                            </div>
+                            <div class="card-meta">
+                                <span class="card-meta__key"><?= getMessage('GL_CUSTOMER') ?></span>
+                                <span class="card-meta__value">
+                                    <?= $arResult['PICTURE'][Picture::FIELD_CUSTOMER_SFX . CURRENT_LANG_UP] ?>
+                                </span>
+                            </div>
+                            <div class="card-meta">
+                                <span class="card-meta__key"><?= getMessage('GL_MODEL') ?></span>
+                                <span class="card-meta__value">
+                                    <?= $arResult['PICTURE'][Picture::FIELD_RESTORATION_SFX . CURRENT_LANG_UP] ?>
+                                </span>
+                            </div>
+                            <div class="card-meta">
+                                <span class="card-meta__key"><?= getMessage('GL_SKETCHES') ?></span>
+                                <span class="card-meta__value">
+                                    <?= $arResult['PICTURE'][Picture::FIELD_SKETCHES_SFX . CURRENT_LANG_UP] ?>
+                                </span>
+                            </div>
+                            <div class="card-meta">
+                                <span class="card-meta__key"><?= getMessage('GL_OTHER') ?></span>
+                                <span class="card-meta__value">
+                                    <?= $arResult['PICTURE'][Picture::FIELD_OTHER_SFX . CURRENT_LANG_UP] ?>
+                                </span>
+                            </div>
                         </div>
                     </div>
-                </div>
+                <? } ?>
             </div>
             <div class="col-md-4 col-sm-5">
                 <h1>
@@ -150,7 +153,7 @@
                         <?= number_format(($arResult['PICTURE'][Picture::FIELD_WIDTH] / 10), 1, ',', '') ?>
                         &times;
                         <?= number_format(($arResult['PICTURE'][Picture::FIELD_HEIGHT] / 10), 1, ',', '')  ?>
-                        см
+                        <?= getMessage('GL_CM') ?>
                     </span>
                 </div>
                 <div class="card-meta">

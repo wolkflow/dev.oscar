@@ -11,8 +11,6 @@
 
 <main class="siteMain">
     <?	// Тарифы.
-        $GLOBALS['arTariffsFilter'] = array('PROPERTY_CANBUY' => 'Y');
-    
         $APPLICATION->IncludeComponent(
             "bitrix:catalog.section",
             "tariffs",
@@ -28,7 +26,7 @@
                 "ELEMENT_SORT_ORDER" => "ASC",
                 "ELEMENT_SORT_FIELD2" => "ID",
                 "ELEMENT_SORT_ORDER2" => "ASC",
-                "FILTER_NAME" => "arTariffsFilter",
+                "FILTER_NAME" => "",
                 "INCLUDE_SUBSECTIONS" => "Y",
                 "SHOW_ALL_WO_SECTION" => "Y",
                 "SECTION_URL" => "",
