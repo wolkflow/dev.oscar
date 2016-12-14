@@ -113,6 +113,10 @@ class StatisticSalesComponent extends \CBitrixComponent
             
         }
         
+        if ($this->arParams['PAGE'] <= 0) {
+            $this->arParams['PAGE'] = 1;
+        }
+        
         // Параметры поиска.
         $params = array(
             'order'  => $this->arParams['ORDER'],

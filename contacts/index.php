@@ -48,9 +48,9 @@
 	<?	// Форма отправки контакта.
 		$APPLICATION->IncludeComponent(
 			"glyf:form.mail",
-			"feedback",
+			"contacts",
 			array(
-				'FORM'     => 'CONTACTS',
+				'FORM'     => 'GL_CONTACT',
 				'CAPTCHA'  => 'N',
 				'FIELDS'   => array('NAME', 'PHONE', 'EMAIL'),
 				'REQUIRED' => array('NAME', 'PHONE', 'EMAIL'),

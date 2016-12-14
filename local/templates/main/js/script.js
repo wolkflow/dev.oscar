@@ -95,16 +95,17 @@ $(document).ready(function () {
 	$('[data-collapse-target]').on('click', function(){
 		if (!$(this).hasClass('is-expanded')) {
 			var target = $('[data-collapse-block='+$(this).data('collapse-target')+']');
-			$(this).parents('.col-lg-2').find($('[data-collapse-target]')).removeClass('is-expanded');
-			$(this).parents('.col-lg-2').find($('[data-collapse-block]')).slideUp(200);
+			$('[data-collapse-target]').removeClass('is-expanded');
+			$('[data-collapse-block]').slideUp(200);
 			$(this).addClass('is-expanded');
 			$(target).stop().slideDown(200, function(){
 				$(target).removeClass('collapsed');
 			});
 			$('.js-acitve-lightbox').removeClass('js-acitve-lightbox');
-			$(this).parent().addClass('js-acitve-lightbox')
-			return false;
+			$(this).parent().addClass('js-acitve-lightbox');
+			console.log(target)
 		}
+		return false;
 	});
 
 	$('[data-expand-target]').on('click', function(){

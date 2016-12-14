@@ -16,11 +16,11 @@
     <div class="lightboxes">
         <? $first = true ?>
         <? foreach ($arResult['LIGHTBOXES'] as $item) { ?>
-            <div id="js-side-lightbox-<?= $item['ID'] ?>-id" class="lightboxes__item js-lightbox <?= ($first) ? ('js-acitve-lightbox') : ('') ?>"" data-lid="<?= $item['ID'] ?>">
-                <div class="lightboxes__item-title <?= ($first) ? ('is-expanded') : ('') ?>"" data-collapse-target="<?= $item['ID'] ?>"> <? // добавь класс is-expanded Первому в списке ?>
+            <div id="js-side-lightbox-<?= $item['ID'] ?>-id" class="lightboxes__item js-lightbox <?= ($first) ? ('js-acitve-lightbox') : ('') ?>" data-lid="<?= $item['ID'] ?>">
+                <div class="lightboxes__item-title <?= ($first) ? ('is-expanded') : ('') ?>" data-collapse-target="<?= $item['ID'] ?>"> <? // добавь класс is-expanded Первому в списке ?>
                     <?= $item['UF_TITLE'] ?>
                 </div>
-                <div class="lightboxes__item-content js-lightbox-content <?= ($first) ? ('') : ('collapsed') ?>"" data-collapse-block="<?= $item['ID'] ?>"> <? // убери класс collapsed у первого в списке ?>
+                <div class="lightboxes__item-content js-lightbox-content <?= ($first) ? ('') : ('collapsed') ?>" data-collapse-block="<?= $item['ID'] ?>"> <? // убери класс collapsed у первого в списке ?>
                     <div class="lightboxes__item-pictures js-lightbox-pictures">
                         <? if (!empty($item['PICTURES'])) { ?>
                             <? $chunks = array_chunk($item['PICTURES'], 3) ?>

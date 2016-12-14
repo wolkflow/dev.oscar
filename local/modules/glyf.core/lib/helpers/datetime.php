@@ -13,6 +13,8 @@ IncludeModuleLangFile(__FILE__);
 class DateTime
 {	
 
+
+
     /** 
      * Получение квартала по текущей дате.
      */
@@ -22,19 +24,23 @@ class DateTime
             $date = time();
         }
         
-        $month = (int) date('n', (int) $date);
-        $month = intval($month / TIME_MONTH_IN_QUARTER);
+        // Дельта для верного округления.
+        $delta = 0.1;
         
-        if ($month == 0) {
-            $month = 1;
+        $quarter = (int) date('n', (int) $date);
+        $quarter = ceil($quarter / TIME_MONTH_IN_QUARTER - $delta);
+        
+        if ($quarter == 0) {
+            $quarter = 1;
         }
         
-        $monthB = $month * TIME_MONTH_IN_QUARTER;
-        $monthF = $month * TIME_MONTH_IN_QUARTER + TIME_MONTH_IN_QUARTER + 1;
-
-        $dateB = new \DateTime('01.' . $monthB . '.' . date('Y'));
-        $dateF = clone $dateB;
-        $dateF->add(new \DateInterval('P'.TIME_MONTH_IN_QUARTER.'M'));
+        $month = $quarter * TIME_MONTH_IN_QUARTER - (TIME_MONTH_IN_QUARTER - 1);
+        
+        $dateB = new \DateTime('01.' . $month . '.' . date('Y'));
+        $dateF = new \DateTime('01.' . $month . '.' . date('Y'));
+        
+        $dateF->modify('+' . TIME_MONTH_IN_QUARTER . ' month')->modify('-1 day');
+        
         
         return array('begin' => $dateB->getTimestamp(), 'finish' => $dateF->getTimestamp());
     }

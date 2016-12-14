@@ -1676,7 +1676,9 @@ input[type='submit'].styler[disabled] {
 .card-right__add-to-cart .btn {
   margin: 5px 0;
 }
-
+.lightboxes {
+  padding-bottom: 20px;
+}
 .lightboxes__item{
   margin-bottom: 5px; }
 

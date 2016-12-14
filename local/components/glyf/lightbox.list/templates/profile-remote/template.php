@@ -30,14 +30,6 @@
                         </span>
                     </div>
                 </span>
-                <? /*
-                <span>
-                    <?= $item['UF_TITLE'] ?>
-                </span>
-                <label>
-                    <input type="checkbox" name="LIGHTBOX[]" class="js-personal-lightbox" value="<?= $item['ID']?>" />
-                </label>
-                */ ?>
             </div>
             <div class="cabinet-lightbox__content">
                 <div class="lightboxes__item-pictures js-lightbox-pictures">
