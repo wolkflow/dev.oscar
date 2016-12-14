@@ -338,21 +338,11 @@ $(document).ready(function () {
         }
     });
 
-	$('.card-image__container > img, .lightboxes-setImage > img').draggable({
+	$('.card-image__container > img, .lightboxes-setImage > img, .catalogItemImage-alt').draggable({
 		revert: 'invalid',
 		helper: 'clone',
 		cursor: "move",
 		cursorAt: { top: 35, left: 35}
-	});
-    
-	$(".lightboxes__item").droppable({
-		drop:function(event, ui) {
-            var $that = $(this);
-            var $item = ui.draggable;
-            
-            $that.addClass('newItemAdded');
-			addPictureToLignhbox($item.data('pid'), $that.data('lid'), 'side');
-		}
 	});
     
     $('.styler, /*input[type="checkbox"],*/ .form input').styler();

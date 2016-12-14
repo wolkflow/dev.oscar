@@ -19,7 +19,7 @@
             <div class="lightboxes">
                 <? $first = true ?>
                 <? foreach ($arResult['LIGHTBOXES'] as $item) { ?>
-                    <div id="js-side-lightbox-<?= $item['ID'] ?>-id" class="lightboxes__item js-lightbox <?= ($first) ? ('js-acitve-lightbox') : ('') ?>" data-lid="<?= $item['ID'] ?>">
+                    <div id="js-side-lightbox-<?= $item['ID'] ?>-id" class="lightboxes__item js-lightbox js-lightbox-drop <?= ($first) ? ('js-acitve-lightbox') : ('') ?>" data-lid="<?= $item['ID'] ?>">
                         <div class="lightboxes__item-title <?= ($first) ? ('is-expanded') : ('') ?>" data-collapse-target="lightbox-<?= $item['ID'] ?>">
                             <?= $item['UF_TITLE'] ?>
                         </div>

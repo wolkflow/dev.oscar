@@ -103,7 +103,7 @@
                     <label for="regacept">
                         <input type="checkbox" id="regacept" name="AGREEMENT" value="Y" /> 
                         <?= getMessage('GL_AGREE_WITH') ?> 
-                        <a href="#"><?= getMessage('GL_OFFER_CONTRACT') ?></a>
+                        <a href="/rules/" target="_blank"><?= getMessage('GL_OFFER_CONTRACT') ?></a>
                     </label>
                 </li>
                 <li>

@@ -28,4 +28,5 @@ $MESS['GL_SALES_HISTORY'] = 'Sales history';
 $MESS['GL_STATISTICS_VIEW_SALES'] = 'The statistics of view / sales';
 $MESS['GL_PROFILE'] = 'Profile';
 $MESS['GL_COLLECTION_NO_LIGHTBOX'] = 'Collection';
-$MESS['GL_ADD_TO_CART'] = 'add to cart';
+$MESS['GL_ADD_TO_CART'] = 'Add to cart';
+$MESS['GL_LIGHTBOX_PICTURES_NO_FOUND'] = 'At the moment, there is no collection';

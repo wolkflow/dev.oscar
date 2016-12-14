@@ -89,7 +89,7 @@
                     </div>
                     
                     <div id="js-buyout-price-wrap-id" class="buyoutPrice hide">
-                        <span id="js-buyout-price-id"></span>р.
+                        <span id="js-buyout-price-id"></span> <?= getMessage('GL_RUB') ?>
                     </div>
                     <input id="js-buyout-submit-id" type="button" data-bid="<?= $arResult['BASKET']['ID'] ?>" data-pid="<?= $arResult['PICTURE']['ID'] ?>" class="btn btn-sm btn-default hide" value="<?= getMessage('GL_CONFIRM') ?>" />
                 </form>

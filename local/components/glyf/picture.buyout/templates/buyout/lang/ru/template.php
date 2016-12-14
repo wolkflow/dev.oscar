@@ -16,3 +16,4 @@ $MESS['GL_IF_YOU_HAVE_NOT_FOUND'] = 'Если Вы не нашли нужный 
 $MESS['GL_CONFIRM'] = 'Подтвердить';
 $MESS['GL_CLICK_IMAGE_LEFT'] = 'Для покупки кликните на изображение слева.';
 $MESS['GL_CM'] = 'см';
+$MESS['GL_RUB'] = 'р.';

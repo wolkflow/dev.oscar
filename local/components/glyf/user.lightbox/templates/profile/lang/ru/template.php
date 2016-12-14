@@ -27,3 +27,4 @@ $MESS['GL_STATISTICS_VIEW_SALES'] = 'Статистика просмотров /
 $MESS['GL_PROFILE'] = 'Профиль';
 $MESS['GL_COLLECTION_NO_LIGHTBOX'] = 'Коллекции';
 $MESS['GL_ADD_TO_CART'] = 'добавить в корзину';
+$MESS['GL_LIGHTBOX_PICTURES_NO_FOUND'] = 'На данный момент нет ни одного сборника';

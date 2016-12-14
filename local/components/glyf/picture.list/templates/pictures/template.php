@@ -13,7 +13,7 @@
             <? foreach ($arResult['ITEMS'] as $item) { ?>
                 <div class="col-xs-6 col-sm-4 col-md-4 col-lg-3 catalogItem-alt">
                     <a href="<?= $item['DETAIL_URL'] ?>">
-                        <div class="catalogItemImage-alt" style="background-image: url(<?= CFile::getPath($item[Picture::FIELD_SMALL_FILE]) ?>"></div>
+                        <div class="catalogItemImage-alt js-picture-drag" data-pid="<?= $item[Picture::FIELD_ID] ?>" style="background-image: url(<?= CFile::getPath($item[Picture::FIELD_SMALL_FILE]) ?>"></div>
                     </a>
                     <div class="catalogItemTitle-alt">
                         <a href="<?= $item['COLLECTION']['SECTION_PAGE_URL'] ?>">

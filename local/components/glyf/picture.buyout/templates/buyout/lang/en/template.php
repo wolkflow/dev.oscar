@@ -16,3 +16,4 @@ $MESS['GL_IF_YOU_HAVE_NOT_FOUND'] = 'If You have not found the desired type of u
 $MESS['GL_CONFIRM'] = 'Confirm';
 $MESS['GL_CLICK_IMAGE_LEFT'] = 'To buy click on the image to the left.';
 $MESS['GL_CM'] = 'cm';
+$MESS['GL_RUB'] = 'rub';

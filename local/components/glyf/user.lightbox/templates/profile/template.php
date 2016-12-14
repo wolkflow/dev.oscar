@@ -50,7 +50,7 @@
                     ?>
                 <? } else { ?>
                     <div class="lightbox-empty">
-                        <?= getMessage('GL_LAIGHTBOX_PICTURES_NO_FOUND') ?>
+                        <?= getMessage('GL_LIGHTBOX_PICTURES_NO_FOUND') ?>
                     </div>
                 <? } ?>
             </div>

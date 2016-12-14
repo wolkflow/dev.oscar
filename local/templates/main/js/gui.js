@@ -188,4 +188,36 @@ $(document).ready(function() {
             }
         });
     });
+    
+    // Перетаскивание объекта в сборник.
+    $('.js-picture-drag').draggable({
+		revert: 'invalid',
+		helper: 'clone',
+		cursor: 'move',
+		cursorAt: { top: 35, left: 35 }
+	});
+    
+    // Перетаскивание объекта в сборник.
+    $('.js-lightbox-drop').droppable({
+		drop: function(event, ui) {
+            var $that = $(this);
+            var $item = ui.draggable;
+            
+            $that.addClass('newItemAdded');
+			addPictureToLignhbox($item.data('pid'), $that.data('lid'), 'side');
+		}
+	});
+
+    // Перетаскивание объекта в сборник.
+    /*
+	$('.lightboxes__item').droppable({
+		drop: function(event, ui) {
+            var $that = $(this);
+            var $item = ui.draggable;
+
+            $that.addClass('newItemAdded');
+			addPictureToLignhbox($item.data('pid'), $that.data('lid'), 'side');
+		}
+	});
+    */
 });
