@@ -1,6 +1,7 @@
 <?php
 
 $MESS['GL_ERROR_NOT_AUTHORIZED'] = 'Вы не авторизованы';
+$MESS['GL_ERROR_LIGHTBOX_NO_TITLE'] = 'Не указано название сборника';
 $MESS['GL_ERROR_LIGHTBOX_NO_EXISTS'] = 'Сборник не существует';
 $MESS['GL_ERROR_LIGHTBOX_NOT_FOUND'] = 'Сборник не найден';
 $MESS['GL_ERROR_NO_INSERT_PICTURE'] = 'Ошибка добавления картины';

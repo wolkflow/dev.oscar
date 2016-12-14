@@ -6,7 +6,3 @@ $MESS['GL_GO'] = 'ПЕРЕЙТИ';
 $MESS['GL_TO_CREATE_A_NEW'] = 'Создать новый';
 $MESS['GL_DRAG_IMAGE_COLLECTION'] = 'Добавьте новый сборник';
 $MESS['GL_COLLECTIONS_LOG_IN'] = 'Для создания сборников вам необходимо авторизоваться.';
-
-$MESS['GL_INPUT_TITLE'] = 'Введите название';
-$MESS['GL_SAVE'] = 'Сохранить';
-$MESS['GL_CANCEL'] = 'Отменить';

@@ -311,10 +311,18 @@ switch ($action) {
     
     // Создание сборника.
     case ('create-lightbox'):
-        $title = (string) $request->get('title');
+        $title  = (string) $request->get('title');
+        $active = (int)    $request->get('active');
+        $onside = (bool)   $request->get('onside');
+        
+        $title = trim($title);
         
         if (!CUser::IsAuthorized()) {
             jsonresponse(false, getMessage('GL_ERROR_NOT_AUTHORIZED'));
+        }
+        
+        if (empty($title)) {
+            jsonresponse(false, getMessage('GL_ERROR_LIGHTBOX_NO_TITLE'));
         }
         
         // Пользователь.
@@ -339,7 +347,12 @@ switch ($action) {
         if (!$lightbox->add($data)) {
             jsonresponse(false, getMessage('GL_ERROR_NO_INSERT_LIGHTBOX'));
         }
-        jsonresponse(true);
+        
+        $html = '';
+        if ($onside) {
+            $html = gethtmlremote('lightbox.list.side.php');
+        }
+        jsonresponse(true, '', array('html' => $html));
         break;
     
     

@@ -6,7 +6,3 @@ $MESS['GL_GO'] = 'GO';
 $MESS['GL_TO_CREATE_A_NEW'] = 'Create new';
 $MESS['GL_DRAG_IMAGE_COLLECTION'] = 'Add new lightbox';
 $MESS['GL_COLLECTIONS_LOG_IN'] = 'To create the lightboxes you need to login.';
-
-$MESS['GL_INPUT_TITLE'] = 'Input title';
-$MESS['GL_SAVE'] = 'Save';
-$MESS['GL_CANCEL'] = 'Cancel';

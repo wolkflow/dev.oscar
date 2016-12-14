@@ -12,9 +12,13 @@ class LightboxListComponent extends \CBitrixComponent
 	 */
     public function onPrepareComponentParams($arParams)
     {   
+        // Активный сборник.
+        $arParams['ACTIVE'] = (int) $arParams['ACTIVE'];
+    
         // Лимит отображения.
         $arParams['LIMIT'] = (int) $arParams['LIMIT'];
-    
+        
+        
         return $arParams;
 	}
 	
@@ -35,7 +39,9 @@ class LightboxListComponent extends \CBitrixComponent
         
         $this->arResult = array();
         
-       
+        // Активный (открытый) борник.
+        $this->arResult['ACTIVE'] = $this->arParams['ACTIVE'];
+        
         // Пользователь.
         $this->arResult['USER'] = new Glyf\Oscar\User();
         
@@ -58,10 +64,17 @@ class LightboxListComponent extends \CBitrixComponent
             // Общее количество картин в сборнике.
             $data['COUNT'] = $lightbox->getPicturesCount();
             
-            
             $this->arResult['LIGHTBOXES'][$lightbox->getID()] = $data;
         }
         
+        $lightbox = reset($this->arResult['LIGHTBOXES']);
+        
+        if (empty($this->arResult['ACTIVE'])) {
+            $this->arResult['ACTIVE'] = $lightbox['ID'];
+        }
+        unset($lightbox);
+        
+        // Общее количество сборников.
         $this->arResult['LIGHTBOXES_COUNT'] = $this->arResult['USER']->getLightboxesCount();
         
         

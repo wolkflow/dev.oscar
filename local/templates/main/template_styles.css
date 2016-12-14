@@ -2748,6 +2748,15 @@ input[type=text].le.disabled {
   overflow: hidden;
   min-height: 60px;
 }
+.lightbox__new {
+  min-height: 102px;
+  position: relative;
+  z-index: 5;
+  display: table;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+}
 
 .cabinet-lightbox__new a.le-start{
   display: table-cell;
@@ -4184,6 +4193,15 @@ a.catmark:hover {
 }
 .filterSaveInner ul li a:hover:before {
   background-position: -38px -101px;
+}
+.sideAddLightbox {
+  display: table-cell;
+  width: 100%;
+  height: 100%;
+  vertical-align: middle;
+  font-size: 80px;
+  text-decoration: none !important;
+  color: white;
 }
 /*
 .filterSaveInner li a.requestTitle.edit:before {

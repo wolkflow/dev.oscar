@@ -93,7 +93,7 @@ $(document).ready(function () {
 	});
 
 	$('[data-collapse-target]').on('click', function(){
-		if(!$(this).hasClass('is-expanded')) {
+		if (!$(this).hasClass('is-expanded')) {
 			var target = $('[data-collapse-block='+$(this).data('collapse-target')+']');
 			$(this).parents('.col-lg-2').find($('[data-collapse-target]')).removeClass('is-expanded');
 			$(this).parents('.col-lg-2').find($('[data-collapse-block]')).slideUp(200);
@@ -109,15 +109,15 @@ $(document).ready(function () {
 
 	$('[data-expand-target]').on('click', function(){
 		var target = $('[data-expand-block='+$(this).data('expand-target')+']');
-			if($(this).hasClass('is-expanded')) {
-				$(target).slideUp(200);
-				$(this).removeClass('is-expanded');
-			} else {
-				$(target).slideDown(200);
-				$(this).addClass('is-expanded');
-			}
-			return false;
-		console.log(target)
+        
+        if( $(this).hasClass('is-expanded')) {
+            $(target).slideUp(200);
+            $(this).removeClass('is-expanded');
+        } else {
+            $(target).slideDown(200);
+            $(this).addClass('is-expanded');
+        }
+        return false;
 	});
 
 	$('#js-searches-id li a').each(function(){
@@ -265,13 +265,20 @@ $(document).ready(function () {
 			});
 		} else {
             var data = {'action': $that.attr('data-action')};
+            var callprev = $that.data('callprev');
             var callback = $that.data('callback');
+            
+            
             
 			$('input[data-le="' + le + '"]').each(function () {
                 data[$(this).prop('name')] = $(this).val();
 				$(this).prop('disabled', true).addClass('disabled');
 			});
-
+            
+            if (callprev && typeof window[callprev] == 'function') {
+                window[callprev](data);
+            }
+            
             $.ajax({
                 url: '/remote/',
                 type: 'post',

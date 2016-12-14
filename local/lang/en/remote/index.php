@@ -1,6 +1,7 @@
 <?php
 
 $MESS['GL_ERROR_NOT_AUTHORIZED'] = 'You are not logged in';
+$MESS['GL_ERROR_LIGHTBOX_NO_TITLE'] = 'Empty lightbox title';
 $MESS['GL_ERROR_LIGHTBOX_NO_EXISTS'] = 'The collection does not exist';
 $MESS['GL_ERROR_LIGHTBOX_NOT_FOUND'] = 'The collection can not be found';
 $MESS['GL_ERROR_NO_INSERT_PICTURE'] = 'Failed to add a picture';
