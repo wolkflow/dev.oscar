@@ -22,3 +22,4 @@ $MESS['GL_DOWNLOAD'] = 'Download';
 $MESS['GL_ADD_TO_CART'] = 'add to cart';
 $MESS['GL_KEYWORDS'] = 'Keywords';
 $MESS['GL_CM'] = 'cm';
+$MESS['GL_NON_COMMERCIAL'] = 'Available only for non-commercial use';

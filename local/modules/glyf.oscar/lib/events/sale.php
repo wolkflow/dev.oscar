@@ -19,12 +19,13 @@ class Sale
      */
     public static function onSalePayOrder($id, $pay)
 	{
+        $user  = new \Glyf\Oscar\User();
+        $order = new \Glyf\Oscar\Order($id);
+        
+        $data = $order->getData();
+        $data['PROPS'] = $order->getProperties();
+        
         if ($pay == 'Y') {
-            $user  = new \Glyf\Oscar\User();
-            $order = new \Glyf\Oscar\Order($id);
-            
-            $data = $order->getData();
-            $data['PROPS'] = $order->getProperties();
             
             // Пополнение баланса.
             if ($data['PROPS'][\Glyf\Oscar\Order::PROP_BALANCE_CODE]['VALUE'] == 'Y') {
@@ -37,10 +38,23 @@ class Sale
                 );
             }
             
+            // Активация тарифа.
+            if ($data['PROPS'][\Glyf\Oscar\Order::PROP_TARIFF_CODE]['VALUE'] == 'Y') {
+                //$order->recordStatisticSale();
+            }
+            
             // Запись в статистику о покупке изображения.
             if ($data['PROPS'][\Glyf\Oscar\Order::PROP_PICTURE_CODE]['VALUE'] == 'Y') {
                 $order->recordStatisticSale();
             }
+            
+        } else {
+            
+            // Деактивация тарифа.
+            if ($data['PROPS'][\Glyf\Oscar\Order::PROP_TARIFF_CODE]['VALUE'] == 'Y') {
+                //$order->recordStatisticSale();
+            }
+            
         }
     }
     
