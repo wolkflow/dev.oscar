@@ -40,6 +40,9 @@ class User extends \Glyf\Core\User
             return;
         }
         
+        $tariff = new UserTariff($this->getID());
+        
+        /*
         $result = \CSaleOrder::getList(
             array('DATE_PAYED' => 'DESC'),
             array('USER_ID' => $this->getID(), 'XML_ID' => Tariff::XML_ORDER, 'PAYED' => 'Y')
@@ -55,6 +58,8 @@ class User extends \Glyf\Core\User
                 $tariff = new UserTariff($this->getID(), strtotime($bxorder['DATE_PAYED']), (new Tariff($basket['PRODUCT_ID'])));
             }
         }
+        */
+        
         return $tariff;
     }
     

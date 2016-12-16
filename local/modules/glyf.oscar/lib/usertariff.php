@@ -3,23 +3,25 @@
 namespace Glyf\Oscar;
 
 use Glyf\Oscar\Tariff;
+use Glyf\Oscar\OrderTariff;
 use Glyf\Oscar\IPAddress;
 use Glyf\Oscar\Statistic\Download;
 
 
 class UserTariff extends \Glyf\Core\System\IBlockModel
 {
-    protected $uid       = null;
-    protected $time      = null;
-    protected $tariff    = null;
-    protected $downloads = null;
+    protected $uid         = null;
+    protected $time        = null;
+    protected $tariff      = null;
+    protected $ordertariff = null;
+    protected $downloads   = null;
     
     
-    public function __construct($uid, $time, Tariff $tariff)
+    public function __construct($uid)
     {
         $this->uid    = (int) $uid;
-        $this->time   = (int) $time;
-        $this->tariff = $tariff;
+        //$this->time   = (int) $time;
+        //$this->tariff = $tariff;
     }
     
     
@@ -46,6 +48,12 @@ class UserTariff extends \Glyf\Core\System\IBlockModel
      */
     public function getTariff()
     {
+        if (empty($this->tariff)) {
+            $ordertariff = $this->getOrderTariff();
+            if (!empty($ordertariff)) {
+                $this->tariff = $ordertariff->getTariff();
+            }
+        }
         return $this->tariff;
     }
     
@@ -55,7 +63,24 @@ class UserTariff extends \Glyf\Core\System\IBlockModel
      */
     public function getExpire()
     {
-        return ($this->getTime() + TIME_MONTH);
+        $ordertariff = $this->getOrderTariff();
+            
+        if (empty($ordertariff)) {
+            return 0;
+        }
+        return ($ordertariff->getTimeFinish()->getTimestamp());
+    }
+    
+    
+    /**
+     * Получение активного тарифа.
+     */
+    public function getOrderTariff()
+    {
+        if (empty($this->ordertariff)) {
+            $this->ordertariff = OrderTariff::current();
+        }
+        return $this->ordertariff;
     }
     
     
@@ -87,13 +112,24 @@ class UserTariff extends \Glyf\Core\System\IBlockModel
     
     
     /**
-     * Получение количества скачиваний.
+     * Получение количества скачиваний по тарифу.
      */
     public function getDownloadsCountInTariff()
     {
         if (is_null($this->download)) {
+            $ordertariff = $this->getOrderTariff();
+            
+            if (empty($ordertariff)) {
+                return 0;
+            }
+            
             $result = Download::getList(array(
-                'filter' => array(Download::FIELD_USER_ID => $this->getUserID(), '>='.Download::FIELD_TIME => date('d.m.Y', $this->getTime()))
+                'filter' => array(
+                    Download::FIELD_USER_ID     => $this->getUserID(), 
+                    Download::FIELD_BUYED       => false,
+                    '>=' . Download::FIELD_TIME => $ordertariff->getTimeBegin(),
+                    '<'  . Download::FIELD_TIME => $ordertariff->getTimeFinish(),
+                )
             ), false);
             $this->download = (int) $result->getSelectedRowsCount();
         }
@@ -106,7 +142,11 @@ class UserTariff extends \Glyf\Core\System\IBlockModel
      */
     public function getDownloadsLimit()
     {
-        return ($this->getTariff()->getDownloadLimit() - $this->getDownloadsCountInTariff());
+        $tariff = $this->getTariff();
+        if (empty($tariff)) {
+            return 0;
+        }
+        return ($tariff->getDownloadLimit() - $this->getDownloadsCountInTariff());
     }
     
     

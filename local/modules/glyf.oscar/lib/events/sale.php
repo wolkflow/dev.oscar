@@ -40,7 +40,11 @@ class Sale
             
             // Активация тарифа.
             if ($data['PROPS'][\Glyf\Oscar\Order::PROP_TARIFF_CODE]['VALUE'] == 'Y') {
-                //$order->recordStatisticSale();
+                $tariff = \Glyf\Oscar\OrderTariff::getByOrderID($order->getID());
+                
+                if (!empty($tariff) && is_object($tariff)) {
+                    $tariff->activate();
+                }
             }
             
             // Запись в статистику о покупке изображения.

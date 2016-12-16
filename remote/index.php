@@ -968,7 +968,10 @@ switch ($action) {
             $order->saveProperty(\Glyf\Oscar\Order::PROP_TARIFF_CODE, 'Y');
             
             // Ссылка на оплату.
-            $link  = $order->getPaymentURL();
+            $link = $order->getPaymentURL();
+            
+            // Запись о покупке тарифа.
+            Glyf\Oscar\OrderTariff::buy($user->getID(), $order->getID(), $tariff->getID());
             
             jsonresponse(true, '', array('link' => $link));
         }

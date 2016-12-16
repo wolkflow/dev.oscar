@@ -121,14 +121,12 @@
                                     </div>
                                 </div>
                                 <div class="cabinet-profile__block-buttons">
-                                    <? /*
-                                    <a class="btn btn-light btn-filter_edit" href="javascript:void(0)"><?= getMessage('GL_EXTEND') ?></a>
-                                    */ ?>
+                                    <a class="btn btn-light btn-filter_edit" href="javascript:void(0)" id="js-tariff-extend-id" data-tid="<?= $arResult['TARIFF']['ID'] ?>"><?= getMessage('GL_EXTEND') ?></a>
                                     <a class="btn btn-light btn-filter_edit" href="/tariffs/"><?= getMessage('GL_CHANGE') ?></a>
                                 </div>
                             </div>
                             
-                            <? if ($arResult['TARIFF']['MULTIPLE'] || 1) { ?>
+                            <? if ($arResult['TARIFF']['MULTIPLE']) { ?>
                                 <input id="js-field-multiple-copy-id" type="text" name="ips" class="le disabled" style="display:none;" disabled data-le="multiple" value="" />
                                 <div class="cabinet-profile__block">
                                     <div class="cabinet-profile__block-field">

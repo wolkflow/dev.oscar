@@ -139,8 +139,8 @@ class Picture extends HLBlockModel
     const IMAGE_SMALL_WIDTH      = 545;
     const IMAGE_SMALL_HEIGHT     = 360;
     
-    // Время на скачивание файла.
-    const DOWNLOAD_EXPIRE = 1200;//14400;
+    // Время на скачивание файла (секунд).
+    const DOWNLOAD_EXPIRE = 86400;
     
     
     
@@ -736,6 +736,12 @@ class Picture extends HLBlockModel
         
 		return $link;
 	}
+    
+    
+    public function isExpireLastDownload()
+    {
+        
+    }
 	
     
 	/**
@@ -747,9 +753,10 @@ class Picture extends HLBlockModel
             'image'  => $this->getID(),
             'user'   => $userID,
             'time'   => time(),
-            //'nbf'   => time() - 1000, // время начала использования
-           // 'exp'   => time() + 3600 * 1000, // время окончания использования
         );
+        
+        // 'nbf'   => time() - 1000, // время начала использования
+        // 'exp'   => time() + 3600 * 1000, // время окончания использования
         
         if ($ttl > 0) {
             $data['exp'] = time() + $ttl;
@@ -1143,6 +1150,7 @@ class Picture extends HLBlockModel
     {
         return $this->views;
     }
+    
     
     public function getStatSales()
     {
