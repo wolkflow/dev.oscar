@@ -9,11 +9,11 @@
 <div class="col-sm-3 col-lg-2 sidebarLeft">
     
     <form id="js-filter-sideform-id" action="/search/">
-        <div class="sidebarLeftTitle formParamsTitle  is-expanded" data-expand-target="formParams">
+        <div class="sidebarLeftTitle formParamsTitle">
             <?= getMessage('GL_SEARCH_PARAMS') ?>
         </div>
     
-        <div class="form" data-expand-block="formParams">
+        <div class="form">
             <ul class="filters filtersSet">
                 <li>
                     <label class="filtersTitle" for="js-param-title-id">
