@@ -12,31 +12,31 @@
         <tr>
             <td>
                 <label class="checkbox-me">
-                    <input type="checkbox" name="IDS[]" value="<?= $item['ID'] ?>" class="js-checkbox" />
+                    <input type="checkbox" name="IDS[]" value="<?= $item->getID() ?>" class="js-checkbox" />
                     <span></span>
                 </label>
             </td>
             <td>
-                <img class="small-image" src="<?= $item['PICTURE'] ?>" />
+                <img class="small-image" src="<?= $item->getSmallPreviewImageSrc() ?>" />
             </td>
             <td>
-                № <?= $item[Picture::FIELD_ID] ?>
+                № <?= $item->getID() ?>
             </td>
             <td>
-                <?= $item[Picture::FIELD_LANG_TITLE_SFX . CURRENT_LANG_UP] ?>
+                <?= $item->getTitle() ?>
             </td>
             <td>
-                <? if ($item[Picture::FIELD_MODERATE]) { ?>
-                    <?= date('d.m.Y', strtotime($item[Picture::FIELD_MODERATE_TIME])) ?>
+                <? if ($item->isModerate()) { ?>
+                    <?= date('d.m.Y', $item->getModerateTime()) ?>
                 <? } else { ?>
                     <span class="cabinet-table__bluetext"><?= getMessage('GL_MODERATION') ?></span>
                 <? } ?>
             </td>
             <td>
-                <?= number_format($item[Picture::FIELD_STAT_VIEWS], 0, '.' , ' ') ?>
+                <?= number_format($item->getStatViews(), 0, '.' , ' ') ?>
             </td>
             <td>
-                <?= number_format($item[Picture::FIELD_STAT_SALES], 0, '.' , ' ') ?>
+                <?= number_format($item->getStatSales(), 0, '.' , ' ') ?>
             </td>
         </tr>
     <? } ?>

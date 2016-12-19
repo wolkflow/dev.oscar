@@ -102,14 +102,9 @@ class StatisticSalesObjectsComponent extends \CBitrixComponent
             $filter['~=' . self::PREFIX_TABLE_PICTURES . Picture::FIELD_LANG_TITLE_SFX . CURRENT_LANG_UP] = '%'.$this->arParams['TITLE'].'%';
         }
         
-        if (!empty($this->arParams['PERIOD_MIN'])) {
-            $filter['>=' . self::PREFIX_TABLE_VIEWS . View::FIELD_TIME] = date('Y-m-d', strtotime($this->arParams['PERIOD_MIN']));
-            $filter['>=' . self::PREFIX_TABLE_SALES . Sale::FIELD_TIME] = date('Y-m-d', strtotime($this->arParams['PERIOD_MIN']));
-        }
         
-        if (!empty($this->arParams['PERIOD_MAX'])) {
-            $filter['<=' . self::PREFIX_TABLE_VIEWS . View::FIELD_TIME] = date('Y-m-d', strtotime($this->arParams['PERIOD_MAX']));
-            $filter['<=' . self::PREFIX_TABLE_SALES . Sale::FIELD_TIME] = date('Y-m-d', strtotime($this->arParams['PERIOD_MAX']));
+        if ($this->arParams['PAGE'] < 1) {
+            $this->arParams['PAGE'] = 1;
         }
         
         // Параметры поиска.

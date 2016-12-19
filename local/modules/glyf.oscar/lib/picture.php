@@ -1074,8 +1074,8 @@ class Picture extends HLBlockModel
         $sql = "
             SELECT p.*, COUNT(DISTINCT v.ID) as `VIEWS`, COUNT(DISTINCT s.ID) as `SALES`
             FROM `g_pictures` AS `p`
-            INNER JOIN `g_statistic_views` AS `v` ON (v.UF_ELEMENT_ID = p.ID)
-            INNER JOIN `g_statistic_sales` AS `s` ON (s.UF_ELEMENT_ID = p.ID)
+            LEFT OUTER JOIN `g_statistic_views` AS `v` ON (v.UF_ELEMENT_ID = p.ID)
+            LEFT OUTER JOIN `g_statistic_sales` AS `s` ON (s.UF_ELEMENT_ID = p.ID)
         ";
         
         if (!empty($params['filter'])) {

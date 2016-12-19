@@ -1,3 +1,24 @@
+function getRemoteObjects(page)
+{
+    var title = $('#js-objects-search-id').val();
+    var count = parseInt($('#js-objects-page-count-id option:selected').val());
+    var sort  = $('#js-objects-block-id .js-sort-active').data('sort');
+    var page = page || 1;
+    
+    $.ajax({
+        url: '/remote/',
+        type: 'post',
+        data: {'action': 'get-html', 'inc': 'user.statistic.objects', 'title': title, 'count': count, 'page': page, 'sort': sort},
+        dataType: 'json',
+        success: function(response) {
+            if (response.status) {
+                $('#js-objects-wrapper-id').html(response.data['html']);
+            }
+        }
+    });
+}
+
+
 $(document).ready(function() {
     
     // Выбор элемента.
@@ -69,61 +90,26 @@ $(document).ready(function() {
     });
     
     
+    // Поиск по названию.
     $('#js-objects-search-id').on('keyup',function() {
-        var title = $(this).val();
-        var count = parseInt($('#js-objects-page-count-id option:selected').val());
-        var page  = 1;
-        
-        $.ajax({
-            url: '/remote/',
-            type: 'post',
-            data: {'action': 'get-html', 'inc': 'user.statistic.objects', 'title': title, 'count': count, 'page': page},
-            dataType: 'json',
-            success: function(response) {
-                if (response.status) {
-                    $('#js-objects-wrapper-id').html(response.data['html']);
-                }
-            }
-        });
+        getRemoteObjects();
     });
-    
     
     // Изменение колчиества страниц.
     $(document).on('change', '#js-objects-page-count-id', function() {
-        var title = $('#js-objects-search-id').val();
-        var count = parseInt($('#js-objects-page-count-id option:selected').val());
-        var page  = 1;
-        
-        $.ajax({
-            url: '/remote/',
-            type: 'post',
-            data: {'action': 'get-html', 'inc': 'user.statistic.objects', 'title': title, 'count': count, 'page': page},
-            dataType: 'json',
-            success: function(response) {
-                if (response.status) {
-                    $('#js-objects-wrapper-id').html(response.data['html']);
-                }
-            }
-        });
+        getRemoteObjects();
     });
     
     // Изменение текущей страницы.
     $(document).on('click', '#js-objects-nav-id .js-page', function() {
-        var title = $('#js-objects-search-id').val();
-        var count = parseInt($('#js-objects-page-count-id option:selected').val());
-        var page  = parseInt($(this).data('page'));
-        
-        $.ajax({
-            url: '/remote/',
-            type: 'post',
-            data: {'action': 'get-html', 'inc': 'user.statistic.objects', 'title': title, 'count': count, 'page': page},
-            dataType: 'json',
-            success: function(response) {
-                if (response.status) {
-                    $('#js-objects-wrapper-id').html(response.data['html']);
-                }
-            }
-        });
+        getRemoteObjects(parseInt($(this).data('page')));
     });
     
+    // Сортировка.
+    $(document).on('click', '#js-objects-block-id .js-sort', function() {
+        $('#js-objects-block-id .js-sort').removeClass('js-sort-active');
+        $(this).addClass('js-sort-active');
+        
+        getRemoteObjects();
+    });
 });

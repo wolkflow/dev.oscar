@@ -51,26 +51,29 @@ class StatisticObjectsDetail extends \CBitrixComponent
         
         switch ($arParams['ORDER']) {
             case ('ID'):
-                $arParams['ORDER'] = array(Picture::FIELD_ORDER_ID => 'DESC');
+                $arParams['ORDER'] = array(self::PREFIX_TABLE_PICTURES . Picture::FIELD_ID => 'DESC');
                 break;
             
              case ('title'):
-                $arParams['ORDER'] = array(Picture::FIELD_LANG_TITLE_SFX . CURRENT_LANG_UP => 'ASC');
+                $arParams['ORDER'] = array(self::PREFIX_TABLE_PICTURES . Picture::FIELD_LANG_TITLE_SFX . CURRENT_LANG_UP => 'ASC');
+                break;
+            
+            case ('date'):
+                $arParams['ORDER'] = array(self::PREFIX_TABLE_PICTURES . Picture::FIELD_MODERATE_TIME => 'DESC');
                 break;
             
             case ('views'):
-                $arParams['ORDER'] = array(Picture::FIELD_VIEWS => 'DESC');
+                $arParams['ORDER'] = array('VIEWS' => 'DESC');
                 break;
             
             case ('sales'):
-                $arParams['ORDER'] = array(Picture::FIELD_SALES => 'DESC');
+                $arParams['ORDER'] = array('SALES' => 'DESC');
                 break;
             
             default:
-                $arParams['ORDER'] = array(Picture::FIELD_ID => 'DESC');
+                $arParams['ORDER'] = array(self::PREFIX_TABLE_SALES . Sale::FIELD_ID => 'DESC');
                 break;
         }
-        
         
         return $arParams;
 	}
@@ -90,30 +93,43 @@ class StatisticObjectsDetail extends \CBitrixComponent
 			return;
 		}
         
+        
         // Пользователь.
         $user = new User();
         
         
         // Фильтр.
-        $filter = array(Picture::FIELD_USER_ID => $user->getID());
+        $filter = array(self::PREFIX_TABLE_PICTURES . Picture::FIELD_USER_ID => $user->getID());
         
         if (!empty($this->arParams['TITLE'])) {
-            $filter[Picture::FIELD_LANG_TITLE_SFX . CURRENT_LANG_UP] = '%'.$this->arParams['TITLE'].'%';
+            $filter['~=' . self::PREFIX_TABLE_PICTURES . Picture::FIELD_LANG_TITLE_SFX . CURRENT_LANG_UP] = '%'.$this->arParams['TITLE'].'%';
         }
         
         if (!empty($this->arParams['PERIOD_MIN'])) {
-            $filter['>=' . Picture::FIELD_TIME] = date('Y-m-d', strtotime($this->arParams['PERIOD_MIN']));
+            $filter['>=' . self::PREFIX_TABLE_VIEWS . View::FIELD_TIME] = date('Y-m-d', strtotime($this->arParams['PERIOD_MIN']));
+            $filter['>=' . self::PREFIX_TABLE_SALES . Sale::FIELD_TIME] = date('Y-m-d', strtotime($this->arParams['PERIOD_MIN']));
         }
         
         if (!empty($this->arParams['PERIOD_MAX'])) {
-            $filter['<=' . Picture::FIELD_TIME] = date('Y-m-d', strtotime($this->arParams['PERIOD_MAX']));
+            $filter['<=' . self::PREFIX_TABLE_VIEWS . View::FIELD_TIME] = date('Y-m-d', strtotime($this->arParams['PERIOD_MAX']));
+            $filter['<=' . self::PREFIX_TABLE_SALES . Sale::FIELD_TIME] = date('Y-m-d', strtotime($this->arParams['PERIOD_MAX']));
         }
+        
+        if ($this->arParams['PAGE'] < 1) {
+            $this->arParams['PAGE'] = 1;
+        }
+        
+        // Параметры поиска.
+        $params = array(
+            'order'  => $this->arParams['ORDER'],
+            'limit'  => $this->arParams['PERPAGE'],
+            'offset' => ($this->arParams['PAGE'] - 1) * $this->arParams['PERPAGE'],
+            'filter' => $filter
+        );
         
         
         // Общее количество.
-        $result = Picture::getList(array(
-            'filter' =>  $filter
-        ), false);
+        $result = Picture::getStats(array('filter' => $params['filter']), false);
         
         $this->arResult['TOTAL'] = $result->getSelectedRowsCount();
         
@@ -124,29 +140,9 @@ class StatisticObjectsDetail extends \CBitrixComponent
             $this->arParams['PAGE'] = $pagescnt;
         }
         
-        if ($this->arParams['PAGE'] < 1) {
-            $this->arParams['PAGE'] = 1;
-        }
-        
         
         // Список элементов папки.
-        $pictures = Picture::getList(array(
-            'order'  => array(Picture::FIELD_LANG_TITLE_SFX . CURRENT_LANG_UP => 'ASC'),
-            'limit'  => $this->arParams['PERPAGE'],
-            'offset' => ($this->arParams['PAGE'] - 1) * $this->arParams['PERPAGE'],
-            'filter' => $filter
-        ));
-        
-        
-        // Картины.
-        $this->arResult['ITEMS'] = array();
-        foreach ($pictures as $picture) {
-            $item = $picture->getData();
-            $item['PICTURE'] = $picture->getSmallPreviewImageSrc();
-            
-            $this->arResult['ITEMS'] []= $item ;
-        }
-        unset($item, $picture);
+        $this->arResult['ITEMS'] = Picture::getStats($params);
         
         
 		// Подключение шаблона компонента.

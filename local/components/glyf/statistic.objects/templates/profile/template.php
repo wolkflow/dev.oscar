@@ -54,11 +54,11 @@
                 <tr>
                     <th></th>
                     <th></th>
-                    <th class="has-sort">ID<span class="cabinet-table__sort"></span></th>
-                    <th class="has-sort"><?= getMessage('GL_SORT_TITLE') ?><span class="cabinet-table__sort"></th>
-                    <th class="has-sort"><?= getMessage('GL_SORT_DATE') ?><span class="cabinet-table__sort"></th>
-                    <th class="has-sort"><?= getMessage('GL_SORT_VIEWS') ?><span class="cabinet-table__sort"></th>
-                    <th class="has-sort"><?= getMessage('GL_SORT_SALES') ?><span class="cabinet-table__sort"></th>
+                    <th class="has-sort js-sort" data-sort="ID">ID<span class="cabinet-table__sort"></span></th>
+                    <th class="has-sort js-sort" data-sort="title"><?= getMessage('GL_SORT_TITLE') ?><span class="cabinet-table__sort"></th>
+                    <th class="has-sort js-sort" data-sort="date"><?= getMessage('GL_SORT_DATE') ?><span class="cabinet-table__sort"></th>
+                    <th class="has-sort js-sort" data-sort="views"><?= getMessage('GL_SORT_VIEWS') ?><span class="cabinet-table__sort"></th>
+                    <th class="has-sort js-sort" data-sort="sales"><?= getMessage('GL_SORT_SALES') ?><span class="cabinet-table__sort"></th>
                 </tr>
                 </thead>
                 <tbody id="js-objects-wrapper-id">
