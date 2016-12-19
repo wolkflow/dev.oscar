@@ -14,6 +14,7 @@ require ($_SERVER['DOCUMENT_ROOT'] . '/bitrix/modules/main/include/prolog_before
 $request = Bitrix\Main\Application::getInstance()->getContext()->getRequest();
 
 $page  = $request->get('page');
+$sort  = $request->get('sort');
 $count = $request->get('count');
 $title = $request->get('title');
 
@@ -25,5 +26,6 @@ $APPLICATION->IncludeComponent(
         "PAGE"    => intval($page),
         "PERPAGE" => intval($count), 
         "TITLE"   => strval($title),
+        "ORDER"   => strval($sort),
     )
 );

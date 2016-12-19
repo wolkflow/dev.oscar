@@ -1,6 +1,7 @@
 <? define('NEED_AUTH', 'Y') ?>
 <? require ($_SERVER['DOCUMENT_ROOT'].'/bitrix/header.php'); ?>
 <? $APPLICATION->SetTitle("Персональная статистика"); ?>
+
 <?  // Проверка пользователя.
     $user = new Glyf\Oscar\User();
     if (!$user->isPartner()) {

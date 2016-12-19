@@ -13,6 +13,10 @@ class StatisticObjectsDetail extends \CBitrixComponent
 {
     const PERPAGE = 30;
     
+    const PREFIX_TABLE_VIEWS    = 'v.';
+    const PREFIX_TABLE_SALES    = 's.';
+    const PREFIX_TABLE_PICTURES = 'p.';
+    
     
 	/** 
 	 * Установка настроек.

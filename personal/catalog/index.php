@@ -1,6 +1,7 @@
 <? define('NEED_AUTH', 'Y') ?>
 <? require ($_SERVER['DOCUMENT_ROOT'].'/bitrix/header.php'); ?>
 <? $APPLICATION->SetTitle("Oscar Art Agency"); ?>
+
 <?  // Проверка пользователя.
     $user = new Glyf\Oscar\User();
     if (!$user->isPartner()) {

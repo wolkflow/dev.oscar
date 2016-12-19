@@ -45,7 +45,7 @@
 							<p>
 								<? $tags = array() ?>
 								<? foreach ($arResult['PROPERTIES']['LANG_TAGS_'.CURRENT_LANG_UP]['VALUE'] as $tag) { ?>
-									<? $tags []= '<a href="/search/?F[KEYWORDS]=' . $tag . '">' . $tag . '</a>' ?>
+									<? $tags []= '<a href="/blog/search/?TAG=' . $tag . '">' . $tag . '</a>' ?>
 								<? } ?>
 								<?= implode(', ', $tags) ?>
 							</p>
