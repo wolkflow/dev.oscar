@@ -149,17 +149,17 @@ class PicturesDetail extends \CBitrixComponent
         );
         
         if (!$user->isPartner()) {
-            $tariff = $user->getUserTariff();
+            $usertariff = $user->getUserTariff();
             
-            if ($tariff) {
+            if ($usertariff) {
                 
                 // Доступы.
                 $this->arResult['ACCESS'] = array(
                     'BUY'         => true,
-                    'INFO'        => $tariff->canInfoView(),
-                    'ZOOM'        => $tariff->canZoom(),
-                    'WATERMARK'   => $tariff->canWatermark(),
-                    'DOWNLOAD'    => $tariff->canDownload(),
+                    'INFO'        => $usertariff->canInfoView(),
+                    'ZOOM'        => $usertariff->canZoom(),
+                    'WATERMARK'   => $usertariff->canWatermark(),
+                    'DOWNLOAD'    => $usertariff->canDownload($picture->getID()),
                     'DOWNLOAD_IP' => false,
                 );
                 

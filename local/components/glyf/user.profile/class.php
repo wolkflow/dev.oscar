@@ -43,12 +43,16 @@ class UserProfileComponent extends \CBitrixComponent
 
         if (!$user->isPartner()) {
             // Тариф.
-            $tariff = $user->getUserTariff();
+            $usertariff = $user->getUserTariff();
             
-            if ($tariff) {
-                $this->arResult['TARIFF'] = $tariff->getTariff()->getData();
-                $this->arResult['TARIFF']['EXPIRE']   = date('d.m.Y', $tariff->getExpire());
-                $this->arResult['TARIFF']['MULTIPLE'] = $tariff->canMultipleIP();
+            if (is_object($usertariff)) {
+                $tariff = $usertariff->getTariff();
+                
+                if (is_object($tariff)) {
+                    $this->arResult['TARIFF'] = $tariff->getData();
+                    $this->arResult['TARIFF']['EXPIRE']   = date('d.m.Y', $usertariff->getExpire());
+                    $this->arResult['TARIFF']['MULTIPLE'] = $usertariff->canMultipleIP();
+                }
             }
         }
         

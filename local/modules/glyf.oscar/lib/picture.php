@@ -977,7 +977,7 @@ class Picture extends HLBlockModel
             \Glyf\Oscar\Statistic\Download::FIELD_USER_ID     => $user->getID(),
             \Glyf\Oscar\Statistic\Download::FIELD_UPLOADER_ID => $this->getUserID(),
             \Glyf\Oscar\Statistic\Download::FIELD_ELEMENT_ID  => $this->getID(),
-            \Glyf\Oscar\Statistic\Download::FIELD_BUYED       => $this->isBuyedByUser($user->getID())
+            \Glyf\Oscar\Statistic\Download::FIELD_BUYED       => $this->canDownloadBuyedByUser($user->getID())
         ));
         
         $this->update(array(self::FIELD_STAT_LOADS => $this->getStatisticLoadsCount() + 1));
@@ -1028,18 +1028,17 @@ class Picture extends HLBlockModel
     
     
     /**
-     * Проверка покупки пользователем.
+     * Получение последней покупки пользователем.
      */
-    public function isBuyedByUser($uid = null)
+    public function getLastSaleByUser($uid = null)
     {
         if (empty($uid)) {
             $uid = \CUser::getID();
         }
-        $uid = (int) $uid;
-        
-        $user = new \Glyf\Oscar\User($uid);
+        $user = new \Glyf\Oscar\User(intval($uid));
         
         $result = \Glyf\Oscar\Statistic\Sale::getList(array(
+            'order'  => array(\Glyf\Oscar\Statistic\Sale::FIELD_TIME => 'DESC'),
             'filter' => array(
                 \Glyf\Oscar\Statistic\Sale::FIELD_ELEMENT_ID => $this->getID(),
                 \Glyf\Oscar\Statistic\Sale::FIELD_USER_ID    => $user->getID(),
@@ -1047,11 +1046,58 @@ class Picture extends HLBlockModel
             'limit' => 1
         ), false);
         
-        if ($result && $result->getSelectedRowsCount() > 0) {
+        if ($result && is_object($result)) {
+            $data = $result->fetch();
+            $sale = new \Glyf\Oscar\Statistic\Sale($data[\Glyf\Oscar\Statistic\Sale::FIELD_ID], $data);
+            
+            return $sale;
+        }
+        return null;
+    }
+    
+    
+    /**
+     * Получение времени последней покупки пользователем.
+     */
+    public function getLastSaleTimeByUser($uid)
+    {
+        $result = $this->getLastSaleByUser($uid);
+        
+        if (is_object($result) && $result->getID() > 0) {
+            return $result->getTime()->getTimestamp();
+        }
+        return 0;
+    }
+    
+    
+    /**
+     * Проверка покупки пользователем.
+     */
+    public function isBuyedByUser($uid = null)
+    {
+        $result = $this->getLastBuyedByUser($uid);
+        
+        if (is_object($result) && $result->getID() > 0) {
             return true;
         }
         return false;
     }
+    
+    
+    /**
+     * возможность скачать купленный обхект.
+     */
+    public function canDownloadBuyedByUser($uid)
+    {
+        $time = $this->getLastSaleTimeByUser($uid);
+        
+        if ($time > 0 && $time + self::DOWNLOAD_EXPIRE >= time()) {
+            return true;
+        }
+        return false;
+    }
+    
+    
     
     
     /**

@@ -23,7 +23,7 @@ class Order extends \Glyf\Core\Helpers\SaleOrder
         
         foreach ($baskets as $basket) {
             $picture = new \Glyf\Oscar\Picture($basket['PRODUCT_ID']);
-            $picture->recordStatisticSale($basket['PRICE'], $this->getID(), $basket['TYPE']);
+            $picture->recordStatisticSale($basket['PRICE'], $this->getID(), $basket['TYPE'], $this->getUserID());
         }
     }
     

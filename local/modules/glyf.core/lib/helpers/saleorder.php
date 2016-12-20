@@ -30,6 +30,14 @@ class SaleOrder
     }
     
     
+    public function getUserID()
+    {
+        $data = $this->getData();
+        
+        return (int) $data['USER_ID'];
+    }
+    
+    
     public function getPrice()
     {
         $data = $this->getData();

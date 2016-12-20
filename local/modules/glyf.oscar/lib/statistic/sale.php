@@ -59,10 +59,12 @@ class Sale extends HLBlockModel
         return $this->get(self::FIELD_LICENSE_ID);
     }
     
+    
     public function getLicenseRootID()
     {
         return $this->get(self::FIELD_LICENSE_ROOT);
     }
+    
     
     public function getPrice()
     {

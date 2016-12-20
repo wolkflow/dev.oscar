@@ -2,6 +2,7 @@
 
 namespace Glyf\Oscar;
 
+use Glyf\Oscar\Picture;
 use Glyf\Oscar\Tariff;
 use Glyf\Oscar\OrderTariff;
 use Glyf\Oscar\IPAddress;
@@ -155,12 +156,18 @@ class UserTariff extends \Glyf\Core\System\IBlockModel
     /**
      * Возможно ли скачать изображение.
      */
-    public function canDownload()
+    public function canDownload($pid = null)
     {
-        if ($this->isExpire()) {
-            return false;
+        $pid = intval($pid);
+        
+        $result = ($this->getDownloadsLimit() > 0 && !$this->isExpire());
+        
+        if ($pid > 0) {
+            $picture = new Picture($pid);
+            $canload = $picture->canDownloadBuyedByUser($this->getUserID());
+            
+            $result = ($result || $canload);
         }
-        $result = ($this->getDownloadsLimit() > 0);
         
         return $result;
     }

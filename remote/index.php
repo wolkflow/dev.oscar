@@ -488,7 +488,7 @@ switch ($action) {
             
             if ($tariff) {
                 // Ссылка на скачивание.
-                if ($tariff->canDownload()) {
+                if ($tariff->canDownload($pid)) {
                     $picture = new Glyf\Oscar\Picture($pid);
                     
                     if ($picture->exists()) {

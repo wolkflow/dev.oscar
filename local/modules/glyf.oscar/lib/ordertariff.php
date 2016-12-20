@@ -81,16 +81,22 @@ class OrderTariff extends \Glyf\Core\System\HLBlockModel
     /**
      * Активация тарифа.
      */
-    public function activate($time = true)
+    public function activate($intime = true)
     {
         $data = array(self::FIELD_ACTIVE => true);
         
-        if ($time) {
-            $tariff = self::last();
+        if ($intime) {
+            $tariff = self::prev($this->getUserID(), $this->getID());
             
-            if (!empty($tariff)) {
-                $timeT = $tariff->getTimeFinish()->getTimestamp();
-
+            if (is_object($tariff) && $tariff->getID() > 0) {
+                $time = $tariff->getTimeFinish();
+                
+                if (is_object($time)) {
+                    $timeT = $time->getTimestamp();
+                } else {
+                    $timeT = time();
+                }
+                
                 $timeB = strtotime(date('d.m.Y', $timeT) . '+1 day');
                 $timeF = strtotime(date('d.m.Y', $timeB) . '+1 month');
 
@@ -152,6 +158,27 @@ class OrderTariff extends \Glyf\Core\System\HLBlockModel
             'limit'  => 1,
             'order'  => array(self::FIELD_TIME_FINISH => 'DESC'),
             'filter' => array(self::FIELD_USER_ID => $user->getID())
+        ));
+        
+        if (!empty($tariffs)) {
+            return reset($tariffs);
+        }
+        return null;
+    }
+    
+    
+     /**
+     * Получение текущего активного тарифа.
+     */
+    public static function prev($uid = null, $tid = null)
+    {
+        $tariffs = self::getList(array(
+            'limit'  => 1,
+            'order'  => array(self::FIELD_TIME_FINISH => 'DESC'),
+            'filter' => array(
+                self::FIELD_USER_ID  => intval($uid),
+                '!' . self::FIELD_ID => intval($tid),
+            )
         ));
         
         if (!empty($tariffs)) {

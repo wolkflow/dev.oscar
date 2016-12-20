@@ -66,6 +66,8 @@ $(document).ready(function() {
             success: function(response) {
                 if (response.status) {
                     $('#js-cart-count-id').html(response.data['count']);
+                } else {
+                    error(response.message);
                 }
             }
         });
@@ -83,6 +85,8 @@ $(document).ready(function() {
             success: function(response) {
                 if (response.status) {
                     location.href = response.data['link'];
+                } else {
+                    error(response.message);
                 }
             }
         });

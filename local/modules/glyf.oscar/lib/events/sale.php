@@ -43,7 +43,7 @@ class Sale
                 $tariff = \Glyf\Oscar\OrderTariff::getByOrderID($order->getID());
                 
                 if (!empty($tariff) && is_object($tariff)) {
-                    $tariff->activate();
+                    $tariff->activate($order->getUserID());
                 }
             }
             
