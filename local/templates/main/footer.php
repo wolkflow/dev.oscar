@@ -48,7 +48,7 @@
 							?>
                             
                             <div class="row">
-                                <div class="col-xs-11 col-xs-offset-1 col-sm-12 col-sm-offset-0">
+                                <div class="col-sm-12">
                                     <div class="siteFooterContacts">
 										<?  // Телефон.
 											$APPLICATION->IncludeComponent('bitrix:main.include', '', array(
@@ -70,7 +70,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-xs-12 col-sm-6">
+                        <div class="col-sm-6">
                             <div class="copyright">
                                 <?  // Копирайт.
 									$APPLICATION->IncludeComponent('bitrix:main.include', '', array(
@@ -81,7 +81,7 @@
 								?>
                             </div>
                         </div>
-                        <div class="col-xs-12 col-sm-6">
+                        <div class="col-sm-6">
                             <div class="madeby">
 								<?  // Дизайн.
 									$APPLICATION->IncludeComponent('bitrix:main.include', '', array(

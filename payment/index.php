@@ -7,6 +7,7 @@ $APPLICATION->IncludeComponent(
     "bitrix:sale.order.payment.receive",
     "",
     array(
-        "PAY_SYSTEM_ID_NEW" => PAYSYSTEM_ROBOKASSA
+        "PAY_SYSTEM_ID"  => PAYSYSTEM_ROBOKASSA,
+        "PERSON_TYPE_ID" => PERSON_TYPE_DEFAULT,
     ),
 );

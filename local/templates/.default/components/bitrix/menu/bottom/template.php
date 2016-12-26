@@ -4,7 +4,7 @@
 
 <? if (!empty($arResult)) { ?>
 	<div class="row">
-		<div class="col-xs-11 col-xs-offset-1 col-sm-12 col-sm-offset-0">
+		<div class="col-sm-12">
 			<div class="siteFooterMenu">
 				<ul class="nav">
 					<? foreach ($arResult as $arItem) { ?>

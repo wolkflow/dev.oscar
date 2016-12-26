@@ -3348,7 +3348,7 @@ input[type=text].le.disabled {
 }
 @media (max-width: 500px) {
   .siteFooterContacts {
-    font-size: 30px;
+    font-size: 28px;
   }
   .siteFooterContacts a{
     padding: 0 !important;
@@ -3500,7 +3500,7 @@ input[type=text].le.disabled {
     height: 55px;
   }
   .siteFooterMenu {
-    padding-top: 64px;
+    padding-top: 85px;
   }
   .col-footer-logo {
     position: absolute;
@@ -3515,6 +3515,11 @@ input[type=text].le.disabled {
   }
   .footer-logo {
     padding-top: 86px;
+  }
+}
+@media (max-width: 768px) {
+  .footer-logo {
+    padding-top: 58px;
   }
 }
 @media all and (max-width: 767px) {
