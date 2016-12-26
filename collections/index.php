@@ -41,7 +41,7 @@
                         "SECTION_CODE" => strval($_REQUEST['SECTION']),
                         "SECTION_URL" => "",
                         "COUNT_ELEMENTS" => "Y",
-                        "TOP_DEPTH" => "2",
+                        "TOP_DEPTH" => "1",
                         "SECTION_FIELDS" => "",
                         "SECTION_USER_FIELDS" => array("UF_LANG_TITLE_RU", "UF_LANG_TITLE_EN"),
                         "ADD_SECTIONS_CHAIN" => "Y",
