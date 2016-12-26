@@ -97,6 +97,10 @@ class OrderTariff extends \Glyf\Core\System\HLBlockModel
                     $timeT = time();
                 }
                 
+                if ($timeT < time()) {
+                    $timeT = time();
+                }
+                
                 $timeB = strtotime(date('d.m.Y', $timeT) . '+1 day');
                 $timeF = strtotime(date('d.m.Y', $timeB) . '+1 month');
 
