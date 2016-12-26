@@ -31,7 +31,7 @@ class Sale
             if ($data['PROPS'][\Glyf\Oscar\Order::PROP_BALANCE_CODE]['VALUE'] == 'Y') {
                 \CSaleUserAccount::UpdateAccount(
                     $user->getID(),
-                    $user->getBalance() + floatval($data['PRICE']),
+                    floatval($data['PRICE']),
                     CURRENCY_DEFAULT,
                     'BALANCE',
                     $order->getID()

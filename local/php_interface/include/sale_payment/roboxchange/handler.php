@@ -12,7 +12,7 @@ use Bitrix\Sale\PriceMaths;
 
 Loc::loadMessages(__FILE__);
 
-class RoboxchangeLocalHandler extends PaySystem\ServiceHandler
+class RoboxchangeHandler extends PaySystem\ServiceHandler
 {
     public function getLink($data)
     {
