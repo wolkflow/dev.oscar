@@ -10,7 +10,7 @@
     <? if (!empty($arResult['ITEMS'])) { ?>
         <div class="row">
             <? foreach ($arResult['ITEMS'] as $item) { ?>
-                <div class="col-xs-6 col-sm-4 col-md-4 col-lg-3 catalogItem-alt">
+                <div class="col-xs-6 col-md-4 col-lg-3 catalogItem-alt">
                     <a href="<?= $item['DETAIL_URL'] ?>">
                         <div class="catalogItemImage-alt js-picture-drag" data-pid="<?= $item[Picture::FIELD_ID] ?>" style="background-image: url(<?= CFile::getPath($item['UF_FILE']) ?>"></div>
                     </a>

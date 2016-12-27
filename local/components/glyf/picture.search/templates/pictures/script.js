@@ -53,7 +53,8 @@ $(document).ready(function() {
         });
     });
     
-    
+    // Высота высот
+
     // Добавление в корзину.
     /*
     $(document).on('click', '.add-to-cart', function() {

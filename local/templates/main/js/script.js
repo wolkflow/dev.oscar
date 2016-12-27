@@ -197,9 +197,12 @@ $(document).ready(function () {
 		);
 		columns.height(tallestcolumn);
 	}
-	setEqualHeight($(".subscribeCol-list"));
-	setEqualHeight($(".subscribeSearch-col"));
-    
+	$(window).on('load resize', function () {
+		setEqualHeight($(".subscribeCol-list"));
+		setEqualHeight($(".subscribeSearch-col"));
+		setEqualHeight($(".catalogItem-alt"));
+	})
+
     $('[data-modal]').click(function() {
 		var modal = $(this).data('modal');
 		$(modal).arcticmodal();
