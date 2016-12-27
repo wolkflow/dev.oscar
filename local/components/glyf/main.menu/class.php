@@ -23,11 +23,11 @@ class MainMenuComponent extends \CBitrixComponent
 		Loader::includeModule('glyf.core');
 		
         $cache = new CPHPCache();
-        $ctime = 86400;
+        $ctime = 3600;
         $ccode = 'main-counts';
         $cpath = '/onpage/';
         
-        if (0 && $ctime > 0 && $cache->InitCache($ctime, $ccode, $cpath)) {
+        if ($ctime > 0 && $cache->InitCache($ctime, $ccode, $cpath)) {
             $this->arResult = $cache->getVars();
         } else {
             $result = CIBlockElement::getList(array(), array('IBLOCK_ID' => IBLOCK_BLOG_ID, 'ACTIVE' => 'Y'));
@@ -35,7 +35,7 @@ class MainMenuComponent extends \CBitrixComponent
             
             $this->arResult = array(
                 'COUNT_COLLECTIONS' => Glyf\Oscar\Collection::getCount(array('IBLOCK_ID' => IBLOCK_COLLECTIONS_ID, 'DEPTH_LEVEL' => 1)),
-                'COUNT_OBJECTS'     => Glyf\Oscar\Picture::getCount(),
+                'COUNT_OBJECTS'     => Glyf\Oscar\Picture::getCount(array('filter' => array(Glyf\Oscar\Picture::FIELD_MODERATE => true))),
                 'COUNT_SUBSCRIBES'  => Glyf\Oscar\Subscribe::getCount(),
                 'COUNT_ARTICLES'    => $bcount,
             );

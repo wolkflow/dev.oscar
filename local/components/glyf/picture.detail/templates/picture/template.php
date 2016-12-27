@@ -29,21 +29,19 @@
                     <? if ($arResult['ACCESS']['ZOOM']) { ?>
                         <img
                             src="<?= $src ?>" 
-                            alt="<?= $arResult['PICTURE'][Picture::FIELD_LANG_TITLE_SFX . CURRENT_LANG_UP] ?>" 
-                            style="max-height: 545px;"
+                            alt="<?= $arResult['PICTURE'][Picture::FIELD_LANG_TITLE_SFX . CURRENT_LANG_UP] ?>"
                             data-pid="<?= $arResult['PICTURE'][Picture::FIELD_ID] ?>"
                             data-zoom-image="<?= $src ?>"
                         />
                     <? } else { ?>
                         <img 
                             src="<?= $src ?>" 
-                            alt="<?= $arResult['PICTURE'][Picture::FIELD_LANG_TITLE_SFX . CURRENT_LANG_UP] ?>" 
-                            style="max-height: 545px;"
+                            alt="<?= $arResult['PICTURE'][Picture::FIELD_LANG_TITLE_SFX . CURRENT_LANG_UP] ?>"
                             data-pid="<?= $arResult['PICTURE'][Picture::FIELD_ID] ?>"
                         />
                     <? } ?>
                     <div class="card-image__buttons">
-                        <? if ($arResult['PICTURE'][Picture::FIELD_LEGAL] == Picture::PROP_LEGAL_FULL_ID) { ?>
+                        <? if ($arResult['PICTURE'][Picture::FIELD_LEGAL] == Picture::PROP_LEGAL_NOCOMMERCIAL_ID) { ?>
                             <a class="card-image__button card-image__button--copyright" href="javascript:void(0)" title="<?= getMessage('GL_NON_COMMERCIAL') ?>"></a>
                         <? } ?>
                         <a class="card-image__button card-image__button--add js-add-to-lightbox" href="javascript:void(0)" data-pid="<?= $arResult['PICTURE'][Picture::FIELD_ID] ?>"></a>
