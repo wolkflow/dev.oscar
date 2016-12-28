@@ -136,7 +136,7 @@ class PicturesDetail extends \CBitrixComponent
         
         // Изображения.
         $this->arResult['PICTURE']['IMAGE_PREVIEW_SRC'] = $picture->getPreviewImageSrc();
-        $this->arResult['PICTURE']['IMAGE_PREVIEW_WATER_MARK_SRC'] = $picture->getPreviewImageWMSrc();
+        $this->arResult['PICTURE']['IMAGE_PREVIEW_WATERMAK_SRC'] = $picture->getPreviewImageWMSrc();
         
         // Доступы.
         $this->arResult['ACCESS'] = array(

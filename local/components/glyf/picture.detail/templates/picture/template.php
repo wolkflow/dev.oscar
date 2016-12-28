@@ -25,7 +25,7 @@
         <div class="row card">
             <div class="col-md-8 col-sm-7">
                 <div class="card-image__container">
-                    <? $src = (true) ? ($arResult['PICTURE']['IMAGE_PREVIEW_SRC']) : ($arResult['PICTURE']['IMAGE_PREVIEW_WATERMAK_SRC']) ?>
+                    <? $src = ($arResult['ACCESS']['WATERMARK']) ? ($arResult['PICTURE']['IMAGE_PREVIEW_SRC']) : ($arResult['PICTURE']['IMAGE_PREVIEW_WATERMAK_SRC']) ?>
                     <? if ($arResult['ACCESS']['ZOOM']) { ?>
                         <img
                             src="<?= $src ?>" 
