@@ -19,7 +19,11 @@
                     </a>
                 </li>
             <? } ?>
-            <li><?= $lastitem['TITLE'] ?></li>
+            <li class="last">
+                <a href="<?= $lastitem['LINK'] ?>">
+                    <?= $lastitem['TITLE'] ?>
+                </a>
+            </li>
         </ol>
         
         <div class="row card">

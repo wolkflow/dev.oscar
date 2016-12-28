@@ -4710,6 +4710,10 @@ a:hover {
   text-decoration: none;
   color: #666;
 }
+.breadcrumb li.last a {
+  text-decoration: none;
+  color: #00c3d9;
+}
 .clearfix:before,
 .clearfix:after {
   content: " ";

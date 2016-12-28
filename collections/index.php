@@ -13,6 +13,20 @@
 
 <main class="siteMain">
     <div class="container">
+        <?  // Цепочка навигации.
+            if (CUser::getID() == 1) {
+            $APPLICATION->IncludeComponent(
+                "bitrix:breadcrumb",
+                "collections",
+                array(
+                    "START_FROM" => "0", 
+                    "PATH" => "", 
+                    "SITE_ID" => "s1" 
+                )
+            );
+            }
+        ?>
+    
         <div class="collections-triggers bg-transparent"> 
             <a href="/collections/map/"><?= getMessage('GL_COLLECTIONS_MAP') ?></a>
             <a href="/collections/" class="active"><?= getMessage('GL_COLLECTIONS_ALL') ?></a>

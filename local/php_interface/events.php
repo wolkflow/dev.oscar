@@ -8,4 +8,9 @@ if (\Bitrix\Main\Loader::includeModule('glyf.oscar')) {
 	AddEventHandler('main', 'OnBeforeUserRegister', array('\Glyf\Oscar\Events\Main', 'OnBeforeUserRegister'));
     AddEventHandler('main', 'OnAfterUserRegister', array('\Glyf\Oscar\Events\Main', 'OnAfterUserRegister'));
     AddEventHandler('sale', 'onSalePayOrder', array('\Glyf\Oscar\Events\Sale', 'onSalePayOrder'));
+    
+    
+    //$manager = \Bitrix\Main\EventManager::getInstance();
+    //$manager->addEventHandler('', 'PicturesOnBeforeUpdate', '');
 }
+
