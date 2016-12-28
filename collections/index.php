@@ -1,6 +1,8 @@
 <? require ($_SERVER['DOCUMENT_ROOT'].'/bitrix/header.php'); ?>
 <? $APPLICATION->SetTitle("Oscar Art Agency"); ?>
 
+<? $section = strval($_REQUEST['SECTION']) ?>
+
 <? IncludeFileLangFile(__FILE__) ?>
 
 <?  // Строка поиска.
@@ -14,23 +16,27 @@
 <main class="siteMain">
     <div class="container">
         <?  // Цепочка навигации.
-            if (CUser::getID() == 1) {
-            $APPLICATION->IncludeComponent(
-                "bitrix:breadcrumb",
-                "collections",
-                array(
-                    "START_FROM" => "0", 
-                    "PATH" => "", 
-                    "SITE_ID" => "s1" 
-                )
-            );
+            if (!empty($section)) {
+                $APPLICATION->AddChainItem(getMessage('GL_COLLECTIONS_ALL'), '/collections/');
+                
+                $APPLICATION->IncludeComponent(
+                    "bitrix:breadcrumb",
+                    "collections",
+                    array(
+                        "START_FROM" => "0", 
+                        "PATH" => "", 
+                        "SITE_ID" => "s1" 
+                    )
+                );
             }
         ?>
-    
-        <div class="collections-triggers bg-transparent"> 
-            <a href="/collections/map/"><?= getMessage('GL_COLLECTIONS_MAP') ?></a>
-            <a href="/collections/" class="active"><?= getMessage('GL_COLLECTIONS_ALL') ?></a>
-        </div>
+        
+        <? if (empty($section)) { ?>
+            <div class="collections-triggers bg-transparent"> 
+                <a href="/collections/map/"><?= getMessage('GL_COLLECTIONS_MAP') ?></a>
+                <a href="/collections/" class="active"><?= getMessage('GL_COLLECTIONS_ALL') ?></a>
+            </div>
+        <? } ?>
         
         <div class="row">
             <? // Коллекции.
@@ -46,13 +52,13 @@
                     "bitrix:catalog.section.list",
                     "collections",
                     array(
-                        "CURRENT" => strval($_REQUEST['SECTION']),
+                        "CURRENT" => $section,
                         "VIEW_MODE" => "TEXT",
                         "SHOW_PARENT_NAME" => "N",
                         "IBLOCK_TYPE" => "products",
                         "IBLOCK_ID" => "4",
                         "SECTION_ID" => "",
-                        "SECTION_CODE" => strval($_REQUEST['SECTION']),
+                        "SECTION_CODE" => $section,
                         "SECTION_URL" => "",
                         "COUNT_ELEMENTS" => "Y",
                         "TOP_DEPTH" => "1",
