@@ -879,7 +879,7 @@ class Picture extends HLBlockModel
             $nheight = $image->getImageHeight();
             
             $wmimage = new \Imagick($_SERVER['DOCUMENT_ROOT'] . self::IMAGE_WATERMARK_PATH);
-            $image->compositeImage($wmimage, \Imagick::COMPOSITE_DEFAULT, $nwidth / 2 - self::IMAGE_WATERMARK_WIDTH / 2, $nheight / 2 - self::IMAGE_WATERMARK_HEIGHT / 2);
+            $image->compositeImage($wmimage, \Imagick::COMPOSITE_DEFAULT, 0, 0);
         }
         
         $image->writeImage($path);
