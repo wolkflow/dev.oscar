@@ -134,18 +134,21 @@ class IBlockSectionModel extends Model
      */
     public function getSubsectionIDs()
     {
+        $data = $this->load();
+        
         $result = \CIBlockSection::GetList(
             array('LEFT_MARGIN' => 'ASC'),
             array(
-                'IBLOCK_ID'  => self::getIBlockID(),
-                'SECTION_ID' => $this->getID()
+                'IBLOCK_ID'    => self::getIBlockID(),
+                'LEFT_MARGIN'  => $data['LEFT_MARGIN'],
+                'RIGHT_MARGIN' => $data['RIGHT_MARGIN'],
             ),
             array('ID')
         );
         
         $items = array();
         while ($item = $result->fetch()) {
-            $items []= $item['ID'];
+            $items []= (int) $item['ID'];
         }
         return $items;
     }
