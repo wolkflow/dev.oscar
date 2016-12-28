@@ -7,7 +7,7 @@
 <? use Glyf\Oscar\Collection; ?>
 
 <? if (!empty($arResult['ROOT']['CHILDREN'])) { ?>
-	<div class="container">
+	<div class="container collectionsMap">
 		<div class="row">
 			<? foreach ($arResult['ROOT']['CHILDREN'] as $section) { ?>
                 <? $collection = new Collection($section['ID']) ?>

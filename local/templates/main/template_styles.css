@@ -2353,6 +2353,18 @@ div.cabinet-panel--stats-inner {
   -moz-column-gap: normal;
   column-gap: normal; }
 
+.collectionsMap .col-sm-4:nth-child(3n+4) {
+  clear: left;
+}
+
+@media (min-width: 992px){
+  .collectionsMap .col-sm-4:nth-child(3n+4) {
+    clear: none;
+  }
+  .collectionsMap .col-sm-4:nth-child(6n+7) {
+    clear: left;
+  }
+}
 @media (max-width: 991px){
   .cabinet-collections{
     -webkit-columns: 2;
