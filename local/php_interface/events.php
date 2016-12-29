@@ -10,7 +10,8 @@ if (\Bitrix\Main\Loader::includeModule('glyf.oscar')) {
     AddEventHandler('sale', 'onSalePayOrder', array('\Glyf\Oscar\Events\Sale', 'onSalePayOrder'));
     
     
-    //$manager = \Bitrix\Main\EventManager::getInstance();
-    //$manager->addEventHandler('', 'PicturesOnBeforeUpdate', '');
+    $manager = \Bitrix\Main\EventManager::getInstance();
+    $manager->addEventHandler('', 'PicturesOnBeforeUpdate',  array('\Glyf\Oscar\Events\EventPicture', 'onBeforeUpdate'));
+    $manager->addEventHandler('', 'PicturesOnAfterUpdate',  array('\Glyf\Oscar\Events\EventPicture', 'onAfterUpdate'));
 }
 

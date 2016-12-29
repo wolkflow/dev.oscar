@@ -42,8 +42,8 @@ define('LANG_EN', 'en');
 /*
  * Поддомены.
  */
-define('SITENAME', 'oscar.dev.wolkflow.com');
-define('SUBDOMAIN_IMAGES', 'img.oscar.dev.wolkflow.com');
+define('SITENAME', 'oscarcollection.ru');
+define('SUBDOMAIN_IMAGES', 'img.oscarcollection.ru');
 
 
 /*
