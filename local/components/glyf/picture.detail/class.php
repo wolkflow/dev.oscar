@@ -60,6 +60,7 @@ class PicturesDetail extends \CBitrixComponent
         $this->arResult['COLLECTION'] = $collection->getData();
         $this->arResult['NAVIGATION'] = $collection->getChains();
         
+        $this->arResult['PICTURE']['VIEWID'] = $picture->getViewID();
         $this->arResult['PICTURE']['AUTHOR'] = $picture->getAuthor()->getName();
         $this->arResult['PICTURE']['HOLDER'] = $picture->getHolder()->getName();
         $this->arResult['PICTURE']['COLLECTION'] = $this->arResult['NAVIGATION'][1];

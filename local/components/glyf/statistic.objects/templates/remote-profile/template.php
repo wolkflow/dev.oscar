@@ -20,7 +20,7 @@
                 <img class="small-image" src="<?= $item->getSmallPreviewImageSrc() ?>" />
             </td>
             <td>
-                № <?= $item->getID() ?>
+                № <?= $item->getViewID() ?>
             </td>
             <td>
                 <?= $item->getTitle() ?>

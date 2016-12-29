@@ -131,6 +131,9 @@ class StatisticFolderDetail extends \CBitrixComponent
         // Картины.
         $this->arResult['ITEMS'] = array();
         while ($item = $result->fetch()) {
+            $picture = new Picture($item['ID']);
+            $item['VIEWID'] = $picture->getViewID();
+            
             $this->arResult['ITEMS'] []= $item;
         }
         unset($item);

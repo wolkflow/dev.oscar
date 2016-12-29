@@ -17,7 +17,7 @@
                 </label>
             </td>
             <td>
-                № <?= $item[Picture::FIELD_ID] ?>
+                № <?= $item['VIEWID'] ?>
             </td>
             <td>
                 <?= $item[Picture::FIELD_LANG_TITLE_SFX . CURRENT_LANG_UP] ?>

@@ -27,3 +27,5 @@ $MESS['GL_CUSTOMER'] = 'Заказчик:';
 $MESS['GL_MODEL'] = 'Модель:';
 $MESS['GL_SKETCHES'] = 'Эскизы:';
 $MESS['GL_OTHER'] = 'Прочее:';
+$MESS['GL_CM'] = 'см';
+$MESS['GL_NOT_ASCERTAINED'] = 'Не установлено';

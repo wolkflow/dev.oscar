@@ -13,4 +13,10 @@ class Holder extends HLBlockModel
     {
         return $this->get('UF_LANG_NAME_' . CURRENT_LANG_UP);
     }
+    
+    
+    public function getCode()
+    {
+        return $this->get('UF_CODE');
+    }
 }

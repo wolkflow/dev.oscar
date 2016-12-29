@@ -125,7 +125,7 @@ class PictureSearchComponent extends \CBitrixComponent
         
         // ID.
 		if (!empty($filters['ID'])) {
-			$filter->setIDs($filters['ID']);
+			$filter->setID($filters['ID']);
 		}
         
         // Ключевые слова.

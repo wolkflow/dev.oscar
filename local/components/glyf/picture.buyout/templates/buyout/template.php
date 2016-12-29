@@ -43,9 +43,18 @@
                         </li>
                         <li>
                             <b><?= getMessage('GL_DIMENSIONS') ?></b>
-                            <?= number_format(($arResult['PICTURE'][Picture::FIELD_WIDTH] / 10), 1, ',', '') ?>
-                            &times;
-                            <?= number_format(($arResult['PICTURE'][Picture::FIELD_HEIGHT] / 10), 1, ',', '')  ?>
+                            <? if (!empty($arResult['PICTURE'][Picture::FIELD_WIDTH]) && !empty($arResult['PICTURE'][Picture::FIELD_HEIGHT])) { ?>
+                                <?= number_format($arResult['PICTURE'][Picture::FIELD_WIDTH], 1, ',', '') ?>
+                                &times;
+                                <?= number_format($arResult['PICTURE'][Picture::FIELD_HEIGHT], 1, ',', '')  ?>
+                            <? } else { ?>
+                                <? if (!empty($arResult['PICTURE'][Picture::FIELD_WIDTH])) { ?>
+                                    <?= number_format($arResult['PICTURE'][Picture::FIELD_WIDTH], 1, ',', '') ?>
+                                <? } ?>
+                                <? if (!empty($arResult['PICTURE'][Picture::FIELD_HEIGHT])) { ?>
+                                    <?= number_format($arResult['PICTURE'][Picture::FIELD_HEIGHT], 1, ',', '')  ?>
+                                <? } ?>
+                            <? } ?>
                             <?= getMessage('GL_CM') ?>
                         </li>
                         <li>
@@ -58,7 +67,7 @@
                         </li>
                         <li>
                             <b>ID:</b> 
-                            <?= $arResult['PICTURE'][Picture::FIELD_ID] ?>
+                            <?= $arResult['PICTURE']['VIEWID'] ?>
                         </li>
                     </ul>
                 </div>

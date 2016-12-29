@@ -27,3 +27,5 @@ $MESS['GL_CUSTOMER'] = 'Customer:';
 $MESS['GL_MODEL'] = 'Model:';
 $MESS['GL_SKETCHES'] = 'Sketches';
 $MESS['GL_OTHER'] = 'Other:';
+$MESS['GL_CM'] = 'cm';
+$MESS['GL_NOT_ASCERTAINED'] = 'Not ascertained';

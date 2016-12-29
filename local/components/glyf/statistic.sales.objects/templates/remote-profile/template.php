@@ -17,7 +17,7 @@
                 </label>
             </td>
             <td>
-                № <?= $item->getID() ?>
+                № <?= $item->getViewID() ?>
             </td>
             <td>
                 <?= $item->getTitle() ?>

@@ -9,7 +9,7 @@
 
 <div class="pdf">
     <div class="pdfTop">
-        <div class="pdfTitle">GL_SALES_STATISTICS</div>
+        <div class="pdfTitle"><?= getMessage('GL_SALES_STATISTICS') ?></div>
         <div class="pdfLogo">
             <div class="pdfLogoImage">
                 <img src="<?= SITE_TEMPLATE_PATH ?>/images/logo.png" />
@@ -38,7 +38,7 @@
                     <? foreach ($arResult['ITEMS'] as $item) { ?>
                         <tr>
                             <td>
-                                <span>№</span> <?= $item->getID() ?>
+                                <span>№</span> <?= $item->getViewID() ?>
                             </td>
                             <td>
                                 <?= $item->getTitle() ?>

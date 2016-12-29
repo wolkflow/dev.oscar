@@ -13,6 +13,19 @@ class Picture extends \Glyf\Core\Filters\HLBlockElement
     
     
     /**
+     * фильтр по ID.
+     */
+    public function setID($value)
+    {
+        $value = (int) ltrim(preg_replace('/(\D)/', '', (string) $value), '0');
+        
+        if (!empty($value)) {
+			$this->params['filter']['ID'] = $value;
+		}
+    }
+    
+    
+    /**
      * фильтр по заголовку.
      */
     public function setTitle($value)

@@ -518,6 +518,14 @@ class Picture extends HLBlockModel
         return $this->get(self::FIELD_MODERATE_TEXT);
     }
     
+    public function getViewID()
+    {
+        if (empty($this->viewid)) {
+            $this->viewid = $this->getHolder()->getCode() . str_pad($this->getID(), 8, '0', STR_PAD_LEFT);
+        }        
+        return $this->viewid;
+    }
+    
     
     
     
