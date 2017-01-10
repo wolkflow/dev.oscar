@@ -17,3 +17,4 @@ $MESS['GL_CONFIRM'] = 'Confirm';
 $MESS['GL_CLICK_IMAGE_LEFT'] = 'To buy click on the image to the left.';
 $MESS['GL_CM'] = 'cm';
 $MESS['GL_RUB'] = 'rub';
+$MESS['GL_NOT_ASCERTAINED'] = 'Not ascertained';

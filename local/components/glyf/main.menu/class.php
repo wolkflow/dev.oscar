@@ -23,7 +23,7 @@ class MainMenuComponent extends \CBitrixComponent
 		Loader::includeModule('glyf.core');
 		
         $cache = new CPHPCache();
-        $ctime = 3600;
+        $ctime = 600;
         $ccode = 'main-counts';
         $cpath = '/onpage/';
         

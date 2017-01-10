@@ -40,6 +40,8 @@ class UserPictureComponent extends \CBitrixComponent
             return;
         }
         
+        Loc::loadMessages(__FILE__);
+        
         // Пользователь.
         $user = new User();
         
@@ -68,6 +70,7 @@ class UserPictureComponent extends \CBitrixComponent
         $this->arResult['COLLECTION'] = $collection->getData();
         $this->arResult['NAVIGATION'] = $collection->getChains();
         
+        $this->arResult['PICTURE']['VIEWID'] = $picture->getViewID();
         $this->arResult['PICTURE']['AUTHOR'] = $picture->getAuthor()->getName();
         $this->arResult['PICTURE']['HOLDER'] = $picture->getHolder()->getName();
         $this->arResult['PICTURE']['COLLECTION'] = $this->arResult['NAVIGATION'][1];
@@ -104,36 +107,37 @@ class UserPictureComponent extends \CBitrixComponent
         $convertor = new Glyf\Core\Helpers\NumConvertor();
         if ($this->arResult['PICTURE'][Picture::FIELD_PERIOD_FROM] == $this->arResult['PICTURE'][Picture::FIELD_PERIOD_TO]) {
             $period = $this->arResult['PICTURE'][Picture::FIELD_PERIOD_FROM];
-            $era    = ($period < 0)  ? ('до н.э.') : ('н.э.');
+            $era    = ($period < 0)  ? (Loc::getMessage('GL_AGE_BC')) : (Loc::getMessage('GL_AGE_AD'));
             $period = abs($period);
             
             if (!$this->arResult['PICTURE'][Picture::FIELD_IS_YEAR_FROM]) {
                 $period = $convertor->toRoman($period / TIME_YEARS_IN_CENTURY);
-                $time = ' в. ';
+                $time = Loc::getMessage('GL_AGE_CENTURY');
             } else {
-                $time = ' в. ';
+                $time = Loc::getMessage('GL_AGE_YEAR');
             }
-            $this->arResult['PICTURE']['PERIOD'] = ($period . $time . $era);
+            
+            $this->arResult['PICTURE']['PERIOD'] = (!empty($period)) ? ($period . $time . $era) : ('');
         } else {
             $periodF = $this->arResult['PICTURE'][Picture::FIELD_PERIOD_FROM];
             $periodT = $this->arResult['PICTURE'][Picture::FIELD_PERIOD_TO];
-            $eraF    = ($periodF < 0)  ? ('до н.э.') : ('н.э.');
-            $eraT    = ($periodT < 0)  ? ('до н.э.') : ('н.э.');
+            $eraF    = ($periodF < 0)  ? (Loc::getMessage('GL_AGE_BC')) : (Loc::getMessage('GL_AGE_AD'));
+            $eraT    = ($periodT < 0)  ? (Loc::getMessage('GL_AGE_BC')) : (Loc::getMessage('GL_AGE_AD'));
             $periodF = abs($periodF);
             $periodT = abs($periodT);
             
             if (!$this->arResult['PICTURE'][Picture::FIELD_IS_YEAR_FROM]) {
                 $periodF = $convertor->toRoman($periodF / TIME_YEARS_IN_CENTURY);
-                $timeF = ' в. ';
+                $time = Loc::getMessage('GL_AGE_CENTURY');
             } else {
-                $timeF = ' г. ';
+                $time = Loc::getMessage('GL_AGE_YEAR');
             }
             
             if (!$this->arResult['PICTURE'][Picture::FIELD_IS_YEAR_TO]) {
                 $periodT = $convertor->toRoman($periodT / TIME_YEARS_IN_CENTURY);
-                $timeT = ' в. ';
+                $time = Loc::getMessage('GL_AGE_CENTURY');
             } else {
-                $timeT = ' г. ';
+                $time = Loc::getMessage('GL_AGE_YEAR');
             }
             $periodF = ($periodF . $timeF . $eraF);
             $periodT = ($periodT . $timeT . $eraT);

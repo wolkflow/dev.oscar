@@ -1,7 +1,7 @@
 <?php
 
 // Глобальный js-переменные.
-$GLOBALS['JSVARS'] = array();
+$GLOBALS['JSVARS'] = array('LANGS' => array());
 
 
 // Константы.

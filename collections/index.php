@@ -66,7 +66,7 @@
                         "SECTION_USER_FIELDS" => array("UF_LANG_TITLE_RU", "UF_LANG_TITLE_EN"),
                         "ADD_SECTIONS_CHAIN" => "Y",
                         "CACHE_TYPE" => "A",
-                        "CACHE_TIME" => "36000000",
+                        "CACHE_TIME" => "600",
                         "CACHE_NOTES" => "",
                         "CACHE_GROUPS" => "Y"
                     )		

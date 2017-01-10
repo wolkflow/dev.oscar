@@ -369,16 +369,16 @@ class PictureUpload extends \CBitrixComponent
         $fields[Picture::FIELD_PLACE_COUNTRY] = (string) $data['COUNTRY'];
         
         // Город.
-        $fields[Picture::FIELD_PLACE_CITY_ID] = (int) $data['UF_PLACE_CITY_ID'];
+        $fields[Picture::FIELD_PLACE_CITY_ID] = (int) $data['CITY_ID'];
         
         // Город (текст).
-        $fields[Picture::FIELD_PLACE_CITY] = (string) $data['UF_PLACE_CITY'];
+        $fields[Picture::FIELD_PLACE_CITY] = (string) $data['CITY'];
         
         // Ширина.
-        $fields[Picture::FIELD_WIDTH] = (int) $data['WIDTH'];
+        $fields[Picture::FIELD_WIDTH] = (float) str_replace(',', '.', $data['WIDTH']);
         
         // Высота.
-        $fields[Picture::FIELD_HEIGHT] = (int) $data['HEIGHT'];
+        $fields[Picture::FIELD_HEIGHT] = (float) str_replace(',', '.', $data['HEIGHT']);
         
         // Цвет.
         $fields[Picture::FIELD_COLOR] = (int) $data['COLOR'];

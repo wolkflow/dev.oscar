@@ -2,7 +2,7 @@
 
 $MESS['GL_HEADER_UPLOAD'] = 'Новый объект';
 $MESS['GL_HEADER_RELOAD'] = 'Редактирование объекта';
-$MESS['GL_FILE_NOTE'] = 'выберите объект не менее 3000px по минимальной стороне в формате jpg';
+$MESS['GL_FILE_NOTE'] = 'Выберите объект не менее 3000px по минимальной стороне в формате jpg';
 $MESS['GL_PUT_IN_FOLDER'] = 'поместить в коллекцию';
 $MESS['GL_PLACED_FOLDER'] = 'поместить в папку:';
 $MESS['GL_MODERATION'] = 'Модерация';
@@ -13,11 +13,14 @@ $MESS['GL_OBJECT_PARAMETERS'] = 'Параметры объекта';
 $MESS['GL_NAME_OBJECT'] = 'Название объекта';
 $MESS['GL_EXAMPLE_2'] = 'пример: Лунная ночь';
 $MESS['GL_AUTHOR'] = 'Автор';
+$MESS['GL_EXAMPLE_2A'] = 'пример: Репин Илья Ефимович';
 $MESS['GL_DATE_2'] = 'Дата';
 $MESS['GL_YEAR'] = 'Год';
 $MESS['GL_CENTURY'] = 'Век';
 $MESS['GL_AD'] = 'НЭ';
 $MESS['GL_BC'] = 'ДНЭ';
+$MESS['GL_EXAMPLE_YEAR'] = 'пример: 1920';
+$MESS['GL_EXAMPLE_CENTURY'] = 'пример: XV';
 $MESS['GL_OR'] = 'или';
 $MESS['GL_FROM'] = 'От';
 $MESS['GL_TO'] = 'До';
@@ -44,6 +47,8 @@ $MESS['GL_TECHNICAL_CONDITION'] = 'Техническое состояние:';
 $MESS['GL_SKETCHES'] = 'Эскизы:';
 $MESS['GL_OTHER'] = 'Прочее:';
 $MESS['GL_CUSTOMER'] = 'Заказчик:';
+
+$MESS['GL_SAVE'] = 'Сохранить';
 
 $MESS['GL_GENRE_SELFPORTRAIT'] = 'Автопортрет';
 $MESS['GL_GENRE_ANIMALISM'] = 'Анимализм ';

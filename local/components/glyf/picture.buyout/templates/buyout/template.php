@@ -27,15 +27,28 @@
                     <ul>
                         <li>
                             <b><?= getMessage('GL_AUTHOR') ?></b>
-                            <?= $arResult['PICTURE']['AUTHOR'] ?>
+                            <? if (!empty($arResult['PICTURE']['AUTHOR'])) { ?>
+                                <?= $arResult['PICTURE']['AUTHOR'] ?>
+                            <? } else { ?>
+                                <?= getMessage('GL_NOT_ASCERTAINED') ?>
+                            <? } ?>
                         </li>
                         <li>
                             <b><?= getMessage('GL_PLACE_CREATION') ?></b>
-                            <?= implode(', ', $arResult['PICTURE']['PLACE']) ?>
+                            <? $place = implode(', ', $arResult['PICTURE']['PLACE']) ?>
+                            <? if (!empty($place)) { ?>
+                                <?= $place ?>
+                            <? } else { ?>
+                                <?= getMessage('GL_NOT_ASCERTAINED') ?>
+                            <? } ?>
                         </li>
                         <li>
                             <b><?= getMessage('GL_CREATION_TIME') ?></b>
-                            <?= $arResult['PICTURE']['PERIOD'] ?>
+                            <? if (!empty($arResult['PICTURE']['PERIOD'])) { ?>
+                                <?= $arResult['PICTURE']['PERIOD'] ?>
+                            <? } else { ?>
+                                <?= getMessage('GL_NOT_ASCERTAINED') ?>
+                            <? } ?>
                         </li>
                         <li>
                             <b><?= getMessage('GL_TECHNIQUE') ?></b>
@@ -43,19 +56,23 @@
                         </li>
                         <li>
                             <b><?= getMessage('GL_DIMENSIONS') ?></b>
-                            <? if (!empty($arResult['PICTURE'][Picture::FIELD_WIDTH]) && !empty($arResult['PICTURE'][Picture::FIELD_HEIGHT])) { ?>
-                                <?= number_format($arResult['PICTURE'][Picture::FIELD_WIDTH], 1, ',', '') ?>
-                                &times;
-                                <?= number_format($arResult['PICTURE'][Picture::FIELD_HEIGHT], 1, ',', '')  ?>
-                            <? } else { ?>
-                                <? if (!empty($arResult['PICTURE'][Picture::FIELD_WIDTH])) { ?>
+                            <? if (!empty($arResult['PICTURE'][Picture::FIELD_WIDTH]) || !empty($arResult['PICTURE'][Picture::FIELD_HEIGHT])) { ?>
+                                <? if (!empty($arResult['PICTURE'][Picture::FIELD_WIDTH]) && !empty($arResult['PICTURE'][Picture::FIELD_HEIGHT])) { ?>
                                     <?= number_format($arResult['PICTURE'][Picture::FIELD_WIDTH], 1, ',', '') ?>
-                                <? } ?>
-                                <? if (!empty($arResult['PICTURE'][Picture::FIELD_HEIGHT])) { ?>
+                                    &times;
                                     <?= number_format($arResult['PICTURE'][Picture::FIELD_HEIGHT], 1, ',', '')  ?>
+                                <? } else { ?>
+                                    <? if (!empty($arResult['PICTURE'][Picture::FIELD_WIDTH])) { ?>
+                                        <?= number_format($arResult['PICTURE'][Picture::FIELD_WIDTH], 1, ',', '') ?>
+                                    <? } ?>
+                                    <? if (!empty($arResult['PICTURE'][Picture::FIELD_HEIGHT])) { ?>
+                                        <?= number_format($arResult['PICTURE'][Picture::FIELD_HEIGHT], 1, ',', '')  ?>
+                                    <? } ?>
                                 <? } ?>
+                                <?= getMessage('GL_CM') ?>
+                            <? } else { ?>
+                                <?= getMessage('GL_NOT_ASCERTAINED') ?>
                             <? } ?>
-                            <?= getMessage('GL_CM') ?>
                         </li>
                         <li>
                             <b><?= getMessage('GL_COPYRIGHT_HOLDER') ?></b>

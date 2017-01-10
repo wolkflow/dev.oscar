@@ -7,6 +7,8 @@
 
 <? $this->setFrameMode(true); ?>
 
+<? $GLOBALS['JSVARS']['LANGS']['FILE_NOTE'] = getMessage('GL_FILE_NOTE') ?>
+
 <script src="<?= SITE_TEMPLATE_PATH ?>/js/jquery.autocomplete.min.js"></script>
 <script>
     $(document).ready(function() {
@@ -39,7 +41,7 @@
             $('#js-param-city-id').val('');
         }).autocomplete({
             change: function(event, ui) {
-                $('#js-param-city-id').val('');
+                // $('#js-param-city-id').val('');
             },
             source: function(request, callback) {
                 var $item = $(this.element[0]);
@@ -230,7 +232,7 @@
                         <div class="uploadBlock">
                             <label class="uploadBlock-title">
                                 <input type="radio" name="FOLDER_SET" value="EXIST" <?= (empty($arResult['PARAMS']['FOLDERS'])) ? ('disabled') : ('') ?> <?= ($arResult['DATA']['FOLDER_SET'] == 'EXIST') ? ('checked') : ('') ?> />
-                                поместить в папку:
+                                <?= getMessage('GL_PLACED_FOLDER') ?>
                             </label>
                             <? if (!empty($arResult['PARAMS']['FOLDERS'])) { ?>
                                 <select name="FOLDER_ID" class="styler">
@@ -241,7 +243,7 @@
                                     <? } ?>
                                 </select>
                             <? } else { ?>
-                                На текущий момент нет ни одной папки
+                                <?= getMessage('GL_MOMENT_FOLDERS') ?>
                             <? } ?>
                         </div>
                     </div>
@@ -249,9 +251,9 @@
                         <div class="uploadBlock">
                             <label class="uploadBlock-title">
                                 <input type="radio"  name="FOLDER_SET" value="CREATE" <?= ($arResult['DATA']['FOLDER_SET'] == 'CREATE') ? ('checked') : ('') ?> />
-                                создать новую папку
+                                <?= getMessage('GL_NEW_FOLDER') ?>
                             </label>
-                            <input type="text" name="FOLDER_TITLE" value="<?= $arResult['DATA']['FOLDER_TITLE'] ?>" placeholder="пример: Живопись VII-ХХ век" /> 
+                            <input type="text" name="FOLDER_TITLE" value="<?= $arResult['DATA']['FOLDER_TITLE'] ?>" placeholder="<?= getMessage('GL_EXAMPLE_1') ?>" /> 
                         </div>
                     </div>
                 </div>
@@ -260,19 +262,25 @@
                 <? // Параметры объекта // ?>
                 <div class="row">
                     <div class="col-xs-12">
-                        <div class="uploadRowTitle">Параметры объекта</div>
-                    </div>
-                    <div class="col-xs-12">
-                        <div class="uploadBlock">
-                            <div class="uploadBlock-title">Название объекта</div>
-                            <input type="text" name="TITLE" value="<?= $arResult['DATA']['TITLE'] ?>" placeholder="пример: Лунная ночь" />
+                        <div class="uploadRowTitle">
+                            <?= getMessage('GL_OBJECT_PARAMETERS') ?>
                         </div>
                     </div>
                     <div class="col-xs-12">
                         <div class="uploadBlock">
-                            <div class="uploadBlock-title">Автор</div>
+                            <div class="uploadBlock-title">
+                                <?= getMessage('GL_NAME_OBJECT') ?>
+                            </div>
+                            <input type="text" name="TITLE" value="<?= $arResult['DATA']['TITLE'] ?>" placeholder="<?= getMessage('GL_EXAMPLE_2') ?>" />
+                        </div>
+                    </div>
+                    <div class="col-xs-12">
+                        <div class="uploadBlock">
+                            <div class="uploadBlock-title">
+                                <?= getMessage('GL_AUTHOR') ?>
+                            </div>
                             <input type="hidden" id="js-param-author-id" name="AUTHOR_ID" value="<?= $arResult['DATA']['AUTHOR_ID'] ?>" />
-                            <input type="text" class="suggest" data-type="author" data-input="#js-param-author-id" name="AUTHOR_TITLE" value="<?= $arResult['DATA']['AUTHOR_TITLE'] ?>" placeholder="пример: Репин Илья Ефимович" />
+                            <input type="text" class="suggest" data-type="author" data-input="#js-param-author-id" name="AUTHOR_TITLE" value="<?= $arResult['DATA']['AUTHOR_TITLE'] ?>" placeholder="<?= getMessage('GL_EXAMPLE_2A') ?>" />
                         </div>
                     </div>
                     <div class="col-xs-12 uploadPeriod">
@@ -280,41 +288,41 @@
                             <div class="col-md-5">
                                 <div class="uploadBlock">
                                     <div class="uploadBlock-title">
-                                        Дата 
+                                        <?= getMessage('GL_DATE_2') ?>
                                         <label class="inline-label">
                                             <input type="radio" name="ISYEAR" value="YEAR" <?= ($arResult['DATA']['ISYEAR'] == 'YEAR' || empty($arResult['DATA']['ISYEAR'])) ? ('checked') : ('') ?> />
-                                            Год
+                                            <?= getMessage('GL_YEAR') ?>
                                         </label> 
                                         <label class="inline-label">
                                             <input type="radio"  name="ISYEAR" value="CENTURY" <?= ($arResult['DATA']['ISYEAR'] == 'CENTURY') ? ('checked') : ('') ?> />
-                                            Век
+                                            <?= getMessage('GL_CENTURY') ?>
                                         </label>
                                     </div>
                                     <div class="upload-double">
-                                        <input type="text" name="PERIOD" value="<?= $arResult['DATA']['PERIOD'] ?>" placeholder="пример: 1920" />
+                                        <input type="text" name="PERIOD" value="<?= $arResult['DATA']['PERIOD'] ?>" placeholder="<?= getMessage('GL_EXAMPLE_YEAR') ?>" />
                                         <select class="styler" name="PERIOD_ERA">
                                             <option value="<?= Picture::PROP_TIME_AD ?>" <?= ($arResult['DATA']['PERIOD_ERA'] == Picture::PROP_TIME_AD) ? ('selected') : ('') ?>>
-                                                НЭ
+                                                <?= getMessage('GL_AD') ?>
                                             </option>
                                             <option value="<?= Picture::PROP_TIME_BC ?>" <?= ($arResult['DATA']['PERIOD_ERA'] == Picture::PROP_TIME_BC) ? ('selected') : ('') ?>>
-                                                ДНЭ
+                                                <?= getMessage('GL_BC') ?>
                                             </option>
                                         </select>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-1"><span class="uploadPeriod-divider">или</span></div>
+                            <div class="col-md-1"><span class="uploadPeriod-divider"><?= getMessage('GL_OR') ?></span></div>
                             <div class="col-md-3">
                                 <div class="uploadBlock">
-                                    <div class="uploadBlock-title">От</div>
+                                    <div class="uploadBlock-title"><?= getMessage('GL_FROM') ?></div>
                                     <div class="upload-double">
-                                        <input type="text" name="PERIOD_FROM" value="<?= $arResult['DATA']['PERIOD_FROM'] ?>" placeholder="пример: XV" />
+                                        <input type="text" name="PERIOD_FROM" value="<?= $arResult['DATA']['PERIOD_FROM'] ?>" placeholder="<?= getMessage('GL_EXAMPLE_CENTURY') ?>" />
                                         <select class="styler" name="PERIOD_FROM_ERA">
                                             <option value="<?= Picture::PROP_TIME_AD ?>" <?= ($arResult['DATA']['PERIOD_FROM_ERA'] == Picture::PROP_TIME_AD) ? ('selected') : ('') ?>>
-                                                НЭ
+                                                <?= getMessage('GL_AD') ?>
                                             </option>
                                             <option value="<?= Picture::PROP_TIME_BC ?>" <?= ($arResult['DATA']['PERIOD_FROM_ERA'] == Picture::PROP_TIME_BC) ? ('selected') : ('') ?>>
-                                                ДНЭ
+                                                <?= getMessage('GL_BC') ?>
                                             </option>
                                         </select>
                                     </div>
@@ -322,15 +330,15 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="uploadBlock">
-                                    <div class="uploadBlock-title">До</div>
+                                    <div class="uploadBlock-title"><?= getMessage('GL_TO') ?></div>
                                     <div class="upload-double">
-                                        <input type="text" name="PERIOD_TO" value="<?= $arResult['DATA']['PERIOD_TO'] ?>" placeholder="пример: XX" />
+                                        <input type="text" name="PERIOD_TO" value="<?= $arResult['DATA']['PERIOD_TO'] ?>" placeholder="<?= getMessage('GL_EXAMPLE_CENTURY') ?>" />
                                         <select class="styler" name="PERIOD_TO_ERA">
                                             <option value="<?= Picture::PROP_TIME_AD ?>" <?= ($arResult['DATA']['PERIOD_TO_ERA'] == Picture::PROP_TIME_AD) ? ('selected') : ('') ?>>
-                                                НЭ
+                                                <?= getMessage('GL_AD') ?>
                                             </option>
                                             <option value="<?= Picture::PROP_TIME_BC ?>" <?= ($arResult['DATA']['PERIOD_TO_ERA'] == Picture::PROP_TIME_BC) ? ('selected') : ('') ?>>
-                                                ДНЭ
+                                                <?= getMessage('GL_BC') ?>
                                             </option>
                                         </select>
                                     </div>
@@ -340,8 +348,10 @@
                     </div>
                     <div class="col-xs-12">
                         <div class="uploadBlock js-suggest-tags-wrap" data-param="TECHNIQUE">
-                            <div class="uploadBlock-title">Техника</div>
-                            <input type="text" class="suggest-tags" data-type="technique" placeholder="пример: Масло, Акварель" />
+                            <div class="uploadBlock-title">
+                                <?= getMessage('GL_TECHNIQUE') ?>
+                            </div>
+                            <input type="text" class="suggest-tags" data-type="technique" placeholder="<?= getMessage('GL_EXAMPLE_3') ?>" />
                             <div class="tags">
                                 <? if (!empty($arResult['DATA']['TECHNIQUE'])) { ?>
                                     <? foreach ($arResult['DATA']['TECHNIQUE'] as $id => $value) { ?>
@@ -366,7 +376,9 @@
                     </div>
                     <div class="col-xs-12">
                         <div class="uploadBlock uploadBlock-description">
-                            <div class="uploadBlock-title">Описание</div>
+                            <div class="uploadBlock-title">
+                                <?= getMessage('GL_DESCRIPTION') ?>
+                            </div>
                             <textarea name="DESCRIPTION"><?= $arResult['DATA']['DESCRIPTION'] ?></textarea>
                         </div>
                     </div>
@@ -377,7 +389,9 @@
                     <? // Коллекция // ?>
                     <div class="col-md-6 uploadTypeWrap">
                         <div class="uploadBlock">
-                            <div class="uploadBlock-title uploadBlock-title_bold">Коллекция</div>
+                            <div class="uploadBlock-title uploadBlock-title_bold">
+                                <?= getMessage('GL_COLLECTION_NO_LIGHTBOX') ?>
+                            </div>
                             
                             <?	// Коллекции.
                                 $APPLICATION->IncludeComponent(
@@ -410,7 +424,9 @@
                     
                     <div class="col-md-6">
                         <div class="uploadBlock">
-                            <div class="uploadBlock-title uploadBlock-title_bold">Жанр</div>
+                            <div class="uploadBlock-title uploadBlock-title_bold">
+                                <?= getMessage('GL_GENRE') ?>
+                            </div>
                             <ul class="ddup">
                                 <? foreach ($arResult['PARAMS']['GENRE'] as $id => $code) { ?>
                                     <li>
@@ -428,9 +444,11 @@
                 <div class="row">
                     <div class="col-md-6 uploadBlock">
                         <div class="uploadBlock-size">
-                            <div class="uploadBlock-title">Место создания</div>
-                            <input type="text" id="js-param-place-country-id" name="COUNTRY" data-type="place-country" data-input="#js-param-country-id" value="<?= $arResult['DATA']['COUNTRY'] ?>" placeholder="Страна" />
-                            <input type="text" id="js-param-place-city-id" name="CITY" data-type="place-city" data-input="#js-param-city-id" value="<?= $arResult['DATA']['CITY'] ?>" placeholder="Город" />
+                            <div class="uploadBlock-title">
+                                <?= getMessage('GL_PLACE_CREATION') ?>
+                            </div>
+                            <input type="text" id="js-param-place-country-id" name="COUNTRY" data-type="place-country" data-input="#js-param-country-id" value="<?= $arResult['DATA']['COUNTRY'] ?>" placeholder="<?= getMessage('GL_COUNTRY') ?>" />
+                            <input type="text" id="js-param-place-city-id" name="CITY" data-type="place-city" data-input="#js-param-city-id" value="<?= $arResult['DATA']['CITY'] ?>" placeholder="<?= getMessage('GL_CITY') ?>" />
                             
                             <input type="hidden" id="js-param-country-id" name="COUNTRY_ID" value="<?= $arResult['DATA']['COUNTRY_ID'] ?>" />
                             <input type="hidden" id="js-param-city-id" name="CITY_ID" value="<?= $arResult['DATA']['CITY_ID'] ?>" />
@@ -438,9 +456,11 @@
                     </div>
                     <div class="col-md-6 uploadBlock-size">
                         <div class="uploadBlock">
-                            <div class="uploadBlock-title">Размер объекта (мм)</div>
-                            <input type="text" name="WIDTH" value="<?= $arResult['DATA']['WIDTH'] ?>" placeholder="Ширина" />
-                            <input type="text" name="HEIGHT" value="<?= $arResult['DATA']['HEIGHT'] ?>" placeholder="Высота" />
+                            <div class="uploadBlock-title">
+                                <?= getMessage('GL_OBJECT_SIZE') ?>
+                            </div>
+                            <input type="text" name="WIDTH" value="<?= $arResult['DATA']['WIDTH'] ?>" placeholder="<?= getMessage('GL_WIDTH') ?>" />
+                            <input type="text" name="HEIGHT" value="<?= $arResult['DATA']['HEIGHT'] ?>" placeholder="<?= getMessage('GL_HEIGHT') ?>" />
                         </div>
                     </div>
                 </div>
@@ -448,7 +468,9 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="uploadBlock uploadColor">
-                            <div class="uploadBlock-title">Цвет изображения</div>
+                            <div class="uploadBlock-title">
+                                <?= getMessage('GL_COLOR_IMAGE') ?>
+                            </div>
                             <ul class="ddup">
                                 <? foreach ($arResult['PARAMS']['COLOR'] as $id => $code) { ?>
                                     <li>
@@ -463,7 +485,9 @@
                     </div>
                     <div class="col-md-6">
                         <div class="uploadBlock uploadCopy">
-                            <div class="uploadBlock-title">Правовой режим</div>
+                            <div class="uploadBlock-title">
+                                <?= getMessage('GL_LEGAL_REGIME') ?>
+                            </div>
                             <ul class="ddup">
                                 <? foreach ($arResult['PARAMS']['LEGAL'] as $id => $code) { ?>
                                     <li>
@@ -481,8 +505,10 @@
                 <div class="row">
                     <div class="col-xs-12">
                         <div class="uploadBlock uploadKeywords js-suggest-tags-wrap" data-param="KEYWORDS">
-                            <div class="uploadBlock-title">Ключевые слова</div>
-                            <input type="text" class="suggest-tags" data-type="keywords" placeholder="пример: Живопись, Пейзаж, ХХ век" />
+                            <div class="uploadBlock-title">
+                                <?= getMessage('GL_KEYWORDS') ?>
+                            </div>
+                            <input type="text" class="suggest-tags" data-type="keywords" placeholder="<?= getMessage('GL_EXAMPLE_4') ?>" />
                             <div class="tags">
                                 <? if (!empty($arResult['DATA']['KEYWORDS'])) { ?>
                                     <? foreach ($arResult['DATA']['KEYWORDS'] as $id => $value) { ?>
@@ -515,47 +541,49 @@
                 <div class="row">
                     <div class="col-xs-12 uploadBlock-areas">
                         <div class="uploadBlock">
-                            <div class="uploadBlock-title">Дополнительная информация</div>
+                            <div class="uploadBlock-title">
+                                <?= getMessage('GL_ADDITIONAL_INFORMATION') ?>
+                            </div>
                             <div class="row">
                                 <div class="col-md-6">
-                                    <div class="uploadBlock-title_small">Провенанс:</div>
+                                    <div class="uploadBlock-title_small"><?= getMessage('GL_PROVENANCE') ?></div>
                                     <textarea name="PROVENANCE"><?= $arResult['DATA']['PROVENANCE'] ?></textarea>
                                 </div>
                                 <div class="col-md-6">
-                                    <div class="uploadBlock-title_small">Модель:</div>
+                                    <div class="uploadBlock-title_small"><?= getMessage('GL_MODEL') ?></div>
                                     <textarea name="MODEL"><?= $arResult['DATA']['MODEL'] ?></textarea>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-6">
-                                    <div class="uploadBlock-title_small">Реставрационные работы:</div>
+                                    <div class="uploadBlock-title_small"><?= getMessage('GL_RESTORATION_WORK') ?></div>
                                     <textarea name="RESTORATION"><?= $arResult['DATA']['RESTORATION'] ?></textarea>
                                 </div>
                                 <div class="col-md-6">
-                                    <div class="uploadBlock-title_small">Эскизы:</div>
+                                    <div class="uploadBlock-title_small"><?= getMessage('GL_SKETCHES') ?></div>
                                     <textarea name="SKETCHES"><?= $arResult['DATA']['SKETCHES'] ?></textarea>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-6">
-                                    <div class="uploadBlock-title_small">Техническое состояние:</div>
+                                    <div class="uploadBlock-title_small"><?= getMessage('GL_TECHNICAL_CONDITION') ?></div>
                                     <textarea name="TECHNICAL"><?= $arResult['DATA']['TECHNICAL'] ?></textarea>
                                 </div>
                                 <div class="col-md-6">
-                                    <div class="uploadBlock-title_small">Прочее:</div>
+                                    <div class="uploadBlock-title_small"><?= getMessage('GL_OTHER') ?></div>
                                     <textarea name="OTHER"><?= $arResult['DATA']['OTHER'] ?></textarea>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-6">
-                                    <div class="uploadBlock-title_small">Заказчик:</div>
+                                    <div class="uploadBlock-title_small"><?= getMessage('GL_CUSTOMER') ?></div>
                                     <textarea name="CUSTOMER"><?= $arResult['DATA']['CUSTOMER'] ?></textarea>
                                 </div>
                             </div>
                             
                             <div class="row">
                                 <div class="col-md-12">
-                                    <input type="submit" class="btn btn-upload" value="Сохранить" />
+                                    <input type="submit" class="btn btn-upload" value="<?= getMessage('GL_SAVE') ?>" />
                                 </div>
                             </div>
                         </div>

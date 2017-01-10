@@ -138,13 +138,22 @@
                 <div class="card-meta">
                     <span class="card-meta__key"><?= getMessage('GL_PLACE_CREATION') ?></span>
                     <span class="card-meta__value">
-                        <?= implode(', ', $arResult['PICTURE']['PLACE']) ?>
+                        <? $place = implode(', ', $arResult['PICTURE']['PLACE']) ?>
+                        <? if (!empty($place)) { ?>
+                            <?= $place ?>
+                        <? } else { ?>
+                            <?= getMessage('GL_NOT_ASCERTAINED') ?>
+                        <? } ?>
                     </span>
                 </div>
                 <div class="card-meta">
                     <span class="card-meta__key"><?= getMessage('GL_CREATION_TIME') ?></span>
                     <span class="card-meta__value">
-                        <?= $arResult['PICTURE']['PERIOD'] ?>
+                        <? if (!empty($arResult['PICTURE']['PERIOD'])) { ?>
+                            <?= $arResult['PICTURE']['PERIOD'] ?>
+                        <? } else { ?>
+                            <?= getMessage('GL_NOT_ASCERTAINED') ?>
+                        <? } ?>
                     </span>
                 </div>
                 <div class="card-meta">
@@ -156,19 +165,23 @@
                 <div class="card-meta">
                     <span class="card-meta__key"><?= getMessage('GL_DIMENSIONS') ?></span>
                     <span class="card-meta__value">
-                        <? if (!empty($arResult['PICTURE'][Picture::FIELD_WIDTH]) && !empty($arResult['PICTURE'][Picture::FIELD_HEIGHT])) { ?>
-                            <?= number_format($arResult['PICTURE'][Picture::FIELD_WIDTH], 1, ',', '') ?>
-                            &times;
-                            <?= number_format($arResult['PICTURE'][Picture::FIELD_HEIGHT], 1, ',', '')  ?>
-                        <? } else { ?>
-                            <? if (!empty($arResult['PICTURE'][Picture::FIELD_WIDTH])) { ?>
+                        <? if (!empty($arResult['PICTURE'][Picture::FIELD_WIDTH]) || !empty($arResult['PICTURE'][Picture::FIELD_HEIGHT])) { ?>
+                            <? if (!empty($arResult['PICTURE'][Picture::FIELD_WIDTH]) && !empty($arResult['PICTURE'][Picture::FIELD_HEIGHT])) { ?>
                                 <?= number_format($arResult['PICTURE'][Picture::FIELD_WIDTH], 1, ',', '') ?>
-                            <? } ?>
-                            <? if (!empty($arResult['PICTURE'][Picture::FIELD_HEIGHT])) { ?>
+                                &times;
                                 <?= number_format($arResult['PICTURE'][Picture::FIELD_HEIGHT], 1, ',', '')  ?>
+                            <? } else { ?>
+                                <? if (!empty($arResult['PICTURE'][Picture::FIELD_WIDTH])) { ?>
+                                    <?= number_format($arResult['PICTURE'][Picture::FIELD_WIDTH], 1, ',', '') ?>
+                                <? } ?>
+                                <? if (!empty($arResult['PICTURE'][Picture::FIELD_HEIGHT])) { ?>
+                                    <?= number_format($arResult['PICTURE'][Picture::FIELD_HEIGHT], 1, ',', '')  ?>
+                                <? } ?>
                             <? } ?>
+                            <?= getMessage('GL_CM') ?>
+                        <? } else { ?>
+                            <?= getMessage('GL_NOT_ASCERTAINED') ?>
                         <? } ?>
-                        <?= getMessage('GL_CM') ?>
                     </span>
                 </div>
                 <div class="card-meta">

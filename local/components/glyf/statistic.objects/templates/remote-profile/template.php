@@ -27,7 +27,7 @@
             </td>
             <td>
                 <? if ($item->isModerate()) { ?>
-                    <?= date('d.m.Y', $item->getModerateTime()) ?>
+                    <?= date('d.m.Y', $item->getModerateTime()->getTimeStamp()) ?>
                 <? } else { ?>
                     <span class="cabinet-table__bluetext"><?= getMessage('GL_MODERATION') ?></span>
                 <? } ?>

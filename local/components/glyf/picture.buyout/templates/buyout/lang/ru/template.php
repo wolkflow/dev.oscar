@@ -17,3 +17,4 @@ $MESS['GL_CONFIRM'] = 'Подтвердить';
 $MESS['GL_CLICK_IMAGE_LEFT'] = 'Для покупки кликните на изображение слева.';
 $MESS['GL_CM'] = 'см';
 $MESS['GL_RUB'] = 'р.';
+$MESS['GL_NOT_ASCERTAINED'] = 'Не установлено';

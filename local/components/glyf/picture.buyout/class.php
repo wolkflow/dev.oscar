@@ -110,9 +110,10 @@ class PictureBuyoutComponent extends \CBitrixComponent
                     $period = $convertor->toRoman($period / TIME_YEARS_IN_CENTURY);
                     $time = Loc::getMessage('GL_AGE_CENTURY');
                 } else {
-                    $time = Loc::getMessage('GL_AGE_CENTURY');
+                    $time = Loc::getMessage('GL_AGE_YEAR');
                 }
-                $this->arResult['PICTURE']['PERIOD'] = ($period . $time . $era);
+                
+                $this->arResult['PICTURE']['PERIOD'] = (!empty($period)) ? ($period . $time . $era) : ('');
             } else {
                 $periodF = $this->arResult['PICTURE'][Picture::FIELD_PERIOD_FROM];
                 $periodT = $this->arResult['PICTURE'][Picture::FIELD_PERIOD_TO];

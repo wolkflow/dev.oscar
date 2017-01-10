@@ -104,9 +104,9 @@ class PicturesDetail extends \CBitrixComponent
                 $period = $convertor->toRoman($period / TIME_YEARS_IN_CENTURY);
                 $time = Loc::getMessage('GL_AGE_CENTURY');
             } else {
-                $time = Loc::getMessage('GL_AGE_CENTURY');
+                $time = Loc::getMessage('GL_AGE_YEAR');
             }
-            $this->arResult['PICTURE']['PERIOD'] = ($period . $time . $era);
+            $this->arResult['PICTURE']['PERIOD'] = (!empty($period)) ? ($period . $time . $era) : ('');
         } else {
             $periodF = $this->arResult['PICTURE'][Picture::FIELD_PERIOD_FROM];
             $periodT = $this->arResult['PICTURE'][Picture::FIELD_PERIOD_TO];
@@ -119,14 +119,14 @@ class PicturesDetail extends \CBitrixComponent
                 $periodF = $convertor->toRoman($periodF / TIME_YEARS_IN_CENTURY);
                 $timeF = Loc::getMessage('GL_AGE_CENTURY');
             } else {
-                $timeF = ' г. ';
+                $timeF = Loc::getMessage('GL_AGE_YEAR');
             }
             
             if (!$this->arResult['PICTURE'][Picture::FIELD_IS_YEAR_TO]) {
                 $periodT = $convertor->toRoman($periodT / TIME_YEARS_IN_CENTURY);
                 $timeT = Loc::getMessage('GL_AGE_CENTURY');
             } else {
-                $timeT = ' г. ';
+                $timeT = Loc::getMessage('GL_AGE_YEAR');
             }
             $periodF = ($periodF . $timeF . $eraF);
             $periodT = ($periodT . $timeT . $eraT);

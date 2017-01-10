@@ -11,6 +11,7 @@ $MESS['GL_OBJECT_PARAMETERS'] = 'Object parameters';
 $MESS['GL_NAME_OBJECT'] = 'The name of the object';
 $MESS['GL_EXAMPLE_2'] = 'example: a moonlit night';
 $MESS['GL_AUTHOR'] = 'Author';
+$MESS['GL_EXAMPLE_2A'] = 'example: Repin Ilya Yefimovich';
 $MESS['GL_DATE_2'] = 'Date';
 $MESS['GL_YEAR'] = 'Year';
 $MESS['GL_CENTURY'] = 'Century';
@@ -42,6 +43,8 @@ $MESS['GL_TECHNICAL_CONDITION'] = 'Technical condition:';
 $MESS['GL_SKETCHES'] = 'Sketches';
 $MESS['GL_OTHER'] = 'Other:';
 $MESS['GL_CUSTOMER'] = 'Customer:';
+
+$MESS['GL_SAVE'] = 'Save';
 
 $MESS['GL_GENRE_SELFPORTRAIT'] = 'Self portrait';
 $MESS['GL_GENRE_ANIMALISM'] = 'Animalism';
