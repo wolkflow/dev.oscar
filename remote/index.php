@@ -1510,6 +1510,9 @@ switch ($action) {
             case ('picture.basket'):
                 $html = gethtmlremote('picture.basket.php');
                 break;
+            case ('picture.search'):
+                $html = gethtmlremote('picture.search.php');
+                break;
         }
         jsonresponse(true, '', array('html' => $html));
         break;

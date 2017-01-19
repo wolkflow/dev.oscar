@@ -53,7 +53,23 @@ $(document).ready(function() {
         });
     });
     
-    // Высота высот
+    
+    // Изменение текущей страницы.
+    $(document).on('click', '#js-search-nav-id .js-page', function() {
+        var page = parseInt($(this).data('page'));
+        
+        $.ajax({
+            url: '/remote/',
+            type: 'post',
+            data: {'action': 'get-html', 'inc': 'picture.search', 'page': page},
+            dataType: 'json',
+            success: function(response) {
+                if (response.status) {
+                    $('#js-search-wrapper-id').html(response.data['html']);
+                }
+            }
+        });
+    });
 
     // Добавление в корзину.
     /*

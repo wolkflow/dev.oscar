@@ -6137,3 +6137,7 @@ input.input-error:not(.disabled) {
   border-radius: 5px;
   background: #fff;
 }
+
+.margin-footer {
+    margin-bottom: 30px;
+}

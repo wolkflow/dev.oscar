@@ -459,8 +459,8 @@
                             <div class="uploadBlock-title">
                                 <?= getMessage('GL_OBJECT_SIZE') ?>
                             </div>
-                            <input type="text" name="WIDTH" value="<?= $arResult['DATA']['WIDTH'] ?>" placeholder="<?= getMessage('GL_WIDTH') ?>" />
                             <input type="text" name="HEIGHT" value="<?= $arResult['DATA']['HEIGHT'] ?>" placeholder="<?= getMessage('GL_HEIGHT') ?>" />
+                            <input type="text" name="WIDTH" value="<?= $arResult['DATA']['WIDTH'] ?>" placeholder="<?= getMessage('GL_WIDTH') ?>" />
                         </div>
                     </div>
                 </div>

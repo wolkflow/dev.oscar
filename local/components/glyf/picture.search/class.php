@@ -6,11 +6,24 @@ use Glyf\Oscar\Picture;
 
 class PictureSearchComponent extends \CBitrixComponent
 {
+    const PERPAGE = 40;
+    
+    
 	/** 
 	 * Установка настроек.
 	 */
     public function onPrepareComponentParams($arParams)
     {
+        // Количество на странице.
+        $arParams['PERPAGE'] = self::PERPAGE;
+        
+        // Страница.
+        $arParams['PAGE'] = (int) $arParams['PAGE'];
+        
+        if ($arParams['PAGE'] <= 0) {
+            $arParams['PAGE'] = 1;
+        }
+        
         return $arParams;
 	}
 	
@@ -58,8 +71,33 @@ class PictureSearchComponent extends \CBitrixComponent
         // Задание параметров навигации.
         // $filter->setNav($this->arParams['NAV']);
         
+        
+        if ($this->arParams['PAGE'] < 1) {
+            $this->arParams['PAGE'] = 1;
+        }
+        // $this->arResult['TOTAL'] = $result->getSelectedRowsCount();
+        
         // Фильтрация.
         $filter->execute();
+        
+        
+        // Общее количество.
+        $this->arResult['TOTAL'] = $filter->getCount();
+        
+        
+        // Количество страниц.
+        $pagescnt = ceil($this->arResult['TOTAL'] / $this->arParams['PERPAGE']);
+        
+        if ($this->arParams['PAGE'] > $pagescnt) {
+            $this->arParams['PAGE'] = $pagescnt;
+        }
+        
+        $filter->setLimit(self::PERPAGE);
+        
+        $filter->setOffset(($this->arParams['PAGE'] - 1) * $this->arParams['PERPAGE']);
+        
+        $filter->execute();
+        
         
         // Получение результата фильтрации.
         $result = $filter->getResult();
