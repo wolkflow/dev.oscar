@@ -7,7 +7,7 @@
 
 <? $this->setFrameMode(true); ?>
 <div  id="js-search-block-id" class="col-sm-6 col-lg-8 margin-footer">
-    <div id="js-search-wrapper-id">
+    <div id="js-search-wrapper-id" data-filter='<?= json_encode($_GET[PictureSearchComponent::FILTER], JSON_HEX_APOS) ?>'>
         <? if (!empty($arResult['ITEMS'])) { ?>
             <div class="row">
                 <? foreach ($arResult['ITEMS'] as $item) { ?>

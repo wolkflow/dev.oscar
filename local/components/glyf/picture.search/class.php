@@ -6,6 +6,7 @@ use Glyf\Oscar\Picture;
 
 class PictureSearchComponent extends \CBitrixComponent
 {
+    const FILTER  = 'F';    
     const PERPAGE = 40;
     
     

@@ -1,4 +1,23 @@
 $(document).ready(function() {
+    
+    function setEqualHeight(columns)
+	{
+		var tallestcolumn = 0;
+		columns.each(
+			function()
+			{
+				currentHeight = $(this).height();
+				if(currentHeight > tallestcolumn)
+				{
+					tallestcolumn = currentHeight;
+				}
+			}
+		);
+		columns.height(tallestcolumn);
+	}
+    
+    
+    
     $('#js-param-author-id').on('keyup', function() {
         var text = $(this).val();
         
@@ -56,16 +75,27 @@ $(document).ready(function() {
     
     // Изменение текущей страницы.
     $(document).on('click', '#js-search-nav-id .js-page', function() {
-        var page = parseInt($(this).data('page'));
+        var page   = parseInt($(this).data('page'));
+        var filter = $('#js-search-wrapper-id').data('filter');
         
         $.ajax({
             url: '/remote/',
             type: 'post',
-            data: {'action': 'get-html', 'inc': 'picture.search', 'page': page},
+            data: {'action': 'get-html', 'inc': 'picture.search', 'page': page, 'F': filter},
             dataType: 'json',
             success: function(response) {
                 if (response.status) {
                     $('#js-search-wrapper-id').html(response.data['html']);
+                    
+                    setEqualHeight($(".subscribeCol-list"));
+                    setEqualHeight($(".subscribeSearch-col"));
+                    setEqualHeight($(".catalogItem-alt"));
+                    
+                    $(window).resize(function() {
+                        setEqualHeight($(".subscribeCol-list"));
+                        setEqualHeight($(".subscribeSearch-col"));
+                        setEqualHeight($(".catalogItem-alt"));
+                    });
                 }
             }
         });

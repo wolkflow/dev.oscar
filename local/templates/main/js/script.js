@@ -438,10 +438,11 @@ $(document).ready(function () {
 
 });
 */
+
 $(window).on('load resize', function () {
-	var windowHeight = $(window).height(),
-		wrapperHeight = $('.wrapper').height(),
-		currentHeight = $('.siteHeader').innerHeight() + $('.top').innerHeight() + $('.siteFooter').innerHeight();
-	$('.siteMain, .content').css({'min-height': windowHeight - currentHeight})
-	console.log(currentHeight)
+	var windowHeight = $(window).height();
+    var wrapperHeight = $('.wrapper').height();
+    var currentHeight = $('.siteHeader').innerHeight() + $('.top').innerHeight() + $('.siteFooter').innerHeight();
+    
+	$('.siteMain, .content').css({'min-height': windowHeight - currentHeight});
 });
