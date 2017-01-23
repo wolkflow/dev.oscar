@@ -4,6 +4,7 @@
 
 <? $this->setFrameMode(true); ?>
 
+<? /*
 <div class="content">
 	<div class="container">
 		<div class="row">
@@ -16,13 +17,14 @@
 							"START_FROM" => "0", 
 							"PATH" => "", 
 							"SITE_ID" => "s1" 
-						)
+						),
+                        $component
 					);
 				?>
 			</div>
 		</div>
 	</div>
-	
+*/ ?>
 	<div class="container">
 		<div class="row">
 			<div class="col-md-8 col-md-offset-2">
@@ -55,8 +57,8 @@
 			</div>
 		</div>
 	</div>
-</div>
-
+<? /* </div>
+*/ ?>
 <? if (!empty($arResult['PROPERTIES']['SIMILARS']['VALUE'])) { ?>
 	<div class="similarItems hidden-xs">
 		<div class="container">
