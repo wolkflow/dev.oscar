@@ -881,7 +881,7 @@ table {
 }
 .btn,
 a.btn {
-  padding: 6px 16px 3px;
+  padding: 6px 3% 3px;
   text-decoration: none !important;
   outline: none !important;
   font: 300 19px/normal 'Ristretto Pro', Georgia, 'Times New Roman', Times, serif;

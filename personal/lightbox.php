@@ -20,7 +20,7 @@
 <main class="siteMain">
     <div class="container">
         <div class="row flex">
-            <div class="col-md-10 col-sm-9">
+            <div class="col-sm-9 col-md-9 col-lg-10">
                 <?	// Статистика по папке.					
                     $APPLICATION->IncludeComponent(
                         "glyf:user.lightbox",
@@ -29,7 +29,7 @@
                     );
                 ?>
             </div>
-            <div class="col-md-2 col-sm-3 hidden-xs">
+            <div class="col-sm-3 col-md-3 col-lg-2 hidden-xs">
                 <?	// Сборники.					
                     $APPLICATION->IncludeComponent(
                         "glyf:lightbox.list",

@@ -30,7 +30,7 @@
                     <?= $item[Picture::FIELD_LANG_TITLE_SFX . CURRENT_LANG_UP] ?>
                 </div>
                 <div class="lightboxes-setDesc">
-                    <?= $item['AUTHOR'] ?>
+                    <?= $item['AUTHOR'] ?> &nbsp;
                 </div>
             </div>
         <? } ?>
