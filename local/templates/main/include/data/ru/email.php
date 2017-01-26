@@ -1,1 +1,1 @@
-<a href="mailto:office@OscarArtAgency.ru" class="footerContactsMail"><span>Email:</span> office@OscarArtAgency.ru</a>
+<a href="mailto:office@OscarArtAgency.ru" class="footerContactsMail">Email: office@oscarcollection.ru</a>

@@ -879,9 +879,8 @@ table {
 .icon-find {
   background-position: 0 -96px;
 }
-.btn,
-a.btn {
-  padding: 6px 3% 3px;
+.btn, a.btn {
+  padding: 6px 5px 3px;
   text-decoration: none !important;
   outline: none !important;
   font: 300 19px/normal 'Ristretto Pro', Georgia, 'Times New Roman', Times, serif;

@@ -41,7 +41,7 @@
                         <?= $item['COUNT'] ?>
                     </div>
                     <div class="col-sm-6 lightboxes__item-bottom-link">
-                        <a href="/personal/lightbox/<?= $lightbox['ID'] ?>/"><?= getMessage('GL_GO') ?></a>
+                        <a href="/personal/lightbox/<?= $item['ID'] ?>/"><?= getMessage('GL_GO') ?></a>
                     </div>
                 </div>
             </div>
