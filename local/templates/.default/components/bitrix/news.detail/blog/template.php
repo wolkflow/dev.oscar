@@ -37,7 +37,7 @@
 						<?= $arResult['PROPERTIES']['LANG_SUBTITLE_'.CURRENT_LANG_UP]['VALUE'] ?>
 					</div>
 					<p>
-						<?= $arResult['PROPERTIES']['LANG_DETAIL_TEXT_'.CURRENT_LANG_UP]['VALUE']['TEXT'] ?>
+						<?= $arResult['PROPERTIES']['LANG_DETAIL_TEXT_'.CURRENT_LANG_UP]['~VALUE']['TEXT'] ?>
 					</p>
 					<? if (!empty($arResult['PROPERTIES']['LANG_TAGS_'.CURRENT_LANG_UP]['VALUE'])) { ?>
 						<div class="articleKeywords">

@@ -1,11 +1,12 @@
-<h2>Sales</h2>
-<h3>Department<br>
- </h3>
+<h2>Legal Address</h2>
 <p>
-	E-mail: <a href="mailto:sales@oscar.ru">sales@oscar.ru</a>
 </p>
+125167<br>
+Russia<br>
+Moscow<br>
+Planetnaya ulitsa, 4<br>
+Office 4
 <p>
-	Phone +7 800 455-45-45
 </p>
 <ul>
 </ul>
