@@ -214,8 +214,8 @@ $(document).ready(function () {
 	});
 
 	// Больше параметров
-	$(document).on('click', '.btn-more_params', function () {
-		if($(this).hasClass('open')) {
+	$(document).on('click', '.btn-more_params', function() {
+		if ($(this).hasClass('open')) {
 			$(this).removeClass('open').text('Еще');
 			$(this).parent('.filterBlock').find('.moreParamsList').slideUp();
 		} else {
@@ -232,11 +232,11 @@ $(document).ready(function () {
 		var le = $(this).data('le');
 		$('[data-le="' + le + '"]').removeClass('disabled');
         $('[data-link="' + le + '"]').removeClass('hidden');
-		$('input[data-le="' + le + '"]').each(function () {
+		$('input[data-le="' + le + '"]').each(function() {
 			var value = $(this).val();
             
 			$(this).prop('disabled', false).removeClass('disabled');
-			if(value.length > 0) {
+			if (value.length > 0) {
 				$(this).attr('placeholder', value)
 			}
 		});
@@ -250,11 +250,12 @@ $(document).ready(function () {
 			$('body').addClass('le-active');
 		} else if (le == 'company') {
 			$('.companyDiv').addClass('hide');
-			$('input[name="company"]').removeClass('hide').css({'padding-left': '0'}).animate({'padding-left': '8px'}, 40);
+			$('input[name="company"]').removeClass('hide').css({'padding-left': '0'}).animate({'padding-left': '8px'}, 40);   
 		}
 
 		return false;
 	});
+    
     
     $(document).on('click', 'a.le-end', function() {
         var $that = $(this);
@@ -319,7 +320,8 @@ $(document).ready(function () {
 		}
 	    if (le == 'company') {
 		    $('input[name="company"]').removeAttr('style');
-		    setTimeout(function(){
+            $('.companyDiv').text($('input[name="company"]').val());
+		    setTimeout(function() {
 			    $('.companyDiv').removeClass('hide');
 			    $('input[name="company"]').addClass('hide');
 		    }, 200);
