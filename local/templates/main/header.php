@@ -72,7 +72,6 @@
 							</li>
 						</ul>
 						
-                        
 						<?	// Корзина.
                             $APPLICATION->IncludeComponent(
                                 "bitrix:sale.basket.basket",

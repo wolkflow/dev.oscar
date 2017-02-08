@@ -39,8 +39,8 @@
                             <div class="lightboxes__item-pictures-row">
                                 <? foreach ($chunk as $picture) { ?>
                                     <div class="lightboxes__item-pictures-col">
-                                        <a href="/collections/<?= $picture->getID() ?>/">
-                                            <img src="<?= $picture->getSmallPreviewImageSrc() ?>" title="<?= $picture->getTitle() ?>" />
+                                        <a href="<?= $picture->getDetailURL() ?>">
+                                            <img class="lightbox-image" src="<?= $picture->getSmallPreviewImageSrc() ?>" title="<?= $picture->getTitle() ?>" />
                                         </a>
                                     </div>
                                 <? } ?>

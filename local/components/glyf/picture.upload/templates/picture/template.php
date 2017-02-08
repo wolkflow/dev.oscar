@@ -12,6 +12,10 @@
 <script src="<?= SITE_TEMPLATE_PATH ?>/js/jquery.autocomplete.min.js"></script>
 <script>
     $(document).ready(function() {
+        $('.js-submit').on('click', function(event) {
+            $(this).closest('form').submit();
+        });
+        
         $('#js-param-place-country-id').on('keydown', function(event) {
             $('#js-param-country-id').val('');
             $('#js-param-city-id').val('');
@@ -199,7 +203,7 @@
                 </div>
             <? } ?>
             
-            <form method="post" class="form uploadForm" enctype="multipart/form-data">
+            <form id="js-picture-upload-form-id" method="post" class="form uploadForm" enctype="multipart/form-data">
                 <input type="hidden" name="ID" value="<?= $arResult['DATA']['ID'] ?>" />
                 
                 <? // Файл с изображением // ?>
@@ -583,7 +587,7 @@
                             
                             <div class="row">
                                 <div class="col-md-12">
-                                    <input type="submit" class="btn btn-upload" value="<?= getMessage('GL_SAVE') ?>" />
+                                    <input type="button" class="btn btn-upload button-submit js-submit" value="<?= getMessage('GL_SAVE') ?>" />
                                 </div>
                             </div>
                         </div>

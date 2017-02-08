@@ -6,11 +6,20 @@
 
 <ul class="nav navbar-cart hidden-xs">
     <li>
-        <a href="/buyout/">
-            <span id="js-cart-count-id" class="cart-count">
-                <?= count($arResult['ITEMS']['DelDelCanBuy']) ?>
-            </span>
-            <i class="icon icon-cart"></i>
-        </a>
+        <? if (CUser::IsAuthorized()) { ?>
+            <a href="/buyout/">
+                <span id="js-cart-count-id" class="cart-count">
+                    <?= count($arResult['ITEMS']['DelDelCanBuy']) ?>
+                </span>
+                <i class="icon icon-cart"></i>
+            </a>
+        <? } else { ?>
+            <a href="javascript:void(0)">
+                <span id="js-cart-count-id" class="cart-count">
+                    0
+                </span>
+                <i class="icon icon-cart"></i>
+            </a>
+        <? } ?>
     </li>
 </ul>

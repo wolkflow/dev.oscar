@@ -88,6 +88,8 @@ class StatisticFolderDetail extends \CBitrixComponent
             if ($picture->getAuthorID() > 0) {
                 $item['AUTHOR'] = $picture->getAuthor()->getName();
             }
+            $item['DETAIL_URL'] = $picture->getDetailURL();
+            
             $this->arResult['ITEMS'] []= $item;
         }
         unset($pictures, $picture, $item);

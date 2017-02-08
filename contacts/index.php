@@ -1,6 +1,6 @@
 <? define('PAGE', 'CONTACTS') ?>
 <? require ($_SERVER['DOCUMENT_ROOT'].'/bitrix/header.php'); ?>
-<? $APPLICATION->SetTitle("Oscar Art Agency"); ?>
+<? $APPLICATION->SetTitle("Oscar Collection"); ?>
 
 <?  // Строка поиска.
 	$APPLICATION->IncludeComponent('bitrix:main.include', '', array(
