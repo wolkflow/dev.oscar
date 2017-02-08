@@ -3,7 +3,20 @@
 <? IncludeComponentTemplateLangFile(__FILE__, $this->GetFolder()) ?>
 
 <? $this->setFrameMode(true); ?>
-
+<style>
+    .companyDiv {
+        font: 700 14px/17px 'Circe', Arial, helvetika, sans-serif;
+        padding: 2px 8px 2px 0;
+        color: #545454;
+        background: transparent;
+        -webkit-border-radius: 2px;
+        -moz-border-radius: 2px;
+        -webkit-transition: all 200ms ease 0ms;
+        -moz-transition: all 200ms ease 0ms;
+        -ms-transition: all 200ms ease 0ms;
+        -o-transition: all 200ms ease 0ms;
+        transition: all 200ms ease 0ms;
+    }</style>
 <div class="cabinet-profile col-md-3 col-sm-3">
     <div class="cabinet-block cabinet-block-profile is-active">
         <div class="cabinet-panel">
@@ -31,7 +44,8 @@
                         <div class="cabinet-profile__block cabinet-profile__block--gray">
                             <div class="cabinet-profile__block-field">
                                 <div class="cabinet-profile__block-field-key"><?= getMessage('GL_ORGANIZATION') ?></div>
-                                <input type="text" name="company" class="le disabled" disabled data-le="company" value="<?= $arResult['USER']['WORK_COMPANY'] ?>">
+                                <input type="text" name="company" class="le disabled hide" disabled data-le="company" value="<?= $arResult['USER']['WORK_COMPANY'] ?>">
+                                <div class="companyDiv"><?= $arResult['USER']['WORK_COMPANY'] ?></div>
                             </div>
                             <div class="cabinet-profile__block-field">
                                 <div class="cabinet-profile__block-field-key"><?= getMessage('GL_PHONE') ?></div>
