@@ -248,7 +248,7 @@ $(document).ready(function () {
 			$('.le-save').attr('data-action', 'update-user-password')
 		} else if (le == 'addfolder') {
 			$('body').addClass('le-active');
-		} else if(le == 'company') {
+		} else if (le == 'company') {
 			$('.companyDiv').addClass('hide');
 			$('input[name="company"]').removeClass('hide').css({'padding-left': '0'}).animate({'padding-left': '8px'}, 40);
 		}
@@ -317,12 +317,12 @@ $(document).ready(function () {
                 }
             });
 		}
-	    if(le == 'company') {
+	    if (le == 'company') {
 		    $('input[name="company"]').removeAttr('style');
 		    setTimeout(function(){
 			    $('.companyDiv').removeClass('hide');
 			    $('input[name="company"]').addClass('hide');
-		    }, 200)
+		    }, 200);
 	    }
 		$(this).closest('div').find('.le-start').removeClass('disabled');
 		$(this).closest('div').find('.le-end').addClass('disabled');
