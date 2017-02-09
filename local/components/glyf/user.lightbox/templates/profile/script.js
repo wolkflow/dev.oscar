@@ -75,6 +75,9 @@ $(document).ready(function() {
                     success: function(response) {
                         if (response.status) {
                             location.href = response.data['link'];
+                            //var $link = $('#js-user-lightbox-block-id .js-window-pdf');
+                            //$link.attr('href', response.data['link']);
+                            //$link.eq(0).trigger('click');
                         } else {
                             error(response.message);
                         }

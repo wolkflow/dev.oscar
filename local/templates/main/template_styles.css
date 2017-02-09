@@ -6150,3 +6150,7 @@ input.input-error:not(.disabled) {
 .margin-footer {
     margin-bottom: 30px;
 }
+
+.js-window-pdf {
+    display: none;
+}

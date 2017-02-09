@@ -13,7 +13,7 @@
             <li><a href="/personal/"><?= getMessage('GL_PROFILE') ?></a></li>
             <li><?= $arResult['LIGHTBOX']['UF_TITLE'] ?></li>
         </ol>
-
+        
         <div class="cabinet-panel clearfix">
             <div class="cabinet-panel__switch">
                 <span class="is-active">

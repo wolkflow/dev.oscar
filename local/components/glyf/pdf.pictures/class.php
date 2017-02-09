@@ -84,7 +84,6 @@ class PDFPicturesComponent extends \CBitrixComponent
             $this->getLightboxes();
         }
         
-        
 		// Подключение шаблона компонента.
 		$this->IncludeComponentTemplate();
 		
@@ -100,8 +99,8 @@ class PDFPicturesComponent extends \CBitrixComponent
     {
         $pictures = Picture::getList(array(
             'filter' => array(
-                Picture::FIELD_ID      => array_filter($this->arParams['PIDS']),
-                Picture::FIELD_USER_ID => $this->arResult['USER']->getID(),
+                Picture::FIELD_ID => array_filter($this->arParams['PIDS']),
+                // Picture::FIELD_USER_ID => $this->arResult['USER']->getID(),
             )
         ));
         
